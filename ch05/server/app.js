@@ -1,10 +1,12 @@
 /* RESTful Web APIs - 2013 */
 /* Maze+XML server implementation */
 
+var fs = require('fs');
 var http = require('http');
 var querystring = require('querystring');
 var port = (process.env.PORT||1337);
 var root = '';
+var mazeFile = 'five-by-five.js';
 
 // document model for responses
 var template = {};
@@ -21,6 +23,7 @@ template.cellLink = '<link href="{r}/{m}/{c}" rel="{d}" />';
 template.cellEnd = '</cell>';
 template.error = '<error><title>{t}</title></error>';
 
+// handle request
 function handler(req, res) {
 
     // simple routing
@@ -48,7 +51,10 @@ function handler(req, res) {
     }
 }
 
+// show list of available mazes
 function showCollection(req, res) {
+    // get list of available mazes
+    // format and send response
     var body = template.mazeStart 
         + template.collectionStart.replace('{r}',root).replace('{m}','mid')
         + template.collectionEnd
@@ -56,7 +62,10 @@ function showCollection(req, res) {
     showResponse(req, res, body, 200);
 }
 
+// response for a single maze
 function showMaze(req, res, parts) {
+    // find requested maze (on disk)
+    // format and send response
     var body = template.mazeStart
         + template.itemStart.replace('{m}',parts[1]).replace('{r}',root)
         + template.itemEnd
@@ -64,7 +73,10 @@ function showMaze(req, res, parts) {
     showResponse(req, res, body, 200);
 }
 
+// response for a cell within the maze
 function showCell(req, res, parts) {
+    // find cell within requested maze
+    // format and send response
     var body = template.mazeStart
         + template.cellStart.replace('{r}',root).replace('{m}',parts[1]).replace('{c}',parts[2])
         + template.cellEnd
@@ -72,6 +84,7 @@ function showCell(req, res, parts) {
     showResponse(req, res, body, 200);
 }
 
+// unexpected request
 function showError(req, res, title, code) {
     var body = template.mazeStart
         + template.error.replace('{t}',title)
@@ -79,9 +92,11 @@ function showError(req, res, title, code) {
     showResponse(req, res, body, code);
 }
 
+// return response to caller
 function showResponse(req, res, body, code) {
     res.writeHead(code,{'content-type':'application/xml'});
     res.end(body);
 }
 
+// wait for someone to call
 http.createServer(handler).listen(port);
