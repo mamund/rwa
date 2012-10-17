@@ -4,12 +4,14 @@
 var http = require('http');
 var querystring = require('querystring');
 var port = (process.env.PORT||1337);
+var root = '';
 
 function handler(req, res) {
 
     // simple routing
     var parts = req.url.split('/');
-    console.log(parts);
+    root = 'http://'+req.headers.host;
+    
     if(req.method!=='GET') {
         showError(req, res, 'Method Not Allowed', 405);
     }
@@ -33,7 +35,7 @@ function handler(req, res) {
 
 function showCollection(req, res) {
     var body = '<maze version="1.0">' 
-        + '<collection href="/mid">'
+        + '<collection href="{r}/mid">'.replace('{r}',root)
         + '</collection>'
         + '</maze>';
     showResponse(req, res, body, 200);
@@ -41,7 +43,7 @@ function showCollection(req, res) {
 
 function showMaze(req, res, parts) {
     var body = '<maze version="1.0">'
-        + '<item href="/{m}">'.replace('{m}',parts[1])
+        + '<item href="{r}/{m}">'.replace('{m}',parts[1]).replace('{r}',root)
         + '</item>'
         + '</maze>';
     showResponse(req, res, body, 200);
@@ -49,7 +51,7 @@ function showMaze(req, res, parts) {
 
 function showCell(req, res, parts) {
     var body = '<maze version="1.0">'
-        + '<cell href="/{m}/{c}">'.replace('{m}',parts[1]).replace('{c}',parts[2])
+        + '<cell href="{r}/{m}/{c}">'.replace('{r}',root).replace('{m}',parts[1]).replace('{c}',parts[2])
         + '</cell>'
         + '</maze>';
     showResponse(req, res, body, 200);
