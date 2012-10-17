@@ -5,22 +5,23 @@
 
 var fs = require('fs');
 var folder = process.cwd()+'/data/';
+console.log('folder '+folder);
 
 module.exports = main;
 
-function main(args) {
+function main(cmd, maze, cell) {
     var rtn;
 
-    switch(args[0])
+    switch(cmd)
     {
         case 'list':
             rtn = getList();
             break;
         case 'maze':
-            rtn = getMaze(args[1]);
+            rtn = getMaze(maze);
             break;
         case 'cell':
-            rtn = getCell(args[1], args[2]);
+            rtn = getCell(maze, cell);
             break;
         default:
             break;
@@ -33,18 +34,28 @@ function getList() {
 
     coll = [];
     list = fs.readdirSync(folder);
+    console.log('getList '+list);
     for(i=0,x=list.length;i<x;i++) {
-        maze = JSON.parse(fs.readFileSync(folder+list[i]));
-        coll.push(maze);
+        coll.push(list[i].replace('.js',''));
     }
     return coll;
 }
 
 function getMaze(m) {
-    return JSON.parse(fs.readFileSync(folder+m+'.js'));
+    try {
+        return JSON.parse(fs.readFileSync(folder+m+'.js'));
+    }
+    catch(ex) {
+        return undefined;
+    }
 }
 
 function getCell(m, c) {
-    var maze = getMaze(m+'.js');
-    return maze.cells[cell+c];
+    try {
+        var maze = getMaze(m+'.js');
+        return maze.cells[cell+c];
+    }
+    catch(ex) {
+        return undefined;
+    }
 }
