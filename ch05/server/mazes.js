@@ -3,13 +3,12 @@
  * 2012-10 (mca)
  */
 
-// TODO: depends on synchronous file work (fix for async)
-
 var fs = require('fs');
 var folder = process.cwd()+'/data/';
 
 module.exports = main;
 
+// hande all requests for maze data
 function main(cmd, maze, cell) {
     var rtn;
 
@@ -30,18 +29,19 @@ function main(cmd, maze, cell) {
     return rtn;
 }
 
+// read a list of maze files off the disk
 function getList() {
     var coll, maze, list, i, x;
 
     coll = [];
     list = fs.readdirSync(folder);
-    console.log('getList '+list);
     for(i=0,x=list.length;i<x;i++) {
         coll.push(list[i].replace('.js',''));
     }
     return coll;
 }
 
+// return the contents of a single maze file
 function getMaze(m) {
     try {
         return JSON.parse(fs.readFileSync(folder+m+'.js'));
@@ -51,10 +51,10 @@ function getMaze(m) {
     }
 }
 
+// return a single cell from the specified maze file
 function getCell(m, c) {
     try {
         var maze = getMaze(m);
-        console.log('getCell '+maze);
         return maze.cells['cell'+c];
     }
     catch(ex) {

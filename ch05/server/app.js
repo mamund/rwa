@@ -2,7 +2,7 @@
 /* Maze+XML server implementation */
 
 var http = require('http');
-var mazes = require('./maze-data.js');
+var mazes = require('./mazes.js');
 
 var port = (process.env.PORT||1337);
 var root = '';
@@ -15,7 +15,7 @@ template.collectionStart = '<collection href="{l}/">';
 template.collectionEnd = '</collection>';
 template.itemStart = '<item href="{l}">';
 template.itemEnd = '</item>';
-template.cellStart = '<cell href="{l}" rel=="current">';
+template.cellStart = '<cell href="{l}" rel="current">';
 template.cellEnd = '</cell>';
 template.link = '<link href="{l}" rel="{d}"/>'
 template.error = '<error><title>{t}</title></error>';
@@ -23,6 +23,9 @@ template.error = '<error><title>{t}</title></error>';
 // handle request
 function handler(req, res) {
     var segments, i, x, parts;
+
+    // set global var
+    root = 'http://'+req.headers.host;
 
     // simple routing
     parts = [];
@@ -32,17 +35,18 @@ function handler(req, res) {
             parts.push(segments[i]);
         }
     }
-    root = 'http://'+req.headers.host;
-    
+
+    // ignore thes requests
     if(req.url==='/favicon.ico') {
         return;
     }
 
+    // only accept GETs
     if(req.method!=='GET') {
         showError(req, res, 'Method Not Allowed', 405);
     }
     else {
-        
+        // route to handle requests
         switch(parts.length) {
             case 0:
                 showCollection(req, res);
@@ -62,18 +66,17 @@ function handler(req, res) {
 
 // show list of available mazes
 function showCollection(req, res) {
-    var body, list, i, x, links;
+    var body, list, i, x;
     
-    links = [];
-
     body = '';
     body += template.mazeStart;
     body += template.collectionStart.replace('{l}',root);
     
     list = mazes('list');
-    console.log('showCollection '+list);
-    for(i=0,x=list.length;i<x;i++) {
-        body += template.link.replace('{l}',root+'/'+list[i]).replace('{d}','maze');;
+    if(list!==undefined) {
+        for(i=0,x=list.length;i<x;i++) {
+            body += template.link.replace('{l}',root+'/'+list[i]).replace('{d}','maze');;
+        }
     }
     
     body += template.collectionEnd;
@@ -85,7 +88,8 @@ function showCollection(req, res) {
 // response for a single maze
 function showMaze(req, res, maze) {
     var body, data;
-    
+   
+    // make sure it exists before crafting response
     data = mazes('maze',maze);
     if(data!==undefined) {
         body = '';
@@ -104,16 +108,25 @@ function showMaze(req, res, maze) {
 
 // response for a cell within the maze
 function showCell(req, res, maze, cell) {
-    var body, data, rel, mov, sq, z, ex;
+    var body, data, rel, mov, mz, sq, ex, z, t;
 
-    // TODO: hard-coded for 25 cell maze
+    // validate the maze
+    mz = mazes('maze',maze);
+    if(mz===undefined) {
+        showError(req, res, 'Maze Not Found', 404);
+        return;
+    }
+
+    // compute state and set up possible moves
     z = parseInt(cell, 10);
-    sq = Math.sqrt(25);
-    ex = 24;
+    t = Object.keys(mz.cells).length;
+    sq = Math.sqrt(t);
+    ex = t-1;
 
     rel = ['north', 'west', 'south', 'east'];
     mov = [z-1, z+(sq*-1), z+1, z+sq]
     
+    // get cell details
     if(z===999) {
         data = [1,1,1,1];
     }
@@ -121,27 +134,35 @@ function showCell(req, res, maze, cell) {
         data = mazes('cell', maze, cell);
     }
     
+    // if we have details, craft representation
     if(data!==undefined) {
         body = '';
         body += template.mazeStart;
         body += template.cellStart.replace('{l}',root+'/'+maze+'/'+cell);
+        
+        // add doors
         for(i=0,x=data.length;i<x;i++) {
             if(data[i]===0) {
                 body += template.link.replace('{l}',root+'/'+maze+'/'+mov[i]).replace('{d}',rel[i]);
             }
         }
+
+        // if there is an exit, add it
         if(z===ex) {
             body += template.link.replace('{l}',root+'/'+maze+'/999').replace('{d}','exit');
         }
+
+        // add link to start of the maze and the entire collection
         body += template.link.replace('{l}',root+'/'+maze).replace('{d}','maze');
         body += template.link.replace('{l}',root).replace('{d}', 'collection');
+        
         body += template.cellEnd;
         body += template.mazeEnd;
     
         showResponse(req, res, body, 200);
     }
     else {
-        showError(req, res, 'Maze/Cell Not Found', 404);
+        showError(req, res, 'Cell Not Found', 404);
     }
 }
 
