@@ -1,4 +1,4 @@
-RWA - RESTful Web APIS
+RWA - RESTful Web APIs
 ======================
 
 Content for the projects in the RWA book.
