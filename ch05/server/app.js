@@ -7,6 +7,14 @@ var mazes = require('./mazes.js');
 var port = (process.env.PORT||1337);
 var root = '';
 
+// add support for CORS
+var headers = {
+    'Content-Type' : 'application/xml',
+    'Access-Control-Allow-Orign' : '*',
+    'Access-Control-Allow-Methods' : '*',
+    'Access-Control-Allow-Headers' : '*'
+};
+
 // document model for responses
 var template = {};
 template.mazeStart = '<maze version="1.0">';
@@ -39,6 +47,12 @@ function handler(req, res) {
     // ignore thes requests
     if(req.url==='/favicon.ico') {
         return;
+    }
+
+    // handle CORS OPTIONS call
+    if(req.method==='OPTIONS') {
+        var body = JSON.stringify(headers);
+        showResponse(req, res, body, 200);
     }
 
     // only accept GETs
@@ -176,7 +190,7 @@ function showError(req, res, title, code) {
 
 // return response to caller
 function showResponse(req, res, body, code) {
-    res.writeHead(code,{'content-type':'application/xml'});
+    res.writeHead(code,headers);
     res.end(body);
 }
 
