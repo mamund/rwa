@@ -11,15 +11,16 @@ var root = '';
 var template = {};
 template.mazeStart = '<maze version="1.0">';
 template.mazeEnd = '</maze>';
-template.collectionStart = '<collection href="{r}/">';
-template.collectionLink = '<link href="{r}/{m}" rel="maze" />';
+template.collectionStart = '<collection href="{l}/">';
+template.collectionLink = '<link href="{l}" rel="maze" />';
 template.collectionEnd = '</collection>';
-template.itemStart = '<item href="{r}/{m}">';
-template.itemLink = '<link href="{r}/{m}/start" rel="start" />';
+template.itemStart = '<item href="{l}">';
+template.itemLink = '<link href="{l}/start" rel="start" />';
 template.itemEnd = '</item>';
-template.cellStart = '<cell href="{r}/{m}/{c}">';
-template.cellLink = '<link href="{r}/{m}/{c}" rel="{d}" />';
+template.cellStart = '<cell href="{l}" rel=="current">';
+template.cellLink = '<link href="{l}" rel="{d}"/>';
 template.cellEnd = '</cell>';
+template.link = '<link href="{l}" rel="{d}"/>'
 template.error = '<error><title>{t}</title></error>';
 
 // handle request
@@ -70,12 +71,12 @@ function showCollection(req, res) {
 
     body = '';
     body += template.mazeStart;
-    body += template.collectionStart.replace('{r}',root);
+    body += template.collectionStart.replace('{l}',root);
     
     list = mazes('list');
     console.log('showCollection '+list);
     for(i=0,x=list.length;i<x;i++) {
-        body += template.collectionLink.replace('{r}',root).replace('{m}',list[i]);
+        body += template.collectionLink.replace('{l}',root+'/'+list[i]);
     }
     
     body += template.collectionEnd;
@@ -92,7 +93,8 @@ function showMaze(req, res, maze) {
     if(data!==undefined) {
         body = '';
         body += template.mazeStart;
-        body += template.itemStart.replace('{m}',maze).replace('{r}',root);
+        body += template.itemStart.replace('{l}',root+'/'+maze);
+        body += template.link.replace('{l}',root+'/'+maze+'/0').replace('{d}','start');
         body += template.itemEnd;
         body += template.mazeEnd;
 
@@ -105,13 +107,38 @@ function showMaze(req, res, maze) {
 
 // response for a cell within the maze
 function showCell(req, res, maze, cell) {
-    var body, data;
+    var body, data, rel, mov, sq, z, ex;
 
-    data = mazes('cell', maze, cell);
+    z = parseInt(cell, 10);
+    sq = Math.sqrt(25);
+    ex = 24;
+    console.log(sq);
+    rel = ['north', 'west', 'south', 'east'];
+    mov = [z-1, z+(sq*-1), z+1, z+sq]
+    
+    if(z===999) {
+        data = [1,1,1,1];
+    }
+    else {
+        data = mazes('cell', maze, cell);
+    }
+    console.log('c ',cell);
+    console.log('cell '+data);
+    
     if(data!==undefined) {
         body = '';
         body += template.mazeStart;
-        body += template.cellStart.replace('{r}',root).replace('{m}',maze).replace('{c}',cell);
+        body += template.cellStart.replace('{l}',root+'/'+maze+'/'+cell);
+        for(i=0,x=data.length;i<x;i++) {
+            if(data[i]===0) {
+                body += template.link.replace('{l}',root+'/'+maze+'/'+mov[i]).replace('{d}',rel[i]);
+            }
+        }
+        if(z===ex) {
+            body += template.link.replace('{l}',root+'/'+maze+'/999').replace('{d}','exit');
+        }
+        body += template.link.replace('{l}',root+'/'+maze).replace('{d}','maze');
+        body += template.link.replace('{l}',root).replace('{d}', 'collection');
         body += template.cellEnd;
         body += template.mazeEnd;
     

@@ -52,8 +52,9 @@ function getMaze(m) {
 
 function getCell(m, c) {
     try {
-        var maze = getMaze(m+'.js');
-        return maze.cells[cell+c];
+        var maze = getMaze(m);
+        console.log('getCell '+maze);
+        return maze.cells['cell'+c];
     }
     catch(ex) {
         return undefined;
