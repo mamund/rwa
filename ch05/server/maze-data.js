@@ -1,11 +1,12 @@
 /*
- * maze file handlder
+ * maze file handler
  * 2012-10 (mca)
  */
 
+// TODO: depends on synchronous file work (fix for async)
+
 var fs = require('fs');
 var folder = process.cwd()+'/data/';
-console.log('folder '+folder);
 
 module.exports = main;
 

@@ -12,13 +12,10 @@ var template = {};
 template.mazeStart = '<maze version="1.0">';
 template.mazeEnd = '</maze>';
 template.collectionStart = '<collection href="{l}/">';
-template.collectionLink = '<link href="{l}" rel="maze" />';
 template.collectionEnd = '</collection>';
 template.itemStart = '<item href="{l}">';
-template.itemLink = '<link href="{l}/start" rel="start" />';
 template.itemEnd = '</item>';
 template.cellStart = '<cell href="{l}" rel=="current">';
-template.cellLink = '<link href="{l}" rel="{d}"/>';
 template.cellEnd = '</cell>';
 template.link = '<link href="{l}" rel="{d}"/>'
 template.error = '<error><title>{t}</title></error>';
@@ -76,7 +73,7 @@ function showCollection(req, res) {
     list = mazes('list');
     console.log('showCollection '+list);
     for(i=0,x=list.length;i<x;i++) {
-        body += template.collectionLink.replace('{l}',root+'/'+list[i]);
+        body += template.link.replace('{l}',root+'/'+list[i]).replace('{d}','maze');;
     }
     
     body += template.collectionEnd;
@@ -109,10 +106,11 @@ function showMaze(req, res, maze) {
 function showCell(req, res, maze, cell) {
     var body, data, rel, mov, sq, z, ex;
 
+    // TODO: hard-coded for 25 cell maze
     z = parseInt(cell, 10);
     sq = Math.sqrt(25);
     ex = 24;
-    console.log(sq);
+
     rel = ['north', 'west', 'south', 'east'];
     mov = [z-1, z+(sq*-1), z+1, z+sq]
     
@@ -122,8 +120,6 @@ function showCell(req, res, maze, cell) {
     else {
         data = mazes('cell', maze, cell);
     }
-    console.log('c ',cell);
-    console.log('cell '+data);
     
     if(data!==undefined) {
         body = '';
