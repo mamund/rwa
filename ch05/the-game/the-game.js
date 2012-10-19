@@ -39,7 +39,7 @@ function makeRequest(method, path) {
     pUrl = url.parse(path);
     
     hdrs = {
-        'host' : pUrl.hostname,
+        'host' : pUrl.host,
         'content-type' : 'application/vnd.amundsen.maze+xml'
     };
 
