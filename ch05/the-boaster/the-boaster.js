@@ -10,7 +10,7 @@ var DOMParser = require('xmldom').DOMParser;
 
 var m = {};
 m.moves = 1;
-m.help = '***Usage:\nnode the-game [starting-url]';
+m.help = '***Usage:\nnode the-boaster [starting-url]';
 m.winner = '*** DONE and it only took {m} moves! ***';
 m.quitter = '*** Sorry, can\'t find any mazes here. ***';
 
@@ -31,7 +31,7 @@ function makeRequest(method, path) {
     pUrl = url.parse(path);
     
     hdrs = {
-        'host' : pUrl.hostname,
+        'host' : pUrl.host,
         'content-type' : 'application/vnd.amundsen.maze+xml'
     };
 
