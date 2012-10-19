@@ -15,6 +15,7 @@ m.facing = 'north';
 m.moves = 1;
 m.help = '***Usage:\nnode the-game [starting-url]';
 m.winner = '*** DONE and it only took {m} moves! ***';
+m.quitter = '*** Sorry, I can\'t find any mazes here. ***';
 m.rules = {
     'east' : ['south','east','north','west'],
     'south' : ['west','south','east','north'],
@@ -25,7 +26,7 @@ m.rules = {
 // get argument and start process
 arg = process.argv[2];
 if(arg===undefined) {
-    console.log(help);
+    console.log(m.help);
 }
 else {
     makeRequest('GET',arg);
@@ -85,8 +86,21 @@ function makeRequest(method, path) {
                     m.facing = 'north';
                     console.log(m.moves++ + ':' + href)
                 }
+                // ok, see if we can find a maze link
+                if(href===undefined) {
+                    href = findLink(links, 'maze');
+                }
+                // well, is there a collection link?
+                if(href===undefined) {
+                    href = findLink(links, 'collection');
+                }
+                // ok, i give up!
+                if(href===undefined) {
+                    console.log(m.quitter);
+                    return;
+                }
             }
-
+            
             // ok, try to move to new room
             if(href===undefined) {
                 choices = m.rules[m.facing];
