@@ -25,7 +25,7 @@ m.rules = {
 // get argument and start process
 arg = process.argv[2];
 if(arg===undefined) {
-    console.log(help);
+    console.log(m.help);
 }
 else {
     makeRequest('GET',arg);
