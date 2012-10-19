@@ -17,6 +17,6 @@ CH05 - Domain Specific Designs
     </tr>
     <tr>
         <td>/ch05/the-boaster/</td>
-        <td>Maze++XML client that lies about completing the maze</td>
+        <td>Maze+XML client that lies about completing the maze</td>
     </tr>
 </table>
