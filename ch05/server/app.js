@@ -10,7 +10,7 @@ var root = '';
 // add support for CORS
 var headers = {
     'Content-Type' : 'application/xml',
-    'Access-Control-Allow-Orign' : '*',
+    'Access-Control-Allow-Origin' : '*',
     'Access-Control-Allow-Methods' : '*',
     'Access-Control-Allow-Headers' : '*'
 };
