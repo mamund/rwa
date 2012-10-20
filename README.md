@@ -17,8 +17,11 @@ CH05 - Domain Specific Designs
     </tr>
     <tr>
         <td>/ch05/the-boaster/</td>
-        <td>Maze+XML client that lies about completing the maze</td>
+        <td>Maze+XML bot that lies about completing the maze</td>
     </tr>
+    <tr>
+        <td>/ch05/the-mapmaker/</td>
+        <td>Maze+XML bot that visits all the rooms in the maze</td>
     <tr>
         <td>/ch05/the-bot/</td>
         <td>Maze+XML robot that automatically navigates the maze</td>

@@ -12,7 +12,7 @@ var DOMParser = require('xmldom').DOMParser;
 var m = {};
 m.start = false;
 m.moves = 1;
-m.help = '***Usage:\nnode the-bot [starting-url]';
+m.help = '***Usage:\nnode the-mapmaker [starting-url]';
 m.winner = '*** DONE and it only took {m} moves! ***';
 m.quitter = '*** Sorry, I can\'t find any mazes here. ***';
 
