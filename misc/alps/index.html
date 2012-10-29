@@ -1,0 +1,1076 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.4" />
+<title>Application-Level Profile Semantics</title>
+<style type="text/css">
+/* Sans-serif font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+div#toctitle,
+span#author, span#revnumber, span#revdate, span#revremark,
+div#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+/* Serif font. */
+div.sectionbody {
+  font-family: Georgia,"Times New Roman",Times,serif;
+}
+
+/* Monospace font. */
+tt {
+  font-size: inherit;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+tt {
+  font-size: inherit;
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revnumber, span#revdate, span#revremark {
+}
+
+div#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #777777;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toc {
+  margin-bottom: 2.5em;
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes();}
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+}
+
+}
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Application-Level Profile Semantics</h1>
+<span id="author">Revision: 2012-10-29 (mca)</span><br />
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_summary">Summary</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This document describes a media type designed to allow Web application authors
+and implementors a way to define, document, and apply application-level
+semantic descriptions to elements within media-type representations. This
+document also sets a standard for creating and registering ALPS document
+identifers and provides suggested conventions for applying ALPS descriptors
+to existing media types (HTML, JSON, and XML).</p></div>
+<div class="paragraph"><p>This document registers two media-type identifiers with the IANA:
+<tt>application/vnd.alps+xml</tt> and <tt>application/vnd.alps+json</tt>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_motivation">Motivation</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>When implementing a hypermedia client/server application using an existing
+general media type (i.e. HTML, Atom, Collection+JSON, etc.), client and server
+instances need to share application-specific information such as data element
+names, link relation values, and state transfer parameters. This information
+is directly related to the application being implemented (i.e. accounting,
+contact management, etc.) rather than the media type used to represent the
+application state.</p></div>
+<div class="paragraph"><p>Instead of creating (and registering) and entirely new media type (i.e.
+<tt>application/accounting</tt>), this standard allows representation authors define,
+document, and apply application-level semantic descriptions to elements
+within a representation. This increases the specificity of the representation
+without reducing the generality of the media type.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_identifying_an_alps_document">Identifying an ALPS Document</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>ALPS vocabularies are identified by a unique URI. This URI can be in the form
+of a resolvable URL (i.e. <tt>http://example.org/alps/accounting</tt>) or it can be
+in the form of a URN (i.e. TK).</p></div>
+<div class="paragraph"><p>If the identifier is a URL, it SHOULD point to a valid ALPS document. the URL
+MAY point to a human-readable document that describes the ALPS specification
+for the identified use case.  If the identifier is a URN, it SHOULD NOT be
+treated as a resolvable identiferand instead SHOULD be treated as a unique
+name for the identified use case.</p></div>
+<div class="paragraph"><p>All ALPS URIs MUST be unique and SHOULD be registered in the ALPS Registry
+located at [TK].</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_alps_documents">ALPS Documents</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>ALPS Documents contain a machine-readable collection of semantic descriptors
+and their details. These document can be represented in either XML or JSON
+format. This section identifies the general elements and properties of an
+ALPS document, their meaning, and use. Additional sub sections provide
+specific details on how to construct a valid ALPS document in XML and in
+JSON format.</p></div>
+<div class="sect2">
+<h3 id="_compliance">Compliance</h3>
+<div class="paragraph"><p>An implementation is not compliant if it fails to satisfy one or more of the
+MUST or REQUIRED level requirements. An implementation that satisfies all
+the MUST or REQUIRED level and all the SHOULD level requirements is said
+to be "unconditionally compliant"; one that satisfies all the MUST level
+requirements but not all the SHOULD level requirements is said to be
+"conditionally compliant."</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to
+be interpreted as described in RFC 2119.</p></div>
+</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_alps_elements_and_properties">ALPS Elements and Properties</h3>
+<div class="paragraph"><p>The ALPS media type has a small set of elements and properties. These appear
+in both the XML and JSON formats, but are expressed in different ways. Below
+is a list of the elements and properties that can appear in an ALPS document.</p></div>
+<div class="sect3">
+<h4 id="_tt_alps_tt"><tt>alps</tt></h4>
+<div class="paragraph"><p>This is the root element of the ALPS document. This MUST be the first element
+in the document.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_appears_tt"><tt>appears</tt></h4>
+<div class="paragraph"><p>Indicates the appearance rules to apply to the related <tt>element</tt>. This
+SHOULD appear as a property of the <tt>element</tt> and <tt>child</tt> elements. Valid
+values for this element are: <em>MUST</em>, <em>SHOULD</em>, and <em>MAY</em>. These values are
+to be treat asRFC 2119 key words. If this property does not appear, the
+value SHOULD be set to <em>MAY</em>.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_cardinality_tt"><tt>cardinality</tt></h4>
+<div class="paragraph"><p>Indicates the number of times the related <tt>element</tt> can appear within a single
+representation. Valid values are <em>single</em> and <em>many</em>. This MAY appear
+as a property of the <tt>element</tt> and <tt>child</tt> elements. If this property does not
+appear, the value SHOULD be set to <em>single</em>.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_child_tt"><tt>child</tt></h4>
+<div class="paragraph"><p>Indicates there is a child of the related <tt>element</tt> This MAY appear as a
+sub-element of the <tt>element</tt>. The <tt>child</tt> element MUST have an <tt>href</tt>
+property pointing to the full <tt>element</tt> that will appear as a child element
+(see <tt>href</tt> for details).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_description_tt"><tt>description</tt></h4>
+<div class="paragraph"><p>A text field that contains free-form, usually human-readable, text describing
+the meaning and use of the related <tt>element</tt>. This SHOULD appear as a
+sub-element of <tt>element</tt>.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_element_tt"><tt>element</tt></h4>
+<div class="paragraph"><p>Identifies a semantic descriptor. One or more <tt>element</tt> blocks SHOULD appear
+as children of the <tt>alps</tt> element.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_external_id_tt"><tt>external_id</tt></h4>
+<div class="paragraph"><p>TK</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_href_tt"><tt>href</tt></h4>
+<div class="paragraph"><p>A valid URL that points to an <tt>element</tt> either within the existing document
+or in another document. This MUST appear as part of the <tt>child</tt> element.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_id_tt"><tt>id</tt></h4>
+<div class="paragraph"><p>Indicates the semantic descriptor value for the related <tt>element</tt>. This
+MUST appear for each <tt>element</tt>. The value of this property contains the
+text that will appear within the media type representation as the value of
+that media type&#8217;s semantic descriptor (see Applying ALPS to Existing Media
+Types for details).</p></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_type_tt"><tt>type</tt></h4>
+<div class="paragraph"><p>Indicates the type of representation control to which the <tt>element</tt> is
+applied. Below is the explanation of the possible valid values.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>descriptor</em> refers to an attribute of an element that can take on a
+given value many times in a single representation.
+</p>
+</li>
+<li>
+<p>
+<em>link-relation</em> refers to a hypermedia control that triggers a safe
+state transition (i.e. <tt>HTTP.GET</tt>, etc.).
+</p>
+</li>
+<li>
+<p>
+<em>idempotent-relation</em> refers to a hypermedia control that triggers an
+idempotent state transition (i.e. <tt>HTTP.PUT</tt>, etc.).
+</p>
+</li>
+<li>
+<p>
+<em>unsafe-relation</em> refers to a hypermedia control that triggers an
+unsafe state transition (i.e. <tt>HTTP.POST</tt>).
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>[MCA: pulled this out since i agree we don't need this one.]
+ * 'unique' refers to an attribute of an element that can only take on a
+given value once in a given representation. (Not really convinced we
+need this one.)</tt></pre>
+</div></div>
+</div>
+<div class="sect3">
+<h4 id="_tt_version_tt"><tt>version</tt></h4>
+<div class="paragraph"><p>Indicates the version number of the ALPS document. This SHOULD appear as a
+property of the <tt>alps</tt> elements. Currently the only valid
+value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em>.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_xml_representation">XML Representation</h3>
+<div class="paragraph"><p>Below shows how ALPS Elements are expressed in the XML format.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&lt;alps version="1.0"&gt;
+
+ &lt;element id="hmaze" type="descriptor" appears="MUST"&gt;
+   &lt;description&gt;
+      Indicates the root of an hMaze document.
+    &lt;/description&gt;
+    &lt;child href="#collection"/&gt;
+    &lt;child href="#item"/&gt;
+    &lt;child href="#error"/&gt;
+    &lt;child href="#cell"/&gt;
+    &lt;child href="#inventory-link"/&gt;
+  &lt;/element&gt;
+
+  &lt;element id="collection" type="descriptor"&gt;
+    &lt;description&gt;A collection of mazes.&lt;/description&gt;
+    &lt;child href="#cell" cardinality="many" appears="MAY"&gt;
+      &lt;description&gt;The opening cell of a maze&lt;/description&gt;
+    &lt;/child&gt;
+  &lt;/element&gt;
+
+  &lt;element id="item" type="descriptor"&gt;
+    &lt;description&gt;A single maze.&lt;/description&gt;
+    &lt;child href="#start"/ appears="SHOULD"&gt;
+  &lt;/element&gt;
+
+  &lt;element id="start" type="link-relation"&gt;
+    &lt;description&gt;The beginning cell of a maze.&lt;/description&gt;
+  &lt;/element&gt;
+
+  &lt;element id="error" type="descriptor"&gt;
+    &lt;description&gt;An error message.&lt;/description&gt;
+  &lt;/element&gt;
+
+  &lt;element id="cell" type="descriptor"&gt;
+    &lt;description&gt;A cell in a maze.&lt;/description&gt;
+    &lt;child href="#title" appears="SHOULD"&gt;
+      &lt;description&gt;
+        The name of the cell, e.g. "Throne Room."
+      &lt;/description&gt;
+    &lt;/child&gt;
+    &lt;child href="#north" appears="MAY"/&gt;
+    &lt;child href="#south" appears="MAY"/&gt;
+    &lt;child href="#east" appears="MAY"/&gt;
+    &lt;child href="#west" appears="MAY"/&gt;
+    &lt;child href="#exit" appears="MAY"/&gt;
+    &lt;child href="#current" appears="MUST"/&gt;
+  &lt;/element&gt;
+
+  &lt;element id="north" type="link-relation"&gt;
+    &lt;description&gt;The cell to the north of this one.&lt;/description&gt;
+  &lt;/element&gt;
+
+  ...
+  [similarly for south, east, west, exit, current.]
+  ...
+
+  &lt;element id="inventory-link" external_id="inventory" type="link-relation"&gt;
+    &lt;description&gt;The player's inventory.&lt;/description&gt;
+  &lt;/element&gt;
+
+  &lt;element id="inventory" type="descriptor"&gt;
+    &lt;description&gt;
+      Everything the player is carrying.
+    &lt;/description&gt;
+    &lt;child href="#treasure" cardinality="many" appears="MAY"/&gt;
+    &lt;child href="#score" appears="MAY"&gt;
+      The player's total score.
+    &lt;/child&gt;
+  &lt;/element&gt;
+
+  &lt;element id="treasure" type="descriptor"&gt;
+    &lt;id&gt;treasure&lt;/id&gt;
+    &lt;description&gt;
+      A treasure found in the maze.
+    &lt;/description&gt;
+    &lt;child href="#title" appears="SHOULD"&gt;
+      &lt;description&gt;The name of this treasure, e.g. "Amethyst."&lt;/description&gt;
+    &lt;/child&gt;
+    &lt;child href="#score" appears="MAY"/&gt;
+    &lt;child href="#pickup" appears="MAY"/&gt;
+    &lt;child href="#drop" appears="MAY"/&gt;
+  &lt;/element&gt;
+
+  &lt;element id="title" type="descriptor"&gt;
+    &lt;description&gt;A title.&lt;/description&gt;
+  &lt;/element&gt;
+
+  &lt;element id="score" type="descriptor"&gt;
+    &lt;description&gt;A numeric score.&lt;/description&gt;
+  &lt;/element&gt;
+
+  &lt;element id="pickup" type="idempotent-relation"&gt;
+    &lt;description&gt;
+      Picks up the treasure.
+    &lt;/description&gt;
+  &lt;/element&gt;
+
+  &lt;element id="drop" type="idempotent-relation"&gt;
+    &lt;description&gt;
+      Drops the treasure.
+    &lt;/description&gt;
+  &lt;/element&gt;
+
+&lt;/alps&gt;</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_json_representation">JSON Representation</h3>
+<div class="paragraph"><p>Below shows how ALPS Elements are expressed in the JSON format.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_applying_alps_to_existing_media_types">Applying ALPS to Existing Media Types</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>ALPS documents can be applied to various existing hypermedia types. Below
+are a set of instructions on how to apply ALPS information to existing
+media types.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>MCA:</p></div>
+<div class="paragraph"><p>I copied most of LR&#8217;s content directly here w/ just a few changes.
+I think more needs to be done to <em>normalize</em> across various media types.
+I agree that <em>unique</em> can proly be dropped from the ALPS model (this is
+an HTML-specific thing, right?).</p></div>
+<div class="paragraph"><p>I also think we need to be a bit clearer on describing state transfers
+(<em>link-relation</em>, <em>idemponent-relation</em>, <em>safe-relation</em>, &amp; <em>unsafe-relation</em>).
+I suspect there is unneeded overlap/vague-ness here.</p></div>
+<div class="paragraph"><p>Finally, What isour position on providing descriptors for state transfers? IOW,
+is this a MUST, SHOULD, MAY? or should that be left to the media type itself?</p></div>
+</td>
+</tr></table>
+</div>
+<div class="sect2">
+<h3 id="_alps_and_html">ALPS and HTML</h3>
+<div class="paragraph"><p>When applying ALPS to HTML, the following rules apply.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>unique</em> :' becomes the <tt>id</tt> of a tag.
+</p>
+</li>
+<li>
+<p>
+<em>descriptor</em> : becomes the <tt>"class"</tt> of a tag.
+</p>
+</li>
+<li>
+<p>
+<em>idempotent-relation</em> : Element <tt>id</tt> becomes the <tt>"class"</tt> of the submit
+button of an <tt>HTML.FORM@method="POST"</tt> [MCA : POST is non-idempotent].
+If <em>unique</em> or <em>descriptor</em> children are present, those children refer to
+other inputs of the same <tt>HTML.FORM</tt>.
+</p>
+</li>
+<li>
+<p>
+<em>unsafe-relation</em> : Same as <em>idempotent-relation</em>.
+</p>
+</li>
+<li>
+<p>
+<em>safe-relation</em> : Element <tt>id</tt> becomes the <tt>"rel"</tt> of an <tt>&lt;a&gt;</tt> or <tt>&lt;link&gt;</tt>
+tag. If <em>unique</em> or <em>descriptor</em> children are present, they are ignored.
+Element <tt>id</tt> may also become the "<tt>class</tt>" of the submit button of an
+<tt>HTML.FORM@method="GET"</tt>. If <em>unique</em> or <em>descriptor</em> children are present,
+those children refer to other inputs of the same <tt>HTML.FORM</tt>.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_alps_and_collection_json">ALPS and Collection+JSON</h3>
+<div class="paragraph"><p>When applying ALPS to Collection+JSON, the following rules apply.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>unique</em> : Undefined. (Alternately: the same as "descriptor")
+</p>
+</li>
+<li>
+<p>
+<em>descriptor</em> : Element ID refers to the "name" of a data field within an item.
+</p>
+</li>
+<li>
+<p>
+<em>link-relation</em> : Element ID refers to the "rel" of a link within an item.
+If child elements are present, they are ignored. OR Element ID refers to the
+"name" of a query in the document. If child rlementsare present, their IDs
+refer to the "name" attributes of data fields within the query.
+</p>
+</li>
+<li>
+<p>
+<em>idempotent-relation</em> : Undefined.
+</p>
+</li>
+<li>
+<p>
+<em>unsafe-relation</em> : Undefined.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_alps_and_hal">ALPS and HAL</h3>
+<div class="paragraph"><p>When applying ALPS to HAL (both XML and JSON formats), the folloiwng rules apply.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>unique</em> : Undefined. (Alternately: the same as "descriptor")
+</p>
+</li>
+<li>
+<p>
+<em>descriptor</em> : Element ID refers to the "name" of a data field within an item.
+</p>
+</li>
+<li>
+<p>
+<em>link-relation</em> : Element ID refers to the "rel" of a link within an item.
+If child elements are present, they are ignored. OR Element ID refers to the
+"name" of a query in the document. If child elements are present, their IDs
+refer to the "name" attributes of data fields within the query.
+</p>
+</li>
+<li>
+<p>
+<em>idempotent-relation</em> : Undefined.
+</p>
+</li>
+<li>
+<p>
+<em>unsafe-relation</em> : Undefined.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_alps_and_siren">ALPS and Siren</h3>
+<div class="paragraph"><p>When appying ALPS to Siren, the following rules apply.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>unique</em> : Undefined. (Alternately: the same as "descriptor")
+</p>
+</li>
+<li>
+<p>
+<em>descriptor</em> : On the top level, element ID refers to the "class" of an entity.
+Within an entity, element ID refers to the "class" of a sub-entity, or
+to a key within the entity&#8217;s <em>properties</em> dictionary. [TK uneasy about
+this one, but it seems to require both.]
+</p>
+</li>
+<li>
+<p>
+<em>link-relation</em> : Within an entity, element ID refers to the "rel" of an
+item in the entity&#8217;s "links" dictionary, or to the "rel" attribute of
+a sub-entity. Alternatively, the Element ID may refer to the "class" of an item in
+the entity&#8217;s "actions" dictionary, so long as the action&#8217;s "method" is
+GET. If this is the case, sub-elements of type "descriptor" refer to
+values for "name" in the action&#8217;s "fields" dictionary.
+</p>
+</li>
+<li>
+<p>
+<em>idempotent-relation</em>
+</p>
+</li>
+<li>
+<p>
+<em>unsafe-relation</em> : Within an entity, element ID
+refers to the "class" of an item in the entity&#8217;s "actions"
+dictionary. For "idempotent-relation", the action&#8217;s "method" must be
+GET, PUT, or DELETE. For "unsafe-relation", any method is acceptable.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Sub-elements of type "descriptor" refer to values for "name" in the
+action&#8217;s "fields" dictionary.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_alps_and_atom">ALPS and Atom</h3>
+<div class="paragraph"><p>When applying ALPS to Atom, the following rules apply.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_alps_and_odata">ALPS and OData</h3>
+<div class="paragraph"><p>When applying ALPS to OData, the following rules apply.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors">Authors</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Mike Amundsen &lt;<a href="mailto:mca@amundsen.com">mca@amundsen.com</a>&gt;</p></div>
+<div class="paragraph"><p>Leonard Richardson &lt;<a href="mailto:leonardr@segfault.org">leonardr@segfault.org</a>&gt;</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2012-10-29 18:20:52 EDT
+</div>
+</div>
+</body>
+</html>
