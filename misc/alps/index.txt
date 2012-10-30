@@ -2,32 +2,36 @@
 Revision: 2012-10-29 (mca)
 
 == Summary ==
-This document describes a media type designed to allow Web application authors
-and implementors a way to define, document, and apply application-level 
-semantic descriptions to elements within media-type representations. This 
-document also sets a standard for creating and registering ALPS document 
-identifers and provides suggested conventions for applying ALPS descriptors 
-to existing media types (HTML, JSON, and XML). 
 
-This document registers two media-type identifiers with the IANA: 
+This document describes a media type designed to give Web application
+authors and implementors a way to define, document, and apply
+application-level semantic descriptions to elements within
+application-agnostic media-type representations. This document also
+sets a standard for creating and registering ALPS document identifers
+and provides suggested conventions for applying ALPS descriptors to
+existing media types (such as HTML, Collection+JSON, and HAL).
+
+This document registers two media-type identifiers with the IANA:
 +application/vnd.alps+xml+ and +application/vnd.alps+json+.
 
 == Motivation ==
-When implementing a hypermedia client/server application using an existing 
-general media type (i.e. HTML, Atom, Collection+JSON, etc.), client and server 
-instances need to share application-specific information such as data element 
-names, link relation values, and state transfer parameters. This information 
-is directly related to the application being implemented (i.e. accounting, 
-contact management, etc.) rather than the media type used to represent the 
-application state. 
 
-Instead of creating (and registering) and entirely new media type (i.e. 
-+application/accounting+), this standard allows representation authors define, 
-document, and apply application-level semantic descriptions to elements 
-within a representation. This increases the specificity of the representation 
-without reducing the generality of the media type.
+When implementing a hypermedia client/server application using a
+general media type (i.e. HTML, Atom, Collection+JSON, etc.), client
+and server instances need to share application-specific information
+such as data element names, link relation values, and state transfer
+parameters. This information is directly related to the application
+being implemented (i.e. accounting, contact management, etc.) rather
+than the media type used in the representations.
+
+Instead of creating (and registering) and entirely new media type
+(i.e.  +application/accounting+), this standard allows representation
+authors to apply application-level semantic descriptions to elements
+defined by the generic media type. This increases the specificity of
+the representation without reducing the generality of the media type.
 
 == Identifying an ALPS Document ==
+
 ALPS vocabularies are identified by a unique URI. This URI can be in the form 
 of a resolvable URL (i.e. +http://example.org/alps/accounting+) or it can be 
 in the form of a URN (i.e. TK).
@@ -35,21 +39,28 @@ in the form of a URN (i.e. TK).
 If the identifier is a URL, it SHOULD point to a valid ALPS document. the URL 
 MAY point to a human-readable document that describes the ALPS specification 
 for the identified use case.  If the identifier is a URN, it SHOULD NOT be 
-treated as a resolvable identiferand instead SHOULD be treated as a unique 
+treated as a resolvable identifer and instead SHOULD be treated as a unique 
 name for the identified use case. 
 
-All ALPS URIs MUST be unique and SHOULD be registered in the ALPS Registry 
-located at [TK].
+[I almost feel like we should have two URLs, an ALPS permalink and a
+human-readable doc. Or should we suggest the use of content
+negotiation? -leonardr]
+
+All ALPS URIs MUST be unique and all ALPS documents intended for
+public consumption SHOULD be registered in the ALPS Registry located
+at [TK].
 
 == ALPS Documents ==
-ALPS Documents contain a machine-readable collection of semantic descriptors 
-and their details. These document can be represented in either XML or JSON 
-format. This section identifies the general elements and properties of an 
-ALPS document, their meaning, and use. Additional sub sections provide 
-specific details on how to construct a valid ALPS document in XML and in 
-JSON format.
+
+ALPS Documents contain a machine-readable collection of semantic
+descriptors and their human-readable details. An ALPS document can be
+represented in either XML or JSON format. This section identifies the
+general elements and properties of an ALPS document, their meaning,
+and their use. Additional subsections provide specific details on how
+to construct a valid ALPS document in XML and in JSON format.
 
 === Compliance ===
+
 An implementation is not compliant if it fails to satisfy one or more of the 
 MUST or REQUIRED level requirements. An implementation that satisfies all 
 the MUST or REQUIRED level and all the SHOULD level requirements is said 
@@ -65,44 +76,111 @@ be interpreted as described in RFC 2119.
 ===========================================
 
 === ALPS Document Properties ===
-The ALPS media type has a small set of properties. These appear
-in both the XML and JSON formats, but are expressed in different ways. Below
-is a list of the properties that can appear in an ALPS document.
+
+The ALPS media type defines a small set of properties. The properties
+appear in both the XML and JSON formats, but are expressed in
+different ways. Below is a list of the properties that can appear in
+an ALPS document.
 
 ==== +alps+ ====
 Indicates the root of the ALPS document. This MUST be the first property
 in the document. This property SHOULD have one or more +element+ child 
 properties.
 
+[Would it be okay to remove the 'must be the first property in the
+document' requirement? This would allow an ALPS doc to be embedded in
+other docs. It would also make it possible to define ALPS as a
+microformat. -leonardr]
+
 ==== +appears+ ====
-Indicates the appearance rules to apply to the related +element+.  Valid 
-values for this element are: 'MUST', 'SHOULD', and 'MAY'. These values are 
-to be treat as RFC 2119 key words. It SHOULD appear as a property 
-of the +element+ and/or +child+ elements. If this property does not appear, 
-the value SHOULD be treated as 'MAY'.
+
+Indicates the appearance rules to apply to the related +element+.
+Valid values for this element are: 'MUST', 'SHOULD', and 'MAY'. These
+values are to be treated as defined in RFC 2119. The +appears+
+property SHOULD appear as a property of the +element+ and/or +child+
+elements. If this property does not appear, the value SHOULD be
+treated as 'MAY'.
+
+[You've removed MUST NOT and the default MUST NOT for top-level
+elements, which makes it difficult to define documents like
+hCalendar. I've written an alternate section below. -leonardr]
+
+Indicates the appearance rules for the related +element+ in a
+representation. All valid values for this property are terms defined in RFC
+2119, and have the meaning given in that standard.
+
+The +appears+ property MAY appear as a property of the +element+
+block. This controls whether the element may appear at the "top
+level"; that is, not enclosed in any other element defined by this
+ALPS document. The formal meaning of "top level" varies by the media
+type; see "Applying ALPS to Existing Media Types" for
+definitions. [that's TK -leonardr]
+
+Valid values for +appears+ in an +element+ block are: 'MUST',
+'SHOULD', 'MAY', and 'MUST NOT'. If this property does not appear, the
+value SHOULD be treated as 'MUST NOT'.
+
+The +appears+ property MAY appear as a property of a +child+
+block. This controls the rules by which the referenced element may
+appear as a child of the enclosing +element+. The formal meaning of
+"enclosing +element+" varies by the media type; see "Applying ALPS to
+Existing Media Types" for definitions. [that's TK -leonardr]
+
+Valid values for +appears+ in an +child+ block are: 'MUST',
+'SHOULD', and 'MAY'. If this property does not appear, the value
+SHOULD be treated as 'MAY'.
 
 ==== +cardinality+ ====
-Indicates the number of times the related +element+ can appear within a single
-representation. Valid values are 'single' and 'many'. This MAY appear
-as a property of the +element+ and/pr +child+ elements. If this property does 
-not appear, the value SHOULD be treated as 'many'.
+
+Indicates the number of times the related +element+ can appear. Valid
+values are 'single' and 'many'.
+
+The +cardinality+ property MAY appear as a property of an +element+
+block. This controls how many times that element may be used at the
+"top level" within a single representation.
+
+The +cardinality+ property MAY appear as a property of a +child+
+block. This controls how many times the child element may occur within
+its enclosing element.
+
+If this property does not appear, the value SHOULD be treated as
+'many'.
 
 ==== +child+ ====
-Indicates a child of the related +element+ This MAY appear as a 
-child of the +element+. The +child+ property MAY have an +href+
-property pointing to the full +element+ definition (see +href+ for details).
 
-If no +href+ appears, then the +child+ property takes on the same features
-as the +element+ property.
+Indicates a child element of the related +element+ This MAY appear in
+the ALPS document as a child of an +element+ block. The +child+
+property MAY have an +href+ property pointing to a definition of an
++element+ block (see +href+ for details).
+
+If no +href+ appears, then the +child+ property takes on the same
+features as the +element+ property. [Which ones? It would also be good
+to mention here which properties the +child+ tag supports, as you do for
++element+. -leonardr]
 
 ==== +description+ ====
-A text field that contains free-form, usually human-readable, text describing
-the meaning and use of the related +element+. It SHOULD appear as a 
-child of +element+.
+
+A text field that contains free-form, usually human-readable, text.
+
+A +description+ block SHOULD appear as a child of +element+. When
+present, it describes the meaning and use of the related +element+.
+
+A +description+ block MAY appear as a child of +child+. When present,
+it describes the meaning of the relationship between the +element+ and
+its +child+.
+
+A +description+ block MAY appear as a child of +alps+. When present,
+it describes the purpose of the ALPS document as a whole.
+
+[When writing the example docs I kept wanting to use HTML
+markup. Obviously you can do this in ALPS+XML by using namespaces. Can
+we explicitly say that the contents of +description+ may be HTML
+markup, a la the contents of an Atom story? -leonardr]
 
 ==== +element+ ====
-Identifies a semantic descriptor. One or more +element+ blocks SHOULD appear
-as children of the +alps+ property. 
+
+Identifies a semantic descriptor. One or more +element+ blocks SHOULD
+appear as children of the +alps+ property.
 
 This property MUST have the following properties:
 
@@ -111,38 +189,74 @@ This property MUST have the following properties:
 
 It SHOULD have the following properties:
 
- * +appears+ 
- 
+ * +appears+
+
 It MAY have the following properties:
 
  * +cardinality+
  * +child+
  * +description+
- * +external_id+
+ * +name+
 
-==== +external_id+ ====
-Indicates the value of the +element+. It MAY appear
-as a property of the +element+.  This is used when this same value
-has already been used as an +id+ value in the ALPS document. 
+==== +name+ ====
+
+Indicates the name of the +element+ as found in generic
+representations. It MAY appear as a property of the +element+.
+
+This is used when the +element+'s name is used as an +id+ value
+elsewhere in the ALPS document. For instance, if a single ALPS
+document defines an element descriptor called 'customer' and a
+safe-idempotent control called 'customer', they can't both have
++id="customer"+ in the ALPS document. One of them needs to have some
+other +id+, and to set +name="customer"+.
 
 ==== +href+ ====
-Points to an +element+ either within the existing ALPS 
-document or in another ALPS document. This MUST appear as part of the 
-+child+ element. The value MUST be a valid URL.
+
+Points to an +element+ either within the existing ALPS document or in
+another ALPS document.
+
+The +href+ attribute MUST appear as part of the +child+ element. The
+value MUST be a valid URL, with a fragment identifier, resolving to an
++element+ within an ALPS document.
+
+[Should <alps> itself support +href+ so it can link to itself or a
+full human-readable doc? Or should we allow a general <link> tag so
+you can do rel="help"?]
+
+[Earlier you said that +child+ didn't need href. -leonardr]
+
+[I have a half-baked idea about using +href+ within +element+ as well.
+This would let you copy the +fn+ descriptor defined in hCard into your
+custom ALPS document (for performance reasons) but still make it clear
+that your +fn+ descriptor has the same meaning as the one defined in
+hCard. -leonardr]
 
 ==== +id+ ====
-Indicates the semantic descriptor value for the related +element+. This
-MUST appear for each +element+. The value of this property contains the 
-text that will appear within the media type representation as the value of
-that media type's semantic descriptor (see Applying ALPS to Existing Media
-Types for details). If +external_id+ exists for the same +element+ the 
-value of +external_id+ contains the value of the semantic descriptor, not 
-value of +id+
+
+A document-wide unique identifier for the related element. This MUST
+appear as a property of each +element+.
+
+The value of this property will appear within generic representations
+as the name of a semantic descriptor or hypermedia control (see
+Applying ALPS to Existing Media Types for details). The exception is
+when an element defines +name+ as well as +id+. In that case, the
+value of +name+ contains the name of the semantic descriptor or
+hypermedia control, and the value of +id+ is just a unique ID.
+
+When applied to an ALPS document, a URI fragment identifier points to
+the element with the appropriate +id+. For example, The fragment
+identifier +customer+ in the URI +http://example.com/#customer+ refers
+to an ALPS element with +id+ set to +customer+.
+
+A relative URL with a fragment identifier (e.g. "#customer") refers to
+an element within the ALPS document containing the reference.
 
 ==== +type+ ====
+
 Indicates the type of representation control to which the +element+ is
-applied. This MUST appear for each +element+ Below is the explanation of 
-the valid values.
+applied. This MUST appear for each +element+. Four values are defined:
+
+[Would it be OK to say that the default is 'descriptor'? -leonardr]
 
  * 'descriptor' refers to a state element (e.g. +HTML.SPAN+, +HTML.INPUT+, etc.).
  * 'safe-idempotent' refers to a hypermedia control that triggers a safe,
@@ -151,14 +265,98 @@ idempotent state transition (i.e. +HTTP.GET+, +HTTP.HEAD+, etc.).
 unsafe, idempotent state transition (i.e. +HTTP.PUT+, +HTTP.DELETE+ etc.).
  * 'unsafe-nonidempotent' refers to a hypermedia control that triggers an
 unsafe, non-idempotent state transition (i.e. +HTTP.POST+).
- 
+
+[How about just idempotent and nonidempotent? -leonardr]
+
 ==== +version+ ====
 Indicates the version number of the ALPS document. This SHOULD appear as a 
 property of the +alps+ property. Currently the only valid value is '1.0'. 
 If no value appears, then it SHOULD be set to '1.0'.
 
 === XML Representation ===
-Below shows how ALPS Elements are expressed in the XML format.
+
+The following example shows how ALPS Elements are expressed in the XML
+format. This example ALPS+XML document describes a portion of the
+hCalendar microformat (http://microformats.org/wiki/hcalendar).
+
+[I put this in because I think an example that ties into something
+preexisting is better than an example we made up for RWA.]
+
+---------------------------------
+<alps version="1.0">
+
+ <description>
+  hCalendar is a simple, open format for publishing events on the web,
+  using a 1:1 representation of iCalendar (RFC2445) VEVENT properties
+  and values in HTML.
+ </description>
+
+ <element appearance="MAY">
+  <id>vcalendar</id>
+  <description>
+   A container for one or more events (vevent).
+  </description>
+  <child href="#vevent" appearance="MAY">
+ </element>
+
+ <element appearance="MAY">
+  <id>vevent</id>
+  <description>
+   A container for one event. See section 4.6.1 of RFC 2445.
+  </description>
+  <child href="#dtstart" appearance="MUST">
+  <child href="#summary" appearance="MUST">
+  <child href="#location" appearance="MAY">
+ </element>
+
+ <element appearance="MUST NOT">
+  <id>dtstart</id>
+  <description>
+   Date/time of the start of the event. See section 4.8.2.4 of RFC 2445.
+  </description>
+ </element>
+
+ <element appearance="MUST NOT">
+  <id>summary</id>
+  <description>
+   Short synopsis, title, or name of the event. See section 4.8.1.12
+   of RFC 2445.
+  </description>
+ </element>
+
+ <element appearance="MUST NOT">
+  <id>location</id>
+  <description>
+   Tells where the event is to be held. May be represented by nested
+   hCard record, adr record, geo record, or combination thereof. See
+   sections 4.8.1.7 and 4.8.1.6 of RFC 2445.
+  </description>
+ </element>
+</alps>
+---------------------------------
+
+This ALPS+XML document describes the +rel-nofollow+ microformat
+(http://microformats.org/wiki/rel-nofollow):
+
+[And I put this other example in because hCalendar doesn't define any link
+relations. -leonardr]
+
+---------------------------------
+<alps version="1.0">
+ <element id="nofollow" type="safe-idempotent">
+  <description>
+   Indicates that the referred resource was not necessarily linked to
+   by the author of the page, and thus said reference should not afford
+   the referred resource any additional weight or ranking by user
+   agents.
+  </description>
+ </element>
+</alps>
+---------------------------------
+
+[leaving in this example because a) i don't want to cut it
+unilaterally, and b) I didn't change the JSON example
+below. -leonardr]
 
 ---------------------------------
 <alps version="1.0">
@@ -264,6 +462,20 @@ Below shows how ALPS Elements are expressed in the JSON format.
 In the JSON format, the +element+ and +child+ properties are each expressed 
 as an +ARRAY+ and are labeled +elements+ and +children+ respectively.
 ======
+
+[I think this should be more formally defined. The property
+descriptions are hard to read because terms like "child" and "element"
+are used for both the ALPS doc and for the generic doc the ALPS doc
+describes. Then there's this extra genericness when defining things
+like +element+ because we can't use XML-specific terminology like
+"tag".
+
+I liked your use of "block" instead of "tag" when defining
++element+. If we consistently use, say, "block" and "attribute", then
+when we talk about XML and JSON representations we can say that a
+block becomes a tag in XML but a list in JSON, and an attribute
+becomes an XML attribute but a key-value pair in a JSON
+dictionary. -leonardr]
 
 ------------------------------------------------
 {
@@ -391,80 +603,120 @@ as an +ARRAY+ and are labeled +elements+ and +children+ respectively.
 -----------------------------------------
 
 == Applying ALPS to Existing Media Types ==
-ALPS documents can be applied to various existing hypermedia types. Below
-are a set of instructions on how to apply ALPS information to existing 
+
+ALPS documents can be applied to many existing hypermedia types. Below
+are a set of instructions on how to apply ALPS information to existing
 media types.
 
-=== ALPS and HTML ===
-When applying ALPS to HTML, the following rules apply.
+[There's an issue of policy here. I've written two paragraphs. Each
+has its own problems. I think I have to vote for #1. -leonardr]
 
-'descriptor' :: The value of +id+ is applied to the +"class"+ attribute of 
-an element. If the descriptor is a +child+ of a transition, the element SHOULD
-be a +<INPUT>+, +<SELECT>+, or +<TEXTAREA>+ element.
- 
-'safe-idempotent' :: If no +child+ descriptors exist, the value of +id+ is 
-applied to the +"rel"+ attribute of an +<A>+ or +<LINK>+ element. If one or
-more +child+ descriptors exist, the value of +id+ is applied to the +"class"+
-attribute of a +<FORM>+ which has it's +"method"+" attribute set to +get+ and
-the +id+ values of any +child+ descriptors are applied to the +"class"+ attribute
-of +<INPUT>+, +<SELECT>+, and/or +<TEXTAREA>+ elements encapsulated by the 
-+<FORM>+.
- 
-'unsafe-idempotent' :: Undefined for HTML
- 
-'unsafe-nonidempotent' :: The value of +id+ is applied to the +"class"+ 
-attribute of a +<FORM>+ which has it's +"method"+ attribute set to 
-+post+ and the +id+ values of any +child+ descriptors are applied to the 
-+"class"+ attribute of +<INPUT>+, +<SELECT>+, and/or +<TEXTAREA>+ elements 
+These instructions are to be considered normative for ALPS version
+1.0. If the body responsible for a given media type adopts conflicting
+instructions for applying an ALPS document to that media type, a new
+revision of the ALPS standard will be released which references that
+body's instructions.
+
+[OR]
+
+These instructions are not to be considered normative. If the body
+responsible for a given media type adopts conflicting instructions for
+applying an ALPS document to that media type, those instructions
+should take precedence.
+
+
+=== ALPS and HTML ===
+
+The following rules apply when applying ALPS to HTML. (That is, to
+documents with media type +text/html+ or +application/xhtml+xml+.)
+
+'descriptor' :: The element's name refers to the +"class"+ attribute
+of an element. If the descriptor is a +child+ of a transition, the
+element SHOULD be a +<INPUT>+, +<SELECT>+, or +<TEXTAREA>+ element.
+
+'safe-idempotent' :: The element's name refers to the +"class"+
+attribute of a +<FORM>+ which has its +"method"+" attribute set to
++get+.  The names of any +child+ descriptors refer to the +"class"+
+attributes of +<INPUT>+, +<SELECT>+, and/or +<TEXTAREA>+ elements
 encapsulated by the +<FORM>+.
 
+If no +child+ descriptors exist, the descriptor name may also be applied
+to the +"rel"+ attribute of an +<A>+ or +<LINK>+ element.
+
+[I think this should be applied to the class of the submit button, not
+the form itself, because a form may contain more than one submit
+button. But, it might be okay to say that it can be applied to the
+form or to a submit button. -leonardr]
+
+'unsafe-idempotent' :: Treated as equivalent to 'unsafe-nonidempotent'.
+
+'unsafe-nonidempotent' :: The element's name refers to the
++"class"+ attribute of a +<FORM>+ which has its +"method"+ attribute
+set to +post+. The names of any +child+ descriptors refer to the
++"class"+ attributes of +<INPUT>+, +<SELECT>+, and/or +<TEXTAREA>+
+elements encapsulated by the +<FORM>+.
+
 ==== NOTES ====
-Since HTML has no built-in support for 'unsafe-nonidempotent' it 
-is up to the implementor to decide how to support this transition when it 
-appears within an ALPS document.
+
+Since HTML has no support for idempotent state transitions per se,
+this standard treats them the same as non-idempotent state
+transitions. Both are represented as HTML forms with +method="post"+.
+
+[I think this is better than leaving it undefined, but I'm open to
+counterarguments. -leonardr]
 
 === ALPS and Collection+JSON ===
-When applying ALPS to Collection+JSON, the following rules apply.
 
-'descriptor' :: The value of +id+ is applied to the +"name"+ property of a 
+The following rules apply when applying ALPS to Collection+JSON. (That
+is, to documents with media type +application/vnd.collection+json+.)
+
+'descriptor' :: The element name refers to the +"name"+ property of a 
 +{"data"}+ object.
 
-'safe-idemptotent' :: The value of +id+ is applied to the +"rel"+ property of 
+'safe-idemptotent' :: The element name refers to the +"rel"+ property of 
 a +{"link"}+ object.
 
-'unsafe-idempotent' :: The value of +id+ is applied to the +"rel"+ of a 
+'unsafe-idempotent' :: The element name refers to the +"rel"+ of a 
 +{"template"}+ object.
 
-'unsafe-nonidempotent' :: Undefined for Collection+JSON
+'unsafe-nonidempotent' :: Undefined for Collection+JSON.
 
 ==== NOTES ====
-Since Collection+JSON does not support 'unsafe-nonidempotent' it is up to
-the implementor to decide how to support this transition when it appears
-within an ALPS document.
+
+Since Collection+JSON does not support non-idempotent transitions, it
+is up to the application implementor how and whether to represent this
+transition in a Collection+JSON representation.
 
 === ALPS and HAL ===
-When applying ALPS to HAL (both XML and JSON formats), the folloiwng rules apply.
 
-'descriptor' :: The value of +id+ is applied to the "name" attribute of an item.
+When applying ALPS to HAL (both XML and JSON formats), the folloiwng
+rules apply.
 
-'safe-idempotent' :: The value of +id+ is applied to the "rel" of a link element.
+'descriptor' :: The element name refers to the "name" attribute of an item.
 
-'unsafe-idempotent' :: The value of +id+ is applied to the "rel" of a link element.
+'safe-idempotent' :: The element name refers to the "rel" of a link element.
 
-'unsafe-nonidempotent' :: The value of the +id+ is applied to the "rel" of a 
+'unsafe-idempotent' :: The element name refers to the "rel" of a link element.
+
+'unsafe-nonidempotent' :: The element name refers to the "rel" of a 
 link element.
 
 ==== NOTES ====
-HAL does not identify the state transition details (safe/unsafe, 
-idempotent/non-idempotent) with a representation. Instead that information is
-in the human-readable documentation associated with the link relation value.
-For this reason, it is important to reference the documentation when determining
-which ALPS element +id+ values to apply to which HAL +<LINK>+ elements.
+
+HAL does not identify the protocol-level details of a state transition
+(safe/unsafe, idempotent/non-idempotent) within a
+representation. Instead that information is in the human-readable
+documentation associated with the link relation value. For this
+reason, it is important to reference the application's documentation
+after determining which ALPS element name applies to a HAL +<LINK>+
+element.
 
 [WARNING]
 =========================================
 MCA: I stopped editing at this point. The Siren+JSON, Atom, and OData
 sections still need to be brought up-to-date with the rest of the spec.
+
+LEONARDR: I also stopped here when going through it.
 =========================================
 
 === ALPS and Siren ===
