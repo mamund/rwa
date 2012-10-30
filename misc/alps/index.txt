@@ -64,81 +64,101 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 be interpreted as described in RFC 2119.
 ===========================================
 
-=== ALPS Elements and Properties ===
-The ALPS media type has a small set of elements and properties. These appear
+=== ALPS Document Properties ===
+The ALPS media type has a small set of properties. These appear
 in both the XML and JSON formats, but are expressed in different ways. Below
-is a list of the elements and properties that can appear in an ALPS document.
+is a list of the properties that can appear in an ALPS document.
 
 ==== +alps+ ====
-This is the root element of the ALPS document. This MUST be the first element
-in the document.
+Indicates the root of the ALPS document. This MUST be the first property
+in the document. This property SHOULD have one or more +element+ child 
+properties.
 
 ==== +appears+ ====
-Indicates the appearance rules to apply to the related +element+. This 
-SHOULD appear as a property of the +element+ and +child+ elements. Valid 
+Indicates the appearance rules to apply to the related +element+.  Valid 
 values for this element are: 'MUST', 'SHOULD', and 'MAY'. These values are 
-to be treat asRFC 2119 key words. If this property does not appear, the
-value SHOULD be set to 'MAY'.
+to be treat as RFC 2119 key words. It SHOULD appear as a property 
+of the +element+ and/or +child+ elements. If this property does not appear, 
+the value SHOULD be treated as 'MAY'.
 
 ==== +cardinality+ ====
 Indicates the number of times the related +element+ can appear within a single
 representation. Valid values are 'single' and 'many'. This MAY appear
-as a property of the +element+ and +child+ elements. If this property does not
-appear, the value SHOULD be set to 'single'.
+as a property of the +element+ and/pr +child+ elements. If this property does 
+not appear, the value SHOULD be treated as 'many'.
 
 ==== +child+ ====
-Indicates there is a child of the related +element+ This MAY appear as a 
-sub-element of the +element+. The +child+ element MUST have an +href+
-property pointing to the full +element+ that will appear as a child element
-(see +href+ for details). 
+Indicates a child of the related +element+ This MAY appear as a 
+child of the +element+. The +child+ property MAY have an +href+
+property pointing to the full +element+ definition (see +href+ for details).
+
+If no +href+ appears, then the +child+ property takes on the same features
+as the +element+ property.
 
 ==== +description+ ====
 A text field that contains free-form, usually human-readable, text describing
-the meaning and use of the related +element+. This SHOULD appear as a 
-sub-element of +element+.
+the meaning and use of the related +element+. It SHOULD appear as a 
+child of +element+.
 
 ==== +element+ ====
 Identifies a semantic descriptor. One or more +element+ blocks SHOULD appear
-as children of the +alps+ element. 
+as children of the +alps+ property. 
+
+This property MUST have the following properties:
+
+ * +id+
+ * +type+
+
+It SHOULD have the following properties:
+
+ * +appears+ 
+ 
+It MAY have the following properties:
+
+ * +cardinality+
+ * +child+
+ * +description+
+ * +external_id+
 
 ==== +external_id+ ====
-TK
+Indicates the value of the +element+. It MAY appear
+as a property of the +element+.  This is used when this same value
+has already been used as an +id+ value in the ALPS document. 
 
 ==== +href+ ====
-A valid URL that points to an +element+ either within the existing document
-or in another document. This MUST appear as part of the +child+ element.
+Points to an +element+ either within the existing ALPS 
+document or in another ALPS document. This MUST appear as part of the 
++child+ element. The value MUST be a valid URL.
 
 ==== +id+ ====
 Indicates the semantic descriptor value for the related +element+. This
 MUST appear for each +element+. The value of this property contains the 
 text that will appear within the media type representation as the value of
 that media type's semantic descriptor (see Applying ALPS to Existing Media
-Types for details). 
+Types for details).
+[NOTE]
+=========================
+If the +external_id+ exists for the same +element+ the value of +external_id+ 
+represents the value of the semantic descriptor, not the value of the +id+
+==========================
 
 ==== +type+ ====
 Indicates the type of representation control to which the +element+ is
-applied. Below is the explanation of the possible valid values.
+applied. This MUST appear for each +element+ Below is the explanation of 
+the valid values.
 
- * 'descriptor' refers to an attribute of an element that can take on a
-given value many times in a single representation.
- * 'link-relation' refers to a hypermedia control that triggers a safe
-state transition (i.e. +HTTP.GET+, etc.).
- * 'idempotent-relation' refers to a hypermedia control that triggers an
-idempotent state transition (i.e. +HTTP.PUT+, etc.).
- * 'unsafe-relation' refers to a hypermedia control that triggers an
-unsafe state transition (i.e. +HTTP.POST+).
+ * 'descriptor' refers to a state element (e.g. +HTML.SPAN+, +HTML.INPUT+, etc.).
+ * 'safe-idempotent' refers to a hypermedia control that triggers a safe,
+idempotent state transition (i.e. +HTTP.GET+, +HTTP.HEAD+, etc.).
+ * 'unsafe-idempotent' refers to a hypermedia control that triggers an
+unsafe, idempotent state transition (i.e. +HTTP.PUT+, +HTTP.DELETE+ etc.).
+ * 'unsafe-nonidempotent' refers to a hypermedia control that triggers an
+unsafe, non-idempotent state transition (i.e. +HTTP.POST+).
  
----------------------------------------
-[MCA: pulled this out since i agree we don't need this one.]
- * 'unique' refers to an attribute of an element that can only take on a
-given value once in a given representation. (Not really convinced we
-need this one.)
---------------------------------------- 
-
 ==== +version+ ====
 Indicates the version number of the ALPS document. This SHOULD appear as a 
-property of the +alps+ elements. Currently the only valid
-value is '1.0'. If no value appears, then it SHOULD be set to '1.0'.
+property of the +alps+ property. Currently the only valid value is '1.0'. 
+If no value appears, then it SHOULD be set to '1.0'.
 
 === XML Representation ===
 Below shows how ALPS Elements are expressed in the XML format.
@@ -147,9 +167,7 @@ Below shows how ALPS Elements are expressed in the XML format.
 <alps version="1.0">
 
  <element id="hmaze" type="descriptor" appears="MUST">
-   <description>
-      Indicates the root of an hMaze document.
-    </description>
+   <description>Indicates the root of an hMaze document.</description>
     <child href="#collection"/>
     <child href="#item"/>
     <child href="#error"/>
@@ -169,7 +187,7 @@ Below shows how ALPS Elements are expressed in the XML format.
     <child href="#start"/ appears="SHOULD">
   </element>
                                     
-  <element id="start" type="link-relation">
+  <element id="start" type="safe-idempotent">
     <description>The beginning cell of a maze.</description>
   </element>
                                         
@@ -180,9 +198,7 @@ Below shows how ALPS Elements are expressed in the XML format.
   <element id="cell" type="descriptor">
     <description>A cell in a maze.</description>
     <child href="#title" appears="SHOULD">
-      <description>
-        The name of the cell, e.g. "Throne Room."
-      </description>
+      <description>The name of the cell, e.g. "Throne Room."</description>
     </child>
     <child href="#north" appears="MAY"/>
     <child href="#south" appears="MAY"/>
@@ -192,7 +208,7 @@ Below shows how ALPS Elements are expressed in the XML format.
     <child href="#current" appears="MUST"/>
   </element>
                                                                           
-  <element id="north" type="link-relation">
+  <element id="north" type="safe-idempotent">
     <description>The cell to the north of this one.</description>
   </element>
                                                                               
@@ -200,7 +216,7 @@ Below shows how ALPS Elements are expressed in the XML format.
   [similarly for south, east, west, exit, current.]
   ...
                                                                                
-  <element id="inventory-link" external_id="inventory" type="link-relation">
+  <element id="inventory-link" external_id="inventory" type="safe-idempotent">
     <description>The player's inventory.</description>
   </element>
   
@@ -210,15 +226,13 @@ Below shows how ALPS Elements are expressed in the XML format.
     </description>
     <child href="#treasure" cardinality="many" appears="MAY"/>
     <child href="#score" appears="MAY">
-      The player's total score.
+      <description>The player's total score.</description>
     </child>
   </element>
                                                                       
   <element id="treasure" type="descriptor">
     <id>treasure</id>
-    <description>
-      A treasure found in the maze.
-    </description>
+    <description>A treasure found in the maze.</description>
     <child href="#title" appears="SHOULD">
       <description>The name of this treasure, e.g. "Amethyst."</description>
     </child>
@@ -235,22 +249,143 @@ Below shows how ALPS Elements are expressed in the XML format.
     <description>A numeric score.</description>
   </element>
                                                                             
-  <element id="pickup" type="idempotent-relation">
-    <description>
-      Picks up the treasure.
-    </description>
+  <element id="pickup" type="unsafe-idempotent">
+    <description>Picks up the treasure.</description>
   </element>
                                                      
-  <element id="drop" type="idempotent-relation">
-    <description>
-      Drops the treasure.
-    </description>
+  <element id="drop" type="unsafe-idempotent">
+    <description>Drops the treasure.</description>
   </element>
                                                                                 
 </alps>
 ---------------------------------
 === JSON Representation ===
 Below shows how ALPS Elements are expressed in the JSON format.
+
+------------------------------------------------
+{
+  "alps" :
+  "version" : "1.0",
+  "elements" : [
+    {
+      "id" : "hmaze", 
+      "type" : "descriptor", 
+      "appears" : "MUST",
+      "description" : "Indicates the root of an hMaze document",
+      "children" : [
+        {"href" : "#collection"},
+        {"href" : "#item},
+        {"href" : "#error"},
+        {"href" : "#cell"},
+        {"href" : "#inventory-link"}
+      ]
+    },
+    {
+      "id" : "collection",
+      "type" : "descriptor",
+      "description" : "A collection of mazes",
+      "children" : [
+        {
+          "href" : "#cell", 
+          "cardinality" : "many", 
+          "appears" : "MAY",
+          "description" : "The opening cell of a maze"
+        }
+      ]
+    },
+    {
+      "id" : "item",
+      "type" : "descriptor",
+      "description" : "A single maze"
+      "children" : [
+        {"href" : "#start", "appears" : "SHOULD"}
+      ]
+    },
+    {
+      "id" : "start",
+      "type" : "safe-idempotent",
+      "description" : "The beginning cell of a  maze"
+    },
+    {
+      "id" : "error",
+      "type" : "descriptor",
+      "description" : "An error message"
+    },
+    {
+      "id" : "cell",
+      "type" : "descriptor",
+      "description" : "A cell in a maze",
+      "children" : [
+        {"href" : "#title", "appears" : "SHOULD", 
+         "description" : "The name of the cell, e.g. \"Throne Room\""
+        },
+        {"href" : "#north", "appears" : "MAY"},
+        {"href" : "#south", "appears" : "MAY"},
+        {"href" : "#east", "appears" : "MAY"},
+        {"href" : "#west", "appears" : "MAY"},
+        {"href" : "#exit", "appears" : "MAY"},
+        {"href" : "#current", "appears" : "MUST"}
+      ]
+    }i,
+    {
+      "id" : "north",
+      "type" : "safe-idempotent",
+      "description" : "The cell to the north of the current cell."
+    },
+    ... similary for south, east, west, exit, current ...
+    {
+      "id" : "inventory-link", 
+      "external_id" : "inventory",
+      "type" : "safe-idempotent",
+      "description" : "The player's inventory"
+    },
+    {
+      "id" : "inventory", 
+      "type" : "descriptor",
+      "description" : "Everything the player is carrying",
+      "children" : [
+        {"href" : "#treasure", "cardinality" : "many", "appears" : "MAY},
+        {"href" : "#score", "appears" : "MAY", 
+         "description" : "The player's total score"
+        }
+      ]
+    },
+    {
+      "id" : "treasure",
+      "type" : "descriptor",
+      "description" : "A treasure found in the maze",
+      "children" : [
+        {"href" : "#title", "appears" : "SHOULD", 
+         "description" : "The name of this treasure, e.g. \"Amethyst\""
+        },
+        {"href" : "#score", "appears" : "MAY"},
+        {"href" : "#pickup", "appears" : "MAY"},
+        {"href" : "#drop", "appears" : "MAY"}
+      ]
+    },
+    {
+      "id" : "title",
+      "type" : "descriptor",
+      "description" : "A title"
+    },
+    {
+      "id" : "score",
+      "type" : "descriptor",
+      "description" : "A numeric score"
+    },
+    {
+      "id" : "pickup",
+      "type" : "unsafe-idempotent",
+      "description" : "Picks up the treasure"
+    },
+    {
+      "id" : "drop",
+      "type" : "unsafe-idempotent",
+      "description" : "Drops the treasure"
+    }
+  ]
+} 
+-----------------------------------------
 
 == Applying ALPS to Existing Media Types ==
 ALPS documents can be applied to various existing hypermedia types. Below
@@ -260,17 +395,7 @@ media types.
 [NOTE]
 ======================================
 MCA:
-
-I copied most of LR's content directly here w/ just a few changes.
-I think more needs to be done to 'normalize' across various media types.
-I agree that 'unique' can proly be dropped from the ALPS model (this is
-an HTML-specific thing, right?). 
-
-I also think we need to be a bit clearer on describing state transfers 
-('link-relation', 'idemponent-relation', 'safe-relation', & 'unsafe-relation').
-I suspect there is unneeded overlap/vague-ness here.
-
-Finally, What isour position on providing descriptors for state transfers? IOW,
+What is our position on providing descriptors for state transfers? IOW,
 is this a MUST, SHOULD, MAY? or should that be left to the media type itself?
 =======================================
 

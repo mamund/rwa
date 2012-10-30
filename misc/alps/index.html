@@ -647,56 +647,105 @@ be interpreted as described in RFC 2119.</p></div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_alps_elements_and_properties">ALPS Elements and Properties</h3>
-<div class="paragraph"><p>The ALPS media type has a small set of elements and properties. These appear
+<h3 id="_alps_document_properties">ALPS Document Properties</h3>
+<div class="paragraph"><p>The ALPS media type has a small set of properties. These appear
 in both the XML and JSON formats, but are expressed in different ways. Below
-is a list of the elements and properties that can appear in an ALPS document.</p></div>
+is a list of the properties that can appear in an ALPS document.</p></div>
 <div class="sect3">
 <h4 id="_tt_alps_tt"><tt>alps</tt></h4>
-<div class="paragraph"><p>This is the root element of the ALPS document. This MUST be the first element
-in the document.</p></div>
+<div class="paragraph"><p>Indicates the root of the ALPS document. This MUST be the first property
+in the document. This property SHOULD have one or more <tt>element</tt> child
+properties.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_appears_tt"><tt>appears</tt></h4>
-<div class="paragraph"><p>Indicates the appearance rules to apply to the related <tt>element</tt>. This
-SHOULD appear as a property of the <tt>element</tt> and <tt>child</tt> elements. Valid
+<div class="paragraph"><p>Indicates the appearance rules to apply to the related <tt>element</tt>.  Valid
 values for this element are: <em>MUST</em>, <em>SHOULD</em>, and <em>MAY</em>. These values are
-to be treat asRFC 2119 key words. If this property does not appear, the
-value SHOULD be set to <em>MAY</em>.</p></div>
+to be treat as RFC 2119 key words. It SHOULD appear as a property
+of the <tt>element</tt> and/or <tt>child</tt> elements. If this property does not appear,
+the value SHOULD be treated as <em>MAY</em>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_cardinality_tt"><tt>cardinality</tt></h4>
 <div class="paragraph"><p>Indicates the number of times the related <tt>element</tt> can appear within a single
 representation. Valid values are <em>single</em> and <em>many</em>. This MAY appear
-as a property of the <tt>element</tt> and <tt>child</tt> elements. If this property does not
-appear, the value SHOULD be set to <em>single</em>.</p></div>
+as a property of the <tt>element</tt> and/pr <tt>child</tt> elements. If this property does
+not appear, the value SHOULD be treated as <em>many</em>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_child_tt"><tt>child</tt></h4>
-<div class="paragraph"><p>Indicates there is a child of the related <tt>element</tt> This MAY appear as a
-sub-element of the <tt>element</tt>. The <tt>child</tt> element MUST have an <tt>href</tt>
-property pointing to the full <tt>element</tt> that will appear as a child element
-(see <tt>href</tt> for details).</p></div>
+<div class="paragraph"><p>Indicates a child of the related <tt>element</tt> This MAY appear as a
+child of the <tt>element</tt>. The <tt>child</tt> property MAY have an <tt>href</tt>
+property pointing to the full <tt>element</tt> definition (see <tt>href</tt> for details).</p></div>
+<div class="paragraph"><p>If no <tt>href</tt> appears, then the <tt>child</tt> property takes on the same features
+as the <tt>element</tt> property.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_description_tt"><tt>description</tt></h4>
 <div class="paragraph"><p>A text field that contains free-form, usually human-readable, text describing
-the meaning and use of the related <tt>element</tt>. This SHOULD appear as a
-sub-element of <tt>element</tt>.</p></div>
+the meaning and use of the related <tt>element</tt>. It SHOULD appear as a
+child of <tt>element</tt>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_element_tt"><tt>element</tt></h4>
 <div class="paragraph"><p>Identifies a semantic descriptor. One or more <tt>element</tt> blocks SHOULD appear
-as children of the <tt>alps</tt> element.</p></div>
+as children of the <tt>alps</tt> property.</p></div>
+<div class="paragraph"><p>This property MUST have the following properties:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>id</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>type</tt>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>It SHOULD have the following properties:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>appears</tt>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>It MAY have the following properties:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<tt>cardinality</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>child</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>description</tt>
+</p>
+</li>
+<li>
+<p>
+<tt>external_id</tt>
+</p>
+</li>
+</ul></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_external_id_tt"><tt>external_id</tt></h4>
-<div class="paragraph"><p>TK</p></div>
+<div class="paragraph"><p>Indicates the value of the <tt>element</tt>. It MAY appear
+as a property of the <tt>element</tt>.  This is used when this same value
+has already been used as an <tt>id</tt> value in the ALPS document.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_href_tt"><tt>href</tt></h4>
-<div class="paragraph"><p>A valid URL that points to an <tt>element</tt> either within the existing document
-or in another document. This MUST appear as part of the <tt>child</tt> element.</p></div>
+<div class="paragraph"><p>Points to an <tt>element</tt> either within the existing ALPS
+document or in another ALPS document. This MUST appear as part of the
+<tt>child</tt> element. The value MUST be a valid URL.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_id_tt"><tt>id</tt></h4>
@@ -705,50 +754,54 @@ MUST appear for each <tt>element</tt>. The value of this property contains the
 text that will appear within the media type representation as the value of
 that media type&#8217;s semantic descriptor (see Applying ALPS to Existing Media
 Types for details).</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>If the <tt>external_id</tt> exists for the same <tt>element</tt> the value of <tt>external_id</tt>
+represents the value of the semantic descriptor, not the value of the <tt>id</tt></p></div>
+</td>
+</tr></table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_tt_type_tt"><tt>type</tt></h4>
 <div class="paragraph"><p>Indicates the type of representation control to which the <tt>element</tt> is
-applied. Below is the explanation of the possible valid values.</p></div>
+applied. This MUST appear for each <tt>element</tt> Below is the explanation of
+the valid values.</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<em>descriptor</em> refers to an attribute of an element that can take on a
-given value many times in a single representation.
+<em>descriptor</em> refers to a state element (e.g. <tt>HTML.SPAN</tt>, <tt>HTML.INPUT</tt>, etc.).
 </p>
 </li>
 <li>
 <p>
-<em>link-relation</em> refers to a hypermedia control that triggers a safe
-state transition (i.e. <tt>HTTP.GET</tt>, etc.).
+<em>safe-idempotent</em> refers to a hypermedia control that triggers a safe,
+idempotent state transition (i.e. <tt>HTTP.GET</tt>, <tt>HTTP.HEAD</tt>, etc.).
 </p>
 </li>
 <li>
 <p>
-<em>idempotent-relation</em> refers to a hypermedia control that triggers an
-idempotent state transition (i.e. <tt>HTTP.PUT</tt>, etc.).
+<em>unsafe-idempotent</em> refers to a hypermedia control that triggers an
+unsafe, idempotent state transition (i.e. <tt>HTTP.PUT</tt>, <tt>HTTP.DELETE</tt> etc.).
 </p>
 </li>
 <li>
 <p>
-<em>unsafe-relation</em> refers to a hypermedia control that triggers an
-unsafe state transition (i.e. <tt>HTTP.POST</tt>).
+<em>unsafe-nonidempotent</em> refers to a hypermedia control that triggers an
+unsafe, non-idempotent state transition (i.e. <tt>HTTP.POST</tt>).
 </p>
 </li>
 </ul></div>
-<div class="listingblock">
-<div class="content">
-<pre><tt>[MCA: pulled this out since i agree we don't need this one.]
- * 'unique' refers to an attribute of an element that can only take on a
-given value once in a given representation. (Not really convinced we
-need this one.)</tt></pre>
-</div></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_version_tt"><tt>version</tt></h4>
 <div class="paragraph"><p>Indicates the version number of the ALPS document. This SHOULD appear as a
-property of the <tt>alps</tt> elements. Currently the only valid
-value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em>.</p></div>
+property of the <tt>alps</tt> property. Currently the only valid value is <em>1.0</em>.
+If no value appears, then it SHOULD be set to <em>1.0</em>.</p></div>
 </div>
 </div>
 <div class="sect2">
@@ -759,9 +812,7 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
 <pre><tt>&lt;alps version="1.0"&gt;
 
  &lt;element id="hmaze" type="descriptor" appears="MUST"&gt;
-   &lt;description&gt;
-      Indicates the root of an hMaze document.
-    &lt;/description&gt;
+   &lt;description&gt;Indicates the root of an hMaze document.&lt;/description&gt;
     &lt;child href="#collection"/&gt;
     &lt;child href="#item"/&gt;
     &lt;child href="#error"/&gt;
@@ -781,7 +832,7 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
     &lt;child href="#start"/ appears="SHOULD"&gt;
   &lt;/element&gt;
 
-  &lt;element id="start" type="link-relation"&gt;
+  &lt;element id="start" type="safe-idempotent"&gt;
     &lt;description&gt;The beginning cell of a maze.&lt;/description&gt;
   &lt;/element&gt;
 
@@ -792,9 +843,7 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
   &lt;element id="cell" type="descriptor"&gt;
     &lt;description&gt;A cell in a maze.&lt;/description&gt;
     &lt;child href="#title" appears="SHOULD"&gt;
-      &lt;description&gt;
-        The name of the cell, e.g. "Throne Room."
-      &lt;/description&gt;
+      &lt;description&gt;The name of the cell, e.g. "Throne Room."&lt;/description&gt;
     &lt;/child&gt;
     &lt;child href="#north" appears="MAY"/&gt;
     &lt;child href="#south" appears="MAY"/&gt;
@@ -804,7 +853,7 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
     &lt;child href="#current" appears="MUST"/&gt;
   &lt;/element&gt;
 
-  &lt;element id="north" type="link-relation"&gt;
+  &lt;element id="north" type="safe-idempotent"&gt;
     &lt;description&gt;The cell to the north of this one.&lt;/description&gt;
   &lt;/element&gt;
 
@@ -812,7 +861,7 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
   [similarly for south, east, west, exit, current.]
   ...
 
-  &lt;element id="inventory-link" external_id="inventory" type="link-relation"&gt;
+  &lt;element id="inventory-link" external_id="inventory" type="safe-idempotent"&gt;
     &lt;description&gt;The player's inventory.&lt;/description&gt;
   &lt;/element&gt;
 
@@ -822,15 +871,13 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
     &lt;/description&gt;
     &lt;child href="#treasure" cardinality="many" appears="MAY"/&gt;
     &lt;child href="#score" appears="MAY"&gt;
-      The player's total score.
+      &lt;description&gt;The player's total score.&lt;/description&gt;
     &lt;/child&gt;
   &lt;/element&gt;
 
   &lt;element id="treasure" type="descriptor"&gt;
     &lt;id&gt;treasure&lt;/id&gt;
-    &lt;description&gt;
-      A treasure found in the maze.
-    &lt;/description&gt;
+    &lt;description&gt;A treasure found in the maze.&lt;/description&gt;
     &lt;child href="#title" appears="SHOULD"&gt;
       &lt;description&gt;The name of this treasure, e.g. "Amethyst."&lt;/description&gt;
     &lt;/child&gt;
@@ -847,16 +894,12 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
     &lt;description&gt;A numeric score.&lt;/description&gt;
   &lt;/element&gt;
 
-  &lt;element id="pickup" type="idempotent-relation"&gt;
-    &lt;description&gt;
-      Picks up the treasure.
-    &lt;/description&gt;
+  &lt;element id="pickup" type="unsafe-idempotent"&gt;
+    &lt;description&gt;Picks up the treasure.&lt;/description&gt;
   &lt;/element&gt;
 
-  &lt;element id="drop" type="idempotent-relation"&gt;
-    &lt;description&gt;
-      Drops the treasure.
-    &lt;/description&gt;
+  &lt;element id="drop" type="unsafe-idempotent"&gt;
+    &lt;description&gt;Drops the treasure.&lt;/description&gt;
   &lt;/element&gt;
 
 &lt;/alps&gt;</tt></pre>
@@ -865,6 +908,131 @@ value is <em>1.0</em>. If no value appears, then it SHOULD be set to <em>1.0</em
 <div class="sect2">
 <h3 id="_json_representation">JSON Representation</h3>
 <div class="paragraph"><p>Below shows how ALPS Elements are expressed in the JSON format.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>{
+  "alps" :
+  "version" : "1.0",
+  "elements" : [
+    {
+      "id" : "hmaze",
+      "type" : "descriptor",
+      "appears" : "MUST",
+      "description" : "Indicates the root of an hMaze document",
+      "children" : [
+        {"href" : "#collection"},
+        {"href" : "#item},
+        {"href" : "#error"},
+        {"href" : "#cell"},
+        {"href" : "#inventory-link"}
+      ]
+    },
+    {
+      "id" : "collection",
+      "type" : "descriptor",
+      "description" : "A collection of mazes",
+      "children" : [
+        {
+          "href" : "#cell",
+          "cardinality" : "many",
+          "appears" : "MAY",
+          "description" : "The opening cell of a maze"
+        }
+      ]
+    },
+    {
+      "id" : "item",
+      "type" : "descriptor",
+      "description" : "A single maze"
+      "children" : [
+        {"href" : "#start", "appears" : "SHOULD"}
+      ]
+    },
+    {
+      "id" : "start",
+      "type" : "safe-idempotent",
+      "description" : "The beginning cell of a  maze"
+    },
+    {
+      "id" : "error",
+      "type" : "descriptor",
+      "description" : "An error message"
+    },
+    {
+      "id" : "cell",
+      "type" : "descriptor",
+      "description" : "A cell in a maze",
+      "children" : [
+        {"href" : "#title", "appears" : "SHOULD",
+         "description" : "The name of the cell, e.g. \"Throne Room\""
+        },
+        {"href" : "#north", "appears" : "MAY"},
+        {"href" : "#south", "appears" : "MAY"},
+        {"href" : "#east", "appears" : "MAY"},
+        {"href" : "#west", "appears" : "MAY"},
+        {"href" : "#exit", "appears" : "MAY"},
+        {"href" : "#current", "appears" : "MUST"}
+      ]
+    }i,
+    {
+      "id" : "north",
+      "type" : "safe-idempotent",
+      "description" : "The cell to the north of the current cell."
+    },
+    ... similary for south, east, west, exit, current ...
+    {
+      "id" : "inventory-link",
+      "external_id" : "inventory",
+      "type" : "safe-idempotent",
+      "description" : "The player's inventory"
+    },
+    {
+      "id" : "inventory",
+      "type" : "descriptor",
+      "description" : "Everything the player is carrying",
+      "children" : [
+        {"href" : "#treasure", "cardinality" : "many", "appears" : "MAY},
+        {"href" : "#score", "appears" : "MAY",
+         "description" : "The player's total score"
+        }
+      ]
+    },
+    {
+      "id" : "treasure",
+      "type" : "descriptor",
+      "description" : "A treasure found in the maze",
+      "children" : [
+        {"href" : "#title", "appears" : "SHOULD",
+         "description" : "The name of this treasure, e.g. \"Amethyst\""
+        },
+        {"href" : "#score", "appears" : "MAY"},
+        {"href" : "#pickup", "appears" : "MAY"},
+        {"href" : "#drop", "appears" : "MAY"}
+      ]
+    },
+    {
+      "id" : "title",
+      "type" : "descriptor",
+      "description" : "A title"
+    },
+    {
+      "id" : "score",
+      "type" : "descriptor",
+      "description" : "A numeric score"
+    },
+    {
+      "id" : "pickup",
+      "type" : "unsafe-idempotent",
+      "description" : "Picks up the treasure"
+    },
+    {
+      "id" : "drop",
+      "type" : "unsafe-idempotent",
+      "description" : "Drops the treasure"
+    }
+  ]
+}</tt></pre>
+</div></div>
 </div>
 </div>
 </div>
@@ -880,15 +1048,8 @@ media types.</p></div>
 <div class="title">Note</div>
 </td>
 <td class="content">
-<div class="paragraph"><p>MCA:</p></div>
-<div class="paragraph"><p>I copied most of LR&#8217;s content directly here w/ just a few changes.
-I think more needs to be done to <em>normalize</em> across various media types.
-I agree that <em>unique</em> can proly be dropped from the ALPS model (this is
-an HTML-specific thing, right?).</p></div>
-<div class="paragraph"><p>I also think we need to be a bit clearer on describing state transfers
-(<em>link-relation</em>, <em>idemponent-relation</em>, <em>safe-relation</em>, &amp; <em>unsafe-relation</em>).
-I suspect there is unneeded overlap/vague-ness here.</p></div>
-<div class="paragraph"><p>Finally, What isour position on providing descriptors for state transfers? IOW,
+<div class="paragraph"><p>MCA:
+What is our position on providing descriptors for state transfers? IOW,
 is this a MUST, SHOULD, MAY? or should that be left to the media type itself?</p></div>
 </td>
 </tr></table>
@@ -1069,7 +1230,7 @@ action&#8217;s "fields" dictionary.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-10-29 18:20:52 EDT
+Last updated 2012-10-29 21:45:36 EDT
 </div>
 </div>
 </body>
