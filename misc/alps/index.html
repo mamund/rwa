@@ -574,12 +574,13 @@ footnotes: function () {
 <div class="sect1">
 <h2 id="_summary">Summary</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This document describes a media type designed to allow Web application authors
-and implementors a way to define, document, and apply application-level
-semantic descriptions to elements within media-type representations. This
-document also sets a standard for creating and registering ALPS document
-identifers and provides suggested conventions for applying ALPS descriptors
-to existing media types (HTML, JSON, and XML).</p></div>
+<div class="paragraph"><p>This document describes a media type designed to give Web application
+authors and implementors a way to define, document, and apply
+application-level semantic descriptions to elements within
+application-agnostic media-type representations. This document also
+sets a standard for creating and registering ALPS document identifers
+and provides suggested conventions for applying ALPS descriptors to
+existing media types (such as HTML, Collection+JSON, and HAL).</p></div>
 <div class="paragraph"><p>This document registers two media-type identifiers with the IANA:
 <tt>application/vnd.alps+xml</tt> and <tt>application/vnd.alps+json</tt>.</p></div>
 </div>
@@ -587,18 +588,18 @@ to existing media types (HTML, JSON, and XML).</p></div>
 <div class="sect1">
 <h2 id="_motivation">Motivation</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>When implementing a hypermedia client/server application using an existing
-general media type (i.e. HTML, Atom, Collection+JSON, etc.), client and server
-instances need to share application-specific information such as data element
-names, link relation values, and state transfer parameters. This information
-is directly related to the application being implemented (i.e. accounting,
-contact management, etc.) rather than the media type used to represent the
-application state.</p></div>
-<div class="paragraph"><p>Instead of creating (and registering) and entirely new media type (i.e.
-<tt>application/accounting</tt>), this standard allows representation authors define,
-document, and apply application-level semantic descriptions to elements
-within a representation. This increases the specificity of the representation
-without reducing the generality of the media type.</p></div>
+<div class="paragraph"><p>When implementing a hypermedia client/server application using a
+general media type (i.e. HTML, Atom, Collection+JSON, etc.), client
+and server instances need to share application-specific information
+such as data element names, link relation values, and state transfer
+parameters. This information is directly related to the application
+being implemented (i.e. accounting, contact management, etc.) rather
+than the media type used in the representations.</p></div>
+<div class="paragraph"><p>Instead of creating (and registering) and entirely new media type
+(i.e.  <tt>application/accounting</tt>), this standard allows representation
+authors to apply application-level semantic descriptions to elements
+defined by the generic media type. This increases the specificity of
+the representation without reducing the generality of the media type.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -610,21 +611,25 @@ in the form of a URN (i.e. TK).</p></div>
 <div class="paragraph"><p>If the identifier is a URL, it SHOULD point to a valid ALPS document. the URL
 MAY point to a human-readable document that describes the ALPS specification
 for the identified use case.  If the identifier is a URN, it SHOULD NOT be
-treated as a resolvable identiferand instead SHOULD be treated as a unique
+treated as a resolvable identifer and instead SHOULD be treated as a unique
 name for the identified use case.</p></div>
-<div class="paragraph"><p>All ALPS URIs MUST be unique and SHOULD be registered in the ALPS Registry
-located at [TK].</p></div>
+<div class="paragraph"><p>[I almost feel like we should have two URLs, an ALPS permalink and a
+human-readable doc. Or should we suggest the use of content
+negotiation? -leonardr]</p></div>
+<div class="paragraph"><p>All ALPS URIs MUST be unique and all ALPS documents intended for
+public consumption SHOULD be registered in the ALPS Registry located
+at [TK].</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_alps_documents">ALPS Documents</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>ALPS Documents contain a machine-readable collection of semantic descriptors
-and their details. These document can be represented in either XML or JSON
-format. This section identifies the general elements and properties of an
-ALPS document, their meaning, and use. Additional sub sections provide
-specific details on how to construct a valid ALPS document in XML and in
-JSON format.</p></div>
+<div class="paragraph"><p>ALPS Documents contain a machine-readable collection of semantic
+descriptors and their human-readable details. An ALPS document can be
+represented in either XML or JSON format. This section identifies the
+general elements and properties of an ALPS document, their meaning,
+and their use. Additional subsections provide specific details on how
+to construct a valid ALPS document in XML and in JSON format.</p></div>
 <div class="sect2">
 <h3 id="_compliance">Compliance</h3>
 <div class="paragraph"><p>An implementation is not compliant if it fails to satisfy one or more of the
@@ -648,48 +653,95 @@ be interpreted as described in RFC 2119.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_alps_document_properties">ALPS Document Properties</h3>
-<div class="paragraph"><p>The ALPS media type has a small set of properties. These appear
-in both the XML and JSON formats, but are expressed in different ways. Below
-is a list of the properties that can appear in an ALPS document.</p></div>
+<div class="paragraph"><p>The ALPS media type defines a small set of properties. The properties
+appear in both the XML and JSON formats, but are expressed in
+different ways. Below is a list of the properties that can appear in
+an ALPS document.</p></div>
 <div class="sect3">
 <h4 id="_tt_alps_tt"><tt>alps</tt></h4>
 <div class="paragraph"><p>Indicates the root of the ALPS document. This MUST be the first property
 in the document. This property SHOULD have one or more <tt>element</tt> child
 properties.</p></div>
+<div class="paragraph"><p>[Would it be okay to remove the <em>must be the first property in the
+document</em> requirement? This would allow an ALPS doc to be embedded in
+other docs. It would also make it possible to define ALPS as a
+microformat. -leonardr]</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_appears_tt"><tt>appears</tt></h4>
-<div class="paragraph"><p>Indicates the appearance rules to apply to the related <tt>element</tt>.  Valid
-values for this element are: <em>MUST</em>, <em>SHOULD</em>, and <em>MAY</em>. These values are
-to be treat as RFC 2119 key words. It SHOULD appear as a property
-of the <tt>element</tt> and/or <tt>child</tt> elements. If this property does not appear,
-the value SHOULD be treated as <em>MAY</em>.</p></div>
+<div class="paragraph"><p>Indicates the appearance rules to apply to the related <tt>element</tt>.
+Valid values for this element are: <em>MUST</em>, <em>SHOULD</em>, and <em>MAY</em>. These
+values are to be treated as defined in RFC 2119. The <tt>appears</tt>
+property SHOULD appear as a property of the <tt>element</tt> and/or <tt>child</tt>
+elements. If this property does not appear, the value SHOULD be
+treated as <em>MAY</em>.</p></div>
+<div class="paragraph"><p>[You&#8217;ve removed MUST NOT and the default MUST NOT for top-level
+elements, which makes it difficult to define documents like
+hCalendar. I&#8217;ve written an alternate section below. -leonardr]</p></div>
+<div class="paragraph"><p>Indicates the appearance rules for the related <tt>element</tt> in a
+representation. All valid values for this property are terms defined in RFC
+2119, and have the meaning given in that standard.</p></div>
+<div class="paragraph"><p>The <tt>appears</tt> property MAY appear as a property of the <tt>element</tt>
+block. This controls whether the element may appear at the "top
+level"; that is, not enclosed in any other element defined by this
+ALPS document. The formal meaning of "top level" varies by the media
+type; see "Applying ALPS to Existing Media Types" for
+definitions. [that&#8217;s TK -leonardr]</p></div>
+<div class="paragraph"><p>Valid values for <tt>appears</tt> in an <tt>element</tt> block are: <em>MUST</em>,
+<em>SHOULD</em>, <em>MAY</em>, and <em>MUST NOT</em>. If this property does not appear, the
+value SHOULD be treated as <em>MUST NOT</em>.</p></div>
+<div class="paragraph"><p>The <tt>appears</tt> property MAY appear as a property of a <tt>child</tt>
+block. This controls the rules by which the referenced element may
+appear as a child of the enclosing <tt>element</tt>. The formal meaning of
+"enclosing <tt>element</tt>" varies by the media type; see "Applying ALPS to
+Existing Media Types" for definitions. [that&#8217;s TK -leonardr]</p></div>
+<div class="paragraph"><p>Valid values for <tt>appears</tt> in an <tt>child</tt> block are: <em>MUST</em>,
+<em>SHOULD</em>, and <em>MAY</em>. If this property does not appear, the value
+SHOULD be treated as <em>MAY</em>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_cardinality_tt"><tt>cardinality</tt></h4>
-<div class="paragraph"><p>Indicates the number of times the related <tt>element</tt> can appear within a single
-representation. Valid values are <em>single</em> and <em>many</em>. This MAY appear
-as a property of the <tt>element</tt> and/pr <tt>child</tt> elements. If this property does
-not appear, the value SHOULD be treated as <em>many</em>.</p></div>
+<div class="paragraph"><p>Indicates the number of times the related <tt>element</tt> can appear. Valid
+values are <em>single</em> and <em>many</em>.</p></div>
+<div class="paragraph"><p>The <tt>cardinality</tt> property MAY appear as a property of an <tt>element</tt>
+block. This controls how many times that element may be used at the
+"top level" within a single representation.</p></div>
+<div class="paragraph"><p>The <tt>cardinality</tt> property MAY appear as a property of a <tt>child</tt>
+block. This controls how many times the child element may occur within
+its enclosing element.</p></div>
+<div class="paragraph"><p>If this property does not appear, the value SHOULD be treated as
+<em>many</em>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_child_tt"><tt>child</tt></h4>
-<div class="paragraph"><p>Indicates a child of the related <tt>element</tt> This MAY appear as a
-child of the <tt>element</tt>. The <tt>child</tt> property MAY have an <tt>href</tt>
-property pointing to the full <tt>element</tt> definition (see <tt>href</tt> for details).</p></div>
-<div class="paragraph"><p>If no <tt>href</tt> appears, then the <tt>child</tt> property takes on the same features
-as the <tt>element</tt> property.</p></div>
+<div class="paragraph"><p>Indicates a child element of the related <tt>element</tt> This MAY appear in
+the ALPS document as a child of an <tt>element</tt> block. The <tt>child</tt>
+property MAY have an <tt>href</tt> property pointing to a definition of an
+<tt>element</tt> block (see <tt>href</tt> for details).</p></div>
+<div class="paragraph"><p>If no <tt>href</tt> appears, then the <tt>child</tt> property takes on the same
+features as the <tt>element</tt> property. [Which ones? It would also be good
+to mention here which properties the <tt>child</tt> tag supports, as you do for
+<tt>element</tt>. -leonardr]</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_description_tt"><tt>description</tt></h4>
-<div class="paragraph"><p>A text field that contains free-form, usually human-readable, text describing
-the meaning and use of the related <tt>element</tt>. It SHOULD appear as a
-child of <tt>element</tt>.</p></div>
+<div class="paragraph"><p>A text field that contains free-form, usually human-readable, text.</p></div>
+<div class="paragraph"><p>A <tt>description</tt> block SHOULD appear as a child of <tt>element</tt>. When
+present, it describes the meaning and use of the related <tt>element</tt>.</p></div>
+<div class="paragraph"><p>A <tt>description</tt> block MAY appear as a child of <tt>child</tt>. When present,
+it describes the meaning of the relationship between the <tt>element</tt> and
+its <tt>child</tt>.</p></div>
+<div class="paragraph"><p>A <tt>description</tt> block MAY appear as a child of <tt>alps</tt>. When present,
+it describes the purpose of the ALPS document as a whole.</p></div>
+<div class="paragraph"><p>[When writing the example docs I kept wanting to use HTML
+markup. Obviously you can do this in ALPS+XML by using namespaces. Can
+we explicitly say that the contents of <tt>description</tt> may be HTML
+markup, a la the contents of an Atom story? -leonardr]</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_element_tt"><tt>element</tt></h4>
-<div class="paragraph"><p>Identifies a semantic descriptor. One or more <tt>element</tt> blocks SHOULD appear
-as children of the <tt>alps</tt> property.</p></div>
+<div class="paragraph"><p>Identifies a semantic descriptor. One or more <tt>element</tt> blocks SHOULD
+appear as children of the <tt>alps</tt> property.</p></div>
 <div class="paragraph"><p>This property MUST have the following properties:</p></div>
 <div class="ulist"><ul>
 <li>
@@ -730,38 +782,61 @@ as children of the <tt>alps</tt> property.</p></div>
 </li>
 <li>
 <p>
-<tt>external_id</tt>
+<tt>name</tt>
 </p>
 </li>
 </ul></div>
 </div>
 <div class="sect3">
-<h4 id="_tt_external_id_tt"><tt>external_id</tt></h4>
-<div class="paragraph"><p>Indicates the value of the <tt>element</tt>. It MAY appear
-as a property of the <tt>element</tt>.  This is used when this same value
-has already been used as an <tt>id</tt> value in the ALPS document.</p></div>
+<h4 id="_tt_name_tt"><tt>name</tt></h4>
+<div class="paragraph"><p>Indicates the name of the <tt>element</tt> as found in generic
+representations. It MAY appear as a property of the <tt>element</tt>.</p></div>
+<div class="paragraph"><p>This is used when the <tt>element</tt><em>s name is used as an <tt>id</tt> value
+elsewhere in the ALPS document. For instance, if a single ALPS
+document defines an element descriptor called 'customer</em> and a
+safe-idempotent control called <em>customer</em>, they can&#8217;t both have
+<tt>id="customer"</tt> in the ALPS document. One of them needs to have some
+other <tt>id</tt>, and to set <tt>name="customer"</tt>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_href_tt"><tt>href</tt></h4>
-<div class="paragraph"><p>Points to an <tt>element</tt> either within the existing ALPS
-document or in another ALPS document. This MUST appear as part of the
-<tt>child</tt> element. The value MUST be a valid URL.</p></div>
+<div class="paragraph"><p>Points to an <tt>element</tt> either within the existing ALPS document or in
+another ALPS document.</p></div>
+<div class="paragraph"><p>The <tt>href</tt> attribute MUST appear as part of the <tt>child</tt> element. The
+value MUST be a valid URL, with a fragment identifier, resolving to an
+<tt>element</tt> within an ALPS document.</p></div>
+<div class="paragraph"><p>[Should &lt;alps&gt; itself support <tt>href</tt> so it can link to itself or a
+full human-readable doc? Or should we allow a general &lt;link&gt; tag so
+you can do rel="help"?]</p></div>
+<div class="paragraph"><p>\[ Earlier you said that <tt>child</tt> didn&#8217;t need href. -leonardr \]</p></div>
+<div class="paragraph"><p>[I have a half-baked idea about using <tt>href</tt> within <tt>element</tt> as well.
+This would let you copy the <tt>fn</tt> descriptor defined in hCard into your
+custom ALPS document (for performance reasons) but still make it clear
+that your <tt>fn</tt> descriptor has the same meaning as the one defined in
+hCard. -leonardr]</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_id_tt"><tt>id</tt></h4>
-<div class="paragraph"><p>Indicates the semantic descriptor value for the related <tt>element</tt>. This
-MUST appear for each <tt>element</tt>. The value of this property contains the
-text that will appear within the media type representation as the value of
-that media type&#8217;s semantic descriptor (see Applying ALPS to Existing Media
-Types for details). If <tt>external_id</tt> exists for the same <tt>element</tt> the
-value of <tt>external_id</tt> contains the value of the semantic descriptor, not
-value of <tt>id</tt></p></div>
+<div class="paragraph"><p>A document-wide unique identifier for the related element. This MUST
+appear as a property of each <tt>element</tt>.</p></div>
+<div class="paragraph"><p>The value of this property will appear within generic representations
+as the name of a semantic descriptor or hypermedia control (see
+Applying ALPS to Existing Media Types for details). The exception is
+when an element defines <tt>name</tt> as well as <tt>id</tt>. In that case, the
+value of <tt>name</tt> contains the name of the semantic descriptor or
+hypermedia control, and the value of <tt>id</tt> is just a unique ID.</p></div>
+<div class="paragraph"><p>When applied to an ALPS document, a URI fragment identifier points to
+the element with the appropriate <tt>id</tt>. For example, The fragment
+identifier <tt>customer</tt> in the URI <tt>http://example.com/#customer</tt> refers
+to an ALPS element with <tt>id</tt> set to <tt>customer</tt>.</p></div>
+<div class="paragraph"><p>A relative URL with a fragment identifier (e.g. "#customer") refers to
+an element within the ALPS document containing the reference.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_type_tt"><tt>type</tt></h4>
 <div class="paragraph"><p>Indicates the type of representation control to which the <tt>element</tt> is
-applied. This MUST appear for each <tt>element</tt> Below is the explanation of
-the valid values.</p></div>
+applied. This MUST appear for each <tt>element</tt>. Four values are defined:</p></div>
+<div class="paragraph"><p>\[ Would it be OK to say that the default is <em>descriptor</em>? -leonardr \]</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -787,6 +862,7 @@ unsafe, non-idempotent state transition (i.e. <tt>HTTP.POST</tt>).
 </p>
 </li>
 </ul></div>
+<div class="paragraph"><p>\[ How about just idempotent and nonidempotent? -leonardr \]</p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_version_tt"><tt>version</tt></h4>
@@ -797,7 +873,84 @@ If no value appears, then it SHOULD be set to <em>1.0</em>.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_xml_representation">XML Representation</h3>
-<div class="paragraph"><p>Below shows how ALPS Elements are expressed in the XML format.</p></div>
+<div class="paragraph"><p>The following example shows how ALPS Elements are expressed in the XML
+format. This example ALPS+XML document describes a portion of the
+hCalendar microformat (<a href="http://microformats.org/wiki/hcalendar">http://microformats.org/wiki/hcalendar</a>).</p></div>
+<div class="paragraph"><p>[I put this in because I think an example that ties into something
+preexisting is better than an example we made up for RWA.]</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&lt;alps version="1.0"&gt;
+
+ &lt;description&gt;
+  hCalendar is a simple, open format for publishing events on the web,
+  using a 1:1 representation of iCalendar (RFC2445) VEVENT properties
+  and values in HTML.
+ &lt;/description&gt;
+
+ &lt;element appearance="MAY"&gt;
+  &lt;id&gt;vcalendar&lt;/id&gt;
+  &lt;description&gt;
+   A container for one or more events (vevent).
+  &lt;/description&gt;
+  &lt;child href="#vevent" appearance="MAY"&gt;
+ &lt;/element&gt;
+
+ &lt;element appearance="MAY"&gt;
+  &lt;id&gt;vevent&lt;/id&gt;
+  &lt;description&gt;
+   A container for one event. See section 4.6.1 of RFC 2445.
+  &lt;/description&gt;
+  &lt;child href="#dtstart" appearance="MUST"&gt;
+  &lt;child href="#summary" appearance="MUST"&gt;
+  &lt;child href="#location" appearance="MAY"&gt;
+ &lt;/element&gt;
+
+ &lt;element appearance="MUST NOT"&gt;
+  &lt;id&gt;dtstart&lt;/id&gt;
+  &lt;description&gt;
+   Date/time of the start of the event. See section 4.8.2.4 of RFC 2445.
+  &lt;/description&gt;
+ &lt;/element&gt;
+
+ &lt;element appearance="MUST NOT"&gt;
+  &lt;id&gt;summary&lt;/id&gt;
+  &lt;description&gt;
+   Short synopsis, title, or name of the event. See section 4.8.1.12
+   of RFC 2445.
+  &lt;/description&gt;
+ &lt;/element&gt;
+
+ &lt;element appearance="MUST NOT"&gt;
+  &lt;id&gt;location&lt;/id&gt;
+  &lt;description&gt;
+   Tells where the event is to be held. May be represented by nested
+   hCard record, adr record, geo record, or combination thereof. See
+   sections 4.8.1.7 and 4.8.1.6 of RFC 2445.
+  &lt;/description&gt;
+ &lt;/element&gt;
+&lt;/alps&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>This ALPS+XML document describes the <tt>rel-nofollow</tt> microformat
+(<a href="http://microformats.org/wiki/rel-nofollow">http://microformats.org/wiki/rel-nofollow</a>):</p></div>
+<div class="paragraph"><p>[And I put this other example in because hCalendar doesn&#8217;t define any link
+relations. -leonardr]</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&lt;alps version="1.0"&gt;
+ &lt;element id="nofollow" type="safe-idempotent"&gt;
+  &lt;description&gt;
+   Indicates that the referred resource was not necessarily linked to
+   by the author of the page, and thus said reference should not afford
+   the referred resource any additional weight or ranking by user
+   agents.
+  &lt;/description&gt;
+ &lt;/element&gt;
+&lt;/alps&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>[leaving in this example because a) i don&#8217;t want to cut it
+unilaterally, and b) I didn&#8217;t change the JSON example
+below. -leonardr]</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>&lt;alps version="1.0"&gt;
@@ -910,6 +1063,18 @@ as an <tt>ARRAY</tt> and are labeled <tt>elements</tt> and <tt>children</tt> res
 </td>
 </tr></table>
 </div>
+<div class="paragraph"><p>[I think this should be more formally defined. The property
+descriptions are hard to read because terms like "child" and "element"
+are used for both the ALPS doc and for the generic doc the ALPS doc
+describes. Then there&#8217;s this extra genericness when defining things
+like <tt>element</tt> because we can&#8217;t use XML-specific terminology like
+"tag".</p></div>
+<div class="paragraph"><p>I liked your use of "block" instead of "tag" when defining
+<tt>element</tt>. If we consistently use, say, "block" and "attribute", then
+when we talk about XML and JSON representations we can say that a
+block becomes a tag in XML but a list in JSON, and an attribute
+becomes an XML attribute but a key-value pair in a JSON
+dictionary. -leonardr]</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>{
@@ -1041,21 +1206,34 @@ as an <tt>ARRAY</tt> and are labeled <tt>elements</tt> and <tt>children</tt> res
 <div class="sect1">
 <h2 id="_applying_alps_to_existing_media_types">Applying ALPS to Existing Media Types</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>ALPS documents can be applied to various existing hypermedia types. Below
+<div class="paragraph"><p>ALPS documents can be applied to many existing hypermedia types. Below
 are a set of instructions on how to apply ALPS information to existing
 media types.</p></div>
+<div class="paragraph"><p>[There&#8217;s an issue of policy here. I&#8217;ve written two paragraphs. Each
+has its own problems. I think I have to vote for #1. -leonardr]</p></div>
+<div class="paragraph"><p>These instructions are to be considered normative for ALPS version
+1.0. If the body responsible for a given media type adopts conflicting
+instructions for applying an ALPS document to that media type, a new
+revision of the ALPS standard will be released which references that
+body&#8217;s instructions.</p></div>
+<div class="paragraph"><p>OR</p></div>
+<div class="paragraph"><p>These instructions are not to be considered normative. If the body
+responsible for a given media type adopts conflicting instructions for
+applying an ALPS document to that media type, those instructions
+should take precedence.</p></div>
 <div class="sect2">
 <h3 id="_alps_and_html">ALPS and HTML</h3>
-<div class="paragraph"><p>When applying ALPS to HTML, the following rules apply.</p></div>
+<div class="paragraph"><p>The following rules apply when applying ALPS to HTML. (That is, to
+documents with media type <tt>text/html</tt> or <tt>application/xhtml+xml</tt>.)</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <em>descriptor</em> 
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the <tt>"class"</tt> attribute of
-an element. If the descriptor is a <tt>child</tt> of a transition, the element SHOULD
-be a <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, or <tt>&lt;TEXTAREA&gt;</tt> element.
+The element&#8217;s name refers to the <tt>"class"</tt> attribute
+of an element. If the descriptor is a <tt>child</tt> of a transition, the
+element SHOULD be a <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, or <tt>&lt;TEXTAREA&gt;</tt> element.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1063,21 +1241,27 @@ be a <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, or <tt>&lt;TEXTAREA&gt;</t
 </dt>
 <dd>
 <p>
-If no <tt>child</tt> descriptors exist, the value of <tt>id</tt> is
-applied to the <tt>"rel"</tt> attribute of an <tt>&lt;A&gt;</tt> or <tt>&lt;LINK&gt;</tt> element. If one or
-more <tt>child</tt> descriptors exist, the value of <tt>id</tt> is applied to the <tt>"class"</tt>
-attribute of a <tt>&lt;FORM&gt;</tt> which has it&#8217;s <tt>"method"</tt>" attribute set to <tt>get</tt> and
-the <tt>id</tt> values of any <tt>child</tt> descriptors are applied to the <tt>"class"</tt> attribute
-of <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, and/or <tt>&lt;TEXTAREA&gt;</tt> elements encapsulated by the
-<tt>&lt;FORM&gt;</tt>.
+The element&#8217;s name refers to the <tt>"class"</tt>
+attribute of a <tt>&lt;FORM&gt;</tt> which has its <tt>"method"</tt>" attribute set to
+<tt>get</tt>.  The names of any <tt>child</tt> descriptors refer to the <tt>"class"</tt>
+attributes of <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, and/or <tt>&lt;TEXTAREA&gt;</tt> elements
+encapsulated by the <tt>&lt;FORM&gt;</tt>.
 </p>
 </dd>
+</dl></div>
+<div class="paragraph"><p>If no <tt>child</tt> descriptors exist, the descriptor name may also be applied
+to the <tt>"rel"</tt> attribute of an <tt>&lt;A&gt;</tt> or <tt>&lt;LINK&gt;</tt> element.</p></div>
+<div class="paragraph"><p>[I think this should be applied to the class of the submit button, not
+the form itself, because a form may contain more than one submit
+button. But, it might be okay to say that it can be applied to the
+form or to a submit button. -leonardr]</p></div>
+<div class="dlist"><dl>
 <dt class="hdlist1">
 <em>unsafe-idempotent</em> 
 </dt>
 <dd>
 <p>
-Undefined for HTML
+Treated as equivalent to <em>unsafe-nonidempotent</em>.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1085,31 +1269,34 @@ Undefined for HTML
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the <tt>"class"</tt>
-attribute of a <tt>&lt;FORM&gt;</tt> which has it&#8217;s <tt>"method"</tt> attribute set to
-<tt>post</tt> and the <tt>id</tt> values of any <tt>child</tt> descriptors are applied to the
-<tt>"class"</tt> attribute of <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, and/or <tt>&lt;TEXTAREA&gt;</tt> elements
-encapsulated by the <tt>&lt;FORM&gt;</tt>.
+The element&#8217;s name refers to the
+<tt>"class"</tt> attribute of a <tt>&lt;FORM&gt;</tt> which has its <tt>"method"</tt> attribute
+set to <tt>post</tt>. The names of any <tt>child</tt> descriptors refer to the
+<tt>"class"</tt> attributes of <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, and/or <tt>&lt;TEXTAREA&gt;</tt>
+elements encapsulated by the <tt>&lt;FORM&gt;</tt>.
 </p>
 </dd>
 </dl></div>
 <div class="sect3">
 <h4 id="_notes">NOTES</h4>
-<div class="paragraph"><p>Since HTML has no built-in support for <em>unsafe-nonidempotent</em> it
-is up to the implementor to decide how to support this transition when it
-appears within an ALPS document.</p></div>
+<div class="paragraph"><p>Since HTML has no support for idempotent state transitions per se,
+this standard treats them the same as non-idempotent state
+transitions. Both are represented as HTML forms with <tt>method="post"</tt>.</p></div>
+<div class="paragraph"><p>[I think this is better than leaving it undefined, but I&#8217;m open to
+counterarguments. -leonardr]</p></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_alps_and_collection_json">ALPS and Collection+JSON</h3>
-<div class="paragraph"><p>When applying ALPS to Collection+JSON, the following rules apply.</p></div>
+<div class="paragraph"><p>The following rules apply when applying ALPS to Collection+JSON. (That
+is, to documents with media type <tt>application/vnd.collection+json</tt>.)</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <em>descriptor</em> 
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the <tt>"name"</tt> property of a
+The element name refers to the <tt>"name"</tt> property of a
 <tt>{"data"}</tt> object.
 </p>
 </dd>
@@ -1118,7 +1305,7 @@ The value of <tt>id</tt> is applied to the <tt>"name"</tt> property of a
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the <tt>"rel"</tt> property of
+The element name refers to the <tt>"rel"</tt> property of
 a <tt>{"link"}</tt> object.
 </p>
 </dd>
@@ -1127,7 +1314,7 @@ a <tt>{"link"}</tt> object.
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the <tt>"rel"</tt> of a
+The element name refers to the <tt>"rel"</tt> of a
 <tt>{"template"}</tt> object.
 </p>
 </dd>
@@ -1136,27 +1323,28 @@ The value of <tt>id</tt> is applied to the <tt>"rel"</tt> of a
 </dt>
 <dd>
 <p>
-Undefined for Collection+JSON
+Undefined for Collection+JSON.
 </p>
 </dd>
 </dl></div>
 <div class="sect3">
 <h4 id="_notes_2">NOTES</h4>
-<div class="paragraph"><p>Since Collection+JSON does not support <em>unsafe-nonidempotent</em> it is up to
-the implementor to decide how to support this transition when it appears
-within an ALPS document.</p></div>
+<div class="paragraph"><p>Since Collection+JSON does not support non-idempotent transitions, it
+is up to the application implementor how and whether to represent this
+transition in a Collection+JSON representation.</p></div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_alps_and_hal">ALPS and HAL</h3>
-<div class="paragraph"><p>When applying ALPS to HAL (both XML and JSON formats), the folloiwng rules apply.</p></div>
+<div class="paragraph"><p>When applying ALPS to HAL (both XML and JSON formats), the folloiwng
+rules apply.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <em>descriptor</em> 
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the "name" attribute of an item.
+The element name refers to the "name" attribute of an item.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1164,7 +1352,7 @@ The value of <tt>id</tt> is applied to the "name" attribute of an item.
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the "rel" of a link element.
+The element name refers to the "rel" of a link element.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1172,7 +1360,7 @@ The value of <tt>id</tt> is applied to the "rel" of a link element.
 </dt>
 <dd>
 <p>
-The value of <tt>id</tt> is applied to the "rel" of a link element.
+The element name refers to the "rel" of a link element.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1180,18 +1368,20 @@ The value of <tt>id</tt> is applied to the "rel" of a link element.
 </dt>
 <dd>
 <p>
-The value of the <tt>id</tt> is applied to the "rel" of a
+The element name refers to the "rel" of a
 link element.
 </p>
 </dd>
 </dl></div>
 <div class="sect3">
 <h4 id="_notes_3">NOTES</h4>
-<div class="paragraph"><p>HAL does not identify the state transition details (safe/unsafe,
-idempotent/non-idempotent) with a representation. Instead that information is
-in the human-readable documentation associated with the link relation value.
-For this reason, it is important to reference the documentation when determining
-which ALPS element <tt>id</tt> values to apply to which HAL <tt>&lt;LINK&gt;</tt> elements.</p></div>
+<div class="paragraph"><p>HAL does not identify the protocol-level details of a state transition
+(safe/unsafe, idempotent/non-idempotent) within a
+representation. Instead that information is in the human-readable
+documentation associated with the link relation value. For this
+reason, it is important to reference the application&#8217;s documentation
+after determining which ALPS element name applies to a HAL <tt>&lt;LINK&gt;</tt>
+element.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1200,6 +1390,7 @@ which ALPS element <tt>id</tt> values to apply to which HAL <tt>&lt;LINK&gt;</tt
 <td class="content">
 <div class="paragraph"><p>MCA: I stopped editing at this point. The Siren+JSON, Atom, and OData
 sections still need to be brought up-to-date with the rest of the spec.</p></div>
+<div class="paragraph"><p>LEONARDR: I also stopped here when going through it.</p></div>
 </td>
 </tr></table>
 </div>
@@ -1275,7 +1466,7 @@ action&#8217;s "fields" dictionary.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-10-29 22:40:51 EDT
+Last updated 2012-10-30 10:44:43 EDT
 </div>
 </div>
 </body>

@@ -223,7 +223,7 @@ value MUST be a valid URL, with a fragment identifier, resolving to an
 full human-readable doc? Or should we allow a general <link> tag so
 you can do rel="help"?]
 
-[Earlier you said that +child+ didn't need href. -leonardr]
+\[ Earlier you said that +child+ didn't need href. -leonardr \]
 
 [I have a half-baked idea about using +href+ within +element+ as well.
 This would let you copy the +fn+ descriptor defined in hCard into your
@@ -256,7 +256,7 @@ an element within the ALPS document containing the reference.
 Indicates the type of representation control to which the +element+ is
 applied. This MUST appear for each +element+. Four values are defined:
 
-[Would it be OK to say that the default is 'descriptor'? -leonardr]
+\[ Would it be OK to say that the default is 'descriptor'? -leonardr \]
 
  * 'descriptor' refers to a state element (e.g. +HTML.SPAN+, +HTML.INPUT+, etc.).
  * 'safe-idempotent' refers to a hypermedia control that triggers a safe,
@@ -266,7 +266,7 @@ unsafe, idempotent state transition (i.e. +HTTP.PUT+, +HTTP.DELETE+ etc.).
  * 'unsafe-nonidempotent' refers to a hypermedia control that triggers an
 unsafe, non-idempotent state transition (i.e. +HTTP.POST+).
 
-[How about just idempotent and nonidempotent? -leonardr]
+\[ How about just idempotent and nonidempotent? -leonardr \]
 
 ==== +version+ ====
 Indicates the version number of the ALPS document. This SHOULD appear as a 
@@ -617,7 +617,7 @@ instructions for applying an ALPS document to that media type, a new
 revision of the ALPS standard will be released which references that
 body's instructions.
 
-[OR]
+OR
 
 These instructions are not to be considered normative. If the body
 responsible for a given media type adopts conflicting instructions for
