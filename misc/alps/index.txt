@@ -135,12 +135,9 @@ Indicates the semantic descriptor value for the related +element+. This
 MUST appear for each +element+. The value of this property contains the 
 text that will appear within the media type representation as the value of
 that media type's semantic descriptor (see Applying ALPS to Existing Media
-Types for details).
-[NOTE]
-=========================
-If the +external_id+ exists for the same +element+ the value of +external_id+ 
-represents the value of the semantic descriptor, not the value of the +id+
-==========================
+Types for details). If +external_id+ exists for the same +element+ the 
+value of +external_id+ contains the value of the semantic descriptor, not 
+value of +id+
 
 ==== +type+ ====
 Indicates the type of representation control to which the +element+ is
@@ -260,7 +257,13 @@ Below shows how ALPS Elements are expressed in the XML format.
 </alps>
 ---------------------------------
 === JSON Representation ===
-Below shows how ALPS Elements are expressed in the JSON format.
+Below shows how ALPS Elements are expressed in the JSON format. 
+
+[NOTE]
+======
+In the JSON format, the +element+ and +child+ properties are each expressed 
+as an +ARRAY+ and are labeled +elements+ and +children+ respectively.
+======
 
 ------------------------------------------------
 {
@@ -326,7 +329,7 @@ Below shows how ALPS Elements are expressed in the JSON format.
         {"href" : "#exit", "appears" : "MAY"},
         {"href" : "#current", "appears" : "MUST"}
       ]
-    }i,
+    },
     {
       "id" : "north",
       "type" : "safe-idempotent",
@@ -392,52 +395,77 @@ ALPS documents can be applied to various existing hypermedia types. Below
 are a set of instructions on how to apply ALPS information to existing 
 media types.
 
-[NOTE]
-======================================
-MCA:
-What is our position on providing descriptors for state transfers? IOW,
-is this a MUST, SHOULD, MAY? or should that be left to the media type itself?
-=======================================
-
 === ALPS and HTML ===
 When applying ALPS to HTML, the following rules apply.
 
- * 'unique' :' becomes the +id+ of a tag.
- * 'descriptor' : becomes the +"class"+ of a tag.
- * 'idempotent-relation' : Element +id+ becomes the +"class"+ of the submit 
-button of an +HTML.FORM@method="POST"+ [MCA : POST is non-idempotent]. 
-If 'unique' or 'descriptor' children are present, those children refer to 
-other inputs of the same +HTML.FORM+.
- * 'unsafe-relation' : Same as 'idempotent-relation'.
- * 'safe-relation' : Element +id+ becomes the +"rel"+ of an +<a>+ or +<link>+
-tag. If 'unique' or 'descriptor' children are present, they are ignored.
-Element +id+ may also become the "+class+" of the submit button of an
-+HTML.FORM@method="GET"+. If 'unique' or 'descriptor' children are present, 
-those children refer to other inputs of the same +HTML.FORM+.
+'descriptor' :: The value of +id+ is applied to the +"class"+ attribute of 
+an element. If the descriptor is a +child+ of a transition, the element SHOULD
+be a +<INPUT>+, +<SELECT>+, or +<TEXTAREA>+ element.
+ 
+'safe-idempotent' :: If no +child+ descriptors exist, the value of +id+ is 
+applied to the +"rel"+ attribute of an +<A>+ or +<LINK>+ element. If one or
+more +child+ descriptors exist, the value of +id+ is applied to the +"class"+
+attribute of a +<FORM>+ which has it's +"method"+" attribute set to +get+ and
+the +id+ values of any +child+ descriptors are applied to the +"class"+ attribute
+of +<INPUT>+, +<SELECT>+, and/or +<TEXTAREA>+ elements encapsulated by the 
++<FORM>+.
+ 
+'unsafe-idempotent' :: Undefined for HTML
+ 
+'unsafe-nonidempotent' :: The value of +id+ is applied to the +"class"+ 
+attribute of a +<FORM>+ which has it's +"method"+ attribute set to 
++post+ and the +id+ values of any +child+ descriptors are applied to the 
++"class"+ attribute of +<INPUT>+, +<SELECT>+, and/or +<TEXTAREA>+ elements 
+encapsulated by the +<FORM>+.
+
+==== NOTES ====
+Since HTML has no built-in support for 'unsafe-nonidempotent' it 
+is up to the implementor to decide how to support this transition when it 
+appears within an ALPS document.
 
 === ALPS and Collection+JSON ===
 When applying ALPS to Collection+JSON, the following rules apply.
 
- * 'unique' : Undefined. (Alternately: the same as "descriptor")
- * 'descriptor' : Element ID refers to the "name" of a data field within an item.
- * 'link-relation' : Element ID refers to the "rel" of a link within an item. 
-If child elements are present, they are ignored. OR Element ID refers to the 
-"name" of a query in the document. If child rlementsare present, their IDs 
-refer to the "name" attributes of data fields within the query.
- * 'idempotent-relation' : Undefined.
- * 'unsafe-relation' : Undefined.
+'descriptor' :: The value of +id+ is applied to the +"name"+ property of a 
++{"data"}+ object.
+
+'safe-idemptotent' :: The value of +id+ is applied to the +"rel"+ property of 
+a +{"link"}+ object.
+
+'unsafe-idempotent' :: The value of +id+ is applied to the +"rel"+ of a 
++{"template"}+ object.
+
+'unsafe-nonidempotent' :: Undefined for Collection+JSON
+
+==== NOTES ====
+Since Collection+JSON does not support 'unsafe-nonidempotent' it is up to
+the implementor to decide how to support this transition when it appears
+within an ALPS document.
 
 === ALPS and HAL ===
 When applying ALPS to HAL (both XML and JSON formats), the folloiwng rules apply.
 
- * 'unique' : Undefined. (Alternately: the same as "descriptor")
- * 'descriptor' : Element ID refers to the "name" of a data field within an item.
- * 'link-relation' : Element ID refers to the "rel" of a link within an item. 
-If child elements are present, they are ignored. OR Element ID refers to the 
-"name" of a query in the document. If child elements are present, their IDs 
-refer to the "name" attributes of data fields within the query.
- * 'idempotent-relation' : Undefined.
- * 'unsafe-relation' : Undefined.
+'descriptor' :: The value of +id+ is applied to the "name" attribute of an item.
+
+'safe-idempotent' :: The value of +id+ is applied to the "rel" of a link element.
+
+'unsafe-idempotent' :: The value of +id+ is applied to the "rel" of a link element.
+
+'unsafe-nonidempotent' :: The value of the +id+ is applied to the "rel" of a 
+link element.
+
+==== NOTES ====
+HAL does not identify the state transition details (safe/unsafe, 
+idempotent/non-idempotent) with a representation. Instead that information is
+in the human-readable documentation associated with the link relation value.
+For this reason, it is important to reference the documentation when determining
+which ALPS element +id+ values to apply to which HAL +<LINK>+ elements.
+
+[WARNING]
+=========================================
+MCA: I stopped editing at this point. The Siren+JSON, Atom, and OData
+sections still need to be brought up-to-date with the rest of the spec.
+=========================================
 
 === ALPS and Siren ===
 When appying ALPS to Siren, the following rules apply.

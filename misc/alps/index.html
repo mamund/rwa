@@ -753,18 +753,9 @@ document or in another ALPS document. This MUST appear as part of the
 MUST appear for each <tt>element</tt>. The value of this property contains the
 text that will appear within the media type representation as the value of
 that media type&#8217;s semantic descriptor (see Applying ALPS to Existing Media
-Types for details).</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph"><p>If the <tt>external_id</tt> exists for the same <tt>element</tt> the value of <tt>external_id</tt>
-represents the value of the semantic descriptor, not the value of the <tt>id</tt></p></div>
-</td>
-</tr></table>
-</div>
+Types for details). If <tt>external_id</tt> exists for the same <tt>element</tt> the
+value of <tt>external_id</tt> contains the value of the semantic descriptor, not
+value of <tt>id</tt></p></div>
 </div>
 <div class="sect3">
 <h4 id="_tt_type_tt"><tt>type</tt></h4>
@@ -908,6 +899,17 @@ If no value appears, then it SHOULD be set to <em>1.0</em>.</p></div>
 <div class="sect2">
 <h3 id="_json_representation">JSON Representation</h3>
 <div class="paragraph"><p>Below shows how ALPS Elements are expressed in the JSON format.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>In the JSON format, the <tt>element</tt> and <tt>child</tt> properties are each expressed
+as an <tt>ARRAY</tt> and are labeled <tt>elements</tt> and <tt>children</tt> respectively.</p></div>
+</td>
+</tr></table>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre><tt>{
@@ -973,7 +975,7 @@ If no value appears, then it SHOULD be set to <em>1.0</em>.</p></div>
         {"href" : "#exit", "appears" : "MAY"},
         {"href" : "#current", "appears" : "MUST"}
       ]
-    }i,
+    },
     {
       "id" : "north",
       "type" : "safe-idempotent",
@@ -1042,123 +1044,166 @@ If no value appears, then it SHOULD be set to <em>1.0</em>.</p></div>
 <div class="paragraph"><p>ALPS documents can be applied to various existing hypermedia types. Below
 are a set of instructions on how to apply ALPS information to existing
 media types.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph"><p>MCA:
-What is our position on providing descriptors for state transfers? IOW,
-is this a MUST, SHOULD, MAY? or should that be left to the media type itself?</p></div>
-</td>
-</tr></table>
-</div>
 <div class="sect2">
 <h3 id="_alps_and_html">ALPS and HTML</h3>
 <div class="paragraph"><p>When applying ALPS to HTML, the following rules apply.</p></div>
-<div class="ulist"><ul>
-<li>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<em>descriptor</em> 
+</dt>
+<dd>
 <p>
-<em>unique</em> :' becomes the <tt>id</tt> of a tag.
+The value of <tt>id</tt> is applied to the <tt>"class"</tt> attribute of
+an element. If the descriptor is a <tt>child</tt> of a transition, the element SHOULD
+be a <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, or <tt>&lt;TEXTAREA&gt;</tt> element.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>safe-idempotent</em> 
+</dt>
+<dd>
 <p>
-<em>descriptor</em> : becomes the <tt>"class"</tt> of a tag.
+If no <tt>child</tt> descriptors exist, the value of <tt>id</tt> is
+applied to the <tt>"rel"</tt> attribute of an <tt>&lt;A&gt;</tt> or <tt>&lt;LINK&gt;</tt> element. If one or
+more <tt>child</tt> descriptors exist, the value of <tt>id</tt> is applied to the <tt>"class"</tt>
+attribute of a <tt>&lt;FORM&gt;</tt> which has it&#8217;s <tt>"method"</tt>" attribute set to <tt>get</tt> and
+the <tt>id</tt> values of any <tt>child</tt> descriptors are applied to the <tt>"class"</tt> attribute
+of <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, and/or <tt>&lt;TEXTAREA&gt;</tt> elements encapsulated by the
+<tt>&lt;FORM&gt;</tt>.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>unsafe-idempotent</em> 
+</dt>
+<dd>
 <p>
-<em>idempotent-relation</em> : Element <tt>id</tt> becomes the <tt>"class"</tt> of the submit
-button of an <tt>HTML.FORM@method="POST"</tt> [MCA : POST is non-idempotent].
-If <em>unique</em> or <em>descriptor</em> children are present, those children refer to
-other inputs of the same <tt>HTML.FORM</tt>.
+Undefined for HTML
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>unsafe-nonidempotent</em> 
+</dt>
+<dd>
 <p>
-<em>unsafe-relation</em> : Same as <em>idempotent-relation</em>.
+The value of <tt>id</tt> is applied to the <tt>"class"</tt>
+attribute of a <tt>&lt;FORM&gt;</tt> which has it&#8217;s <tt>"method"</tt> attribute set to
+<tt>post</tt> and the <tt>id</tt> values of any <tt>child</tt> descriptors are applied to the
+<tt>"class"</tt> attribute of <tt>&lt;INPUT&gt;</tt>, <tt>&lt;SELECT&gt;</tt>, and/or <tt>&lt;TEXTAREA&gt;</tt> elements
+encapsulated by the <tt>&lt;FORM&gt;</tt>.
 </p>
-</li>
-<li>
-<p>
-<em>safe-relation</em> : Element <tt>id</tt> becomes the <tt>"rel"</tt> of an <tt>&lt;a&gt;</tt> or <tt>&lt;link&gt;</tt>
-tag. If <em>unique</em> or <em>descriptor</em> children are present, they are ignored.
-Element <tt>id</tt> may also become the "<tt>class</tt>" of the submit button of an
-<tt>HTML.FORM@method="GET"</tt>. If <em>unique</em> or <em>descriptor</em> children are present,
-those children refer to other inputs of the same <tt>HTML.FORM</tt>.
-</p>
-</li>
-</ul></div>
+</dd>
+</dl></div>
+<div class="sect3">
+<h4 id="_notes">NOTES</h4>
+<div class="paragraph"><p>Since HTML has no built-in support for <em>unsafe-nonidempotent</em> it
+is up to the implementor to decide how to support this transition when it
+appears within an ALPS document.</p></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_alps_and_collection_json">ALPS and Collection+JSON</h3>
 <div class="paragraph"><p>When applying ALPS to Collection+JSON, the following rules apply.</p></div>
-<div class="ulist"><ul>
-<li>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<em>descriptor</em> 
+</dt>
+<dd>
 <p>
-<em>unique</em> : Undefined. (Alternately: the same as "descriptor")
+The value of <tt>id</tt> is applied to the <tt>"name"</tt> property of a
+<tt>{"data"}</tt> object.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>safe-idemptotent</em> 
+</dt>
+<dd>
 <p>
-<em>descriptor</em> : Element ID refers to the "name" of a data field within an item.
+The value of <tt>id</tt> is applied to the <tt>"rel"</tt> property of
+a <tt>{"link"}</tt> object.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>unsafe-idempotent</em> 
+</dt>
+<dd>
 <p>
-<em>link-relation</em> : Element ID refers to the "rel" of a link within an item.
-If child elements are present, they are ignored. OR Element ID refers to the
-"name" of a query in the document. If child rlementsare present, their IDs
-refer to the "name" attributes of data fields within the query.
+The value of <tt>id</tt> is applied to the <tt>"rel"</tt> of a
+<tt>{"template"}</tt> object.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>unsafe-nonidempotent</em> 
+</dt>
+<dd>
 <p>
-<em>idempotent-relation</em> : Undefined.
+Undefined for Collection+JSON
 </p>
-</li>
-<li>
-<p>
-<em>unsafe-relation</em> : Undefined.
-</p>
-</li>
-</ul></div>
+</dd>
+</dl></div>
+<div class="sect3">
+<h4 id="_notes_2">NOTES</h4>
+<div class="paragraph"><p>Since Collection+JSON does not support <em>unsafe-nonidempotent</em> it is up to
+the implementor to decide how to support this transition when it appears
+within an ALPS document.</p></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_alps_and_hal">ALPS and HAL</h3>
 <div class="paragraph"><p>When applying ALPS to HAL (both XML and JSON formats), the folloiwng rules apply.</p></div>
-<div class="ulist"><ul>
-<li>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<em>descriptor</em> 
+</dt>
+<dd>
 <p>
-<em>unique</em> : Undefined. (Alternately: the same as "descriptor")
+The value of <tt>id</tt> is applied to the "name" attribute of an item.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>safe-idempotent</em> 
+</dt>
+<dd>
 <p>
-<em>descriptor</em> : Element ID refers to the "name" of a data field within an item.
+The value of <tt>id</tt> is applied to the "rel" of a link element.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>unsafe-idempotent</em> 
+</dt>
+<dd>
 <p>
-<em>link-relation</em> : Element ID refers to the "rel" of a link within an item.
-If child elements are present, they are ignored. OR Element ID refers to the
-"name" of a query in the document. If child elements are present, their IDs
-refer to the "name" attributes of data fields within the query.
+The value of <tt>id</tt> is applied to the "rel" of a link element.
 </p>
-</li>
-<li>
+</dd>
+<dt class="hdlist1">
+<em>unsafe-nonidempotent</em> 
+</dt>
+<dd>
 <p>
-<em>idempotent-relation</em> : Undefined.
+The value of the <tt>id</tt> is applied to the "rel" of a
+link element.
 </p>
-</li>
-<li>
-<p>
-<em>unsafe-relation</em> : Undefined.
-</p>
-</li>
-</ul></div>
+</dd>
+</dl></div>
+<div class="sect3">
+<h4 id="_notes_3">NOTES</h4>
+<div class="paragraph"><p>HAL does not identify the state transition details (safe/unsafe,
+idempotent/non-idempotent) with a representation. Instead that information is
+in the human-readable documentation associated with the link relation value.
+For this reason, it is important to reference the documentation when determining
+which ALPS element <tt>id</tt> values to apply to which HAL <tt>&lt;LINK&gt;</tt> elements.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>MCA: I stopped editing at this point. The Siren+JSON, Atom, and OData
+sections still need to be brought up-to-date with the rest of the spec.</p></div>
+</td>
+</tr></table>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_alps_and_siren">ALPS and Siren</h3>
@@ -1230,7 +1275,7 @@ action&#8217;s "fields" dictionary.</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-10-29 21:45:36 EDT
+Last updated 2012-10-29 22:40:51 EDT
 </div>
 </div>
 </body>
