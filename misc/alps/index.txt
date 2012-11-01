@@ -1,6 +1,41 @@
 = Application-Level Profile Semantics =
 Revision: 2012-10-29 (mca)
 
+Two TODO items from leonardr:
+
+1. I would like to discuss the addition of a +parent+ element,
+analogous to +child+. This would allow one ALPS document to
+unilaterally extend another.
+
+The main problem with this (apart from implementation difficulties) is
+that the attributes look weird:
+
+<element id="foo"
+ <parent href="http://other.doc/#bar" appears="MAY"
+  cardinality="many"/>
+</element>
+
+This makes it sound like a +foo+ may have zero, one or more parents,
+each of which is a +bar+. When actually it's saying that a +foo+ may
+appear zero, one, or many times within a +bar+.
+
+2. I would like to explore the possibility of replacing +child+ and
++parent+ with a generic +link+.
+
+<element id="foo">
+ <link rel="parent" href="http://other.doc/#bar" appears="MAY"
+  cardinality="many"/>
+</element>
+
+This would make ALPS into a general hypermedia format. +appears+ and
+cardinality would only make sense for +child+ and +parent+.
+
+The disadvantage (it's a big disadvantage) is extra verbosity and lack
+of clarity in the common case.
+
+If you don't like this, what about allowing a general +link+ with
++rel+ as an extension mechanism.
+
 == Summary ==
 
 This document describes a media type designed to give Web application
@@ -12,7 +47,8 @@ and provides suggested conventions for applying ALPS descriptors to
 existing media types (such as HTML, Collection+JSON, and HAL).
 
 This document registers two media-type identifiers with the IANA:
-+application/vnd.alps+xml+ and +application/vnd.alps+json+.
++application/vnd.alps+xml+ ("ALPS+XML") and
++application/vnd.alps+json+ ("ALPS+JSON").
 
 == Motivation ==
 
@@ -148,7 +184,7 @@ If this property does not appear, the value SHOULD be treated as
 
 ==== +child+ ====
 
-Indicates a child element of the related +element+ This MAY appear in
+Links to a child element of the related +element+ This MAY appear in
 the ALPS document as a child of an +element+ block. The +child+
 property MAY have an +href+ property pointing to a definition of an
 +element+ block (see +href+ for details).
@@ -291,16 +327,14 @@ preexisting is better than an example we made up for RWA.]
   and values in HTML.
  </description>
 
- <element appearance="MAY">
-  <id>vcalendar</id>
+ <element id="vcalendar" appearance="MAY">
   <description>
    A container for one or more events (vevent).
   </description>
   <child href="#vevent" appearance="MAY">
  </element>
 
- <element appearance="MAY">
-  <id>vevent</id>
+ <element id="vevent" appearance="MAY">
   <description>
    A container for one event. See section 4.6.1 of RFC 2445.
   </description>
@@ -309,23 +343,20 @@ preexisting is better than an example we made up for RWA.]
   <child href="#location" appearance="MAY">
  </element>
 
- <element appearance="MUST NOT">
-  <id>dtstart</id>
+ <element id="dtstart" appearance="MUST NOT">
   <description>
    Date/time of the start of the event. See section 4.8.2.4 of RFC 2445.
   </description>
  </element>
 
- <element appearance="MUST NOT">
-  <id>summary</id>
+ <element id="summary" appearance="MUST NOT">
   <description>
    Short synopsis, title, or name of the event. See section 4.8.1.12
    of RFC 2445.
   </description>
  </element>
 
- <element appearance="MUST NOT">
-  <id>location</id>
+ <element id="location" appearance="MUST NOT">
   <description>
    Tells where the event is to be held. May be represented by nested
    hCard record, adr record, geo record, or combination thereof. See
@@ -747,6 +778,18 @@ When applying ALPS to Atom, the following rules apply.
 
 === ALPS and OData ===
 When applying ALPS to OData, the following rules apply.
+
+=== Linking to ALPS documents ===
+
+When a representation links to an ALPS document describing its
+semantics, the "describedBy" link relation (found in the IANA link
+registry) SHOULD be used to describe the relationship between the
+representation and the ALPS document.
+
+A single representation may be "describedBy" more than one ALPS
+document. If two ALPS documents give conflicting semantics for the
+same element, the document linked to earlier in the representation
+SHOULD take precedence.
 
 == References ==
 
