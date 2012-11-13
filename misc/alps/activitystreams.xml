@@ -1,0 +1,1524 @@
+<alps version="1.0">
+ <description>
+  This is an ALPS description of the semantics defined by the
+  ActivityStreams standard. It is based on information published in
+  the "JSON Activity Streams 1.0" standard
+  [http://activitystrea.ms/specs/json/1.0/]
+
+  The 'activity' in Activity Streams is a description of an action that
+  was performed (the verb) at some instant in time by someone or
+  something (the actor) against some kind of person, place, or thing
+  (the object). There may also be a target (like a photo album or
+  wishlist) involved.
+
+  The 'stream' in Activity Streams is a feed of related activities for a
+  given person or social object.
+
+  Put together, Activity Streams is a convenient and consistent way to
+  syndicate social activities around the web.
+
+  This document does *not* describe real Activity Streams
+  documents. Instead, it allows documents written in HTML,
+  Collection+JSON, Siren, or other hypermedia type with ALPS support
+  to use Activity Streams-style semantics. The goal of this document
+  is to save the trouble of porting the semantics of Activity Streams
+  to a plethora of representation formats.
+ </description>
+
+ <element id="activity" appears="MUST">
+
+  <description>
+   A description of an action that was performed (the verb) at some
+   instant in time by someone or something (the actor) against some
+   kind of person, place, or thing (the object). There may also be a
+   target (like a photo album or wishlist) involved.
+  </description>
+
+  <child id="actor" href="#object" appears="MUST" cardinality="single">
+   <description>
+    Describes the entity that performed the activity.
+   </description>
+  </child>
+
+  <child id="content" appears="MAY" cardinality="single">
+   <description>
+    Natural-language description of the activity containing containing
+    HTML markup. Visual elements such as thumbnail images MAY be
+    included.
+   </description>
+  </child>
+
+  <child id="generator" href="#object" appears="MAY" cardinality="single">
+   <description>
+    Describes the application that generated the activity.
+   </description>
+  </child>
+
+  <child id="icon" href="#media-link" appears="MAY" cardinality="single">
+   <description>
+    Description of a resource providing a visual representation of the
+    object, intended for human consumption. The image SHOULD have an
+    aspect ratio of one (horizontal) to one (vertical) and SHOULD be
+    suitable for presentation at a small size.
+   </description>
+  </child>
+
+  <child href="#id" appears="SHOULD" cardinality="single"/>
+
+  <child href="#object" appears="SHOULD" cardinality="single">
+   <description>
+     Describes the primary object of the activity. For instance, in
+     the activity, "John saved a movie to his wishlist", the object of
+     the activity is "movie". If 'object' is not present, the
+     primary object of the activity MAY be implied by context.
+   </description>
+  </child>
+
+  <child href="#published" appears="MUST" cardinality="single"/>
+
+  <child id="provider" href="#object" appears="MAY" cardinality="single">
+   <description>
+    Describes the application that published the activity. Note that
+    this is not necessarily the same entity that generated the
+    activity.
+   </description>
+  </child>
+
+  <child id="target" href="#object" appears="MAY" cardinality="single">
+   <description>
+    Describes the target of the activity. The precise meaning of the
+    activity's target is dependent on the activity's 'verb', but will
+    often be the object of the English preposition "to". For instance,
+    in the activity, "John saved a movie to his wishlist", the target
+    of the activity is "wishlist". The activity target MUST NOT be
+    used to identity an indirect object that is not a target of the
+    activity.
+   </description>
+  </child>
+
+  <child id="title" appears="MAY" cardinality="single">
+   <description>
+    Natural-language title or headline for the activity containing
+    HTML markup.
+   </description>
+  </child>
+
+  <child href="#updated" appears="MAY" cardinality="single"/>
+
+  <child href="#url" type="safe" appears="MAY" cardinality="single">
+   <description>
+     An IRI [RFC3987] identifying a resource providing an HTML
+     representation of the activity.
+   </description>
+  </child>
+
+  <child id="verb" appears="SHOULD" cardinality="single">
+   <description>
+     Identifies the action that the activity describes. Value MUST be
+     non-empty and match either the "isegment-nz-nc" or the "IRI"
+     production in [RFC3339]. The unsafe link relations defined in
+     this document make good values for "verb". Note that the use of a
+     relative reference other than a simple name is not allowed. If
+     the verb is not specified, or if the value is null, the verb is
+     assumed to be "post".
+   </description>
+  </child>
+ </element>
+
+ <element id="media-link" appears="MUST NOT">
+
+  <child name="duration" appears="MAY" cardinality="single">
+   <description>
+    A hint to the consumer about the length, in seconds, of the media
+    resource identified by the 'url' property. A media link MAY
+    contain a 'duration' property when the target resource is a
+    time-based media item such as an audio or video file.
+   </description>
+  </child>
+
+  <child name="height" appears="MAY" cardinality="single">
+   <description>
+    A hint to the consumer about the height, in pixels, of the media
+    resource identified by the "url" property. A media link MAY contain
+    a "width" property when the target resource is a visual media item
+    such as an image, video or embeddable HTML page.
+   </description>
+  </child>
+
+  <child name="width" appears="MAY" cardinality="single">
+   <description>
+    A hint to the consumer about the width, in pixels, of the media
+    resource identified by the "url" property. A media link MAY contain
+    a "width" property when the target resource is a visual media item
+    such as an image, video or embeddable HTML page.
+   </description>
+  </child>
+
+  <child href="#url" appears="MUST" cardinality="single">
+   <description>
+ 	The IRI of the media resource being linked.
+   </description>
+  </child>
+ </element>
+
+ <element id="object" appears="MUST NOT">
+  <description>
+   An object is a collection of data with very generic aplication. An
+   object may be 'actor', 'generator', 'object', 'provider', or
+   'target' of an activity. In the activity "John saved a movie to his
+   wishlist," the objects are: John himself ('actor'), the movie
+   ('object'), the wishlist ('target'), the service that makes an
+   announcement when John's wishlist changes ('provider'), and the
+   service John uses to manage his wishlist ('genarator').
+  </description>
+
+  <child id="attachment" href="#object" appears="MAY" cardinality="many">
+   <description>
+     A collection of one or more additional, associated objects,
+     similar to the concept of attached files in an email message.
+   </description>
+  </child>
+
+  <child id="author" href="#object" appears="MAY" cardinality="single">
+   <description>
+     Describes the entity that created or authored the object. Note
+     that the author field identifies the entity that created the
+     object and does not necessarily identify the entity that
+     published the object. For instance, it may be the case that an
+     object created by one person is posted and published to a system
+     by an entirely different entity.
+   </description>
+  </child>
+
+  <child id="content" appears="MAY" cardinality="single">
+   <description>
+    Natural-language description of the object including HTML
+    markup. Visual elements such as thumbnail images MAY be included.
+   </description>
+  </child>
+
+  <child id="displayname" appears="MAY" cardinality="single">
+   <description>
+     A natural-language, human-readable and plain-text name for the
+     object. HTML markup MUST NOT be included.
+   </description>
+  </child>
+
+  <child id="downstreamDuplicate" type="safe" appears="MAY" cardinality="many">
+   <description>
+    An absolute IRI [RFC3987] identifying an object that duplicates
+    this object's content. An object SHOULD use the
+    downstreamDuplicate element when there are known objects,
+    possibly in a different system, that duplicate the content in this
+    object. This MAY be used as a hint for consumers to use when
+    resolving duplicates between objects received from different
+    sources.
+   </description>
+  </child>
+
+  <child href="#id" cardinality="single"/>
+
+  <child id="image" href="#media-link" appears="MAY" cardinality="single">
+   <description>
+    Description of a resource providing a visual representation of the
+    object, intended for human consumption.
+   </description>
+  </child>
+
+  <child href="#published" appears="MAY" cardinality="single"/>
+
+  <child id="summary" appears="MAY" cardinality="single">
+   <description>
+    Natural-language summarization of the object containing HTML
+    markup. Visual elements such as thumbnail images MAY be included.
+   </description>
+  </child>
+
+  <child href="#updated" cardinality="single"/>
+
+  <child id="upstreamDuplicate" rel="safe" appears="MAY" cardinality="many">
+   <description>
+    An absolute IRI [RFC3987] identifying an object that duplicates
+    this object's content. An object SHOULD use the
+    downstreamDuplicate property when a publisher is knowingly
+    duplicating with a new ID the content from another object. This
+    MAY be used as a hint for consumers to use when resolving
+    duplicates between objects received from different sources.
+   </description>
+  </child>
+
+  <child href="#url" appears="MAY" cardinality="single">
+   <description>
+     Identifies a link to an HTML representation of the object. The
+     link relation should describe the object. (e.g. "activity",
+     "alert", "application", ..., as given below) This link relation
+     replaces the 'objectType' attribute defined by Activity Streams.
+   </description>
+  </child>
+ </element>
+
+ <!--Elements common to "activity", "media-link", and "object".-->
+
+ <element id="id" type="safe" appears="MUST NOT">
+  <description>
+   Provides a permanent, universally unique identifier for something
+   in the form of an absolute IRI [RFC3987]. If the 'id' element is
+   not present but the 'url' element is, consumers MAY use the value
+   of 'url' as a less-reliable, non-unique identifier.
+   </description>
+ </element>
+
+ <element id="published" appears="MUST NOT">
+   <description>
+    The date and time at which something was first published. The
+    format is as described in [RFC3339].
+   </description>
+ </element>
+
+ <element id="updated" appears="MUST NOT">
+  <description>
+   The date and time at which something previously published was
+   modified. The format is as described in [RFC3339].
+  </description>
+ </element>
+
+ <element id="url" type="safe" appears="MUST NOT">
+  <description>
+    An IRI [RFC3987] identifying a resource providing a representation
+    of the thing being described.
+  </description>
+ </element>
+
+<!-- These are the object types defined by the Activity Streams
+     standard and the associated Activity Schema draft. Object types
+     may be used either as link relations or as semantic descriptors.
+
+Here's 'event' being used as a link relation describing an object:
+
+<div class="object">"
+ <a class="url" href="http://www.example.com/events/44" rel="event">
+  Birthday party
+ </a>
+</div>
+
+Click on that link and you may see 'event' used as a semantic descriptor:
+
+<div class="event">
+ Date: <span class="start">July 20, 2014</span>
+</div>
+-->
+
+ <element id="activity" type="descriptor safe">
+  <description>
+  An object representation of an activity.
+  </description>
+ </element>
+
+ <element id="alert" type="descriptor safe">
+  <description>
+  Any kind of significant notification.
+  </description>
+ </element>
+
+ <element id="application" type="descriptor safe">
+  <description>
+  A software application.
+  </description>
+ </element>
+
+ <element id="article" type="descriptor safe">
+  <description>
+   An article, such as a news article, knowledge base entry or similar
+   construct.
+  </description>
+ </element>
+
+ <element id="audio" type="descriptor safe">
+  <description>
+   An item of audio content.
+  </description>
+ </element>
+
+ <element id="badge" type="descriptor safe">
+  <description>
+   A badge or award given to an entity.
+  </description>
+ </element>
+
+ <element id="binary" type="descriptor safe">
+  <description>
+    Objects of this type are used to carry arbitrary Base64-encoded
+    binary data within an Activity Stream object. It is primarily
+    intended to attach binary data to other types of objects through
+    the use of the "attachments" property.
+  </description>
+ </element>
+
+ <element id="bookmark" type="descriptor safe">
+  <description>
+   A pointer to a URL.
+  </description>
+ </element>
+
+ <element id="collection" type="descriptor safe">
+  <description>
+   A generic collection of objects of any type.
+  </description>
+ </element>
+
+ <element id="comment" type="descriptor safe">
+  <description>
+   A textual response to another object.
+  </description>
+ </element>
+
+ <element id="device" type="descriptor safe">
+  <description>
+   A device of any type.
+  </description>
+ </element>
+
+ <element id="event" type="descriptor safe">
+  <description>
+   An event that occurs in a certain place during a particular
+   interval of time.
+  </description>
+ </element>
+
+ <element id="file" type="descriptor safe">
+  <description>
+   A document or other file with no additional machine-readable semantics.
+  </description>
+ </element>
+
+ <element id="game" type="descriptor safe">
+  <description>
+   A game or competition of any kind.
+  </description>
+ </element>
+
+ <element id="group" type="descriptor safe">
+  <description>
+   A social networking group.
+  </description>
+ </element>
+
+ <element id="image" type="descriptor safe">
+  <description>
+   A graphical image.
+  </description>
+ </element>
+
+ <element id="issue" type="descriptor safe">
+  <description>
+   Represents a report about a problem or situation that needs to be
+   resolved. For instance, the issue object can be used to represent
+   reports detailing software defects, or reports of acceptable use
+   violations, and so forth.
+  </description>
+ </element>
+
+ <element id="job" type="descriptor safe">
+  <description>
+   A job or job posting.
+  </description>
+ </element>
+
+ <element id="link" type="descriptor safe">
+  <description>
+   A link to another resource.
+  </description>
+ </element>
+
+ <element id="note" type="descriptor safe">
+  <description>
+   A short-form text message.
+  </description>
+ </element>
+
+ <element id="offer" type="descriptor safe">
+  <description>
+   An offer of any kind.
+  </description>
+ </element>
+
+ <element id="organization" type="descriptor safe">
+  <description>
+   An organization of any kind.
+  </description>
+ </element>
+
+ <element id="page" type="descriptor safe">
+  <description>
+   Represents an area, typically a web page, that is representative
+   of, and generally managed by a particular entity.  Such areas are
+   usually dedicated to displaying descriptive information about the
+   entity and showcasing recent content such as articles, photographs
+   and videos.
+
+   Most social networking applications, for example, provide
+   individual users with their own dedicated "profile" pages. Several
+   allow similar types of pages to be created for commercial entities,
+   organizations or events.
+
+   While the specific details of how pages are implemented, their
+   characteristics and use may vary, the one unifying property is that
+   they are typically "owned" by a single entity that is represented
+   by the content provided by the page itself.
+  </description>
+ </element>
+
+ <element id="person" type="descriptor safe">
+  <description>
+   A user account.
+  </description>
+ </element>
+
+ <element id="place" type="descriptor safe">
+  <description>
+   A location on Earth.
+  </description>
+ </element>
+
+ <element id="process" type="descriptor safe">
+  <description>
+   Represents any form of process. For instance, a long-running task
+   that is started and expected to continue operating for a period of
+   time.
+  </description>
+ </element>
+
+ <element id="product" type="descriptor safe">
+  <description>
+   A commercial good or service.
+  </description>
+ </element>
+
+ <element id="question" type="descriptor safe">
+  <description>
+   A question or poll.
+  </description>
+ </element>
+
+ <element id="review" type="descriptor safe">
+  <description>
+   A primarily prosed-based commentary on another object.
+  </description>
+ </element>
+
+ <element id="service" type="descriptor safe">
+  <description>
+   Something that provides a service to others.
+  </description>
+ </element>
+
+ <element id="task" type="descriptor safe">
+  <description>
+   An activity that has yet to be completed.
+  </description>
+ </element>
+
+ <element id="video" type="descriptor safe">
+  <description>
+   An item of video content.
+  </description>
+ </element>
+
+<!--Extensions to #activity defined by the Activity Schema draft.-->
+
+<element id="context" parent="#activity" href="#object">
+ <description>
+  An object construct that provides information about why an activity occurred by describing the context within which it occurred.
+ </description>
+</element>
+
+<element id="result" parent="#activity" href="#object">
+ <description>
+  The result of an activity.
+ </description>
+</element>
+
+<!--Extensions defined by the Activity Schema draft that can apply to
+     either #activity or #object.-->
+
+<element id="dc" parent="#activity #object" href="#object">
+ <description>
+  Related Dublin Core Metadata (http://dublincore.org)
+ </description>
+</element>
+
+<element id="endTime" parent="#activity #object" href="#object">
+ <description>
+  A timestamp indicating the date and time at which the activity ended.
+ </description>
+</element>
+
+<element id="geojson" parent="#activity #object" href="#object">
+ <description>
+  GeoJSON Metadata related to the object (http://www.geojson.org/geojson-spec.html)
+ </description>
+</element>
+
+<element id="ld" parent="#activity #object" href="#object">
+ <description>
+  JSON-LD Metadata related to the object (http://json-ld.org)
+ </description>
+</element>
+
+<element id="links" parent="#activity #object" href="#object">
+ <description>
+  Links associated with the object
+ </description>
+</element>
+
+<element id="location" parent="#activity #object" href="#object">
+ <description>
+  An object construct representing the location at which the activity occured.
+ </description>
+</element>
+
+<element id="mood" parent="#activity #object" href="#object">
+ <description>
+  A human-readable keyword or short phrase describing the mood of the actor at the time the activity was performed.
+ </description>
+</element>
+
+<element id="odata" parent="#activity #object" href="#object">
+ <description>
+  OData Metadata related to the object (http://www.odata.org)
+ </description>
+</element>
+
+<element id="opengraph" parent="#activity #object" href="#object">
+ <description>
+  OpenGraph Metadata related to the object (http://developers.facebook.com/docs/opengraph)
+ </description>
+</element>
+
+<element id="rating" parent="#activity #object" href="#object">
+ <description>
+  A rating given as a number between 1.0 and 5.0 inclusive with one decimal place of precision.
+ </description>
+</element>
+
+<element id="schema_org" parent="#activity #object">
+ <description>
+  Schema.org Metadata related to the activity (http://schema.org)
+ </description>
+</element>
+
+<element id="source" parent="#activity #object" href="#object">
+ <description>
+  A reference to the original source of an activity.
+ </description>
+</element>
+
+<element id="startTime" parent="#activity #object">
+ <description>
+  A timestamp indicating the date and time at which the activity was started.
+ </description>
+</element>
+
+<element id="tags" parent="#activity #object" href="#object">
+ <description>
+  A listing of the objects that have been associated with a particular object using the tag verb.
+ </description>
+</element>
+
+<!--These are the verbs defined by the Activity Stream standard and
+     the Activity Schema draft. They are defined here as relations
+     indicating state transitions. This should be considered a grab
+     bag of standardized names for state transitions commonly used in
+     consumer-facing applications.
+
+     All the state transitions are defined as "unsafe" even though
+     this may not be true for a particular application. In one
+     application, the "accept" transition may be idempotent; a user
+     can only accept a given thing once. In a different context the
+     "accept" transition may be unsafe: a user can accept the same
+     thing many times.
+
+     The only exception is "join", which the Activity Schema draft
+     explicitly defines as idempotent. [TK we should either make our
+     own value judgements or just make them all unsafe.]
+
+     HTML example:
+
+<form action="/g555" method="POST" class="acknowledge">
+ <input type="Submit" value="Acknowledge receipt of this notice."/>
+</form>
+
+-->
+
+ <element id="post" type="unsafe">
+  <description>
+   The act of authoring an object and then publishing it online.
+  </description>
+ </element>
+
+ <element id="accept" type="unsafe">
+  <description>
+   The act of accepting an object. For instance, a person accepting an
+   award, or accepting an assignment.
+  </description>
+ </element>
+
+ <element id="access" type="unsafe">
+  <description>
+   The act of accessing the object. For instance, a person accessing a
+   room, or accessing a file.
+  </description>
+ </element>
+
+ <element id="acknowledge" type="unsafe">
+  <description>
+   Indicates that the actor has acknowledged the object. This
+   effectively signals that the actor is aware of the object's
+   existence.
+  </description>
+ </element>
+
+ <element id="add" type="unsafe">
+  <description>
+   Indicates that the actor has added the object to the target. For
+   instance, adding a photo to an album.
+  </description>
+ </element>
+
+ <element id="agree" type="unsafe">
+  <description>
+   Indicates that the actor agrees with the object. For example, a
+   person agreeing with an argument, or expressing agreement with a
+   particular issue.
+  </description>
+ </element>
+
+ <element id="append" type="unsafe">
+  <description>
+   Indicates that the actor has appended the object to the target. For
+   instance, a person appending a new record to a database.
+  </description>
+ </element>
+
+ <element id="approve" type="unsafe">
+  <description>
+   Indicates that the actor has approved the object. For instance, a
+   manager might approve a travel request.
+  </description>
+ </element>
+
+ <element id="archive" type="unsafe">
+  <description>
+   Indicates that the actor has archived the object.
+  </description>
+ </element>
+
+ <element id="assign" type="unsafe">
+  <description>
+   Indicates that the actor has assigned the object to the target.
+  </description>
+ </element>
+
+ <element id="at" type="unsafe">
+  <description>
+   Indicates that the actor is currently located at the object. For
+   instance, a person being at a specific physical location.
+  </description>
+ </element>
+
+ <element id="attach" type="unsafe">
+  <description>
+   Indicates that the actor has attached the object to the target. For
+   instance, a person attaching a file to a wiki page or an email.
+  </description>
+ </element>
+
+ <element id="attend" type="unsafe">
+  <description>
+   Indicates that the actor has attended the object. For instance, a
+   person attending a meeting.
+  </description>
+ </element>
+
+ <element id="author" type="unsafe">
+  <description>
+   Indicates that the actor has authored the object. Note that this is
+   a more specific form of the verb "create".
+  </description>
+ </element>
+
+ <element id="authorize" type="unsafe">
+  <description>
+   Indicates that the actor has authorized the object. If a target is
+   specified, it means that the authorization is specifically in
+   regards to the target.
+
+   For instance, a service can authorize a person to access a given
+   application; in which case the actor is the service, the object is
+   the person, and the target is the application.
+
+   In contrast, a person can authorize a request; in which case the
+   actor is the person and the object is the request and there might
+   be no explicit target.
+  </description>
+ </element>
+
+ <element id="borrow" type="unsafe">
+  <description>
+   Indicates that the actor has borrowed the object. If a target is
+   specified, it identifies the entity from which the object was
+   borrowed. For instance, if a person borrows a book from a library,
+   the person is the actor, the book is the object and the library is
+   the target.
+  </description>
+ </element>
+
+ <element id="build" type="unsafe">
+  <description>
+   Indicates that the actor has built the object. For example, if a
+   person builds a model or compiles code.
+  </description>
+ </element>
+
+ <element id="cancel" type="unsafe">
+  <description>
+   Indicates that the actor has canceled the object. For instance,
+   canceling a calendar event.
+  </description>
+ </element>
+
+ <element id="checkin" type="unsafe">
+  <description>
+   Indicates that the actor has checked-in to the object. For
+   instance, a person checking-in to a Place.
+  </description>
+ </element>
+
+ <element id="close" type="unsafe">
+  <description>
+   Indicates that the actor has closed the object. For instance, the
+   object could represent a ticket being tracked in an issue
+   management system.
+  </description>
+ </element>
+
+ <element id="complete" type="unsafe">
+  <description>
+   Indicates that the actor has completed the object.
+  </description>
+ </element>
+
+ <element id="confirm" type="unsafe">
+  <description>
+   Indicates that the actor has confirmed or agrees with the
+   object. For instance, a software developer might confirm an issue
+   reported against a product.
+  </description>
+ </element>
+
+ <element id="consume" type="unsafe">
+  <description>
+   Indicates that the actor has consumed the object. The specific
+   meaning is dependent largely on the object's type.  For instance,
+   an actor may "consume" an audio object, indicating that the actor
+   has listened to it; or an actor may "consume" a book, indicating
+   that the book has been read.
+
+   As such, the "consume" verb is a more generic form of other more
+   specific verbs such as "read" and "play".
+  </description>
+ </element>
+
+ <element id="create" type="unsafe">
+  <description>
+   Indicates that the actor has created the object.
+  </description>
+ </element>
+
+ <element id="delete" type="unsafe">
+  <description>
+   Indicates that the actor has deleted the object. This implies, but
+   does not require, the permanent destruction of the object.
+  </description>
+ </element>
+
+ <element id="deliver" type="unsafe">
+  <description>
+   Indicates that the actor has delivered the object. For example,
+   delivering a package.
+  </description>
+ </element>
+
+ <element id="deny" type="unsafe">
+  <description>
+   Indicates that the actor has denied the object. For example, a
+   manager may deny a travel request.
+  </description>
+ </element>
+
+ <element id="disagree" type="unsafe">
+  <description>
+   Indicates that the actor disagrees with the object.
+  </description>
+ </element>
+
+ <element id="dislike" type="unsafe">
+  <description>
+   Indicates that the actor dislikes the object. Note that the
+   "dislike" verb is distinct from the "unlike" verb which assumes
+   that the object had been previously "liked".
+  </description>
+ </element>
+
+ <element id="experience" type="unsafe">
+  <description>
+   Indicates that the actor has experienced the object in some
+   manner. Note that, depending on the specific object types used for
+   both the actor and object, the meaning of this verb can overlap
+   that of the "consume" and "play" verbs. For instance, a person
+   might "experience" a movie; or "play" the movie; or "consume" the
+   movie.  The "experience" verb can be considered a more generic form
+   of other more specific verbs as "consume", "play", "watch",
+   "listen", and "read"
+  </description>
+ </element>
+
+ <element id="favorite" type="unsafe">
+  <description>
+   Indicates that the actor marked the object as an item of special
+   interest.
+  </description>
+ </element>
+
+ <element id="find" type="unsafe">
+  <description>
+   Indicates that the actor has found the object.
+  </description>
+ </element>
+
+ <element id="flag-as-inappropriate" type="unsafe">
+  <description>
+   Indicates that the actor has flagged the object as being
+   inappropriate for some reason. When using this verb, the "context"
+   property can be used to provide additional detail about why the
+   object has been flagged.
+  </description>
+ </element>
+
+ <element id="follow" type="unsafe">
+  <description>
+   Indicates that the actor began following the activity of the
+   object. In most cases, the object will be a Person, but it can
+   potentially be of any type that can sensibly generate
+   activity. Processors MAY ignore (silently drop) successive
+   identical "follow" activities.
+  </description>
+ </element>
+
+ <element id="give" type="unsafe">
+  <description>
+   Indicates that the actor is giving an object to the
+   target. Examples include one person giving a badge object to
+   another person. The object identifies the object being given. The
+   target identifies the receiver.
+  </description>
+ </element>
+
+ <element id="host" type="unsafe">
+  <description>
+   Indicates that the actor is hosting the object. As in hosting an
+   event, or hosting a service.
+  </description>
+ </element>
+
+ <element id="ignore" type="unsafe">
+  <description>
+   Indicates that the actor has ignored the object. For instance, this
+   verb may be used when an actor has ignored a friend request, in
+   which case the object may be the request-friend activity.
+  </description>
+ </element>
+
+ <element id="insert" type="unsafe">
+  <description>
+   Indicates that the actor has inserted the object into the target.
+  </description>
+ </element>
+
+ <element id="install" type="unsafe">
+  <description>
+   Indicates that the actor has installed the object, as in installing
+   an application.
+  </description>
+ </element>
+
+ <element id="interact" type="unsafe">
+  <description>
+   Indicates that the actor has interacted with the object. For
+   instance, when one person interacts with another.
+  </description>
+ </element>
+
+ <element id="invite" type="unsafe">
+  <description>
+   Indicates that the actor has invited the object, typically a
+   person, to join or participate in the object described by the
+   target. The target could, for instance, be an event, group or a
+   service.
+  </description>
+ </element>
+
+ <element id="join" type="idempotent">
+  <description>
+   Indicates that the actor has become a member of the object.
+  </description>
+ </element>
+
+ <element id="leave" type="unsafe">
+  <description>
+   Indicates that the actor has left the object. For instance a Person
+   leaving a Group or checking-out of a Place.
+  </description>
+ </element>
+
+ <element id="like" type="unsafe">
+  <description>
+   Indicates that the actor marked the object as an item of special
+   interest. The "like" verb is considered to be an alias of
+   "favorite". The two verb are semantically identical.
+  </description>
+ </element>
+
+ <element id="listen" type="unsafe">
+  <description>
+   Indicates that the actor has listened to the object. This is
+   typically only applicable for objects representing audio content,
+   such as music, an audio-book, or a radio broadcast. The "listen"
+   verb is a more specific form of the "consume", "experience" and
+   "play" verbs.
+  </description>
+ </element>
+
+ <element id="lose" type="unsafe">
+  <description>
+   Indicates that the actor has lost the object. For instance, if a
+   person loses a game.
+  </description>
+ </element>
+
+ <element id="make-friend" type="unsafe">
+  <description>
+   Indicates the creation of a friendship that is reciprocated by the
+   object. Since this verb implies an activity on the part of its
+   object, processors MUST NOT accept activities with this verb unless
+   they are able to verify through some external means that there is
+   in fact a reciprocated connection. For example, a processor may
+   have received a guarantee from a particular publisher that the
+   publisher will only use this Verb in cases where a reciprocal
+   relationship exists.
+  </description>
+ </element>
+
+ <element id="open" type="unsafe">
+  <description>
+   Indicates that the actor has opened the object. For instance, the
+   object could represent a ticket being tracked in an issue
+   management system.
+  </description>
+ </element>
+
+ <element id="play" type="unsafe">
+  <description>
+   Indicates that the actor spent some time enjoying the object. For
+   example, if the object is a video this indicates that the subject
+   watched all or part of the video.
+  </description>
+ </element>
+
+ <element id="present" type="unsafe">
+  <description>
+   Indicates that the actor has presented the object. For instance,
+   when a person gives a presentation at a conference.
+  </description>
+ </element>
+
+ <element id="purchase" type="unsafe">
+  <description>
+   Indicates that the actor has purchased the object. If a target is
+   specified, in indicates the entity from which the object was
+   purchased.
+  </description>
+ </element>
+
+ <element id="qualify" type="unsafe">
+  <description>
+   Indicates that the actor has qualified for the object. If a target
+   is specified, it indicates the context within which the
+   qualification applies.
+  </description>
+ </element>
+
+ <element id="read" type="unsafe">
+  <description>
+   Indicates that the actor read the object.  This is typically only
+   applicable for objects representing printed or written content,
+   such as a book, a message or a comment. The "read" verb is a more
+   specific form of the "consume", "experience" and "play" verbs.
+  </description>
+ </element>
+
+ <element id="receive" type="unsafe">
+  <description>
+   Indicates that the actor is receiving an object. Examples include a
+   person receiving a badge object. The object identifies the object
+   being received.
+  </description>
+ </element>
+
+ <element id="reject" type="unsafe">
+  <description>
+   Indicates that the actor has rejected the object.
+  </description>
+ </element>
+
+ <element id="remove" type="unsafe">
+  <description>
+   Indicates that the actor has removed the object from the target.
+  </description>
+ </element>
+
+ <element id="remove-friend" type="unsafe">
+  <description>
+   Indicates that the actor has removed the object from the collection
+   of friends.
+  </description>
+ </element>
+
+ <element id="replace" type="unsafe">
+  <description>
+   Indicates that the actor has replaced the target with the object.
+  </description>
+ </element>
+
+ <element id="request" type="unsafe">
+  <description>
+   Indicates that the actor has requested the object. If a target is
+   specified, it indicates the entity from which the object is being
+   requested.
+  </description>
+ </element>
+
+ <element id="request-friend" type="unsafe">
+  <description>
+   Indicates the creation of a friendship that has not yet been
+   reciprocated by the object.
+  </description>
+ </element>
+
+ <element id="resolve" type="unsafe">
+  <description>
+   Indicates that the actor has resolved the object. For instance, the
+   object could represent a ticket being tracked in an issue
+   management system.
+  </description>
+ </element>
+
+ <element id="retract" type="unsafe">
+  <description>
+   Indicates that the actor has retracted the object. For instance, if
+   an actor wishes to retract a previously published activity, the
+   object would be the previously published activity that is being
+   retracted.
+  </description>
+ </element>
+
+ <element id="return" type="unsafe">
+  <description>
+   Indicates that the actor has returned the object. If a target is
+   specified, it indicates the entity to which the object was
+   returned.
+  </description>
+ </element>
+
+ <element id="rsvp-maybe" type="unsafe">
+  <description>
+   The "possible RSVP" verb indicates that the actor has made a
+   possible RSVP for the object. This specification only defines the
+   meaning of this verb when its object is an event, though
+   implementors SHOULD be prepared to handle other object types as
+   meaning MAY be provided by extension specifications. The use of
+   this verb is only appropriate when the RSVP was created by an
+   explicit action by the actor. It is not appropriate to use this
+   verb when a user has been added as an attendee by an event
+   organiser or administrator.
+  </description>
+ </element>
+
+ <element id="rsvp-no" type="unsafe">
+  <description>
+   The "negative RSVP" verb indicates that the actor has made a
+   negative RSVP for the object. This specification only defines the
+   meaning of this verb when its object is an event, though
+   implementors SHOULD be prepared to handle other object types as
+   meaning MAY be provided by extension specifications. The use of
+   this verb is only appropriate when the RSVP was created by an
+   explicit action by the actor. It is not appropriate to use this
+   verb when a user has been added as an attendee by an event
+   organiser or administrator.
+  </description>
+ </element>
+
+ <element id="rsvp-yes" type="unsafe">
+  <description>
+   The "positive RSVP" verb indicates that the actor has made a
+   positive RSVP for an object. This specification only defines the
+   meaning of this verb when its object is an event, though
+   implementors SHOULD be prepared to handle other object types as
+   meaning MAY be provided by extension specifications. The use of
+   this verb is only appropriate when the RSVP was created by an
+   explicit action by the actor. It is not appropriate to use this
+   verb when a user has been added as an attendee by an event
+   organiser or administrator.
+  </description>
+ </element>
+
+ <element id="satisfy" type="unsafe">
+  <description>
+   Indicates that the actor has satisfied the object. If a target is
+   specified, it indicate the context within which the object was
+   satisfied. For instance, if a person satisfies the requirements for
+   a particular challenge, the person is the actor; the requirement is
+   the object; and the challenge is the target.
+  </description>
+ </element>
+
+ <element id="save" type="unsafe">
+  <description>
+   Indicates that the actor has called out the object as being of
+   interest primarily to him- or herself. Though this action MAY be
+   shared publicly, the implication is that the object has been saved
+   primarily for the actor's own benefit rather than to show it to
+   others as would be indicated by the "share" verb.
+  </description>
+ </element>
+
+ <element id="schedule" type="unsafe">
+  <description>
+   Indicates that the actor has scheduled the object. For instance,
+   scheduling a meeting.
+  </description>
+ </element>
+
+ <element id="search" type="unsafe">
+  <description>
+   Indicates that the actor is or has searched for the object. If a
+   target is specified, it indicates the context within which the
+   search is or has been conducted.
+  </description>
+ </element>
+
+ <element id="sell" type="unsafe">
+  <description>
+   Indicates that the actor has sold the object. If a target is
+   specified, it indicates the entity to which the object was sold.
+  </description>
+ </element>
+
+ <element id="send" type="unsafe">
+  <description>
+   Indicates that the actor has sent the object. If a target is
+   specified, it indicates the entity to which the object was sent.
+  </description>
+ </element>
+
+ <element id="share" type="unsafe">
+  <description>
+   Indicates that the actor has called out the object to readers. In
+   most cases, the actor did not create the object being shared, but
+   is instead drawing attention to it.
+  </description>
+ </element>
+
+ <element id="sponsor" type="unsafe">
+  <description>
+   Indicates that the actor has sponsored the object. If a target is
+   specified, it indicates the context within which the sponsorship is
+   offered. For instance, a company can sponsor an event; or an
+   individual can sponsor a project; etc.
+  </description>
+ </element>
+
+ <element id="start" type="unsafe">
+  <description>
+   Indicates that the actor has started the object. For instance, when
+   a person starts a project.
+  </description>
+ </element>
+
+ <element id="stop-following" type="unsafe">
+  <description>
+   Indicates that the actor has stopped following the object.
+  </description>
+ </element>
+
+ <element id="submit" type="unsafe">
+  <description>
+   Indicates that the actor has submitted the object. If a target is
+   specified, it indicates the entity to which the object was
+   submitted.
+  </description>
+ </element>
+
+ <element id="tag" type="unsafe">
+  <description>
+   Indicates that the actor has identified the presence of a target
+   inside another object. For example, the actor may have specified
+   that a particular user appears in a photo. The target of the "tag"
+   verb gives the object in which the tag has been added. For example,
+   if a user appears in a photo, the object is the user and the target
+   is the photo.
+  </description>
+ </element>
+
+ <element id="terminate" type="unsafe">
+  <description>
+   Indicates that the actor has terminated the object.
+  </description>
+ </element>
+
+ <element id="tie" type="unsafe">
+  <description>
+   Indicates that the actor has neither won or lost the object. This
+   verb is generally only applicable when the object represents some
+   form of competition, such as a game.
+  </description>
+ </element>
+
+ <element id="unfavorite" type="unsafe">
+  <description>
+   Indicates that the actor has removed the object from the collection
+   of favorited items.
+  </description>
+ </element>
+
+ <element id="unlike" type="unsafe">
+  <description>
+   Indicates that the actor has removed the object from the collection
+   of liked items.
+  </description>
+ </element>
+
+ <element id="unsatisfy" type="unsafe">
+  <description>
+   Indicates that the actor has not satisfied the object. If a target
+   is specified, it indicates the context within which the object was
+   not satisfied. For instance, if a person fails to satisfy the
+   requirements of some particular challenge, the person is the actor;
+   the requirement is the object and the challenge is the target.
+  </description>
+ </element>
+
+ <element id="unsave" type="unsafe">
+  <description>
+   Indicates that the actor has removed the object from the collection
+   of saved items.
+  </description>
+ </element>
+
+ <element id="unshare" type="unsafe">
+  <description>
+   Indicates that the actor is no longer sharing the object. If a
+   target is specified, it indicates the entity with whom the object
+   is no longer being shared.
+  </description>
+ </element>
+
+ <element id="update" type="unsafe">
+  <description>
+   The "update" verb indicates that the actor has modified the
+   object. Implementors SHOULD use verbs such as "post" where the
+   actor is adding new items to a collection or similar. Update is
+   reserved for modifications to existing object or data such as
+   changing a user's profile information.
+  </description>
+ </element>
+
+ <element id="use" type="unsafe">
+  <description>
+   Indicates that the actor has used the object in some manner.
+  </description>
+ </element>
+
+ <element id="watch" type="unsafe">
+  <description>
+   Indicates that the actor has watched the object. This verb is
+   typically applicable only when the object represents dynamic,
+   visible content such as a movie, a television show or a public
+   performance. This verb is a more specific form of the verbs
+   "experience", "play" and "consume".
+  </description>
+ </element>
+
+ <element id="win" type="unsafe">
+  <description>
+   Indicates that the actor has won the object. This verb is typically
+   applicable only when the object represents some form of
+   competition, such as a game.
+  </description>
+ </element>
+
+ <!--Extensions taken from "Audience Targeting for JSON Activity Streams".-->
+
+ <element id="to" href="#object" parent="#activity" cardinality="many">
+  <description>
+    Specifies the public primary audience of an activity.
+  </description>
+ </element>
+
+ <element id="cc" href="#object" parent="#activity" cardinality="many">
+  <description>
+    Specifies the secondary primary audience of an activity.
+  </description>
+ </element>
+
+ <element id="bto" href="#object" parent="#activity" cardinality="many">
+  <description>
+    Specifies the primary private audience of an activity.
+  </description>
+ </element>
+
+ <element id="bcc" href="#object" parent="#activity" cardinality="many">
+  <description>
+    Specifies the secondary private audience of an activity.
+  </description>
+ </element>
+
+ <element id="alias" parent="#object">
+  <description>
+    An alternative meaningful label for the object in addition to the
+    "id". For instance, within some systems, groups can be identified
+    by both a unique global ID and a more friendly label such as
+    "@friends" or "@network", etc. In some systems, the alias can be
+    used as an alternative to the "id" in certain situations.
+
+    The value of the "alias" property MUST be a non-empty string that
+    matches either the "isegment-nz-nc" or "IRI" productions defined
+    in [RFC3987]. Note that the use of relative references other than
+    a simple name is not allowed.
+  </description>
+ </element>
+
+ <!--Extensions taken from "Responses for Activity Streams"-->
+
+ <element id="inReplyTo" href="#object" parent="#activity" cardinality="many">
+  <description>
+   An object to which this activity is a response.
+  </description>
+ </element>
+
+ <element id="attendedBy" href="#object" parent="#object" cardinality="many">
+  <description>
+   An object that attended this event.
+  </description>
+ </element>
+
+ <element id="attending" href="#object" parent="#object" cardinality="many">
+  <description>
+    An actor who responded to this event using the rsvp-yes verb.
+  </description>
+ </element>
+
+ <element id="followedBy" href="#object" parent="#object" cardinality="many">
+  <description>
+   An object (typically a person) that is "following" this one.
+  </description>
+ </element>
+
+ <element id="following" href="#object" parent="#object" cardinality="many">
+  <description>
+   An object that this object is "following".
+  </description>
+ </element>
+
+ <element id="friend-request" href="#object" parent="#object" cardinality="many">
+  <description>
+   An object with which this object (typically a person) is requesting
+   a "friendship" relationship using the "request-friend" verb.
+  </description>
+ </element>
+
+ <element id="friend" href="#object" parent="#object" cardinality="many">
+  <description>
+   An object with which this object (typically a person) has
+   established a friendship with using the "make-friend" verb.
+  </description>
+ </element>
+
+ <element id="invited" href="#object" parent="#object" cardinality="many">
+  <description>
+   An object that has been invited to an event, invited to join a group, etc.
+  </description>
+ </element>
+
+ <element id="likedBy" href="#object" parent="#object" cardinality="many">
+  <description>
+    An actor (typically a person) that has favorited or liked this object.
+  </description>
+ </element>
+
+ <element id="maybeAttending" href="#object" parent="#object" cardinality="many">
+  <description>
+   An actor that has responded to this event using the rsvp-maybe
+   verb.
+  </description>
+ </element>
+
+ <element id="member" href="#object" parent="#object" cardinality="many">
+  <description>
+   An actor (typically a person) that has "joined" this object. This
+   is typically only useful for object types that represent groups.
+  </description>
+ </element>
+
+ <element id="notAttendedBy" href="#object" parent="#object" cardinality="many">
+  <description>
+   An entity that did not attend this event.
+  </description>
+ </element>
+
+ <element id="notAttending" href="#object" parent="#object" cardinality="many">
+  <description>
+   An actor that has responded to this event using the "rsvp-no" verb.
+  </description>
+ </element>
+
+ <element id="reply" href="#object" parent="#object" cardinality="many">
+  <description>
+   Used to provide information about the thread of discussion
+   associated with this object. Typically, the objects contained
+   will have an implied "inReplyTo" property value equal to the object
+   containing the "replies" property.
+  </description>
+ </element>
+
+ <element id="reviewed" href="#object" parent="#object" cardinality="many">
+  <description>
+   Used to provide information about a review available for this
+   object.
+  </description>
+ </element>
+
+ <element id="savedBy" href="#object" parent="#object" cardinality="many">
+  <description>
+    An actor (typically a person) that has "saved" the containing
+    object.
+  </description>
+ </element>
+
+ <element id="sharedBy" href="#object" parent="#object" cardinality="many">
+  <description>
+   An actor (typically a person) that has "shared" the containing
+   object.
+  </description>
+ </element>
+</alps>

@@ -1,7 +1,7 @@
 = Application-Level Profile Semantics =
 Revision: 2012-10-29 (mca)
 
-Two TODO items from leonardr:
+Some TODO items from leonardr:
 
 1. I would like to discuss the addition of a +parent+ element,
 analogous to +child+. This would allow one ALPS document to
@@ -35,6 +35,83 @@ of clarity in the common case.
 
 If you don't like this, what about allowing a general +link+ with
 +rel+ as an extension mechanism.
+
+3. This feels natural; should we allow it?
+
+<child>
+ Description goes here.
+</child>
+
+<element>
+ Description goes here
+ <child href="#foo"/>
+</element>
+
+(instead of)
+
+<child>
+ <description>
+  Description goes here.
+ </description>
+</child>
+
+
+<element>
+ <description>Description goes here</description>
+ <child href="#foo"/>
+</element>
+
+I guess not; it might complicate implementations too much.
+
+4. After going through Activity Streams I think we should reconsider
+the default cardinality being "many".
+
+5. I would also be nice to allow multiple values for type;
+specifically, "descriptor" as well as one of "safe", "unsafe",
+"idempotent".
+
+<element id="inventory" type="descriptor safe">
+ <description>The current player's inventory</description>
+</element>
+
+This would mean that the 'inventory' element can be a semantic
+descriptor, *or* it can be a link to a standalone resource, the gist
+of whose representation is equivalent to a block of data marked with
+that descriptor.
+
+6. There are two big difficulties with making an ALPS version of
+Activity Streams.
+
+6a. Every object is supposed to have an "objectType" attribute. For
+each provided value for "objectType" (e.g. "event", "game"), I defined
+a combination link relation/semantic descriptor.  But there's no way
+in ALPS to indicate that a certain semantic descriptor is expected to
+be used as a value for "objectType".
+
+To approximate this I got rid of objectType and mentioned in the
+definition of "url" that any hypermedia control with descriptor "url"
+should set its link relation to reflect the object type on the other
+end.
+
+<div class="object">"
+ <a class="url" href="http://www.example.com/events/44" rel="event">
+  Birthday party
+ </a>
+</div>
+
+"event" is not technically a relationship, but neither is "inventory".
+
+But there's still no way of saying within ALPS that _those particular_
+link relations are intended to be the partial range of "url"'s link
+relation.
+
+6b. Every activity has a "verb" associated with it which serves the
+same purpose as objectType. It explains what kind of activity this
+is. e.g. "consume", "checkin", "dislike".
+
+I defined an unsafe link relation for every verb, but there's no way
+in ALPS to explain that those link relations are intended to be the
+partial range of the "verb" descriptor.
 
 == Summary ==
 
