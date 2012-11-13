@@ -113,6 +113,13 @@ I defined an unsafe link relation for every verb, but there's no way
 in ALPS to explain that those link relations are intended to be the
 partial range of the "verb" descriptor.
 
+I don't think we should extend ALPS to deal with these two problems,
+but does it make sense to define an Activity Streams-specific
+extension?
+
+ <element id="checkin" type="unsafe verb">
+ <element id="game" type="safe descriptor objectType">
+
 == Summary ==
 
 This document describes a media type designed to give Web application
@@ -126,6 +133,52 @@ existing media types (such as HTML, Collection+JSON, and HAL).
 This document registers two media-type identifiers with the IANA:
 +application/vnd.alps+xml+ ("ALPS+XML") and
 +application/vnd.alps+json+ ("ALPS+JSON").
+
+7. I think "activity schema.xml" demonstrates the value of the
+"parent" attribute for extensions. But many of the extension elements
+have two parents:
+
+<element id="dc" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+ <description>
+  Related Dublin Core Metadata (http://dublincore.org)
+ </description>
+</element>
+
+This argues for a different syntax. This:
+
+<element id="dc" href="http://path/to/activitystreams#object">
+ <parent href="http://path/to/activitystreams#activity"/>
+ <parent href="http://path/to/activitystreams#object"/>
+ <description>
+  Related Dublin Core Metadata (http://dublincore.org)
+ </description>
+</element>
+
+Or this:
+
+<element id="dc" href="http://path/to/activitystreams#object">
+ <link rel="parent" href="http://path/to/activitystreams#activity"/>
+ <link rel="parent" href="http://path/to/activitystreams#object"/>
+ <description>
+  Related Dublin Core Metadata (http://dublincore.org)
+ </description>
+</element>
+
+There's also the problem that a single element may have different
+cardinalities in different contexts. You need to specify cardinality
+(and description) when you specify parent.
+
+This syntax would solve both problems without requiring anything new,
+but it's a bit repetitive:
+
+<element id="dc">
+ <description>
+  Related Dublin Core Metadata (http://dublincore.org)
+ </description>
+</element>
+
+<element id="dc-activity" name="id" href="http://path/to/activitystreams#activity"/>
+<element id="dc-object" name="id" href="http://path/to/activitystreams#activity"/>
 
 == Motivation ==
 
