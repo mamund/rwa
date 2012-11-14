@@ -1,7 +1,10 @@
 <alps version="1.0">
  <description>
    An ALPS specification of the semantics defined by the hCalendar
-   microformat.
+   microformat. When applied to HTML content, this document is
+   equivalent to the hCalendar specification. When applied to some
+   other hypermedia format, e.g. Siren, this document allows the same
+   semantics hCalendar gives to HTML.
  </description>
 
  <element id="vcalendar" appears="MAY">
@@ -27,7 +30,7 @@
    <child href="#dtstart"/>
    <child href="#dtend"/>
    <child href="#duration"/>
-   <child href="#geo"/>
+   <child href="geo.xml#geo" appears="MAY"/>
    <child href="#last-modified"/>
    <child href="#location"/>
    <child href="#method"/>
@@ -38,7 +41,7 @@
    <child href="#summary"/>
    <child href="#uid"/>
    <child href="#url" cardinality="many"/>
-   <!--There's more in RFC2446.-->
+   <!--There's more in RFC2445.-->
  </element>
 
  <element id="attach">
@@ -107,11 +110,6 @@
  <element id="duration">
    <description>
      Length of the event. See section 4.8.2.5 of RFC 2445.
-   </description>
- </element>
-
- <element id="geo">
-   <description>
    </description>
  </element>
 

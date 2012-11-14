@@ -1,0 +1,31 @@
+<alps version="1.0">
+
+ <description>
+   geo (pronounced "gee-oh") is a simple format for marking up WGS84
+   geographic coordinates (latitude and longitude). This ALPS
+   description of geo allows any hypermedia format that supports ALPS
+   to use the geo format.
+ </description>
+
+ <element id="geo" appears="MUST">
+   <description>
+     A geographic location on Earth.
+   </description>
+   <child href="#latitude" appears="MUST"/>
+   <child href="#longitude" appears="MUST"/>
+ </element>
+
+ <child id="latitude">
+  <description>
+    A measurement of latitude. This MUST specified in decimal degrees
+    and SHOULD be specified to six decimal places.
+  </description>
+ </child>
+
+ <child id="latitude">
+  <description>
+    A measurement of longitude. This MUST specified in decimal degrees
+    and SHOULD be specified to six decimal places.
+  </description>
+ </child>
+</alps>
