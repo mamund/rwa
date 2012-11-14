@@ -42,141 +42,273 @@
 
  <!--BEGIN object types.-->
 
- <element id="alert" type="descriptor safe">
+ <element id="alert">
   <description>
   Any kind of significant notification.
   </description>
  </element>
 
- <element id="application" type="descriptor safe">
+ <element id="application">
   <description>
   A software application.
   </description>
  </element>
 
- <element id="article" type="descriptor safe">
+ <element id="article">
   <description>
    An article, such as a news article, knowledge base entry or similar
    construct.
   </description>
  </element>
 
- <element id="audio" type="descriptor safe">
+ <element id="audio">
   <description>
    An item of audio content.
   </description>
  </element>
 
- <element id="badge" type="descriptor safe">
+ <element id="badge">
   <description>
    A badge or award given to an entity.
   </description>
  </element>
 
- <element id="binary" type="descriptor safe">
+ <element id="binary">
   <description>
     Objects of this type are used to carry arbitrary Base64-encoded
     binary data within an Activity Stream object. It is primarily
     intended to attach binary data to other types of objects through
     the use of the "attachments" property.
   </description>
+
+  <element id="binary-compression" name="compression">
+    <description>
+      An optional token identifying a compression algorithm applied to
+      the binary data prior to Base64-encoding. Possible algorithms
+      are "deflate" and "gzip", respectively indicating the use of the
+      compression mechanisms defined by [RFC1951] and
+      [RFC1952]. Additional compression algorithms MAY be used but are
+      not defined by this specification.
+    </description>
+  </element>
+
+  <element id="binary-data" name="data">
+    <description>
+      The URL-Safe Base64-encoded representation of the binary data.
+    </description>
+  </element>
+
+  <element id="binary-fileURL" name="fileURL" type="safe">
+    <description>
+      A link to a resource that serves the binary data as a
+      representation.
+    </description>
+  </element>
+
+  <element id="binary-length" name="length">
+    <description>
+      The total number of unencoded, uncompressed octets contained
+      within the "data" field represented as a non-negative integer
+      value.
+    </description>
+  </element>
+
+  <element id="binary-md5" name="md5">
+    <description>
+      An MD5 checksum calculated over the unencoded, uncompressed
+      octets contained with the "data" field.
+    </description>
+  </element>
+
+  <element id="binary-mimeType" name="mimeType">
+    <description>
+      The MIME type of the binary data.
+    </description>
+  </element>
+
  </element>
 
- <element id="bookmark" type="descriptor safe">
+ <element id="bookmark">
   <description>
    A pointer to a URL.
   </description>
  </element>
 
- <element id="collection" type="descriptor safe">
+ <element id="collection">
   <description>
    A generic collection of objects of any type.
   </description>
+
+  <element id="collection-itemsAfter" name="itemsAfter">
+    <description>
+      An [RFC3339] date-time, indicating that the collection contains
+      only items published or updated after the date and time
+      specified.
+    </description>
+  </element>
+
+  <element id="collection-itemsBefore" name="itemsBefore">
+    <description>
+      An [RFC3339] date-time, indicating that the collection contains
+      only items published or updated before the date and time
+      specified.
+    </description>
+  </element>
+
+  <element id="collection-itemsPerPage" name="itemsPerPage">
+    <description>
+      A non-negative integer specifying the maximum number of objects
+      that will be present underneath 'links'
+    </description>
+  </element>
+
+  <element id="collection-items" name="items">
+    <description>
+      Designates an ordered list of the items in this collection.
+    </description>
+  </element>
+
+  <element id="collection-links" name="links">
+    <description>
+      A collection of links connecting this collection to other
+      collections, each containing additional items that can be
+      considered members of the collection.
+
+      Each link should use one of the following IANA-registered link
+      relations: "first", "least", "prev", "next", "current", "self".
+    </description>
+  </element>
+
+  <element id="collection-startIndex" name="startIndex">
+    <description>
+      A non-negative integer value identifying the relative position
+      within the collection of the first element contained in the
+      'items' property. For instance, if there are 20 items that are
+      considered to be members of a collection, but only the last 10
+      of those items are serialized within the value of the items
+      property, the value of startIndex would be 10.
+    </description>
+  </element>
+
  </element>
 
- <element id="comment" type="descriptor safe">
+ <element id="comment">
   <description>
    A textual response to another object.
   </description>
  </element>
 
- <element id="device" type="descriptor safe">
+ <element id="device">
   <description>
    A device of any type.
   </description>
  </element>
 
- <element id="event" type="descriptor safe">
+ <element id="event">
   <description>
    An event that occurs in a certain place during a particular
    interval of time.
   </description>
+
+  <element href="#attendedBy"/>
+  <element href="#attending"/>
+  <element href="#endTime"/>
+  <element href="#invited"/>
+  <element href="#maybeAttending"/>
+  <element href="#notAttendedBy"/>
+  <element href="#notAttending"/>
+  <element href="#startTime"/>
  </element>
 
- <element id="file" type="descriptor safe">
+ <element id="file">
   <description>
    A document or other file with no additional machine-readable semantics.
   </description>
  </element>
 
- <element id="game" type="descriptor safe">
+ <element id="game">
   <description>
    A game or competition of any kind.
   </description>
  </element>
 
- <element id="group" type="descriptor safe">
+ <element id="group">
   <description>
    A social networking group.
   </description>
  </element>
 
- <element id="image" type="descriptor safe">
+ <element id="image">
   <description>
    A graphical image.
   </description>
  </element>
 
- <element id="issue" type="descriptor safe">
+ <element id="issue">
   <description>
    Represents a report about a problem or situation that needs to be
    resolved. For instance, the issue object can be used to represent
    reports detailing software defects, or reports of acceptable use
    violations, and so forth.
   </description>
+
+  <element id="issue-type" name="type" type="safe">
+   A link to a resource that describes the type of issue.
+  </element>
+
  </element>
 
- <element id="job" type="descriptor safe">
+ <element id="job">
   <description>
    A job or job posting.
   </description>
  </element>
 
- <element id="link" type="descriptor safe">
+ <element id="link">
   <description>
    A link to another resource.
   </description>
+
+  <element id="link-hreflang" name="hreflang">
+   <description>
+     A Language Tag [RFC4646] that hints at language of the target
+     resource.
+   </description>
+  </element>
+
+  <element id="link-title" name="title">
+   <description>
+     A human-readable descriptive label for the link.
+   </description>
+  </element>
+
+  <element id="link-type" name="type">
+   <description>
+     A hint that identifies the media type of the linked resource.
+   </description>
+  </element>
+
  </element>
 
- <element id="note" type="descriptor safe">
+ <element id="note">
   <description>
    A short-form text message.
   </description>
  </element>
 
- <element id="offer" type="descriptor safe">
+ <element id="offer">
   <description>
    An offer of any kind.
   </description>
  </element>
 
- <element id="organization" type="descriptor safe">
+ <element id="organization">
   <description>
    An organization of any kind.
   </description>
  </element>
 
- <element id="page" type="descriptor safe">
+ <element id="page">
   <description>
    Represents an area, typically a web page, that is representative
    of, and generally managed by a particular entity.  Such areas are
@@ -196,19 +328,19 @@
   </description>
  </element>
 
- <element id="person" type="descriptor safe">
+ <element id="person">
   <description>
    A user account.
   </description>
  </element>
 
- <element id="place" type="descriptor safe">
+ <element id="place">
   <description>
    A location on Earth.
   </description>
  </element>
 
- <element id="process" type="descriptor safe">
+ <element id="process">
   <description>
    Represents any form of process. For instance, a long-running task
    that is started and expected to continue operating for a period of
@@ -216,37 +348,83 @@
   </description>
  </element>
 
- <element id="product" type="descriptor safe">
+ <element id="product">
   <description>
    A commercial good or service.
   </description>
  </element>
 
- <element id="question" type="descriptor safe">
+ <element id="question">
   <description>
    A question or poll.
   </description>
  </element>
 
- <element id="review" type="descriptor safe">
+ <element id="review">
   <description>
-   A primarily prosed-based commentary on another object.
+   A primarily prose-based commentary on another object.
   </description>
  </element>
 
- <element id="service" type="descriptor safe">
+ <element id="service">
   <description>
    Something that provides a service to others.
   </description>
  </element>
 
- <element id="task" type="descriptor safe">
+ <element id="task">
   <description>
    An activity that has yet to be completed.
   </description>
+
+  <element id="task-actor" name="actor" appears="MAY">
+    <description>
+      The actor that is expected to complete the task.
+    </description>
+  </element>
+
+  <element id="task-by" name="by" appears="MAY">
+    <description>
+      An [RFC3339] timestamp specifying the date and time by which the
+      task is to be completed.
+    </description>
+  </element>
+
+  <element id="task-object" name="object" href="http://path/to/activitystreams.xml#object" appears="MAY">
+    <description>
+      The object of the task.
+    </description>
+  </element>
+
+  <element id="prerequisite" cardinality="many" appears="MAY">
+    <description>
+     Another task which must be completed before this one.
+    </description>
+  </element>
+
+  <element id="task-required" name="required" appears="MAY">
+    <description>
+      A boolean value indicating whether completion of the task is
+      considered to be mandatory or not.
+    </description>
+  </element>
+
+  <element id="supersedes" appears="MAY" cardinality="many">
+    <description>
+      A task superceded by this one.
+    </description>
+  </element>
+
+  <element id="task-verb" name="verb" appears="MAY">
+    <description>
+      The verb for this task as defined for the 'verb' property
+      of an Activity Streams activity.
+    </description>
+  </element>
+
  </element>
 
- <element id="video" type="descriptor safe">
+ <element id="video">
   <description>
    An item of video content.
   </description>
@@ -967,14 +1145,14 @@
 
  <!--BEGIN Activity Schema's extensions to the "object" descriptor-->
 
- <element id="context" parent="http://path/to/activitystreams#activity" href="http://path/to/activitystreams#object">
+ <element id="context">
   <description>
    An object that provides information about why an activity occurred,
    by describing the context within which it occurred.
   </description>
  </element>
 
- <element id="result" parent="http://path/to/activitystreams#activity" href="http://path/to/activitystreams#object">
+ <element id="result">
   <description>
    The result of an activity.
   </description>
@@ -983,89 +1161,224 @@
 <!--BEGIN Activity Schema extensions that can apply to either the
      "activity" or the "object" descriptor.-->
 
-<element id="dc" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="dc">
  <description>
   Related Dublin Core Metadata (http://dublincore.org)
  </description>
 </element>
 
-<element id="endTime" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="endTime">
  <description>
   A timestamp indicating the date and time at which the activity ended.
  </description>
 </element>
 
-<element id="geojson" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="geojson">
  <description>
   GeoJSON Metadata related to the object (http://www.geojson.org/geojson-spec.html)
  </description>
 </element>
 
-<element id="ld" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="ld">
  <description>
   JSON-LD Metadata related to the object (http://json-ld.org)
  </description>
 </element>
 
-<element id="links" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="links">
  <description>
-  Links associated with the object
+  Links associated with the object.
  </description>
 </element>
 
-<element id="location" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="location">
  <description>
-  An object construct representing the location at which the activity occured.
+  The location at which an activity occured.
+ </description>
+
+ <element id="position">
+  <description>
+   The latitude, longitude and altitude of the place as a point on Earth.
+  </description>
+  <element>
+   <element id="altitude">
+    <description>
+      The elevation of this point relative to the Earth, in meters
+      above or below mean sea level. (e.g. 8848.00, -86.00).
+    </description>
+   </element>
+
+   <element id="latitude">
+    <description>
+      The latitude of this point on Earth according to the WGS-84
+      coordinate reference system in decimal degrees (e.g. 27.9881,
+      -3.12676).
+    </description>
+   </element>
+
+   <element id="longitude">
+    <description>
+      The longitude of this point on Earth according to the WGS-84
+      coordinate reference system in decimal degrees (e.g. 86.9253,
+      -134.4323).
+    </description>
+   </element>
+  </element>
+
+  <element id="address">
+   <description>
+     A physical address.
+   </description>
+
+   <element id="formatted">
+     <description>
+       The full mailing address formatted for display or use with a
+       mailing label.
+     </description>
+   </element>
+
+   <element id="streetAddress">
+     <description>
+       The street address including house number, street name,
+       P.O. Box, and extended multi-line address information.
+     </description>
+   </element>
+
+   <element id="locality">
+     <description>
+       The city or locality.
+     </description>
+   </element>
+
+   <element id="region">
+     <description>
+       The state or region.
+     </description>
+   </element>
+
+   <element id="postalCode">
+     <description>
+       The ZIP or postal code.
+     </description>
+   </element>
+
+   <element id="country">
+     <description>
+       The country name component.
+     </description>
+   </element>
+ </element>
+</element>
+
+<element id="mood">
+ <description>
+  A human-readable keyword or short phrase describing the mood of the
+  actor at the time the activity was performed.
+ </description>
+
+ <element id="mood-displayName" name="displayName"
+          appears="MUST">
+  <description>
+   The natural-language, human-readable and plain-text keyword or
+   phrase describing the mood. HTML markup MUST NOT be included
+  </description>
+ </element>
+
+ <element id="mood-image" name="image" appears="MAY"
+          href="http://path/to/activitystreams.xml#media-link">
+  <description>
+   An image that provides a visual representation of the mood.
+  </description>
+ </element>
+
+</element>
+
+<element id="odata">
+ <description>
+  Related OData metadata (http://www.odata.org)
  </description>
 </element>
 
-<element id="mood" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="opengraph">
  <description>
-  A human-readable keyword or short phrase describing the mood of the actor at the time the activity was performed.
+  Related OpenGraph metadata
+  (http://developers.facebook.com/docs/opengraph)
  </description>
 </element>
 
-<element id="odata" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="rating">
  <description>
-  OData Metadata related to the object (http://www.odata.org)
+  A rating given as a number between 1.0 and 5.0 inclusive with one
+  decimal place of precision.
  </description>
 </element>
 
-<element id="opengraph" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="schema_org">
  <description>
-  OpenGraph Metadata related to the object (http://developers.facebook.com/docs/opengraph)
+  Related Schema.org metadata (http://schema.org)
  </description>
 </element>
 
-<element id="rating" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="source">
  <description>
-  A rating given as a number between 1.0 and 5.0 inclusive with one decimal place of precision.
+  The original source of an activity.
  </description>
 </element>
 
-<element id="schema_org" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object">
+<element id="startTime">
  <description>
-  Schema.org Metadata related to the activity (http://schema.org)
+  An [RFC3339] timestamp indicating the date and time at which the
+  activity was started.
  </description>
 </element>
 
-<element id="source" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
+<element id="tags">
  <description>
-  A reference to the original source of an activity.
+  A list of objects that have been associated with a particular object
+  using the tag verb.
  </description>
 </element>
 
-<element id="startTime" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object">
- <description>
-  A timestamp indicating the date and time at which the activity was started.
- </description>
-</element>
+<!--These elements are defined as aspects of 'event' in Activity
+     Schema, and as general aspects of 'object' in Responses. I'm
+     defining them here, so that they can be referenced by the
+     definition of 'event', and not defining them in the ALPS version
+     of Responses.-->
 
-<element id="tags" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
- <description>
-  A listing of the objects that have been associated with a particular object using the tag verb.
- </description>
-</element>
+  <element id="attendedBy" cardinality="many">
+    <description>
+      An actor that attended an event.
+    </description>
+  </element>
 
+  <element id="attending" cardinality="many">
+    <description>
+      An actor who responded to an event using the rsvp-yes verb.
+    </description>
+  </element>
+
+  <element id="invited" cardinality="many">
+    <description>
+      An actor that has been invited to an event, invited to join a group, etc.
+    </description>
+  </element>
+
+  <element id="maybeAttending" cardinality="many">
+    <description>
+      An actor that responded to an event using the rsvp-maybe verb.
+    </description>
+  </element>
+
+  <element id="notAttendedBy" cardinality="many">
+    <description>
+      An actor that did not attend an event.
+    </description>
+  </element>
+
+  <element id="notAttending" cardinality="many">
+    <description>
+      An actor that has responded to an event using the "rsvp-no" verb.
+    </description>
+  </element>
 
 </alps>

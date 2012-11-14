@@ -1,11 +1,21 @@
 = Application-Level Profile Semantics =
 Revision: 2012-10-29 (mca)
 
-Some TODO items from leonardr:
+Some topics for conversation.
 
 1. I would like to discuss the addition of a +parent+ element,
 analogous to +child+. This would allow one ALPS document to
 unilaterally extend another.
+
+I used this heavily in my first draft of the ALPS version of Activity
+Streams. When an extension element extended 'activity', I said that
+its parent was the #activity object in another file. Similarly for
+#object.
+
+Then I decided to take a more laid-back, microformats-ish
+approach. Now the extension elements can be used anywhere. I feel that
+this is a better approach, because it means the elements are much more
+reusable. But I think there's still be a case for #parent.
 
 The main problem with this (apart from implementation difficulties) is
 that the attributes look weird:
@@ -19,8 +29,8 @@ This makes it sound like a +foo+ may have zero, one or more parents,
 each of which is a +bar+. When actually it's saying that a +foo+ may
 appear zero, one, or many times within a +bar+.
 
-2. I would like to explore the possibility of replacing +child+ and
-+parent+ with a generic +link+.
+2. Because of that, I would like to explore the possibility of
+replacing +child+ and +parent+ with a generic +link+.
 
 <element id="foo">
  <link rel="parent" href="http://other.doc/#bar" appears="MAY"
@@ -36,48 +46,46 @@ of clarity in the common case.
 If you don't like this, what about allowing a general +link+ with
 +rel+ as an extension mechanism.
 
-3. This feels natural; should we allow it?
+4. A lot of semantic descriptors also make sense as link
+relations. The "inventory" descriptor from the treasure hunt is
+defined as a link relation, and as the name of the top-level tag you
+find when you follow the link.
 
-<child>
- Description goes here.
-</child>
+While working on the Activity Streams translation I discovered that
+*most* semantic descriptors could be used as safe link
+relations. For "event", "collection", "location", even "longitude", it
+might make sense to either include the value inline or link to a
+standalone resource whose representation provides the value.
 
-<element>
- Description goes here
- <child href="#foo"/>
-</element>
+I think the ALPS spec should say that a semantic descriptor can be
+used as a safe link relation. If the name of a descriptor conflicts
+with an IANA-registered link relation, the local name takes
+precedence. (This is the only way to prevent a situation where
+additions to IANA change the meaning of preexisting ALPS documents.)
 
-(instead of)
+<a href="foo" rel="event">
 
-<child>
- <description>
-  Description goes here.
- </description>
-</child>
+->
 
+<span class="event">
+ ...
+</span>
 
-<element>
- <description>Description goes here</description>
- <child href="#foo"/>
-</element>
+Alternatively, we could say that a semantic descriptor applied to a
+hypermedia link "types" the link.
 
-I guess not; it might complicate implementations too much.
+<a href="foo" class="event" rel="somethingelse">
 
-4. After going through Activity Streams I think we should reconsider
-the default cardinality being "many".
+->
 
-5. I would also be nice to allow multiple values for type;
-specifically, "descriptor" as well as one of "safe", "unsafe",
-"idempotent".
+<span class="event">
+ ...
+</span>
 
-<element id="inventory" type="descriptor safe">
- <description>The current player's inventory</description>
-</element>
-
-This would mean that the 'inventory' element can be a semantic
-descriptor, *or* it can be a link to a standalone resource, the gist
-of whose representation is equivalent to a block of data marked with
-that descriptor.
+But that seems to reinvent the work done by the link relation. And I
+don't know if there's support in all our target representation formats
+for applying semantic descriptors (as opposed to link relations) to
+links.
 
 6. There are two big difficulties with making an ALPS version of
 Activity Streams.

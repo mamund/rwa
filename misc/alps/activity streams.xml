@@ -24,6 +24,31 @@
   document is to stop other people from repeating the work Activity
   Streams has done to catalogue the sort of things people do on the
   Web.
+
+  The semantics defined by this document are comparable in strictness
+  to an HTML microformat; much looser than the semantics defined by
+  Activity Streams. An example: Activity Streams says that the 'actor'
+  in an activity must be an Activity Streams 'object'. This document
+  requires that an event have an 'actor', but an 'actor' can be
+  anything at all, so long as it's tagged with the 'actor' descriptor.
+
+  <div class="activity">
+   <div class="actor">
+    J.R. "Bob" Dobbs
+   </div>
+  </div>
+
+  An 'actor' that also happens to implement the semantics of 'object'
+  would be tagged with both 'actor' and 'object':
+
+  <div class="activity">
+   <div class="actor object">
+    <span class="displayName">
+     J.R. "Bob" Dobbs
+    </span>
+    (<a href="/profiles/jdobbs" class="url" rel="person">Profile</a>)
+   </div>
+  </div>
  </description>
 
  <element id="activity" appears="MUST" cardinality="many">
@@ -35,7 +60,7 @@
    target (like a photo album or wishlist) involved.
   </description>
 
-  <child id="actor" href="#object" appears="MUST" cardinality="single">
+  <child id="actor" appears="MUST" cardinality="single">
    <description>
     Describes the entity that performed the activity.
    </description>
@@ -49,13 +74,13 @@
    </description>
   </child>
 
-  <child id="generator" href="#object" appears="MAY" cardinality="single">
+  <child id="generator" appears="MAY" cardinality="single">
    <description>
     Describes the application that generated the activity.
    </description>
   </child>
 
-  <child id="icon" href="#media-link" appears="MAY" cardinality="single">
+  <child id="icon" appears="MAY" cardinality="single">
    <description>
     Description of a resource providing a visual representation of the
     object, intended for human consumption. The image SHOULD have an
@@ -66,7 +91,7 @@
 
   <child href="#id" appears="SHOULD" cardinality="single"/>
 
-  <child href="#object" appears="SHOULD" cardinality="single">
+  <child appears="SHOULD" cardinality="single">
    <description>
      Describes the primary object of the activity. For instance, in
      the activity, "John saved a movie to his wishlist", the object of
@@ -77,7 +102,7 @@
 
   <child href="#published" appears="MUST" cardinality="single"/>
 
-  <child id="provider" href="#object" appears="MAY" cardinality="single">
+  <child id="provider" appears="MAY" cardinality="single">
    <description>
     Describes the application that published the activity. Note that
     this is not necessarily the same entity that generated the
@@ -85,7 +110,7 @@
    </description>
   </child>
 
-  <child id="target" href="#object" appears="MAY" cardinality="single">
+  <child id="target" appears="MAY" cardinality="single">
    <description>
     Describes the target of the activity. The precise meaning of the
     activity's target is dependent on the activity's 'verb', but will
@@ -173,14 +198,14 @@
    service John uses to manage his wishlist ('genarator').
   </description>
 
-  <child id="attachment" href="#object" appears="MAY" cardinality="many">
+  <child id="attachment" appears="MAY" cardinality="many">
    <description>
      A collection of one or more additional, associated objects,
      similar to the concept of attached files in an email message.
    </description>
   </child>
 
-  <child id="author" href="#object" appears="MAY" cardinality="single">
+  <child id="author" appears="MAY" cardinality="single">
    <description>
      Describes the entity that created or authored the object. Note
      that the author field identifies the entity that created the
@@ -219,7 +244,7 @@
 
   <child href="#id" cardinality="single"/>
 
-  <child id="image" href="#media-link" appears="MAY" cardinality="single">
+  <child id="image" appears="MAY" cardinality="single">
    <description>
     Description of a resource providing a visual representation of the
     object, intended for human consumption.
