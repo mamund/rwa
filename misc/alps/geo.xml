@@ -7,7 +7,7 @@
    to use the geo format.
  </description>
 
- <element id="geo" appears="MUST">
+ <element id="geo" appears="MAY">
    <description>
      A geographic location on Earth.
    </description>

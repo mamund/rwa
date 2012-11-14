@@ -122,10 +122,12 @@
 
  <element id="location">
    <description>
-     Tells where the event is to be held. May be represented by nested
-     hCard record, adr record, geo record, or combination thereof. See
-     sections 4.8.1.7 and 4.8.1.6 of RFC 2445.
+     Tells where the event is to be held. See sections 4.8.1.7 and
+     4.8.1.6 of RFC 2445.
    </description>
+   <element child="geo.xml#geo" appears="MAY"/>
+   <element child="hcard.xml#hcard" appears="MAY"/>
+   <element child="hcard.xml#adr" appears="MAY"/>
  </element>
 
  <element id="method">

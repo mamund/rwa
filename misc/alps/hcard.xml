@@ -1,0 +1,342 @@
+<alps version="1.0">
+ <description>
+   An ALPS specification of the semantics defined by the hCard
+   microformat. When applied to HTML content, this document is
+   equivalent to the hCard specification. When applied to some other
+   hypermedia format, e.g. Siren, this document allows the same
+   semantics hCard gives to HTML.
+ </description>
+
+ <element id="vcard" appears="MAY">
+   <description>
+     A container for a card's data. See section 1. of RFC 2426.
+   </description>
+
+   <child href="#fn" appears="MUST"/>
+   <child href="#n" appears="MAY"/>
+
+   <child href="#adr"/>
+   <child href="#agent"/>
+   <child href="#bday"/>
+   <child href="#category"/>
+   <child href="#class"/>
+   <child href="#email"/>
+   <child href="geo.xml#geo"/>
+   <child href="#key"/>
+   <child href="#label"/>
+   <child href="#logo"/>
+   <child href="#mailer"/>
+   <child href="#nickname" cardinality="many"/>
+   <child href="#note"/>
+   <child href="#org"/>
+   <child href="#photo"/>
+   <child href="#rev"/>
+   <child href="#role"/>
+   <child href="#sort-string"/>
+   <child href="#sound"/>
+   <child href="#tel"/>
+   <child href="#title"/>
+   <child href="#tz"/>
+   <child href="#uid"/>
+   <child href="#url"/>
+ </element>
+
+ <!--Sub-elements of hcard which contain their own sub-elements.-->
+
+ <element id="adr">
+  <child href="#post-office-box"/>
+  <child href="#extended-address"/>
+  <child href="#street-address"/>
+  <child href="#locality"/>
+  <child href="#region"/>
+  <child href="#postal-code"/>
+  <child href="#country-name"/>
+  <child href="#adr-type"/>
+  <child href="#adr-value"/>
+ </element>
+
+ <element id="n">
+    <description>
+      The components of the name of the object the vCard
+      represents. See section 3.1.2 of RFC2426. If absent, a value may
+      be inferred according to the 'Implied "N" optimization'
+      algorithm given in the hCard standard.
+      (http://microformats.org/wiki/hcard)
+    </description>
+
+   <child href="#family-name"/>
+   <child href="#given-name"/>
+   <child href="#additional-name" cardinality="many"/>
+   <child href="#honorific-prefix" cardinality="many"/>
+   <child href="#honorific-suffix" cardinality="many"/>
+ </element>
+
+ <element id="org">
+   <description>
+     See section 3.5.5 of RFC 2426.
+   </description>
+   <child href="#organization-name"/>
+   <child href="#organization-unit"/>
+ </element>
+
+ <element id="tel">
+   <description>
+     See section 3.3.1 of RFC 2426.
+   </description>
+   <child href="#tel-type"/>
+   <child href="#tel-value"/>
+ </element>
+
+  <!--Sub-elements of 'hcard' that don't contain any sub-elements of
+       their own.-->
+
+  <element id="fn" name="fn">
+    <description>
+      The name of the object the vCard represents. See section 3.1.1
+      of RFC2426.
+    </description>
+  </element>
+
+  <element id="agent" name="agent">
+    <description>
+      See section 3.5.4 of RFC 2426. If the value is a vCard, then use
+      a nested hCard.  For simplicity in that case, the element that
+      has the class name of "agent" should also have the class name of
+      "vcard".
+    </description>
+  </element>
+
+  <element id="bday" name="bday">
+    <description>
+     See section 3.1.5 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="category" name="category">
+    <description>
+      See section 3.6.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="class" name="class">
+    <description>
+      See section 3.7.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="email" name="email">
+    <description>
+      See section 3.3.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="key" name="key">
+    <description>
+      See section 3.7.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="label" name="label">
+    <description>
+      See section 3.2.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="logo" name="logo">
+    <description>
+      See section 3.5.3 of RFC 2426. Typically used with a hypermedia
+      control that performs inline inclusion.
+    </description>
+  </element>
+
+  <element id="mailer" name="mailer">
+    <description>
+      See section 3.3.3 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="nickname" name="nickname">
+    <description>
+      See section 3.1.3 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="note" name="note">
+    <description>
+      See section 3.6.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="photo" name="photo">
+    <description>
+      See section 3.1.4 of RFC 2426. Typically used with a hypermedia
+      control that performs inline inclusion.
+    </description>
+  </element>
+
+  <element id="rev" name="rev">
+    <description>
+      A timestamp or date indicating the last time this hCard's data
+      was updated. See section 3.6.4 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="role" name="role">
+    <description>
+     The role, occupation, or business category of the object the
+     vCard represents. See section 3.5.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="sort-string" name="sort-string">
+    <description>
+      See section 3.6.5 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="sound" name="sound">
+    <description>
+      Indicates digital sound information associated with the card. By
+      default, this is used to specify the proper pronunciation of the
+      name. See section 3.6.6 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="title" name="title">
+    <description>
+      See section 3.5.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="tz" name="tz">
+    <description>
+      See section 3.4.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="uid" name="uid">
+    <description>
+      See section 3.6.7 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="url" name="url">
+    <description>
+      See section 3.6.8 of RFC 2426.
+    </description>
+  </element>
+
+ <!--Sub-elements of the 'adr' element.-->
+
+  <element id="post-office-box" name="post-office-box">
+    <description>
+      See "post office box" in section 3.2.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="extended-address" name="extended-address">
+    <description>
+      See "extended address" in section 3.2.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="street-address" name="street-address">
+    <description>
+      See "street address" in section 3.2.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="locality" name="locality">
+    <description>
+      See "locality" in section 3.2.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="region" name="region">
+    <description>
+      See "region" in section 3.2.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="postal-code" name="postal-code">
+    <description>
+      See "postal code" in section 3.2.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="country-name" name="country-name">
+    <description>
+      See "country name" in section 3.2.1 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="adr-type" name="adr-type">
+    <description>
+    </description>
+  </element>
+
+  <element id="adr-value" name="adr-value">
+    <description>
+    </description>
+  </element>
+
+ <!--Sub-elements of the 'n' element.-->
+
+  <element id="family-name" name="family-name">
+    <description>
+      See "Family Name" in section 3.1.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="given-name" name="given-name">
+    <description>
+      See "Given Name" in section 3.1.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="additional-name" name="additional-name">
+    <description>
+      See "Additional Names" in section 3.1.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="honorific-prefix" name="honorific-prefix">
+    <description>
+      See "Honorific Prefixes" in section 3.1.2 of RFC 2426.
+    </description>
+  </element>
+
+  <element id="honorific-suffix" name="honorific-suffix">
+    <description>
+      See "Honorific Suffixes" in section 3.1.2 of RFC 2426.
+    </description>
+  </element>
+
+ <!--Sub-elements of the 'org' element.-->
+
+  <element id="organization-name" name="organization-name">
+    <description>
+      See "Organization Name" in section 3.5.5 of RFC 2426.  May be
+      inferred per the 'Implied "organization-name" Optimization'
+      defined in the hCard standard..
+    </description>
+  </element>
+
+  <element id="organization-unit" name="organization-unit">
+    <description>
+      See "Organization Unit" in section 3.5.5 of RFC 2426.
+    </description>
+  </element>
+
+ <!--Sub-elements of the 'tel' element.-->
+
+  <element id="tel-type" name="tel-type">
+    <description>
+    </description>
+  </element>
+
+  <element id="tel-value" name="tel-value">
+    <description>
+    </description>
+  </element>
+</alps>
