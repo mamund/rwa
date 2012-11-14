@@ -18,14 +18,15 @@
   syndicate social activities around the web.
 
   This document does *not* describe Activity Streams
-  documents. Instead, it allows documents written in HTML,
-  Collection+JSON, Siren, or other hypermedia type with ALPS support
-  to reuse the semantics defined by the Activity Streams standard. The
-  goal of this document is to prevent anyone from reinventing the work
-  already done on Activity Streams.
+  documents. Instead, it allows reuse of the semantics defined by
+  Activity Streams in documents written in any hypermedia type with
+  ALPS support (HTML, Collection+JSON, Siren, etc.) The goal of this
+  document is to stop other people from repeating the work Activity
+  Streams has done to catalogue the sort of things people do on the
+  Web.
  </description>
 
- <element id="activity" appears="MUST">
+ <element id="activity" appears="MUST" cardinality="many">
 
   <description>
    A description of an action that was performed (the verb) at some
@@ -301,7 +302,7 @@
  </element>
 
 <!-- This is the only verb defined by the Activity Stream standard.
-     It may be used as an unsafe link relation.-->
+     It may be used anywhere as an unsafe link relation.-->
 
  <element id="post" type="unsafe">
   <description>
@@ -310,162 +311,3 @@
  </element>
 </alps>
 
- <!--Extensions taken from "Audience Targeting for JSON Activity
-      Streams". To be moved into a separate ALPS document, similar to
-      "activity schema.xml".-->
-
- <element id="to" href="#object" parent="#activity" cardinality="many">
-  <description>
-    Specifies the public primary audience of an activity.
-  </description>
- </element>
-
- <element id="cc" href="#object" parent="#activity" cardinality="many">
-  <description>
-    Specifies the secondary primary audience of an activity.
-  </description>
- </element>
-
- <element id="bto" href="#object" parent="#activity" cardinality="many">
-  <description>
-    Specifies the primary private audience of an activity.
-  </description>
- </element>
-
- <element id="bcc" href="#object" parent="#activity" cardinality="many">
-  <description>
-    Specifies the secondary private audience of an activity.
-  </description>
- </element>
-
- <element id="alias" parent="#object">
-  <description>
-    An alternative meaningful label for the object in addition to the
-    "id". For instance, within some systems, groups can be identified
-    by both a unique global ID and a more friendly label such as
-    "@friends" or "@network", etc. In some systems, the alias can be
-    used as an alternative to the "id" in certain situations.
-
-    The value of the "alias" property MUST be a non-empty string that
-    matches either the "isegment-nz-nc" or "IRI" productions defined
-    in [RFC3987]. Note that the use of relative references other than
-    a simple name is not allowed.
-  </description>
- </element>
-
- <!--Extensions taken from "Responses for Activity Streams". To be
-      moved into a separate ALPS document, similar to "activity
-      schema.xml".-->
-
- <element id="inReplyTo" href="#object" parent="#activity" cardinality="many">
-  <description>
-   An object to which this activity is a response.
-  </description>
- </element>
-
- <element id="attendedBy" href="#object" parent="#object" cardinality="many">
-  <description>
-   An object that attended this event.
-  </description>
- </element>
-
- <element id="attending" href="#object" parent="#object" cardinality="many">
-  <description>
-    An actor who responded to this event using the rsvp-yes verb.
-  </description>
- </element>
-
- <element id="followedBy" href="#object" parent="#object" cardinality="many">
-  <description>
-   An object (typically a person) that is "following" this one.
-  </description>
- </element>
-
- <element id="following" href="#object" parent="#object" cardinality="many">
-  <description>
-   An object that this object is "following".
-  </description>
- </element>
-
- <element id="friend-request" href="#object" parent="#object" cardinality="many">
-  <description>
-   An object with which this object (typically a person) is requesting
-   a "friendship" relationship using the "request-friend" verb.
-  </description>
- </element>
-
- <element id="friend" href="#object" parent="#object" cardinality="many">
-  <description>
-   An object with which this object (typically a person) has
-   established a friendship with using the "make-friend" verb.
-  </description>
- </element>
-
- <element id="invited" href="#object" parent="#object" cardinality="many">
-  <description>
-   An object that has been invited to an event, invited to join a group, etc.
-  </description>
- </element>
-
- <element id="likedBy" href="#object" parent="#object" cardinality="many">
-  <description>
-    An actor (typically a person) that has favorited or liked this object.
-  </description>
- </element>
-
- <element id="maybeAttending" href="#object" parent="#object" cardinality="many">
-  <description>
-   An actor that has responded to this event using the rsvp-maybe
-   verb.
-  </description>
- </element>
-
- <element id="member" href="#object" parent="#object" cardinality="many">
-  <description>
-   An actor (typically a person) that has "joined" this object. This
-   is typically only useful for object types that represent groups.
-  </description>
- </element>
-
- <element id="notAttendedBy" href="#object" parent="#object" cardinality="many">
-  <description>
-   An entity that did not attend this event.
-  </description>
- </element>
-
- <element id="notAttending" href="#object" parent="#object" cardinality="many">
-  <description>
-   An actor that has responded to this event using the "rsvp-no" verb.
-  </description>
- </element>
-
- <element id="reply" href="#object" parent="#object" cardinality="many">
-  <description>
-   Used to provide information about the thread of discussion
-   associated with this object. Typically, the objects contained
-   will have an implied "inReplyTo" property value equal to the object
-   containing the "replies" property.
-  </description>
- </element>
-
- <element id="reviewed" href="#object" parent="#object" cardinality="many">
-  <description>
-   Used to provide information about a review available for this
-   object.
-  </description>
- </element>
-
- <element id="savedBy" href="#object" parent="#object" cardinality="many">
-  <description>
-    An actor (typically a person) that has "saved" the containing
-    object.
-  </description>
- </element>
-
- <element id="sharedBy" href="#object" parent="#object" cardinality="many">
-  <description>
-   An actor (typically a person) that has "shared" the containing
-   object.
-  </description>
- </element>
-</alps>
