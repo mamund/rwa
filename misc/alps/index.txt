@@ -87,10 +87,10 @@ don't know if there's support in all our target representation formats
 for applying semantic descriptors (as opposed to link relations) to
 links.
 
-6. There are two big difficulties with making an ALPS version of
+5. There are two big difficulties with making an ALPS version of
 Activity Streams.
 
-6a. Every object is supposed to have an "objectType" attribute. For
+5a. Every object is supposed to have an "objectType" attribute. For
 each provided value for "objectType" (e.g. "event", "game"), I defined
 a combination link relation/semantic descriptor.  But there's no way
 in ALPS to indicate that a certain semantic descriptor is expected to
@@ -113,7 +113,7 @@ But there's still no way of saying within ALPS that _those particular_
 link relations are intended to be the partial range of "url"'s link
 relation.
 
-6b. Every activity has a "verb" associated with it which serves the
+5b. Every activity has a "verb" associated with it which serves the
 same purpose as objectType. It explains what kind of activity this
 is. e.g. "consume", "checkin", "dislike".
 
@@ -127,6 +127,20 @@ extension?
 
  <element id="checkin" type="unsafe verb">
  <element id="game" type="safe descriptor objectType">
+
+6. Given the prevalence of the collection pattern, it may make sense
+to allow an ALPS document to hint that a given descriptor describes a
+collection rather than a single object. We could do this e.g. by
+defining "collection" as another type, a subtype of "descriptor".
+
+ <element id="vcalendar" type="collection" appears="MAY">
+   <description>
+     A calendar of events.
+   </description>
+   <child href="#event"/ cardinality="many">
+ </element>
+
+I don't know if this feature would really be useful.
 
 == Summary ==
 

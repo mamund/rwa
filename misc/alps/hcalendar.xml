@@ -1,0 +1,224 @@
+<alps version="1.0">
+ <description>
+   An ALPS specification of the semantics defined by the hCalendar
+   microformat.
+ </description>
+
+ <element id="vcalendar" appears="MAY">
+   <description>
+     A container for one or more events (vevent). See section 1. of
+     RFC 2445.
+   </description>
+   <child href="#event"/ cardinality="many">
+ </element>
+
+ <element id="vevent" appears="MAY">
+   <description>
+     A container for one event. See section 4.6.1 of RFC 2445.
+   </description>
+
+   <child href="#attach" cardinality="many"/>
+   <child href="#attendee" cardinality="many"/>
+   <child href="#category" cardinality="many"/>
+   <child href="#class"/>
+   <child href="#contact"/>
+   <child href="#description"/>
+   <child href="#dtstamp"/>
+   <child href="#dtstart"/>
+   <child href="#dtend"/>
+   <child href="#duration"/>
+   <child href="#geo"/>
+   <child href="#last-modified"/>
+   <child href="#location"/>
+   <child href="#method"/>
+   <child href="#organizer"/>
+   <child href="#rdate"/>
+   <child href="#rrule"/>
+   <child href="#status"/>
+   <child href="#summary"/>
+   <child href="#uid"/>
+   <child href="#url" cardinality="many"/>
+   <!--There's more in RFC2446.-->
+ </element>
+
+ <element id="attach">
+   <description>
+     A attached resource associated with the event, such as a
+     photo. See section 4.8.1.1 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="attendee">
+   <description>
+     An individual invited to attend the event. May be represented by
+     nested hCard record. See section 4.8.4.1 of RFC 2445.
+   </description>
+   <child href="#partstat"/>
+   <child href="#role"/>
+ </element>
+
+ <element id="category">
+   <description>
+     Category of the event. Common values are: MEETING, APPOINTMENT,
+     CONFERENCE, EXPO. See section 4.8.1.2 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="class">
+   <description>
+     Access classification of the event information; Values are:
+     PUBLIC, PRIVATE, CONFIDENTIAL. See section 4.8.1.3 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="contact">
+   <description>
+     Contact information associated with the event; May be represented
+     by nested hCard record. See section 4.8.4.2 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="description">
+   <description>
+     A more detailed synopsis of the event than that provided by
+     'summary'. See section 4.8.1.5 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="dtstamp">
+   <description>
+     Date/time of when the document containing information about the
+     event was created. See section 4.8.7.2 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="dtstart">
+   <description>
+     Date/time of the start of the event. See section 4.8.2.2 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="dtend">
+   <description>
+     Date/time of the end of the event. See section 4.8.2.2 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="duration">
+   <description>
+     Length of the event. See section 4.8.2.5 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="geo">
+   <description>
+   </description>
+ </element>
+
+ <element id="last-modified">
+   <description>
+     Date/time the information about the event was updated. See
+     section 4.8.7.3 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="location">
+   <description>
+     Tells where the event is to be held. May be represented by nested
+     hCard record, adr record, geo record, or combination thereof. See
+     sections 4.8.1.7 and 4.8.1.6 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="method">
+   <description>
+    Function of the event object. Values for this property are:
+    PUBLISH, REQUEST, REPLY, ADD, CANCEL, REFRESH, COUNTER, or
+    DECLINECOUNTER. For example, a value of REQUEST indicates that a
+    request is being made for the event to occur. See section 4.7.2 of
+    RFC 2445.
+   </description>
+ </element>
+
+ <element id="organizer">
+   <description>
+     The organizer associated with the event. May be represented by
+     nested hCard record. See section 4.8.4.3 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="partstat">
+   <description>
+     The participation-status of an individual invited to attend the
+     event. See section 4.2.12 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="rdate">
+   <description>
+   </description>
+ </element>
+
+ <element id="role">
+   <description>
+     The role of an individual invited to attend the event. See
+     section 4.2.12 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="rrule">
+   <description>
+   </description>
+ </element>
+
+ <element id="status">
+   <description>
+     Status of the calendar event. Values are: TENTATIVE, CONFIRMED,
+     CANCELLED. See section 4.8.1.11 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="summary">
+   <description>
+     Short synopsis, title, or name of the event. See section 4.8.1.12
+     of RFC 2445.
+   </description>
+ </element>
+
+ <element id="uid">
+   <description>
+     A globally unique identifier for the event; typically a URL is
+     used. See section 4.8.4.7 of RFC 2445.
+   </description>
+ </element>
+
+ <element id="url">
+   <description>
+     A URL to a page that contains the definitive/preferred
+     representation of an event. See section 4.8.4.6 of RFC 2445.
+   </description>
+ </element>
+
+ <!--Since value-class is a general pattern, this could be
+      incorporated by reference?-->
+
+ <element id="value">
+   <description>
+     This class name is used to distinguish the actual value of a
+     property from any other cruft that may be in the containing
+     element representing the property. See the value-class-pattern
+     for details.
+   </description>
+ </element>
+
+ <element id="value-title">
+   <description>
+     This class name is used to distinguish the actual value of a
+     property, specifically in the 'title' attribute of the element,
+     from the element contents and the element representing the
+     containing property. See the value-class-pattern value-title
+     description for details.
+   </description>
+ </element>
+
+</alps>
