@@ -1,0 +1,71 @@
+Three HTML documents that express the same semantics using references
+to different ALPS documents.
+
+----
+<html>
+<head>
+ <link rel="describedBy" href="hcard.xml"/>
+</head>
+
+<body>
+<h1>hCard example</h1>
+
+<p class="vcard">
+ My name is
+ <span class="fn n">
+  <span class="given-name">Leonard</span>
+  <span class="additional-name">D.</span>
+  <span class="family-name">Richardson</span>
+ </span>
+ and
+ <a class="url" href="http://www.crummy.com/">here is my homepage</a>.
+</p>
+
+</body>
+</html>
+
+---
+
+<html>
+<head>
+ <link rel="describedBy" href="activity streams.xml"/>
+ <link rel="describedBy" href="activity schema.xml"/>
+</head>
+
+<body>
+<h1>Activity Streams example</h1>
+
+<p class="actor">
+ My name is
+ <span class="displayName">Leonard D. Richardson</span>
+ and
+ <a class="url" rel="page" href="http://www.crummy.com/">
+  here is my homepage
+ </a>.
+</p>
+
+</body>
+</html>
+
+---
+
+<html>
+<head>
+ <link rel="describedBy" href="foaf.xml"/>
+</head>
+
+<body>
+<h1>FOAF example</h1>
+
+<p class="Person">
+ My name is <span class="name">
+ <span class="givenName">Leonard</span>
+ D.
+ <span class="familyName">Richardson</span></span>
+ and
+ <a class="homepage" href="http://www.crummy.com/">here is my homepage</a>.
+</p>
+
+</body>
+</html>
+

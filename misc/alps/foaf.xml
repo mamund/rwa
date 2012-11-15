@@ -1,0 +1,146 @@
+<alps version="1.0">
+
+ <description>
+   This is an experimental ALPS description of (some of) the semantics
+   defined by FOAF. This puts FOAF on the same footing as two
+   overlapping standards: Activity Streams and the hCard microformat.
+
+   As an experiment, it is incomplete and contains dangling
+   references.  I defined just enough to get a feel for the document
+   and make comparisons with other standards possible.
+ </description>
+
+ <element id="Agent" appears="MAY">
+
+   <description>
+     The Agent class is the class of agents; things that do stuff. A
+     well known sub-class is Person, representing people. Other kinds
+     of agents include Organization and Group.
+
+     The Agent class is useful in a few places in FOAF where Person
+     would have been overly specific. For example, the IM chat ID
+     properties such as "jabberID" are typically associated with people,
+     but sometimes belong to software bots.
+   </description>
+
+  <child id="#weblog" href="#cardinality="many"/>
+
+  <child href="#icqChatID" cardinality="many"/>
+  <child href="#msnChatID" cardinality="many"/>
+
+  <child id="account" href="#OnlineAccount" cardinality="many">
+   <description>
+     Indicates an account held by this agent.
+   </description>
+  </child>
+
+  <child href="#age"/>
+  <child href="#mbox" cardinality="many"/>
+  <child href="#yahooChatID" cardinality="many"/>
+  <child href="#tipjar" cardinality="many"/>
+  <child href="#jabberID" cardinality="many"/>
+  <child href="#status" cardinality="many"/>
+  <child href="#openid" cardinality="many"/>
+  <child href="#gender"/>
+  <child href="#interest" cardinality="many"/>
+  <child id="topic_interest" type="safe" cardinality="many">
+    <description>
+      Links a Agent to a thing that they're interested in. Unlike
+      topic it is not indirected through a document, but links the
+      thing directly.
+    </description>
+  </child>
+  <child href="#aimChatID" cardinality="many"/>
+  <child href="#birthday"/>
+  <child href="#made" cardinality="many"/>
+  <child href="#skypeID" cardinality="many"/>
+  <child href="#mbox_sha1sum" cardinality="many"/>
+ </element>
+
+ <element id="Person" href="#Agent" appears="MAY">
+   <description>
+     The Person class represents people. Something is a Person if it
+     is a person. We don't nitpic about whether they're alive, dead,
+     real, or imaginary.
+   </description>
+
+   <child href="#myersBriggs" cardinality="many"/>
+   <child href="#familyName" cardinality="single"/>
+   <child id="pastPublications" href="#Document" cardinality="single"/>
+   <child href="#lastName" cardinality="single"/>
+   <child href="#firstName" cardinality="single"/>
+   <child id="currentProject" href="#Document" cardinality="single"/>
+   <child href="#surname" cardinality="single"/>
+   <child id="knows" href="#Person"cardinality="many"/>
+   <child href="#workInfoHomepage" cardinality="many"/>
+   <child id="pastProject" href="#Document" cardinality="many"/>
+   <child href="#geekCode" cardinality="single"/>
+   <child id="schoolHomepage" href="#Document" cardinality="many"/>
+   <child id="workplaceHomepage" href="#Document" cardinality="many"/>
+   <child id="img" href="#Image" cardinality="many"/>
+   <child href="#plan" cardinality="single"/>
+
+ </element>
+
+ <element id="Document" appears="MAY">
+   <description>
+     Represents those things which are, broadly conceived,
+     'documents'.
+
+     We do not (currently) distinguish precisely between physical and
+     electronic documents, or between copies of a work and the
+     abstraction those copies embody. The relationship between
+     documents and their byte-stream representation needs
+     clarification.
+   </description>
+
+   <child href="#primaryTopic" cardinality="single" />
+   <child href="#sha1" cardinality="many"/>
+   <child href="#topic" cardinality="many"/>
+ </element>
+
+ <element id="OnlineAccount" appears="MAY">
+   <description>
+     The OnlineAccount class represents the provision of some form of
+     online service, by some party (indicated indirectly via a
+     accountServiceHomepage) to some Agent. The account property of
+     the agent is used to indicate accounts that are associated with
+     the agent.
+
+     <!--In FOAF this is a subclass of owl:Thing, but since ALPS doesn't
+          have a way of specifying ranges, it's not useful to define
+          owl:Thing in ALPS.-->
+   </description>
+
+   <child href="#accountServiceHomepage" cardinality="single" />
+   <child href="#accountName" cardinality="single"/>
+ </element>
+
+
+ <element id="weblog" href="#Document">
+   <description>
+     A weblog of some thing (whether person, group, company etc.).
+   </description>
+ </element>
+
+ <element id="icqchatid">
+  <description>
+    The icqChatID property relates a Agent to a textual identifier
+    assigned to them in the ICQ Chat system.
+  </description>
+ </element>
+
+ <element id="account" href="#OnlineAccount>
+ </element>
+
+ <element id="">
+  <description>
+  </description>
+ </element>
+
+ <element id="">
+  <description>
+  </description>
+ </element>
+
+</alps>

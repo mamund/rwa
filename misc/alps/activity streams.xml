@@ -277,8 +277,9 @@
    <description>
      Identifies a link to an HTML representation of the object. The
      link relation should describe the object. (e.g. "activity",
-     "alert", "application", ..., as given below) This link relation
-     replaces the 'objectType' attribute defined by Activity Streams.
+     "alert", "application", ..., as given in the Activity Schema
+     document) This link relation replaces the 'objectType' attribute
+     defined by Activity Streams.
    </description>
   </child>
  </element>
