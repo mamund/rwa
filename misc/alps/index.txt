@@ -46,7 +46,7 @@ of clarity in the common case.
 If you don't like this, what about allowing a general +link+ with
 +rel+ as an extension mechanism.
 
-4. A lot of semantic descriptors also make sense as link
+3. A lot of semantic descriptors also make sense as link
 relations. The "inventory" descriptor from the treasure hunt is
 defined as a link relation, and as the name of the top-level tag you
 find when you follow the link.
@@ -87,10 +87,10 @@ don't know if there's support in all our target representation formats
 for applying semantic descriptors (as opposed to link relations) to
 links.
 
-5. There are two big difficulties with making an ALPS version of
+4. There are two big difficulties with making an ALPS version of
 Activity Streams.
 
-5a. Every object is supposed to have an "objectType" attribute. For
+4a. Every object is supposed to have an "objectType" attribute. For
 each provided value for "objectType" (e.g. "event", "game"), I defined
 a combination link relation/semantic descriptor.  But there's no way
 in ALPS to indicate that a certain semantic descriptor is expected to
@@ -113,7 +113,7 @@ But there's still no way of saying within ALPS that _those particular_
 link relations are intended to be the partial range of "url"'s link
 relation.
 
-5b. Every activity has a "verb" associated with it which serves the
+4b. Every activity has a "verb" associated with it which serves the
 same purpose as objectType. It explains what kind of activity this
 is. e.g. "consume", "checkin", "dislike".
 
@@ -128,7 +128,7 @@ extension?
  <element id="checkin" type="unsafe verb">
  <element id="game" type="safe descriptor objectType">
 
-6. Given the prevalence of the collection pattern, it may make sense
+5. Given the prevalence of the collection pattern, it may make sense
 to allow an ALPS document to hint that a given descriptor describes a
 collection rather than a single object. We could do this e.g. by
 defining "collection" as another type, a subtype of "descriptor".
@@ -144,63 +144,23 @@ I don't know if this feature would really be useful.
 
 == Summary ==
 
-This document describes a media type designed to give Web application
-authors and implementors a way to define, document, and apply
-application-level semantic descriptions to elements within
-application-agnostic media-type representations. This document also
-sets a standard for creating and registering ALPS document identifers
-and provides suggested conventions for applying ALPS descriptors to
-existing media types (such as HTML, Collection+JSON, and HAL).
+This document describes a media type for defining application-level
+semantic descriptions (similar to those defined by HTML microformats)
+in a way that incorporates both human-readable documentation and
+machine-readable instructions on applying semantic descriptions to
+elements within application-agnostic media-type representations (such
+as HTML, HAL, Collection+JSON, and Siren). This document also sets a
+standard for creating and registering ALPS document identifers and
+provides suggested conventions for applying ALPS descriptors to
+existing media types.
 
 This document registers two media-type identifiers with the IANA:
 +application/vnd.alps+xml+ ("ALPS+XML") and
 +application/vnd.alps+json+ ("ALPS+JSON").
 
-7. I think "activity schema.xml" demonstrates the value of the
-"parent" attribute for extensions. But many of the extension elements
-have two parents:
+== Simple Example ==
 
-<element id="dc" parent="http://path/to/activitystreams#activity http://path/to/activitystreams#object" href="http://path/to/activitystreams#object">
- <description>
-  Related Dublin Core Metadata (http://dublincore.org)
- </description>
-</element>
-
-This argues for a different syntax. This:
-
-<element id="dc" href="http://path/to/activitystreams#object">
- <parent href="http://path/to/activitystreams#activity"/>
- <parent href="http://path/to/activitystreams#object"/>
- <description>
-  Related Dublin Core Metadata (http://dublincore.org)
- </description>
-</element>
-
-Or this:
-
-<element id="dc" href="http://path/to/activitystreams#object">
- <link rel="parent" href="http://path/to/activitystreams#activity"/>
- <link rel="parent" href="http://path/to/activitystreams#object"/>
- <description>
-  Related Dublin Core Metadata (http://dublincore.org)
- </description>
-</element>
-
-There's also the problem that a single element may have different
-cardinalities in different contexts. You need to specify cardinality
-(and description) when you specify parent.
-
-This syntax would solve both problems without requiring anything new,
-but it's a bit repetitive:
-
-<element id="dc">
- <description>
-  Related Dublin Core Metadata (http://dublincore.org)
- </description>
-</element>
-
-<element id="dc-activity" name="id" href="http://path/to/activitystreams#activity"/>
-<element id="dc-object" name="id" href="http://path/to/activitystreams#activity"/>
+[TK]
 
 == Motivation ==
 
@@ -212,9 +172,9 @@ parameters. This information is directly related to the application
 being implemented (i.e. accounting, contact management, etc.) rather
 than the media type used in the representations.
 
-Instead of creating (and registering) and entirely new media type
-(i.e.  +application/accounting+), this standard allows representation
-authors to apply application-level semantic descriptions to elements
+Instead of creating (and registering) an entirely new media type (i.e.
++application/accounting+), representation authors can use an ALPS
+"profile" to apply application-level semantic descriptions to elements
 defined by the generic media type. This increases the specificity of
 the representation without reducing the generality of the media type.
 
