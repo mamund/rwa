@@ -110,7 +110,16 @@ function showHome(req, res) {
 }
 
 function showAbout(req, res) {
-    showResponse(req, res, '<h1>about</h1>', 200);
+    var t;
+
+    try {
+        t = templates('about.html');
+        t = t.replace(/{@host}/g, root);
+        showResponse(req, res, t, 200);
+    }
+    catch (ex) {
+        ShowError(req, res, 'Server Error', 500);
+    }
 }
 
 function showMessages(req, res) {
