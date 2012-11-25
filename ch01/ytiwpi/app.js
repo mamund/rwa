@@ -12,145 +12,142 @@ var messages = require('./messages.js');
 var port = (process.env.PORT || 1337);
 var root = '';
 
-var headers = {
+var htmlHeaders = {
     'Content-Type' : 'text/html'
 }
+var reHome = new RegExp('^\/$','i');
+var reAbout = new RegExp('^\/about$','i');
+var reList = new RegExp('^\/messages$','i');
+var reItem = new RegExp('^\/messages\/.*','i');
 
 function handler(req, res) {
     var segments, i, x, parts, flg;
 
-    // set globl root
+    // set root
     root = 'http://'+req.headers.host;
 
-    // simple routing
+    // parse incoming request URL
     parts = [];
     segments = req.url.split('/');
-    for(i=0,x=segments.length;i<x;i++) {
+    for(i=0, x=segments.length; i<x; i++) {
         if(segments[i]!=='') {
             parts.push(segments[i]);
         }
     }
 
-    // ignore these reqs
-    if(req.url==='/favicon.ico') {
-        return;
+    // handle routing
+    flg=false;
+
+    // home
+    if(reHome.test(req.url)) {
+        flg=true;
+        if(req.method==='GET') {
+            sendHome(req, res);
+        }
+        else {
+            sendHtmlError(req, res, 'Method Not Allowed', 405);
+        }
     }
 
-    // handle routing
-    flg = false;
-    switch(parts.length) {
-        case 0: // home
-            flg = true;
-            if(req.method==='GET') {
-                showHome(req, res);
-            }
-            else {
-                showError(req, res, 'Method Not Allowed', 405);
-            }
-            break;
-        case 1: // message list or about
-            if(flg===false && parts[0].toLowerCase()==='about') {
-                flg = true;
-                if(req.method==='GET') {
-                    showAbout(req, res);
-                }
-                else {
-                    showError(req, res, 'Method Not Allowed', 405);
-                }
-            }
-            if(flg===false && parts[0].toLowerCase()==='messages') {
-                flg = true;
-                switch(req.method) {
-                    case 'GET':
-                        showMessages(req, res);
-                        break;
-                    case 'POST':
-                        postMessage(req, res);
-                        break;
-                    default:
-                        showError(req, res, 'Method Not Allowed', 405);
-                }
-            }
-            
-            if(flg===false) {
-                showError(req, res, 'Page Not Found (1)', 404);
-            }
-            break;
-        case 2: // single message
-            if(flg===false && parts[0].toLowerCase()==='messages') {
-                flg=true;
-                if(req.method==='GET') {
-                    showMessage(req, res, parts[1]);
-                }
-                else {
-                    showError(req, res, 'Method Not Allowed', 405);
-                }
-            }
-            else {
-                showError(req, res, 'Page Not Found (2)', 404);
-            }
-            break;
-        default: // unknown request
-            showError(req, res, 'Page Not Found (x)', 404);
-            break;
+    // about
+    if(flg===false && reAbout.test(req.url)) {
+        flg=true;
+        if(req.method==='GET') {
+            sendAbout(req, res);
+        }
+        else {
+            sendHtmlError(req, res, 'Method Not Allowed', 405);
+        }
+    }
+
+    // list
+    if(flg===false && reList.test(req.url)) {
+        flg=true;
+        switch(req.method) {
+            case 'GET':
+                sendList(req, res);
+                break;
+            case 'POST':
+                postItem(req, res);
+                break;
+            default:
+                sendHtmlError(req, res, 'Method Not Allowed', 405);
+                break;
+        }
+    }
+
+    // item
+    if(flg===false && reItem.test(req.url)) {
+        flg=true;
+        if(req.method==='GET') {
+            sendItem(req, res, parts[1]);
+        }
+        else {
+            sendHtmlError(req, res, 'Method Not Allowed', 405);
+        }
+    }
+
+    // not found
+    if(flg===false) {
+        sendHtmlError(req, res, 'Page Not Found', 404);
     }
 }
 
-function showHome(req, res) {
+function sendHome(req, res) {
     var t;
 
     try {
         t = templates('home.html');
         t = t.replace(/{@host}/g, root);
-        showResponse(req, res, t, 200);
+        sendHtmlResponse(req, res, t, 200);
     }
     catch (ex) {
-        showError(req, res, 'Server Error', 500);
+        sendHtmlError(req, res, 'Server Error', 500);
     }
 }
 
-function showAbout(req, res) {
+function sendAbout(req, res) {
     var t;
 
     try {
         t = templates('about.html');
         t = t.replace(/{@host}/g, root);
-        showResponse(req, res, t, 200);
+        sendHtmlResponse(req, res, t, 200);
     }
     catch (ex) {
-        ShowError(req, res, 'Server Error', 500);
+        sendHtmlError(req, res, 'Server Error', 500);
     }
 }
 
-function showMessages(req, res) {
+function sendList(req, res) {
     var t;
 
     try {
         t = templates('list.html');
         t = t.replace(/{@host}/g, root);
         t = t.replace(/{@messages}/g, formatList(messages('list')));
-        showResponse(req, res, t, 200);
+        sendHtmlResponse(req, res, t, 200);
     }
     catch (ex) {
-        showError(req, res, 'Server Error', 500);
+        sendHtmlError(req, res, 'Server Error', 500);
     }
 }
 
-function showMessage(req, res, id) {
+function sendItem(req, res, id) {
     var t;
 
     try {
         t = templates('item.html');
         t = t.replace(/{@host}/g, root);
         t = t.replace(/{@msg}/g, formatItem(messages('item',id)));
-        showResponse(req, res, t, 200);
+        sendHtmlResponse(req, res, t, 200);
     }
     catch (ex) {
-        showError(req, res, 'Server Error', 500);
+        sendHtmlError(req, res, 'Server Error', 500);
     }
 }
 
-function postMessage(req, res) {
+function postItem(req, res) {
     var body;
 
     body = '';
@@ -165,7 +162,7 @@ function postMessage(req, res) {
             res.end();
         }
         catch (ex) {
-            showError(req, res, 'Server Error', 500);
+            sendHtmlError(req, res, 'Server Error', 500);
         }
     });
 }
@@ -197,13 +194,13 @@ function formatList(list) {
     return rtn;
 }
 
-function showError(req, res, title, code) {
+function sendHtmlError(req, res, title, code) {
     var body = '<h1>' + title + '<h1>';
-    showResponse(req, res, body, code);
+    sendHtmlResponse(req, res, body, code);
 }
 
-function showResponse(req, res, body, code) {
-    res.writeHead(code, headers);
+function sendHtmlResponse(req, res, body, code) {
+    res.writeHead(code, htmlHeaders);
     res.end(body);
 }
 
