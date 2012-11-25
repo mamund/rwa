@@ -55,7 +55,7 @@ function addItem(item) {
     item.id = makeId();
     item.date = new Date();
     fs.writeFileSync(folder+item.id, JSON.stringify(item));
-    return getList();
+    return getItem(item.id);
 }
 
 function makeId() {

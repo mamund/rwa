@@ -147,7 +147,7 @@ function sendAPIItem(req, res, id) {
 }
 
 function postAPIItem(req, res) {
-    var body;
+    var body, item, msg;
 
     body = '';
     req.on('data', function(chunk) {
@@ -155,8 +155,9 @@ function postAPIItem(req, res) {
     });
 
     req.on('end', function() {
-        messages('add', {message:JSON.parse(body).data[0].text});
-        res.writeHead(301, 'Redirect', {'Location' : root+ '/api/'});
+        msg = JSON.parse(body);
+        item = messages('add', {message : msg.template.data[0].value});
+        res.writeHead(201, 'Created', {'Location' : root+ '/api/'+ item.id});
         res.end();
     });
 }
