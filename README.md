@@ -12,6 +12,10 @@ CH05 - Domain Specific Designs
         <td>You type it, we post it HTML server</td>
     </tr>
     <tr>
+        <td>/ch02/ytiwpi/</td>
+        <td>You type it, we post it API server</td>
+    </tr>
+    <tr>
         <td>/ch05/server/</td>
         <td>Maze+XML Server</td>
     </tr>
