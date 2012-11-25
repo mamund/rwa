@@ -155,7 +155,7 @@ function postAPIItem(req, res) {
     });
 
     req.on('end', function() {
-        messages('add', JSON.parse(body).data[0]);
+        messages('add', {message:JSON.parse(body).data[0].text});
         res.writeHead(301, 'Redirect', {'Location' : root+ '/api/'});
         res.end();
     });
