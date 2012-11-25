@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Messages</title>
+    </head>
+    <body>
+        <h1>Messages</h1>
+        
+        <form action="{@host}/messages" method="post">
+            <input type="text" name="message" value="" 
+                required="true" maxlength="140"/>
+            <input type="submit" value="Post" />
+        </form>
+
+        <div>
+            {@messages}
+        </div>
+
+        <ul>
+            <li><a href="{@host}/">Home</a></li>
+            <li><a href="{@host}/about">About this site</a></li>
+        </ul>
+
+    </body>
+</html>
