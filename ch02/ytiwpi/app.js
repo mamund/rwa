@@ -227,7 +227,7 @@ function postItem(req, res) {
     req.on('end', function() {
         try {
             messages('add', querystring.parse(body));
-            res.writeHead(301,'Redirect', {'Location' : root+'/messages'});
+            res.writeHead(303,'See Other', {'Location' : root+'/messages'});
             res.end();
         }
         catch (ex) {
