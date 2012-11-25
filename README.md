@@ -8,6 +8,10 @@ CH05 - Domain Specific Designs
 ------------------------------
 <table>
     <tr>
+        <td>/ch01/ytiwpi/</td>
+        <td>You type it, we post it HTML server</td>
+    </tr>
+    <tr>
         <td>/ch05/server/</td>
         <td>Maze+XML Server</td>
     </tr>
