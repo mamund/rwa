@@ -5,8 +5,9 @@
  ***************************/
 
 var http = require('http');
+var querystring = require('querystring');
 var templates = require('./templates.js');
-//var messages = require('./messages.js');
+var messages = require('./messages.js');
 
 var port = (process.env.PORT || 1337);
 var root = '';
@@ -38,7 +39,7 @@ function handler(req, res) {
     // handle routing
     flg = false;
     switch(parts.length) {
-        case 0:
+        case 0: // home
             flg = true;
             if(req.method==='GET') {
                 showHome(req, res);
@@ -47,7 +48,7 @@ function handler(req, res) {
                 showError(req, res, 'Method Not Allowed', 405);
             }
             break;
-        case 1:
+        case 1: // message list or about
             if(flg===false && parts[0].toLowerCase()==='about') {
                 flg = true;
                 if(req.method==='GET') {
@@ -72,22 +73,38 @@ function handler(req, res) {
             }
             
             if(flg===false) {
-                showError(req, res, 'Page Not Found', 404);
+                showError(req, res, 'Page Not Found (1)', 404);
             }
             break;
-        default:
-            showError(req, res, 'Page Not Found', 404);
+        case 2: // single message
+            if(flg===false && parts[0].toLowerCase()==='messages') {
+                flg=true;
+                if(req.method==='GET') {
+                    showMessage(req, res, parts[1]);
+                }
+                else {
+                    showError(req, res, 'Method Not Allowed', 405);
+                }
+            }
+            else {
+                showError(req, res, 'Page Not Found (2)', 404);
+            }
+            break;
+        default: // unknown request
+            showError(req, res, 'Page Not Found (x)', 404);
             break;
     }
 }
 
 function showHome(req, res) {
-    var t = templates('home.html');
-    if(t!==undefined) {
+    var t;
+
+    try {
+        t = templates('home.html');
         t = t.replace(/{@host}/g, root);
         showResponse(req, res, t, 200);
     }
-    else {
+    catch (ex) {
         showError(req, res, 'Server Error', 500);
     }
 }
@@ -97,19 +114,78 @@ function showAbout(req, res) {
 }
 
 function showMessages(req, res) {
-    var t = templates('messages.html');
-    if(t!==undefined) {
+    var t;
+
+    try {
+        t = templates('list.html');
         t = t.replace(/{@host}/g, root);
+        t = t.replace(/{@messages}/g, formatList(messages('list')));
         showResponse(req, res, t, 200);
     }
-    else {
+    catch (ex) {
+        showError(req, res, 'Server Error', 500);
+    }
+}
+
+function showMessage(req, res, id) {
+    var t;
+
+    try {
+        t = templates('item.html');
+        t = t.replace(/{@host}/g, root);
+        t = t.replace(/{@msg}/g, formatItem(messages('item',id)));
+        showResponse(req, res, t, 200);
+    }
+    catch (ex) {
         showError(req, res, 'Server Error', 500);
     }
 }
 
 function postMessage(req, res) {
-    res.writeHead(301, 'Temporary Redirect',{'Location' : root+'/'});
-    res.end();
+    var body;
+
+    body = '';
+    req.on('data', function(chunk) {
+        body += chunk.toString();
+    });
+
+    req.on('end', function() {
+        try {
+            messages('add', querystring.parse(body));
+            res.writeHead(301,'Redirect', {'Location' : root+'/messages'});
+            res.end();
+        }
+        catch (ex) {
+            showError(req, res, 'Server Error', 500);
+        }
+    });
+}
+
+function formatItem(item) {
+    var rtn;
+
+    rtn = '<dl>\n';
+    rtn += '<dt>ID</dt><dd>'+item.id+'</dd>\n';
+    rtn += '<dt>DATE</dt><dd>'+item.date+'</dd>\n';
+    rtn += '<dt>MSG</dt><dd>'+item.message+'</dd>';
+    rtn += '</dl>\n';
+
+    return rtn;
+}
+
+function formatList(list) {
+    var i, x, rtn;
+
+    rtn = '<ul>\n';
+    for(i=0,x=list.length;i<x;i++) {
+        rtn += '<li>';
+        rtn += '<a href="'+root+'/messages/'+list[i].id+'" title="' + list[i].date+'">';
+        rtn += list[i].message;
+        rtn += '</a></li>\n';
+    }
+    rtn += '</ul>\n';
+
+    return rtn;
 }
 
 function showError(req, res, title, code) {
