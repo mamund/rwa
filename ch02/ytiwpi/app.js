@@ -116,6 +116,12 @@ function handler(req, res) {
             case 'GET':
                 sendAPIItem(req, res, parts[1]);
                 break;
+            case 'PUT':
+                updateAPIItem(req, res, parts[1]);
+                break;
+            case 'DELETE':
+                removeAPIItem(req, res, parts[1]);
+                break;
             default:
                 sendAPIError(req, res, 'Method Not Allowed', 405);
                 break;
@@ -143,6 +149,32 @@ function sendAPIItem(req, res, id) {
     t = templates('list.js');
     t = t.replace(/{@host}/g, root);
     t = t.replace(/{@list}/g, formatAPIItem(messages('item', id)));
+    sendAPIResponse(req, res, t, 200);
+}
+
+function updateAPIItem(req, res, id) {
+    var body, item, msg;
+
+    body = '';
+    req.on('data', function(chunk) {
+        body += chunk;
+    });
+
+    req.on('end', function() {
+        msg = JSON.parse(body);
+        item = messages('update', id, {message:msg.template.data[0].value});
+        res.writeHead(303, 'See Other', {'Location' : root + '/api/' + id});
+        res.end();
+    });
+}
+
+function removeAPIItem(req, res, id) {
+    var t;
+
+    messages('remove', id);
+    t = templates('list.js');
+    t = t.replace(/{@host}/g, root);
+    t = t.replace(/{@list}/g, formatAPIList(messages('list')));
     sendAPIResponse(req, res, t, 200);
 }
 
@@ -191,15 +223,15 @@ function sendAbout(req, res) {
 function sendList(req, res) {
     var t;
 
-    try {
+    //try {
         t = templates('list.html');
         t = t.replace(/{@host}/g, root);
         t = t.replace(/{@messages}/g, formatList(messages('list')));
         sendHtmlResponse(req, res, t, 200);
-    }
-    catch (ex) {
-        sendHtmlError(req, res, 'Server Error', 500);
-    }
+    //}
+    //catch (ex) {
+    //    sendHtmlError(req, res, 'Server Error', 500);
+    //}
 }
 
 function sendItem(req, res, id) {

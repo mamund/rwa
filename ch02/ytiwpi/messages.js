@@ -9,7 +9,7 @@ var folder = process.cwd()+'/data/';
 
 module.exports = main;
 
-function main(action, arg) {
+function main(action, arg1, arg2) {
     var rtn;
 
     switch(action) {
@@ -17,10 +17,16 @@ function main(action, arg) {
             rtn = getList();
             break;
         case 'item':
-            rtn = getItem(arg);
+            rtn = getItem(arg1);
             break;
         case 'add':
-            rtn = addItem(arg);
+            rtn = addItem(arg1);
+            break;
+        case 'update':
+            rtn = updateItem(arg1, arg2);
+            break;
+        case 'delete':
+            rtn = removeItem(arg1);
             break;
         default:
             break;
@@ -56,6 +62,18 @@ function addItem(item) {
     item.date = new Date();
     fs.writeFileSync(folder+item.id, JSON.stringify(item));
     return getItem(item.id);
+}
+
+function updateItem(id, item) {
+
+    // make mods
+    return getItem(id);
+}
+    
+function removeItem(id) {
+    
+    // remove from file
+    return getList();
 }
 
 function makeId() {
