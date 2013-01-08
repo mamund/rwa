@@ -19,6 +19,7 @@ var reHome = new RegExp('^\/$','i');
 var reAbout = new RegExp('^\/about$','i');
 var reList = new RegExp('^\/messages$','i');
 var reItem = new RegExp('^\/messages\/.*','i');
+var reScript = new RegExp('^\/script.js$','i');
 
 function handler(req, res) {
     var segments, i, x, parts, flg;
@@ -87,6 +88,17 @@ function handler(req, res) {
         }
     }
 
+    // script file
+    if(flg===false && reScript.test(req.url)) {
+        flg=true;
+        if(req.method==='GET') {
+            sendScript(req, res);
+        }
+        else {
+            sendHtmlError(req, res, 'Method Not Allowed', 405);
+        }
+    }
+    
     // not found
     if(flg===false) {
         sendHtmlError(req, res, 'Page Not Found', 404);
@@ -167,6 +179,20 @@ function postItem(req, res) {
     });
 }
 
+function sendScript(req, res) {
+    var t;
+  
+    try {
+        t = templates('script.js');
+        t = t.replace(/{@host}/g, root);
+        res.writeHead(200, {'Content-Type':'application/javascript'});
+        res.end(t);
+    }
+    catch (ex) {
+        sendHtmlError(req, res, 'Server Error', 500);
+    }
+  
+}
 function formatItem(item) {
     var rtn;
 

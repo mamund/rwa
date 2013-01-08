@@ -2,18 +2,25 @@
 <html>
     <head>
         <title>Message</title>
+        <!-- optional styling to this site -->
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
     </head>
     <body>
+      <div>
         <h1>Message</h1>
 
-        <div>
-            {@msg}
-        </div>
+        {@msg}
         
-        <ul>
-            <li><a href="{@host}/messages">Get started</a></li>
-            <li><a href="{@host}/about">About this site</a></li>
-            <li><a href="{@host}/">Home</a></li>
-        </ul>
+        <p class="links">
+            <a href="{@host}/messages">Get started</a>
+            <a href="{@host}/about">About this site</a>
+            <a href="{@host}/">Home</a>
+        </p>
+      </div>
+      
     </body>
+    <!-- optional enhancement -->
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{@host}/script.js"></script>
 </html>

@@ -2,18 +2,22 @@
 <html>
     <head>
         <title>Home</title>
+        <!-- optional styling to this site -->
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
     </head>
     <body>
-        <h1>Home</h1>
         <div>
-            <p>*THE EXCITING*</p>
-            <p>*THE AMAZING*</p>
-            <p><a href="{@host}/">http://youtypeitwepostit.com</a></p>
-            <p>*YOU TYPE IT, WE POST IT*</p>
+          <h1>You type it, we post it!</h1>
+          <p>Exciting! Amazing!</p>
+          
+          <p class="links">
+            <a href="{@host}/messages">Get started</a>
+            <a href="{@host}/about">About this site</a>
+          </p>
         </div>
-        <ul>
-            <li><a href="{@host}/messages">Get started</a></li>
-            <li><a href="{@host}/about">About this site</a></li>
-        </ul>
     </body>
+    <!-- optional enhancement -->
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="{@host}/script.js"></script>
 </html>
