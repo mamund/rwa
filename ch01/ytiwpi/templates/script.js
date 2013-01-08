@@ -4,7 +4,8 @@
  * 2012-11 (@mamund)
  * RESTful Web APIs (Richardson/Amundsen)
  */
- 
+
+// uses bootstrap for styling
 window.onload = function() {
   var elm, coll, i, x;
   
