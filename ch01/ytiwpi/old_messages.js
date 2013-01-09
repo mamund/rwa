@@ -1,7 +1,7 @@
 /*
  * read/write messages module
  * 2012-11 (mamund)
- * RESTful Web APIs (Richardson/Ruby/Amundsen)
+ * RESTful Web APIs (Richardson/Amundsen)
  */ 
 
 var fs = require('fs');
@@ -9,7 +9,7 @@ var folder = process.cwd()+'/data/';
 
 module.exports = main;
 
-function main(action, arg1, arg2) {
+function main(action, arg) {
     var rtn;
 
     switch(action) {
@@ -17,16 +17,10 @@ function main(action, arg1, arg2) {
             rtn = getList();
             break;
         case 'item':
-            rtn = getItem(arg1);
+            rtn = getItem(arg);
             break;
         case 'add':
-            rtn = addItem(arg1);
-            break;
-        case 'update':
-            rtn = updateItem(arg1, arg2);
-            break;
-        case 'remove':
-            rtn = removeItem(arg1);
+            rtn = addItem(arg);
             break;
         default:
             break;
@@ -61,20 +55,6 @@ function addItem(item) {
     item.id = makeId();
     item.date = new Date();
     fs.writeFileSync(folder+item.id, JSON.stringify(item));
-    return getItem(item.id);
-}
-
-function updateItem(id, item) {
-    var current;
-
-    current = getItem(id);
-    current.message = item.message;
-    fs.writeFileSync(folder+id, JSON.stringify(current));
-    return getItem(id);
-}
-    
-function removeItem(id) {
-    fs.unlinkSync(folder+id);
     return getList();
 }
 
