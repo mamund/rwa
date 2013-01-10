@@ -176,13 +176,16 @@ function sendHtmlAbout(req, res) {
 }
 
 function sendHtmlList(req, res) {
-    var t;
+    var t, rtn, list, lmDate;
 
     try {
+        rtn = messages('list');
+        list = rtn.list;
+        lmDate = rtn.lastDate;
         t = templates('list.html');
         t = t.replace(/{@host}/g, root);
-        t = t.replace(/{@messages}/g, formatHtmlList(messages('list')));
-        sendHtmlResponse(req, res, t, 200);
+        t = t.replace(/{@messages}/g, formatHtmlList(list));
+        sendHtmlResponse(req, res, t, 200, new Date(lmDate).toGMTString());
     }
     catch (ex) {
         sendHtmlError(req, res, 'Server Error', 500);
@@ -190,13 +193,16 @@ function sendHtmlList(req, res) {
 }
 
 function sendHtmlItem(req, res, id) {
-    var t;
+    var t, rtn, item, lmDate;
 
     try {
+        rtn = messages('item', id);
+        item = rtn.item;
+        lmDate = rtn.lastDate;
         t = templates('item.html');
         t = t.replace(/{@host}/g, root);
-        t = t.replace(/{@msg}/g, formatHtmlItem(messages('item',id)));
-        sendHtmlResponse(req, res, t, 200);
+        t = t.replace(/{@msg}/g, formatHtmlItem(item));
+        sendHtmlResponse(req, res, t, 200, new Date(lmDate).toGMTString());
     }
     catch (ex) {
         sendHtmlError(req, res, 'Server Error', 500);
@@ -204,7 +210,7 @@ function sendHtmlItem(req, res, id) {
 }
 
 function postHtmlItem(req, res) {
-    var body, item;
+    var body, item, rtn, lmDate;
 
     body = '';
     req.on('data', function(chunk) {
@@ -213,7 +219,7 @@ function postHtmlItem(req, res) {
 
     req.on('end', function() {
         try {
-            item = messages('add', querystring.parse(body));
+            item = messages('add', querystring.parse(body)).item;
             res.writeHead(303,'See Other', {'Location' : root+'/messages/'+item.id});
             res.end();
         }
@@ -239,13 +245,18 @@ function sendScript(req, res) {
 }
 
 function sendAPIList(req, res) {
-    var t;
+    var t, rtn, list, lmDate;
 
     try {
+        rtn = messages('list');
+        list = rtn.list;
+        lmDate = rtn.lastDate;
+        
         t = templates('collection.js');
         t = t.replace(/{@host}/g, root);
-        t = t.replace(/{@list}/g, formatAPIList(messages('list')));
-        sendAPIResponse(req, res, t, 200);
+        t = t.replace(/{@list}/g, formatAPIList(list));
+        
+        sendAPIResponse(req, res, t, 200, new Date(lmDate).toGMTString());
     }
     catch (ex) {
         sendAPIError(req, res, 'Server Error', 500);
@@ -253,13 +264,18 @@ function sendAPIList(req, res) {
 }
 
 function sendAPIItem(req, res, id) {
-    var t;
+    var t, rtn, item, lmDate;
 
     try {
+        rtn = messages('item', id);
+        item = rtn.item;
+        lmDate = rtn.lastDate;
+
         t = templates('collection.js');
         t = t.replace(/{@host}/g, root);
-        t = t.replace(/{@list}/g, formatAPIItem(messages('item', id)));
-        sendAPIResponse(req, res, t, 200);
+        t = t.replace(/{@list}/g, formatAPIItem(item));
+        
+        sendAPIResponse(req, res, t, 200, new DAte(lmDate).toGMTString());
     }
     catch(ex) {
         sendAPIError(req, res, 'Server Error', 500);
@@ -277,9 +293,8 @@ function updateAPIItem(req, res, id) {
     req.on('end', function() {
         try {
             msg = JSON.parse(body);
-            item = messages('update', id, {message:msg.template.data[0].value});
-            res.writeHead(303, 'See Other', {'Location': root + '/api/' + id});
-            res.end();
+            item = messages('update', id, {message:msg.template.data[0].value}).item;
+            sendAPIItem(req, res, id);
         }
         catch(ex) {
             sendAPIError(req, res, 'Server Error', 500);
@@ -314,7 +329,7 @@ function postAPIItem(req, res) {
     req.on('end', function() {
         try {
             msg = JSON.parse(body);
-            item = messages('add', {message:msg.template.data[0].value});
+            item = messages('add', {message:msg.template.data[0].value}).item;
             res.writeHead(201, 'Created', {'Location' : root + '/api/' + item.id});
             res.end();
         }
@@ -383,13 +398,19 @@ function sendHtmlError(req, res, title, code) {
     sendHtmlResponse(req, res, body, code);
 }
 
-function sendHtmlResponse(req, res, body, code) {
-    res.writeHead(code, htmlHeaders);
+function sendHtmlResponse(req, res, body, code, lmDate) {
+    res.writeHead(code, 
+            {'Content-Type' : 'text/html',
+            'ETag' : generateETag(body),
+            'Last-Modified' : lmDate});
     res.end(body);
 }
 
-function sendAPIResponse(req, res, body, code) {
-    res.writeHead(code, {"Content-Type" : "application/vnd.collection+json", "ETag" : generateETag(body)});
+function sendAPIResponse(req, res, body, code, lmDate) {
+    res.writeHead(code, 
+        {"Content-Type" : "application/vnd.collection+json", 
+        "ETag" : generateETag(body),
+        "Last-Modified" : lmDate});
     res.end(body);
 }
 

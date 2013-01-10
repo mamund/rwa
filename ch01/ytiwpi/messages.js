@@ -35,26 +35,38 @@ function main(action, arg1, arg2) {
 }
 
 function getList(arg) {
-    var coll, item, list, i, x;
+    var coll, item, list, i, x, lastDate;
 
+    lastDate = null;
     coll = [];
     list = fs.readdirSync(folder);
     for(i=0,x=list.length;i<x;i++) {
         item = JSON.parse(fs.readFileSync(folder+list[i]));
         if(arg) {
             if(item.title.indexOf(arg)!=-1) {
+                if(lastDate===null || lastDate<new Date(item.date)) {
+                    lastDate = new Date(item.date);
+                }
                 coll.push(item);
             }
         }
         else {
+            if(lastDate===null || lastDate<new Date(item.date)) {
+                lastDate = new Date(item.date);
+            }
             coll.push(item);
         }
     }
-    return coll;
+    return {list:coll, lastDate:lastDate};
 }
 
 function getItem(id) {
-    return JSON.parse(fs.readFileSync(folder+id));
+    var item, lastDate;
+
+    item = JSON.parse(fs.readFileSync(folder+id));
+    lastDate = new Date(item.date);
+
+    return {item:item, lastDate:lastDate};
 }
 
 function addItem(item) {
@@ -69,6 +81,7 @@ function updateItem(id, item) {
 
     current = getItem(id);
     current.message = item.message;
+    current.date = new Date();
     fs.writeFileSync(folder+id, JSON.stringify(current));
     return getItem(id);
 }

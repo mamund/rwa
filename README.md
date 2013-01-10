@@ -8,12 +8,8 @@ CH05 - Domain Specific Designs
 ------------------------------
 <table>
     <tr>
-        <td>/ch01/ytiwpi/</td>
-        <td>You type it, we post it HTML server</td>
-    </tr>
-    <tr>
-        <td>/ch02/ytiwpi/</td>
-        <td>You type it, we post it API server</td>
+        <td>/ch01/</td>
+        <td>You type it, we post it Web & API server (and related files)</td>
     </tr>
     <tr>
         <td>/ch05/server/</td>
