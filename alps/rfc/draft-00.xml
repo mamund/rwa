@@ -92,17 +92,16 @@
         </section>
         <section title="Identifying an ALPS Document">
             <t>
-                ALPS vocabularies are identified by a unique URI. This URI can
-                be in the form of a resolvable URL (i.e. 
-                <spanx style="verb">http://example.org/alps/accounting</spanx>)
-                or it can be in the form of a URN (i.e. TK).
+                ALPS vocabularies are identified by a unique URL. 
+                The URL SHOULD point to a valid ALPS document. The URL MAY 
+                point to a human-readable document that describes the ALPS
+                specification for the identified use case.  
 
-                If the identifier is a URL, it SHOULD point to a valid ALPS
-                document. the URL MAY point to a human-readable document that describes the ALPS
-                specification for the identified use case.  If the identifier is a URN, it
-                SHOULD NOT be treated as a resolvable identifer and instead SHOULD be treated
-                as a unique name for the identified use case. 
-
+                Although the URI SHOULD point to a resource that contains a 
+                definition of the semantics of the relation type, clients 
+                SHOULD NOT automatically access that resource to avoid
+                overburdening its server.
+                
                 [I almost feel like we should have two URLs, an ALPS permalink
                 and a human-readable doc. Or should we suggest the use of content
                 negotiation? -leonardr]
