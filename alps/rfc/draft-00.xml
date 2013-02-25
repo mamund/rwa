@@ -424,6 +424,11 @@
                     reference.
                 </t>
             </section>
+            <section title="rt">
+                <t>
+                    [MCA: add support for @rt in ALPS elements]
+                </t>
+            </section>
             <section title="type">
                 <t>
                     Indicates the type of representation control to which the
