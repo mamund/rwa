@@ -333,8 +333,11 @@
                     <t>cardinality</t>
                     <t>child</t>
                     <t>description</t>
-                    <t>ame</t>
+                    <t>name</t>
                 </list>
+            </section>
+            <section title="ext">
+                [MCA: &lt;ext name="{uri}" value="" /&gt;]
             </section>
             <section title="name">
                 <t>
@@ -422,11 +425,6 @@
                     A relative URL with a fragment identifier (e.g. "#customer") refers to
                     an element within the ALPS document containing the
                     reference.
-                </t>
-            </section>
-            <section title="default_rt">
-                <t>
-                    [MCA: add support for @rt in ALPS elements]
                 </t>
             </section>
             <section title="type">
