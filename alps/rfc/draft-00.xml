@@ -424,7 +424,7 @@
                     reference.
                 </t>
             </section>
-            <section title="rt">
+            <section title="default_rt">
                 <t>
                     [MCA: add support for @rt in ALPS elements]
                 </t>

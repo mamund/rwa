@@ -82,9 +82,10 @@ Table of Contents
        5.2.7.  name . . . . . . . . . . . . . . . . . . . . . . . . .  7
        5.2.8.  href . . . . . . . . . . . . . . . . . . . . . . . . .  7
        5.2.9.  id . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-       5.2.10. type . . . . . . . . . . . . . . . . . . . . . . . . .  8
-       5.2.11. version  . . . . . . . . . . . . . . . . . . . . . . .  8
-     5.3.  XML Representation . . . . . . . . . . . . . . . . . . . .  8
+       5.2.10. default_rt . . . . . . . . . . . . . . . . . . . . . .  8
+       5.2.11. type . . . . . . . . . . . . . . . . . . . . . . . . .  8
+       5.2.12. version  . . . . . . . . . . . . . . . . . . . . . . .  8
+     5.3.  XML Representation . . . . . . . . . . . . . . . . . . . .  9
      5.4.  JSON Representation  . . . . . . . . . . . . . . . . . . .  9
      5.5.  RDFs+OWL Representation  . . . . . . . . . . . . . . . . .  9
    6.  Instructions on Applying ALPS to Existing Media Types  . . . .  9
@@ -96,11 +97,10 @@ Table of Contents
      7.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . .  9
      7.2.  Searching the Registry . . . . . . . . . . . . . . . . . .  9
      7.3.  Contributing to the Registry . . . . . . . . . . . . . . .  9
-   8.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . .  9
+   8.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
    9.  Security Considerations  . . . . . . . . . . . . . . . . . . . 10
    10. Internationalisation Considerations  . . . . . . . . . . . . . 10
    11. Normative References . . . . . . . . . . . . . . . . . . . . . 10
-
 
 
 
@@ -406,7 +406,11 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    A relative URL with a fragment identifier (e.g. "#customer") refers
    to an element within the ALPS document containing the reference.
 
-5.2.10.  type
+5.2.10.  default_rt
+
+   [MCA: add support for @rt in ALPS elements]
+
+5.2.11.  type
 
    Indicates the type of representation control to which the +element+
    is applied.  This MUST appear for each +element+.  Four values are
@@ -432,15 +436,11 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    \[ How about just idempotent and nonidempotent? -leonardr \]
 
-5.2.11.  version
+5.2.12.  version
 
    Indicates the version number of the ALPS document.  This SHOULD
    appear as a property of the +alps+ property.  Currently the only
    valid value is '1.0'.  If no value appears, then it SHOULD be set to
-   '1.0'.
-
-5.3.  XML Representation
-
 
 
 
@@ -448,6 +448,10 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 8]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
+
+   '1.0'.
+
+5.3.  XML Representation
 
 5.4.  JSON Representation
 
@@ -491,10 +495,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 7.3.  Contributing to the Registry
 
-8.  IANA Considerations
-
-   [[anchor32: INSERT TEXT]]
-
 
 
 
@@ -505,13 +505,17 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 9]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
+8.  IANA Considerations
+
+   [[anchor33: INSERT TEXT]]
+
 9.  Security Considerations
 
-   [[anchor34: INSERT TEXT]]
+   [[anchor35: INSERT TEXT]]
 
 10.  Internationalisation Considerations
 
-   [[anchor36: INSERT TEXT (CONSIDER RFC 5987)]]
+   [[anchor37: INSERT TEXT (CONSIDER RFC 5987)]]
 
 11.  Normative References
 
@@ -533,10 +537,6 @@ Authors' Addresses
 
    EMail: leonardr@segfault.org
    URI:   http://crummy.com
-
-
-
-
 
 
 
