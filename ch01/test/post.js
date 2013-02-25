@@ -1,8 +1,9 @@
 {
-    "template" : {
-        "data" : [
-            {"name" : "text", "value" : "testing"},
-            {"name" : "junk", "value" : ""}
-        ]
-    }
+  "template" : {
+    "data" : [
+      {"name" : "text", "value" : "testing"},
+      {"name" : "junk", "value" : ""}
+    ]
+  }
 }
+

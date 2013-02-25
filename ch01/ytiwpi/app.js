@@ -275,7 +275,7 @@ function sendAPIItem(req, res, id) {
         t = t.replace(/{@host}/g, root);
         t = t.replace(/{@list}/g, formatAPIItem(item));
         
-        sendAPIResponse(req, res, t, 200, new DAte(lmDate).toGMTString());
+        sendAPIResponse(req, res, t, 200, new Date(lmDate).toGMTString());
     }
     catch(ex) {
         sendAPIError(req, res, 'Server Error', 500);

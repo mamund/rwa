@@ -1,7 +1,7 @@
 {
-    "template" : {
-        "data" : [
-            {"name" : "text", "value" : "tasting"}
-        ]
-    }
+  "template" : {
+    "data" : [
+      {"name" : "text", "value" : "tasting"}
+    ]
+  }
 }

@@ -1,0 +1,604 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Put Your Internet Draft Title
+    Here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Put Your Internet Draft Title
+    Here">
+<meta name="keywords" content="template">
+<meta name="generator" content="xml2rfc v1.36 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Internet Engineering Task Force</td><td class="header">E. Davies, Ed.</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">Folly Consulting</td></tr>
+<tr><td class="header">Intended status: Informational</td><td class="header">March 2007</td></tr>
+<tr><td class="header">Expires: September 2, 2007</td><td class="header">&nbsp;</td></tr>
+</table></td></tr></table>
+<h1><br />Put Your Internet Draft Title
+    Here<br />draft-ietf-xml2rfc-template-05</h1>
+
+<h3>Status of this Memo</h3>
+<p>
+By submitting this Internet-Draft,
+each author represents that any applicable patent or other IPR claims of which
+he or she is aware have been or will be disclosed,
+and any of which he or she becomes aware will be disclosed,
+in accordance with Section&nbsp;6 of BCP&nbsp;79.</p>
+<p>
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF), its areas, and its working groups.
+Note that other groups may also distribute working documents as
+Internet-Drafts.</p>
+<p>
+Internet-Drafts are draft documents valid for a maximum of six months
+and may be updated, replaced, or obsoleted by other documents at any time.
+It is inappropriate to use Internet-Drafts as reference material or to cite
+them other than as &ldquo;work in progress.&rdquo;</p>
+<p>
+The list of current Internet-Drafts can be accessed at
+<a href='http://www.ietf.org/ietf/1id-abstracts.txt'>http://www.ietf.org/ietf/1id-abstracts.txt</a>.</p>
+<p>
+The list of Internet-Draft Shadow Directories can be accessed at
+<a href='http://www.ietf.org/shadow.html'>http://www.ietf.org/shadow.html</a>.</p>
+<p>
+This Internet-Draft will expire on September 2, 2007.</p>
+
+<h3>Abstract</h3>
+
+<p>Insert an abstract: MANDATORY. This template is for creating an
+      Internet Draft.
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Introduction<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">1.1.</a>&nbsp;
+Requirements Language<br />
+<a href="#simple_list">2.</a>&nbsp;
+Simple List<br />
+<a href="#anchor3">3.</a>&nbsp;
+Figures<br />
+<a href="#anchor4">4.</a>&nbsp;
+Subsections and Tables<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">4.1.</a>&nbsp;
+A Subsection<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">4.2.</a>&nbsp;
+Tables<br />
+<a href="#nested_lists">5.</a>&nbsp;
+More about Lists<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">5.1.</a>&nbsp;
+Numbering Lists across Lists and Sections<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">5.2.</a>&nbsp;
+Where the List Numbering Continues<br />
+<a href="#codeExample">6.</a>&nbsp;
+Example of Code or MIB Module To Be Extracted<br />
+<a href="#Acknowledgements">7.</a>&nbsp;
+Acknowledgements<br />
+<a href="#IANA">8.</a>&nbsp;
+IANA Considerations<br />
+<a href="#Security">9.</a>&nbsp;
+Security Considerations<br />
+<a href="#rfc.references1">10.</a>&nbsp;
+References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references1">10.1.</a>&nbsp;
+Normative References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">10.2.</a>&nbsp;
+Informative References<br />
+<a href="#app-additional">Appendix&nbsp;A.</a>&nbsp;
+Additional Stuff<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+<a href="#rfc.copyright">&#167;</a>&nbsp;
+Intellectual Property and Copyright Statements<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Introduction</h3>
+
+<p>The original specification of xml2rfc format is in <a class='info' href='#RFC2629'>RFC&nbsp;2629<span> (</span><span class='info'>Rose, M., &ldquo;Writing I-Ds and RFCs using XML,&rdquo; June&nbsp;1999.</span><span>)</span></a> [RFC2629].
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1.1"></a><h3>1.1.&nbsp;
+Requirements Language</h3>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <a class='info' href='#RFC2119'>RFC 2119<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a> [RFC2119].
+</p>
+<a name="simple_list"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Simple List</h3>
+
+<p>List styles: 'empty', 'symbols', 'letters', 'numbers', 'hanging',
+      'format'.
+</p>
+<p></p>
+<ul class="text">
+<li>First bullet
+</li>
+<li>Second bullet
+</li>
+</ul><p> You can write text here as well.
+</p>
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Figures</h3>
+
+<p>Figures should not exceed 69 characters wide to allow for the indent
+      of sections.
+</p><br /><hr class="insert" />
+<a name="xml_happy"></a>
+
+<p style='text-align: center'>Preamble text - can be omitted or empty.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
++-----------------------+
+| Use XML, be Happy :-) |
+|_______________________|
+</pre></div>
+<p style='text-align: center'>Cross-references allowed in pre- and postamble. <a class='info' href='#min_ref'>[min_ref]<span> (</span><span class='info'>authSurName, authInitials., &ldquo;Minimal Reference,&rdquo; 2006.</span><span>)</span></a>.
+</p><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Figure&nbsp;1&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+<p>The CDATA means you don't need to escape meta-characters (especially
+      &lt;&nbsp;(&amp;lt;) and &amp;&nbsp;(&amp;amp;)) but is not essential.
+      Figures may also have a title attribute but it won't be displayed unless
+      there is also an anchor. White space, both horizontal and vertical, is
+      significant in figures even if you don't use CDATA.
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Subsections and Tables</h3>
+
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+A Subsection</h3>
+
+<p>By default 3 levels of nesting show in table of contents but that
+        can be adjusted with the value of the "tocdepth" processing
+        instruction.
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
+Tables</h3>
+
+<p>.. are very similar to figures:
+</p><br /><hr class="insert" />
+<a name="table_example"></a>
+
+<p style='text-align: center'>Tables use ttcol to define column headers and widths.
+          Every cell then has a "c" element for its content.
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="center"><col align="center">
+<tr><th align="center">ttcol #1</th><th align="center">ttcol #2</th></tr>
+<tr>
+<td align="center">c #1</td>
+<td align="center">c #2</td>
+</tr>
+<tr>
+<td align="center">c #3</td>
+<td align="center">c #4</td>
+</tr>
+<tr>
+<td align="center">c #5</td>
+<td align="center">c #6</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p style='text-align: center'>which is a very simple example.
+</p><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Table 1: A Very Simple Table&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+<a name="nested_lists"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+More about Lists</h3>
+
+<p>Lists with 'hanging labels': the list item is indented the amount of
+      the hangIndent: </p>
+<blockquote class="text"><dl>
+<dt>short</dt>
+<dd>With a label shorter than the hangIndent.
+</dd>
+<dt>fantastically long label</dt>
+<dd>With a label longer than the
+          hangIndent.
+</dd>
+<dt>vspace_trick</dt>
+<dd>Forces the new
+          item to start on a new line.
+</dd>
+</dl></blockquote>
+
+<p>Simulating more than one paragraph in a list item using
+      &lt;vspace&gt;: </p>
+<blockquote class="text"><dl>
+<dt>a.</dt>
+<dd>First, a short item.
+</dd>
+<dt>b.</dt>
+<dd>Second, a longer list item.<br />
+ And
+          something that looks like a separate pararaph..
+</dd>
+</dl></blockquote>
+
+<p>Simple indented paragraph using the "empty" style: </p>
+<blockquote class="text">
+<p>The quick, brown fox jumped over the lazy dog and lived to fool
+          many another hunter in the great wood in the west.
+</p>
+</blockquote>
+
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+Numbering Lists across Lists and Sections</h3>
+
+<p>Numbering items continuously although they are in separate
+        &lt;list&gt; elements, maybe in separate sections using the "format"
+        style and a "counter" variable.
+</p>
+<p>First list: </p>
+<blockquote class="text"><dl>
+<dt>R1</dt>
+<dd>#1
+</dd>
+<dt>R2</dt>
+<dd>#2
+</dd>
+<dt>R3</dt>
+<dd>#3
+</dd>
+</dl></blockquote><p> Specify the indent explicitly so that all the items line up
+        nicely.
+</p>
+<p>Second list: </p>
+<blockquote class="text"><dl>
+<dt>R4</dt>
+<dd>#4
+</dd>
+<dt>R5</dt>
+<dd>#5
+</dd>
+<dt>R6</dt>
+<dd>#6
+</dd>
+</dl></blockquote>
+
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
+Where the List Numbering Continues</h3>
+
+<p>List continues here.
+</p>
+<p>Third list: </p>
+<blockquote class="text"><dl>
+<dt>R7</dt>
+<dd>#7
+</dd>
+<dt>R8</dt>
+<dd>#8
+</dd>
+<dt>R9</dt>
+<dd>#9
+</dd>
+<dt>R10</dt>
+<dd>#10
+</dd>
+</dl></blockquote><p> The end of the list.
+</p>
+<a name="codeExample"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+Example of Code or MIB Module To Be Extracted</h3>
+
+<p>The &lt;artwork&gt; element has a number of extra attributes
+        that can be used to substitute a more aesthetically pleasing rendition
+        into HTML output while continuing to use the ASCII art version in the
+        text and nroff outputs (see the xml2rfc README for details). It also
+        has a "type" attribute. This is currently ignored except in the case
+        'type="abnf"'. In this case the "artwork" is expected to contain a
+        piece of valid Augmented Backus-Naur Format (ABNF) grammar. This will
+        be syntax checked by xml2rfc and any errors will cause a fatal error
+        if the "strict" processing instruction is set to "yes". The ABNF will
+        also be colorized in HTML output to highlight the syntactic
+        components. Checking of additional "types" may be provided in future
+        versions of xml2rfc.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+
+/**** an example C program */
+
+#include &lt;stdio.h&gt;
+
+void
+main(int argc, char *argv[])
+{
+    int i;
+
+    printf("program arguments are:\n");
+    for (i = 0; i &lt; argc; i++) {
+        printf("%d: \"%s\"\n", i, argv[i]);
+    }
+
+    exit(0);
+} /* main */
+
+/* end of file */
+
+</pre></div>
+<a name="Acknowledgements"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.7"></a><h3>7.&nbsp;
+Acknowledgements</h3>
+
+<p>This template was derived from an initial version written by Pekka
+      Savola and contributed by him to the xml2rfc project.
+</p>
+<p>This document is part of a plan to make xml2rfc indispensable <a class='info' href='#DOMINATION'>[DOMINATION]<span> (</span><span class='info'>Mad Dominators, Inc., &ldquo;Ultimate Plan for Taking Over the World,&rdquo; 1984.</span><span>)</span></a>.
+</p>
+<a name="IANA"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8"></a><h3>8.&nbsp;
+IANA Considerations</h3>
+
+<p>This memo includes no request to IANA.
+</p>
+<p>All drafts are required to have an IANA considerations section (see
+      <a class='info' href='#I-D.narten-iana-considerations-rfc2434bis'>the update of
+      RFC 2434<span> (</span><span class='info'>Narten, T. and H. Alvestrand, &ldquo;Guidelines for Writing an IANA Considerations Section in RFCs,&rdquo; March&nbsp;2008.</span><span>)</span></a> [I&#8209;D.narten&#8209;iana&#8209;considerations&#8209;rfc2434bis] for a guide). If the draft does not require IANA to do
+      anything, the section contains an explicit statement that this is the
+      case (as above). If there are no requirements for IANA, the section will
+      be removed during conversion into an RFC by the RFC Editor.
+</p>
+<a name="Security"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.9"></a><h3>9.&nbsp;
+Security Considerations</h3>
+
+<p>All drafts are required to have a security considerations section.
+      See <a class='info' href='#RFC3552'>RFC 3552<span> (</span><span class='info'>Rescorla, E. and B. Korver, &ldquo;Guidelines for Writing RFC Text on Security Considerations,&rdquo; July&nbsp;2003.</span><span>)</span></a> [RFC3552] for a guide.
+</p>
+<a name="rfc.references"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10"></a><h3>10.&nbsp;
+References</h3>
+
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>10.1.&nbsp;Normative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="min_ref">[min_ref]</a></td>
+<td class="author-text">authSurName, authInitials., &ldquo;Minimal Reference,&rdquo; 2006.</td></tr>
+</table>
+
+<a name="rfc.references2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>10.2.&nbsp;Informative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="DOMINATION">[DOMINATION]</a></td>
+<td class="author-text">Mad Dominators, Inc., &ldquo;<a href="http://www.example.com/dominator.html">Ultimate Plan for Taking Over the World</a>,&rdquo; 1984.</td></tr>
+<tr><td class="author-text" valign="top"><a name="I-D.narten-iana-considerations-rfc2434bis">[I-D.narten-iana-considerations-rfc2434bis]</a></td>
+<td class="author-text">Narten, T. and H. Alvestrand, &ldquo;<a href="http://tools.ietf.org/html/draft-narten-iana-considerations-rfc2434bis-09">Guidelines for Writing an IANA Considerations Section in RFCs</a>,&rdquo; draft-narten-iana-considerations-rfc2434bis-09 (work in progress), March&nbsp;2008 (<a href="http://www.ietf.org/internet-drafts/draft-narten-iana-considerations-rfc2434bis-09.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2629">[RFC2629]</a></td>
+<td class="author-text"><a href="mailto:mrose@not.invisible.net">Rose, M.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2629">Writing I-Ds and RFCs using XML</a>,&rdquo; RFC&nbsp;2629, June&nbsp;1999 (<a href="http://www.rfc-editor.org/rfc/rfc2629.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2629.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2629.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3552">[RFC3552]</a></td>
+<td class="author-text">Rescorla, E. and B. Korver, &ldquo;<a href="http://tools.ietf.org/html/rfc3552">Guidelines for Writing RFC Text on Security Considerations</a>,&rdquo; BCP&nbsp;72, RFC&nbsp;3552, July&nbsp;2003 (<a href="http://www.rfc-editor.org/rfc/rfc3552.txt">TXT</a>).</td></tr>
+</table>
+
+<a name="app-additional"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Additional Stuff</h3>
+
+<p>This becomes an Appendix.
+</p>
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Elwyn Davies (editor)</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Folly Consulting</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Soham,   </td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">UK</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+44 7889 488 335</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:elwynd@dial.pipex.com">elwynd@dial.pipex.com</a></td></tr>
+</table>
+<a name="rfc.copyright"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Full Copyright Statement</h3>
+<p class='copyright'>
+Copyright &copy; The IETF Trust (2007).</p>
+<p class='copyright'>
+This document is subject to the rights,
+licenses and restrictions contained in BCP&nbsp;78,
+and except as set forth therein,
+the authors retain all their rights.</p>
+<p class='copyright'>
+This document and the information contained herein are provided
+on an &ldquo;AS IS&rdquo; basis and THE CONTRIBUTOR,
+THE ORGANIZATION HE/SHE REPRESENTS
+OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE IETF TRUST
+AND THE INTERNET ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT
+THE USE OF THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
+PURPOSE.</p>
+<h3>Intellectual Property</h3>
+<p class='copyright'>
+The IETF takes no position regarding the validity or scope of any
+Intellectual Property Rights or other rights that might be claimed
+to pertain to the implementation or use of the technology
+described in this document or the extent to which any license
+under such rights might or might not be available; nor does it
+represent that it has made any independent effort to identify any
+such rights.
+Information on the procedures with respect to
+rights in RFC documents can be found in BCP&nbsp;78 and BCP&nbsp;79.</p>
+<p class='copyright'>
+Copies of IPR disclosures made to the IETF Secretariat and any
+assurances of licenses to be made available,
+or the result of an attempt made to obtain a general license or
+permission for the use of such proprietary rights by implementers or
+users of this specification can be obtained from the IETF on-line IPR
+repository at <a href='http://www.ietf.org/ipr'>http://www.ietf.org/ipr</a>.</p>
+<p class='copyright'>
+The IETF invites any interested party to bring to its attention
+any copyrights,
+patents or patent applications,
+or other
+proprietary rights that may cover technology that may be required
+to implement this standard.
+Please address the information to the IETF at <a href='mailto:ietf-ipr@ietf.org'>ietf-ipr@ietf.org</a>.</p>
+</body></html>
