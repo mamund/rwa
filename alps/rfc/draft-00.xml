@@ -114,12 +114,17 @@
         </section>
         <section title="ALPS Documents">
             <t>
-                ALPS Documents contain a machine-readable collection of
-                semantic descriptors and their human-readable details. An ALPS document
-                can be represented in either XML or JSON format. This section
-                identifies the general elements and properties of an ALPS document, their
-                meaning, and their use. Additional subsections provide specific details
+                ALPS Documents contain a machine-readable
+                collection of identifying strings and their human-readable
+                explanations. An ALPS document can be represented in either 
+                XML or JSON format. This section identifies the general 
+                elements and properties of an ALPS document, their meaning, 
+                and their use. Additional subsections provide specific details
                 on how to construct a valid ALPS document in XML and in JSON format.
+            </t>
+            <t>
+                [LR: need a section that syas URL can be used as an abstract
+                semantic type]
             </t>
             <section title="Compliance">
                 <t>
@@ -473,74 +478,56 @@
         </section>
         <section title="JSON Representation">
         </section>
+        <section title="RDFs+OWL Representation">
+            [MCA: added here as a reminder.]
+        </section>
     </section>
-        <section title="Applying ALPS to Existing Media Types">
+        <section title="Instructions on Applying ALPS to Existing Media Types">
             <t>
                 ALPS documents can be applied to many existing hypermedia
-                types. Below
-                are a set of instructions on how to apply ALPS information to
-                existing
-                media types.
+                types. Below are a set of instructional examples on how to 
+                apply ALPS information to existing media types.
+                These examples are informative. The most up-to-date
+                guidance on applying ALPS documents to existing media types are
+                available at the official ALPS Web site (http://alps.io).
             </t>
             <t>
-                [There's an issue of policy here. I've written two paragraphs.
-                Each
-                has its own problems. I think I have to vote for #1. -leonardr]
+                [LR:say what it takes to explain how alps applies to a media
+                type you have to define "enclosing element", "link", etc]
             </t>
-            <t>
-                These instructions are to be considered normative for ALPS
-                version
-                1.0. If the body responsible for a given media type adopts
-                conflicting
-                instructions for applying an ALPS document to that media type,
-                a new
-                revision of the ALPS standard will be released which references
-                that
-                body's instructions.
-            </t>
-            <t>
-                OR
-            </t>
-            <t>
-                These instructions are not to be considered normative. If the
-                body
-                responsible for a given media type adopts conflicting
-                instructions for
-                applying an ALPS document to that media type, those
-                instructions
-                should take precedence.'
-            </t>
-            <section title="ALPS and HTML">
+            <section title="A Simple ALPS Document">
             </section>
-            <section title="ALPS and Collection+JSON">
+            <section title="HTML Example">
             </section>
-            <section title="ALPS and HAL">
-            </section>
-            <section title="ALPS and Siren">
-            </section>
-            <section title="ALPS and Atom">
-            </section>
-            <section title="ALPS and OData">
+            <section title="Collection+JSON Example">
             </section>
             <section title="Linking to ALPS Documents">
                 <t>
-                    hen a representation links to an ALPS document describing
+                    When a representation links to an ALPS document describing
                     its
-                    semantics, the "describedBy" link relation (found in the
+                    semantics, the "profile" link relation (found in the
                     IANA link
                     registry) SHOULD be used to describe the relationship
                     between the
                     representation and the ALPS document.
                 </t>
                 <t>
-                    A single representation may be "describedBy" more than one
+                    A single representation may be "profile"-ed more than one
                     ALPS
                     document. If two ALPS documents give conflicting semantics
                     for the
                     same element, the document linked to earlier in the
                     representation
-                    SHOULD take precedence.""""
+                    SHOULD take precedence.
                 </t>
+            </section>
+        </section>
+        <section title="The ALPS Registry">
+            <section title="What is the ALPS Registry">
+            </section>
+            <section title="Searching the Registry">
+            </section>
+            <section title="Contributing to the Registry">
             </section>
         </section>
         <section title="IANA Considerations">

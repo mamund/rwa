@@ -85,21 +85,21 @@ Table of Contents
        5.2.10. type . . . . . . . . . . . . . . . . . . . . . . . . .  8
        5.2.11. version  . . . . . . . . . . . . . . . . . . . . . . .  8
      5.3.  XML Representation . . . . . . . . . . . . . . . . . . . .  8
-     5.4.  JSON Representation  . . . . . . . . . . . . . . . . . . .  8
-   6.  Applying ALPS to Existing Media Types  . . . . . . . . . . . .  9
-     6.1.  ALPS and HTML  . . . . . . . . . . . . . . . . . . . . . .  9
-     6.2.  ALPS and Collection+JSON . . . . . . . . . . . . . . . . .  9
-     6.3.  ALPS and HAL . . . . . . . . . . . . . . . . . . . . . . .  9
-     6.4.  ALPS and Siren . . . . . . . . . . . . . . . . . . . . . .  9
-     6.5.  ALPS and Atom  . . . . . . . . . . . . . . . . . . . . . .  9
-     6.6.  ALPS and OData . . . . . . . . . . . . . . . . . . . . . .  9
-     6.7.  Linking to ALPS Documents  . . . . . . . . . . . . . . . .  9
-   7.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
-   8.  Security Considerations  . . . . . . . . . . . . . . . . . . . 10
-   9.  Internationalisation Considerations  . . . . . . . . . . . . . 10
-   10. Normative References . . . . . . . . . . . . . . . . . . . . . 10
-
-
+     5.4.  JSON Representation  . . . . . . . . . . . . . . . . . . .  9
+     5.5.  RDFs+OWL Representation  . . . . . . . . . . . . . . . . .  9
+   6.  Instructions on Applying ALPS to Existing Media Types  . . . .  9
+     6.1.  A Simple ALPS Document . . . . . . . . . . . . . . . . . .  9
+     6.2.  HTML Example . . . . . . . . . . . . . . . . . . . . . . .  9
+     6.3.  Collection+JSON Example  . . . . . . . . . . . . . . . . .  9
+     6.4.  Linking to ALPS Documents  . . . . . . . . . . . . . . . .  9
+   7.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . .  9
+     7.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . .  9
+     7.2.  Searching the Registry . . . . . . . . . . . . . . . . . .  9
+     7.3.  Contributing to the Registry . . . . . . . . . . . . . . .  9
+   8.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . .  9
+   9.  Security Considerations  . . . . . . . . . . . . . . . . . . . 10
+   10. Internationalisation Considerations  . . . . . . . . . . . . . 10
+   11. Normative References . . . . . . . . . . . . . . . . . . . . . 10
 
 
 
@@ -153,14 +153,14 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 4.  Identifying an ALPS Document
 
-   ALPS vocabularies are identified by a unique URI.  This URI can be in
-   the form of a resolvable URL (i.e.
-   "http://example.org/alps/accounting") or it can be in the form of a
-   URN (i.e.  TK).  If the identifier is a URL, it SHOULD point to a
-   valid ALPS document. the URL MAY point to a human-readable document
-   that describes the ALPS specification for the identified use case.
-   If the identifier is a URN, it SHOULD NOT be treated as a resolvable
-   identifer and instead SHOULD be treated as a unique name for the
+   ALPS vocabularies are identified by a unique URL.  The URL SHOULD
+   point to a valid ALPS document.  The URL MAY point to a human-
+   readable document that describes the ALPS specification for the
+   identified use case.  Although the URI SHOULD point to a resource
+   that contains a definition of the semantics of the relation type,
+   clients SHOULD NOT automatically access that resource to avoid
+   overburdening its server.  [I almost feel like we should have two
+   URLs, an ALPS permalink and a human-readable doc.  Or should we
 
 
 
@@ -169,21 +169,22 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 3]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-   identified use case.  [I almost feel like we should have two URLs, an
-   ALPS permalink and a human-readable doc.  Or should we suggest the
-   use of content negotiation? -leonardr] All ALPS URIs MUST be unique
-   and all ALPS documents intended for public consumption SHOULD be
-   registered in the ALPS Registry located at [TK].
+   suggest the use of content negotiation? -leonardr] All ALPS URIs MUST
+   be unique and all ALPS documents intended for public consumption
+   SHOULD be registered in the ALPS Registry located at [TK].
 
 5.  ALPS Documents
 
-   ALPS Documents contain a machine-readable collection of semantic
-   descriptors and their human-readable details.  An ALPS document can
+   ALPS Documents contain a machine-readable collection of identifying
+   strings and their human-readable explanations.  An ALPS document can
    be represented in either XML or JSON format.  This section identifies
    the general elements and properties of an ALPS document, their
    meaning, and their use.  Additional subsections provide specific
    details on how to construct a valid ALPS document in XML and in JSON
    format.
+
+   [LR: need a section that syas URL can be used as an abstract semantic
+   type]
 
 5.1.  Compliance
 
@@ -216,7 +217,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    Indicates the appearance rules to apply to the related +element+.
    Valid values for this element are: 'MUST', 'SHOULD', and 'MAY'.
-   These values are to be treated as defined in RFC 2119.  The +appears+
 
 
 
@@ -225,6 +225,7 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 4]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
+   These values are to be treated as defined in RFC 2119.  The +appears+
    property SHOULD appear as a property of the +element+ and/or +child+
    elements.  If this property does not appear, the value SHOULD be
    treated as 'MAY'.
@@ -272,7 +273,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    within its enclosing element.
 
    If this property does not appear, the value SHOULD be treated as
-   'many'.
 
 
 
@@ -280,6 +280,8 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 5]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
+
+   'many'.
 
 5.2.4.  child
 
@@ -327,8 +329,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
       appears
 
-   It MAY have the following properties:
-
 
 
 
@@ -336,6 +336,8 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 6]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
+
+   It MAY have the following properties:
 
       cardinality
 
@@ -383,8 +385,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    The value of this property will appear within generic representations
    as the name of a semantic descriptor or hypermedia control (see
-   Applying ALPS to Existing Media Types for details).  The exception is
-   when an element defines +name+ as well as +id+.  In that case, the
 
 
 
@@ -393,6 +393,8 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 7]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
+   Applying ALPS to Existing Media Types for details).  The exception is
+   when an element defines +name+ as well as +id+.  In that case, the
    value of +name+ contains the name of the semantic descriptor or
    hypermedia control, and the value of +id+ is just a unique ID.
 
@@ -439,8 +441,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 5.3.  XML Representation
 
-5.4.  JSON Representation
-
 
 
 
@@ -449,51 +449,51 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 8]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-6.  Applying ALPS to Existing Media Types
+5.4.  JSON Representation
+
+5.5.  RDFs+OWL Representation
+
+6.  Instructions on Applying ALPS to Existing Media Types
 
    ALPS documents can be applied to many existing hypermedia types.
-   Below are a set of instructions on how to apply ALPS information to
-   existing media types.
+   Below are a set of instructional examples on how to apply ALPS
+   information to existing media types.  These examples are informative.
+   The most up-to-date guidance on applying ALPS documents to existing
+   media types are available at the official ALPS Web site
+   (http://alps.io).
 
-   [There's an issue of policy here.  I've written two paragraphs.  Each
-   has its own problems.  I think I have to vote for #1. -leonardr]
+   [LR:say what it takes to explain how alps applies to a media type you
+   have to define "enclosing element", "link", etc]
 
-   These instructions are to be considered normative for ALPS version
-   1.0.  If the body responsible for a given media type adopts
-   conflicting instructions for applying an ALPS document to that media
-   type, a new revision of the ALPS standard will be released which
-   references that body's instructions.
+6.1.  A Simple ALPS Document
 
-   OR
+6.2.  HTML Example
 
-   These instructions are not to be considered normative.  If the body
-   responsible for a given media type adopts conflicting instructions
-   for applying an ALPS document to that media type, those instructions
-   should take precedence.'
+6.3.  Collection+JSON Example
 
-6.1.  ALPS and HTML
+6.4.  Linking to ALPS Documents
 
-6.2.  ALPS and Collection+JSON
-
-6.3.  ALPS and HAL
-
-6.4.  ALPS and Siren
-
-6.5.  ALPS and Atom
-
-6.6.  ALPS and OData
-
-6.7.  Linking to ALPS Documents
-
-   hen a representation links to an ALPS document describing its
-   semantics, the "describedBy" link relation (found in the IANA link
+   When a representation links to an ALPS document describing its
+   semantics, the "profile" link relation (found in the IANA link
    registry) SHOULD be used to describe the relationship between the
    representation and the ALPS document.
 
-   A single representation may be "describedBy" more than one ALPS
+   A single representation may be "profile"-ed more than one ALPS
    document.  If two ALPS documents give conflicting semantics for the
    same element, the document linked to earlier in the representation
-   SHOULD take precedence.""""
+   SHOULD take precedence.
+
+7.  The ALPS Registry
+
+7.1.  What is the ALPS Registry
+
+7.2.  Searching the Registry
+
+7.3.  Contributing to the Registry
+
+8.  IANA Considerations
+
+   [[anchor32: INSERT TEXT]]
 
 
 
@@ -505,19 +505,15 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 9]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-7.  IANA Considerations
+9.  Security Considerations
 
-   [[anchor30: INSERT TEXT]]
+   [[anchor34: INSERT TEXT]]
 
-8.  Security Considerations
+10.  Internationalisation Considerations
 
-   [[anchor32: INSERT TEXT]]
+   [[anchor36: INSERT TEXT (CONSIDER RFC 5987)]]
 
-9.  Internationalisation Considerations
-
-   [[anchor34: INSERT TEXT (CONSIDER RFC 5987)]]
-
-10.  Normative References
+11.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -535,8 +531,12 @@ Authors' Addresses
 
    Leonard Richardson
 
-   EMail: lenoard.richardson@gmail.com
+   EMail: leonardr@segfault.org
    URI:   http://crummy.com
+
+
+
+
 
 
 
