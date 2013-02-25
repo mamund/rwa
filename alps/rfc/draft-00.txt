@@ -73,31 +73,31 @@ Table of Contents
    5.  ALPS Documents . . . . . . . . . . . . . . . . . . . . . . . .  4
      5.1.  Compliance . . . . . . . . . . . . . . . . . . . . . . . .  4
      5.2.  ALPS Document Properties . . . . . . . . . . . . . . . . .  4
-     5.3.  alps . . . . . . . . . . . . . . . . . . . . . . . . . . .  4
-     5.4.  appears  . . . . . . . . . . . . . . . . . . . . . . . . .  4
-     5.5.  cardinality  . . . . . . . . . . . . . . . . . . . . . . .  5
-     5.6.  child  . . . . . . . . . . . . . . . . . . . . . . . . . .  6
-     5.7.  description  . . . . . . . . . . . . . . . . . . . . . . .  6
-     5.8.  element  . . . . . . . . . . . . . . . . . . . . . . . . .  6
-     5.9.  name . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-     5.10. href . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-     5.11. id . . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
-     5.12. type . . . . . . . . . . . . . . . . . . . . . . . . . . .  8
-     5.13. version  . . . . . . . . . . . . . . . . . . . . . . . . .  8
-   6.  XML Representation . . . . . . . . . . . . . . . . . . . . . .  8
-   7.  JSON Representation  . . . . . . . . . . . . . . . . . . . . .  8
-   8.  Applying ALPS to Existing Media Types  . . . . . . . . . . . .  9
-     8.1.  ALPS and HTML  . . . . . . . . . . . . . . . . . . . . . .  9
-     8.2.  ALPS and Collection+JSON . . . . . . . . . . . . . . . . .  9
-     8.3.  ALPS and HAL . . . . . . . . . . . . . . . . . . . . . . .  9
-     8.4.  ALPS and Siren . . . . . . . . . . . . . . . . . . . . . .  9
-     8.5.  ALPS and Atom  . . . . . . . . . . . . . . . . . . . . . .  9
-     8.6.  ALPS and OData . . . . . . . . . . . . . . . . . . . . . .  9
-     8.7.  Linking to ALPS Documents  . . . . . . . . . . . . . . . .  9
-   9.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
-   10. Security Considerations  . . . . . . . . . . . . . . . . . . . 10
-   11. Internationalisation Considerations  . . . . . . . . . . . . . 10
-   12. Normative References . . . . . . . . . . . . . . . . . . . . . 10
+       5.2.1.  alps . . . . . . . . . . . . . . . . . . . . . . . . .  4
+       5.2.2.  appears  . . . . . . . . . . . . . . . . . . . . . . .  4
+       5.2.3.  cardinality  . . . . . . . . . . . . . . . . . . . . .  5
+       5.2.4.  child  . . . . . . . . . . . . . . . . . . . . . . . .  6
+       5.2.5.  description  . . . . . . . . . . . . . . . . . . . . .  6
+       5.2.6.  element  . . . . . . . . . . . . . . . . . . . . . . .  6
+       5.2.7.  name . . . . . . . . . . . . . . . . . . . . . . . . .  7
+       5.2.8.  href . . . . . . . . . . . . . . . . . . . . . . . . .  7
+       5.2.9.  id . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+       5.2.10. type . . . . . . . . . . . . . . . . . . . . . . . . .  8
+       5.2.11. version  . . . . . . . . . . . . . . . . . . . . . . .  8
+     5.3.  XML Representation . . . . . . . . . . . . . . . . . . . .  8
+     5.4.  JSON Representation  . . . . . . . . . . . . . . . . . . .  8
+   6.  Applying ALPS to Existing Media Types  . . . . . . . . . . . .  9
+     6.1.  ALPS and HTML  . . . . . . . . . . . . . . . . . . . . . .  9
+     6.2.  ALPS and Collection+JSON . . . . . . . . . . . . . . . . .  9
+     6.3.  ALPS and HAL . . . . . . . . . . . . . . . . . . . . . . .  9
+     6.4.  ALPS and Siren . . . . . . . . . . . . . . . . . . . . . .  9
+     6.5.  ALPS and Atom  . . . . . . . . . . . . . . . . . . . . . .  9
+     6.6.  ALPS and OData . . . . . . . . . . . . . . . . . . . . . .  9
+     6.7.  Linking to ALPS Documents  . . . . . . . . . . . . . . . .  9
+   7.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
+   8.  Security Considerations  . . . . . . . . . . . . . . . . . . . 10
+   9.  Internationalisation Considerations  . . . . . . . . . . . . . 10
+   10. Normative References . . . . . . . . . . . . . . . . . . . . . 10
 
 
 
@@ -201,7 +201,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    in different ways.  Below is a list of the properties that can appear
    in an ALPS document.
 
-5.3.  alps
+5.2.1.  alps
 
    Indicates the root of the ALPS document.  This MUST be the first
    property in the document.  This property SHOULD have one or more
@@ -212,7 +212,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    in other docs.  It would also make it possible to define ALPS as a
    microformat. -leonardr]
 
-5.4.  appears
+5.2.2.  appears
 
    Indicates the appearance rules to apply to the related +element+.
    Valid values for this element are: 'MUST', 'SHOULD', and 'MAY'.
@@ -258,7 +258,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    and 'MAY'.  If this property does not appear, the value SHOULD be
    treated as 'MAY'.
 
-5.5.  cardinality
+5.2.3.  cardinality
 
    Indicates the number of times the related +element+ can appear.
    Valid values are 'single' and 'many'.
@@ -281,7 +281,7 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 5]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-5.6.  child
+5.2.4.  child
 
    Links to a child element of the related +element+ This MAY appear in
    the ALPS document as a child of an +element+ block.  The +child+
@@ -293,7 +293,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    good to mention here which properties the +child+ tag supports, as
    you do for +element+. -leonardr]
 
-5.7.  description
+5.2.5.  description
 
    A text field that contains free-form, usually human-readable, text.
 
@@ -312,7 +312,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    explicitly say that the contents of +description+ may be HTML markup,
    a la the contents of an Atom story? -leonardr]
 
-5.8.  element
+5.2.6.  element
 
    Identifies a semantic descriptor.  One or more +element+ blocks
    SHOULD appear as children of the +alps+ property.
@@ -345,7 +345,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
       ame
 
-5.9.  name
+5.2.7.  name
 
    Indicates the name of the +element+ as found in generic
    representations.  It MAY appear as a property of the +element+.
@@ -357,7 +357,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    +id="customer"+ in the ALPS document.  One of them needs to have some
    other +id+, and to set +name="customer"+.
 
-5.10.  href
+5.2.8.  href
 
    Points to an +element+ either within the existing ALPS document or in
    another ALPS document.
@@ -376,7 +376,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    descriptor has the same meaning as the one defined in hCard.
    -leonardr]
 
-5.11.  id
+5.2.9.  id
 
    A document-wide unique identifier for the related element.  This MUST
    appear as a property of each +element+.
@@ -404,7 +404,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    A relative URL with a fragment identifier (e.g. "#customer") refers
    to an element within the ALPS document containing the reference.
 
-5.12.  type
+5.2.10.  type
 
    Indicates the type of representation control to which the +element+
    is applied.  This MUST appear for each +element+.  Four values are
@@ -430,16 +430,16 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    \[ How about just idempotent and nonidempotent? -leonardr \]
 
-5.13.  version
+5.2.11.  version
 
    Indicates the version number of the ALPS document.  This SHOULD
    appear as a property of the +alps+ property.  Currently the only
    valid value is '1.0'.  If no value appears, then it SHOULD be set to
    '1.0'.
 
-6.  XML Representation
+5.3.  XML Representation
 
-7.  JSON Representation
+5.4.  JSON Representation
 
 
 
@@ -449,7 +449,7 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 8]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-8.  Applying ALPS to Existing Media Types
+6.  Applying ALPS to Existing Media Types
 
    ALPS documents can be applied to many existing hypermedia types.
    Below are a set of instructions on how to apply ALPS information to
@@ -471,19 +471,19 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    for applying an ALPS document to that media type, those instructions
    should take precedence.'
 
-8.1.  ALPS and HTML
+6.1.  ALPS and HTML
 
-8.2.  ALPS and Collection+JSON
+6.2.  ALPS and Collection+JSON
 
-8.3.  ALPS and HAL
+6.3.  ALPS and HAL
 
-8.4.  ALPS and Siren
+6.4.  ALPS and Siren
 
-8.5.  ALPS and Atom
+6.5.  ALPS and Atom
 
-8.6.  ALPS and OData
+6.6.  ALPS and OData
 
-8.7.  Linking to ALPS Documents
+6.7.  Linking to ALPS Documents
 
    hen a representation links to an ALPS document describing its
    semantics, the "describedBy" link relation (found in the IANA link
@@ -505,19 +505,19 @@ Amundsen & Richardson    Expires August 29, 2013                [Page 9]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-9.  IANA Considerations
+7.  IANA Considerations
 
    [[anchor30: INSERT TEXT]]
 
-10.  Security Considerations
+8.  Security Considerations
 
    [[anchor32: INSERT TEXT]]
 
-11.  Internationalisation Considerations
+9.  Internationalisation Considerations
 
    [[anchor34: INSERT TEXT (CONSIDER RFC 5987)]]
 
-12.  Normative References
+10.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
