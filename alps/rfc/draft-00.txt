@@ -1,26 +1,28 @@
 
 
 
-Network Working Group                                        F. LASTNAME
-Internet-Draft                                         February 25, 2013
-Expires: August 29, 2013
+Network Working Group                                        M. Amundsen
+Internet-Draft                                      Layer 7 Technologies
+Expires: August 29, 2013                                   L. Richardson
+                                                       February 25, 2013
 
 
-                        The FOOBAR Link Relation
-               draft-LASTNAME-FOOBAR-link-relation-latest
+               Application-Level Profile Semantics (ALPS)
+                   draft-amundsen-richardson-alps-00
 
 Abstract
 
-   [[anchor1: SHORT DESCRIPTION OF LINK RELATION]]
+   This document describes a media type for defining application-level
+   semantic descriptions (similar to those defined by HTML microformats)
+   in a way that incorporates both human-readable documentation and
+   machine-readable instructions on applying semantic descriptions to
+   elements within a wide range of media-type representations.
 
 Editorial Note (To be removed by RFC Editor)
 
-   [[anchor2: STATE A VENUE FOR DISCUSSION, OPTIMALLY A PUBLIC, ARCHIVED
-   IETF MAILING LIST, SUCH AS...:]]
-
    Distribution of this document is unlimited.  Comments should be sent
-   to the IETF Apps-Discuss mailing list (see
-   <https://www.ietf.org/mailman/listinfo/apps-discuss>).
+   to the IETF Media-Types mailing list (see
+   <https://www.ietf.org/mailman/listinfo/media-types>).
 
 Status of This Memo
 
@@ -47,24 +49,85 @@ Copyright Notice
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 1]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
-
-
-
-LASTNAME                 Expires August 29, 2013                [Page 1]
-
-Internet-Draft          The FOOBAR Link Relation           February 2013
-
-
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
 
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  Notational Conventions . . . . . . . . . . . . . . . . . . . .  3
+   3.  Motivation . . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   4.  Identifying an ALPS Document . . . . . . . . . . . . . . . . .  3
+   5.  ALPS Documents . . . . . . . . . . . . . . . . . . . . . . . .  4
+     5.1.  Compliance . . . . . . . . . . . . . . . . . . . . . . . .  4
+     5.2.  ALPS Document Properties . . . . . . . . . . . . . . . . .  4
+     5.3.  alps . . . . . . . . . . . . . . . . . . . . . . . . . . .  4
+     5.4.  appears  . . . . . . . . . . . . . . . . . . . . . . . . .  4
+     5.5.  cardinality  . . . . . . . . . . . . . . . . . . . . . . .  5
+     5.6.  child  . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+     5.7.  description  . . . . . . . . . . . . . . . . . . . . . . .  6
+     5.8.  element  . . . . . . . . . . . . . . . . . . . . . . . . .  6
+     5.9.  name . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+     5.10. href . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+     5.11. id . . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+     5.12. type . . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+     5.13. version  . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   6.  XML Representation . . . . . . . . . . . . . . . . . . . . . .  8
+   7.  JSON Representation  . . . . . . . . . . . . . . . . . . . . .  8
+   8.  Applying ALPS to Existing Media Types  . . . . . . . . . . . .  9
+     8.1.  ALPS and HTML  . . . . . . . . . . . . . . . . . . . . . .  9
+     8.2.  ALPS and Collection+JSON . . . . . . . . . . . . . . . . .  9
+     8.3.  ALPS and HAL . . . . . . . . . . . . . . . . . . . . . . .  9
+     8.4.  ALPS and Siren . . . . . . . . . . . . . . . . . . . . . .  9
+     8.5.  ALPS and Atom  . . . . . . . . . . . . . . . . . . . . . .  9
+     8.6.  ALPS and OData . . . . . . . . . . . . . . . . . . . . . .  9
+     8.7.  Linking to ALPS Documents  . . . . . . . . . . . . . . . .  9
+   9.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 10
+   10. Security Considerations  . . . . . . . . . . . . . . . . . . . 10
+   11. Internationalisation Considerations  . . . . . . . . . . . . . 10
+   12. Normative References . . . . . . . . . . . . . . . . . . . . . 10
+
+
+
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 2]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
 1.  Introduction
 
-   [[anchor4: INSERT INTRODUCTION]]
+   This document describes a media type for defining application-level
+   semantic descriptions (similar to those defined by HTML microformats)
+   in a way that incorporates both human-readable documentation and
+   machine-readable instructions on applying semantic descriptions to
+   elements within application-agnostic media-type representations (such
+   as HTML, HAL, Collection+JSON, and Siren).  This document also sets a
+   standard for creating and registering ALPS document identifers and
+   provides suggested conventions for applying ALPS descriptors to
+   existing media types.
+
+   This document registers two media-type identifiers with the IANA:
+   "application/alps+xml" ("ALPS+XML") and "application/alps+json"
+   ("ALPS+JSON").
 
 2.  Notational Conventions
 
@@ -72,77 +135,408 @@ Internet-Draft          The FOOBAR Link Relation           February 2013
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
 
-3.  The FOOBAR Link Relation
+3.  Motivation
 
-   [[anchor7: DESCRIBE THE SEMANTICS OF THE LINK RELATION]]
+   When implementing a hypermedia client/server application using a
+   general media type (i.e.  HTML, Atom, Collection+JSON, etc.), client
+   and server instances need to share application-specific information
+   such as data element names, link relation values, and state transfer
+   parameters.  This information is directly related to the application
+   being implemented (i.e. accounting, contact management, etc.) rather
+   than the media type used in the representations.  Instead of creating
+   (and registering) an entirely new media type (i.e.
+   "application/accounting"), representation authors can use an ALPS
+   "profile" to apply application-level semantic descriptions to
+   elements defined by the generic media type.  This increases the
+   specificity of the representation without reducing the generality of
+   the media type.
 
-4.  IANA Considerations
+4.  Identifying an ALPS Document
 
-   IANA is asked to register the FOOBAR Link Relation below as per
-   [RFC5988].
-
-   Relation Name:
-
-      FOOBAR
-
-   Description:
-
-      [[anchor9: SHORT DESCRIPTION THAT WILL APPEAR IN THE REGISTRY]]
-
-   Reference:
-
-      This specification.
-
-   Notes:
-
-      [[anchor10: ADDITIONAL NOTES (OPTIONAL)]]
-
-   Application Data:
-
-      [[anchor11: CONSULT WITH THE MAILING LIST (OPTIONAL)]]
+   ALPS vocabularies are identified by a unique URI.  This URI can be in
+   the form of a resolvable URL (i.e.
+   "http://example.org/alps/accounting") or it can be in the form of a
+   URN (i.e.  TK).  If the identifier is a URL, it SHOULD point to a
+   valid ALPS document. the URL MAY point to a human-readable document
+   that describes the ALPS specification for the identified use case.
+   If the identifier is a URN, it SHOULD NOT be treated as a resolvable
+   identifer and instead SHOULD be treated as a unique name for the
 
 
 
-
-
-
-
-
-LASTNAME                 Expires August 29, 2013                [Page 2]
+Amundsen & Richardson    Expires August 29, 2013                [Page 3]
 
-Internet-Draft          The FOOBAR Link Relation           February 2013
+Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-5.  Security Considerations
+   identified use case.  [I almost feel like we should have two URLs, an
+   ALPS permalink and a human-readable doc.  Or should we suggest the
+   use of content negotiation? -leonardr] All ALPS URIs MUST be unique
+   and all ALPS documents intended for public consumption SHOULD be
+   registered in the ALPS Registry located at [TK].
 
-   [[anchor13: INSERT TEXT]]
+5.  ALPS Documents
 
-6.  Internationalisation Considerations
+   ALPS Documents contain a machine-readable collection of semantic
+   descriptors and their human-readable details.  An ALPS document can
+   be represented in either XML or JSON format.  This section identifies
+   the general elements and properties of an ALPS document, their
+   meaning, and their use.  Additional subsections provide specific
+   details on how to construct a valid ALPS document in XML and in JSON
+   format.
 
-   [[anchor15: INSERT TEXT (CONSIDER RFC 5987)]]
+5.1.  Compliance
 
-7.  Normative References
+   An implementation is not compliant if it fails to satisfy one or more
+   of the MUST or REQUIRED level requirements.  An implementation that
+   satisfies all the MUST or REQUIRED level and all the SHOULD level
+   requirements is said to be "unconditionally compliant"; one that
+   satisfies all the MUST level requirements but not all the SHOULD
+   level requirements is said to be "conditionally compliant."
+
+5.2.  ALPS Document Properties
+
+   The ALPS media type defines a small set of properties.  The
+   properties appear in both the XML and JSON formats, but are expressed
+   in different ways.  Below is a list of the properties that can appear
+   in an ALPS document.
+
+5.3.  alps
+
+   Indicates the root of the ALPS document.  This MUST be the first
+   property in the document.  This property SHOULD have one or more
+   +element+ child properties.
+
+   [Would it be okay to remove the 'must be the first property in the
+   document' requirement?  This would allow an ALPS doc to be embedded
+   in other docs.  It would also make it possible to define ALPS as a
+   microformat. -leonardr]
+
+5.4.  appears
+
+   Indicates the appearance rules to apply to the related +element+.
+   Valid values for this element are: 'MUST', 'SHOULD', and 'MAY'.
+   These values are to be treated as defined in RFC 2119.  The +appears+
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 4]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+   property SHOULD appear as a property of the +element+ and/or +child+
+   elements.  If this property does not appear, the value SHOULD be
+   treated as 'MAY'.
+
+   [You've removed MUST NOT and the default MUST NOT for top-level
+   elements, which makes it difficult to define documents like
+   hCalendar.  I've written an alternate section below. -leonardr]
+
+   Indicates the appearance rules for the related +element+ in a
+   representation.  All valid values for this property are terms defined
+   in RFC 2119, and have the meaning given in that standard.
+
+   The +appears+ property MAY appear as a property of the +element+
+   block.  This controls whether the element may appear at the "top
+   level"; that is, not enclosed in any other element defined by this
+   ALPS document.  The formal meaning of "top level" varies by the media
+   type; see "Applying ALPS to Existing Media Types" for definitions.
+   [that's TK -leonardr]
+
+   Valid values for +appears+ in an +element+ block are: 'MUST',
+   'SHOULD', 'MAY', and 'MUST NOT'.  If this property does not appear,
+   the value SHOULD be treated as 'MUST NOT'.
+
+   The +appears+ property MAY appear as a property of a +child+ block.
+   This controls the rules by which the referenced element may appear as
+   a child of the enclosing +element+.  The formal meaning of "enclosing
+   +element+" varies by the media type; see "Applying ALPS to Existing
+   Media Types" for definitions. [that's TK -leonardr]
+
+   Valid values for +appears+ in an +child+ block are: 'MUST', 'SHOULD',
+   and 'MAY'.  If this property does not appear, the value SHOULD be
+   treated as 'MAY'.
+
+5.5.  cardinality
+
+   Indicates the number of times the related +element+ can appear.
+   Valid values are 'single' and 'many'.
+
+   The +cardinality+ property MAY appear as a property of an +element+
+   block.  This controls how many times that element may be used at the
+   "top level" within a single representation.
+
+   The +cardinality+ property MAY appear as a property of a +child+
+   block.  This controls how many times the child element may occur
+   within its enclosing element.
+
+   If this property does not appear, the value SHOULD be treated as
+   'many'.
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 5]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+5.6.  child
+
+   Links to a child element of the related +element+ This MAY appear in
+   the ALPS document as a child of an +element+ block.  The +child+
+   property MAY have an +href+ property pointing to a definition of an
+   +element+ block (see +href+ for details).
+
+   If no +href+ appears, then the +child+ property takes on the same
+   features as the +element+ property.  [Which ones?  It would also be
+   good to mention here which properties the +child+ tag supports, as
+   you do for +element+. -leonardr]
+
+5.7.  description
+
+   A text field that contains free-form, usually human-readable, text.
+
+   A +description+ block SHOULD appear as a child of +element+.  When
+   present, it describes the meaning and use of the related +element+.
+
+   A +description+ block MAY appear as a child of +child+.  When
+   present, it describes the meaning of the relationship between the
+   +element+ and its +child+.
+
+   A +description+ block MAY appear as a child of +alps+.  When present,
+   it describes the purpose of the ALPS document as a whole.
+
+   [When writing the example docs I kept wanting to use HTML markup.
+   Obviously you can do this in ALPS+XML by using namespaces.  Can we
+   explicitly say that the contents of +description+ may be HTML markup,
+   a la the contents of an Atom story? -leonardr]
+
+5.8.  element
+
+   Identifies a semantic descriptor.  One or more +element+ blocks
+   SHOULD appear as children of the +alps+ property.
+
+   This property MUST have the following properties:
+
+      id
+
+      type
+
+   It SHOULD have the following properties:
+
+      appears
+
+   It MAY have the following properties:
+
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 6]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+      cardinality
+
+      child
+
+      description
+
+      ame
+
+5.9.  name
+
+   Indicates the name of the +element+ as found in generic
+   representations.  It MAY appear as a property of the +element+.
+
+   This is used when the +element+'s name is used as an +id+ value
+   elsewhere in the ALPS document.  For instance, if a single ALPS
+   document defines an element descriptor called 'customer' and a safe-
+   idempotent control called 'customer', they can't both have
+   +id="customer"+ in the ALPS document.  One of them needs to have some
+   other +id+, and to set +name="customer"+.
+
+5.10.  href
+
+   Points to an +element+ either within the existing ALPS document or in
+   another ALPS document.
+
+   The +href+ attribute MUST appear as part of the +child+ element.  The
+   value MUST be a valid URL, with a fragment identifier, resolving to
+   an +element+ within an ALPS document.
+
+   [Should <alps> itself support +href+ so it can link to itself or a
+   full human-readable doc?  Or should we allow a general <link> tag so
+   you can do rel="help"?] \[ Earlier you said that +child+ didn't need
+   href. -leonardr \] [I have a half-baked idea about using +href+
+   within +element+ as well.  This would let you copy the +fn+
+   descriptor defined in hCard into your custom ALPS document (for
+   performance reasons) but still make it clear that your +fn+
+   descriptor has the same meaning as the one defined in hCard.
+   -leonardr]
+
+5.11.  id
+
+   A document-wide unique identifier for the related element.  This MUST
+   appear as a property of each +element+.
+
+   The value of this property will appear within generic representations
+   as the name of a semantic descriptor or hypermedia control (see
+   Applying ALPS to Existing Media Types for details).  The exception is
+   when an element defines +name+ as well as +id+.  In that case, the
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 7]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+   value of +name+ contains the name of the semantic descriptor or
+   hypermedia control, and the value of +id+ is just a unique ID.
+
+   When applied to an ALPS document, a URI fragment identifier points to
+   the element with the appropriate +id+.  For example, The fragment
+   identifier +customer+ in the URI +http://example.com/#customer+
+   refers to an ALPS element with +id+ set to +customer+.
+
+   A relative URL with a fragment identifier (e.g. "#customer") refers
+   to an element within the ALPS document containing the reference.
+
+5.12.  type
+
+   Indicates the type of representation control to which the +element+
+   is applied.  This MUST appear for each +element+.  Four values are
+   defined:
+
+   \[ Would it be OK to say that the default is 'descriptor'? -leonardr
+   \]
+
+   1.  'descriptor' refers to a state element (e.g. +HTML.SPAN+,
+       +HTML.INPUT+, etc.).
+
+   2.  'safe-idempotent' refers to a hypermedia control that triggers a
+       safe, idempotent state transition (i.e. +HTTP.GET+, +HTTP.HEAD+,
+       etc.).
+
+   3.  'unsafe-idempotent' refers to a hypermedia control that triggers
+       an unsafe, idempotent state transition (i.e. +HTTP.PUT+,
+       +HTTP.DELETE+ etc.).
+
+   4.  'unsafe-nonidempotent' refers to a hypermedia control that
+       triggers an unsafe, non-idempotent state transition (i.e.
+       +HTTP.POST+).
+
+   \[ How about just idempotent and nonidempotent? -leonardr \]
+
+5.13.  version
+
+   Indicates the version number of the ALPS document.  This SHOULD
+   appear as a property of the +alps+ property.  Currently the only
+   valid value is '1.0'.  If no value appears, then it SHOULD be set to
+   '1.0'.
+
+6.  XML Representation
+
+7.  JSON Representation
+
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 8]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+8.  Applying ALPS to Existing Media Types
+
+   ALPS documents can be applied to many existing hypermedia types.
+   Below are a set of instructions on how to apply ALPS information to
+   existing media types.
+
+   [There's an issue of policy here.  I've written two paragraphs.  Each
+   has its own problems.  I think I have to vote for #1. -leonardr]
+
+   These instructions are to be considered normative for ALPS version
+   1.0.  If the body responsible for a given media type adopts
+   conflicting instructions for applying an ALPS document to that media
+   type, a new revision of the ALPS standard will be released which
+   references that body's instructions.
+
+   OR
+
+   These instructions are not to be considered normative.  If the body
+   responsible for a given media type adopts conflicting instructions
+   for applying an ALPS document to that media type, those instructions
+   should take precedence.'
+
+8.1.  ALPS and HTML
+
+8.2.  ALPS and Collection+JSON
+
+8.3.  ALPS and HAL
+
+8.4.  ALPS and Siren
+
+8.5.  ALPS and Atom
+
+8.6.  ALPS and OData
+
+8.7.  Linking to ALPS Documents
+
+   hen a representation links to an ALPS document describing its
+   semantics, the "describedBy" link relation (found in the IANA link
+   registry) SHOULD be used to describe the relationship between the
+   representation and the ALPS document.
+
+   A single representation may be "describedBy" more than one ALPS
+   document.  If two ALPS documents give conflicting semantics for the
+   same element, the document linked to earlier in the representation
+   SHOULD take precedence.""""
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 29, 2013                [Page 9]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+9.  IANA Considerations
+
+   [[anchor30: INSERT TEXT]]
+
+10.  Security Considerations
+
+   [[anchor32: INSERT TEXT]]
+
+11.  Internationalisation Considerations
+
+   [[anchor34: INSERT TEXT (CONSIDER RFC 5987)]]
+
+12.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
 
    [RFC5988]  Nottingham, M., "Web Linking", RFC 5988, October 2010.
 
-Author's Address
+Authors' Addresses
 
-   FIRSTNAME LASTNAME
+   Mike Amundsen
+   Layer 7 Technologies
 
-   EMail: FIRSTNAME.LASTNAME at EXAMPLE.COM
-
-
-
-
+   EMail: mca@amundsen.com
+   URI:   http://amundsen.com
 
 
+   Leonard Richardson
 
-
-
-
+   EMail: lenoard.richardson@gmail.com
+   URI:   http://crummy.com
 
 
 
@@ -162,7 +556,5 @@ Author's Address
 
 
 
-
-
-LASTNAME                 Expires August 29, 2013                [Page 3]
+Amundsen & Richardson    Expires August 29, 2013               [Page 10]
 
