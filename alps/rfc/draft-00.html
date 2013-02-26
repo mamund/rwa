@@ -163,7 +163,8 @@
 
 <p>
             Distribution of this document is unlimited. Comments should be sent to the 
-            IETF Media-Types mailing list (see <a href='https://www.ietf.org/mailman/listinfo/media-types'>https://www.ietf.org/mailman/listinfo/media-types</a>).
+            IETF Media-Types mailing list (see 
+            <a href='https://www.ietf.org/mailman/listinfo/media-types'>https://www.ietf.org/mailman/listinfo/media-types</a>).
             
 </p>
 <h3>Status of This Memo</h3>
@@ -202,74 +203,82 @@ described in the Simplified BSD License.</p>
 <p class="toc">
 <a href="#anchor1">1.</a>&nbsp;
 Introduction<br />
-<a href="#anchor2">2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">1.1.</a>&nbsp;
 Notational Conventions<br />
-<a href="#anchor3">3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">1.2.</a>&nbsp;
 Motivation<br />
-<a href="#anchor4">4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">1.3.</a>&nbsp;
+A Simple ALPS Example<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">1.4.</a>&nbsp;
 Identifying an ALPS Document<br />
-<a href="#anchor5">5.</a>&nbsp;
+<a href="#anchor6">2.</a>&nbsp;
 ALPS Documents<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">5.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">2.1.</a>&nbsp;
 Compliance<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">5.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">2.2.</a>&nbsp;
 ALPS Document Properties<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">5.2.1.</a>&nbsp;
-alps<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">5.2.2.</a>&nbsp;
-appears<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">5.2.3.</a>&nbsp;
-cardinality<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">5.2.4.</a>&nbsp;
-child<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">5.2.5.</a>&nbsp;
-description<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">5.2.6.</a>&nbsp;
-element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor14">5.2.7.</a>&nbsp;
-ext<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor15">5.2.8.</a>&nbsp;
-name<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">5.2.9.</a>&nbsp;
-href<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor17">5.2.10.</a>&nbsp;
-id<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor18">5.2.11.</a>&nbsp;
-type<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor19">5.2.12.</a>&nbsp;
-version<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor20">5.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">2.2.1.</a>&nbsp;
+'alps'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">2.2.2.</a>&nbsp;
+'appears'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">2.2.3.</a>&nbsp;
+'cardinality'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">2.2.4.</a>&nbsp;
+'child'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor17">2.2.5.</a>&nbsp;
+'description'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor18">2.2.6.</a>&nbsp;
+'element'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor19">2.2.7.</a>&nbsp;
+'ext'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor20">2.2.8.</a>&nbsp;
+'href'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor21">2.2.9.</a>&nbsp;
+'id'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor22">2.2.10.</a>&nbsp;
+'name'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">2.2.11.</a>&nbsp;
+'type'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">2.2.12.</a>&nbsp;
+'version'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xml-representation">2.3.</a>&nbsp;
 XML Representation<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor21">5.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#json-representation">2.4.</a>&nbsp;
 JSON Representation<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor22">5.5.</a>&nbsp;
-RDFs+OWL Representation<br />
-<a href="#anchor23">6.</a>&nbsp;
+<a href="#instructions">3.</a>&nbsp;
 Instructions on Applying ALPS to Existing Media Types<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">6.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#a-simple-alps-document">3.1.</a>&nbsp;
 A Simple ALPS Document<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor25">6.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#html-example">3.2.</a>&nbsp;
 HTML Example<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor26">6.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#collection-json-example">3.3.</a>&nbsp;
 Collection+JSON Example<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">6.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#linking-to-alps-documents">3.4.</a>&nbsp;
 Linking to ALPS Documents<br />
-<a href="#anchor28">7.</a>&nbsp;
+<a href="#alps-registry">4.</a>&nbsp;
 The ALPS Registry<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">7.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#what-is-the-alps-registry">4.1.</a>&nbsp;
 What is the ALPS Registry<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor30">7.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#searching-the-registry">4.2.</a>&nbsp;
 Searching the Registry<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor31">7.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#contributing-to-the-registry">4.3.</a>&nbsp;
 Contributing to the Registry<br />
-<a href="#anchor32">8.</a>&nbsp;
+<a href="#iana-considerations">5.</a>&nbsp;
 IANA Considerations<br />
-<a href="#anchor34">9.</a>&nbsp;
-Security Considerations<br />
-<a href="#anchor36">10.</a>&nbsp;
-Internationalisation Considerations<br />
-<a href="#rfc.references1">11.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#iana-alps-xml">5.1.</a>&nbsp;
+application/alps+xml<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#iana-alps-json">5.2.</a>&nbsp;
+application/alps+json<br />
+<a href="#internationalization">6.</a>&nbsp;
+Internationalization Considerations<br />
+<a href="#anchor26">7.</a>&nbsp;
+Acknowledgements<br />
+<a href="#rfc.references1">8.</a>&nbsp;
+References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references1">8.1.</a>&nbsp;
 Normative References<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rfc.references2">8.2.</a>&nbsp;
+Informative References<br />
 </p>
 <br clear="all" />
 
@@ -292,73 +301,89 @@ Introduction</h3>
 </p>
 <p>
                 This document registers two media-type identifiers with the
-                IANA:  <tt>application/alps+xml</tt> ("ALPS+XML") 
-                and <tt>application/alps+json</tt> ("ALPS+JSON").
+                IANA:  'application/alps+xml' ("ALPS+XML") and 
+                'application/alps+json' ("ALPS+JSON").
             
 </p>
 <a name="anchor2"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.2"></a><h3>2.&nbsp;
+<a name="rfc.section.1.1"></a><h3>1.1.&nbsp;
 Notational Conventions</h3>
 
 <p>
-            The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-            "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-            document are to be interpreted as described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>.
-            
+                The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+                "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+                document are to be interpreted as described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>.
+                
 </p>
 <a name="anchor3"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.3"></a><h3>3.&nbsp;
+<a name="rfc.section.1.2"></a><h3>1.2.&nbsp;
 Motivation</h3>
 
 <p>
-                When implementing a hypermedia client/server application using
-                a general media type (i.e. HTML, Atom, Collection+JSON, etc.),
-                client and server instances need to share application-specific
-                information such as data element names, link relation values, and state
-                transfer parameters. This information is directly related to the
-                application being implemented (i.e. accounting, contact management, etc.)
-                rather than the media type used in the representations.
-
-                Instead of creating (and registering) an entirely new media
-                type (i.e. <tt>application/accounting</tt>), representation authors can use an
-                ALPS "profile" to apply application-level semantic descriptions to
-                elements  defined by the generic media type. This increases the
-                specificity of  the representation without reducing the generality of the media
-                type.
-            
-            
+                    When implementing a hypermedia client/server application using
+                    a general media type (i.e. HTML, Atom, Collection+JSON, etc.),
+                    client and server instances need to share application-specific
+                    information such as data element names, link relation values, 
+                    and state transfer parameters. This information is directly 
+                    related to the application being implemented (i.e. accounting, 
+                    contact management, etc.) rather than the media type used 
+                    in the representations.
+                
+</p>
+<p>
+                    Instead of creating (and registering) an entirely new media
+                    type (i.e. 'application/accounting'), representation 
+                    authors can use an ALPS "profile" to apply application-level 
+                    semantic descriptions to elements  defined by the generic 
+                    media type. This increases the  specificity of  the 
+                    representation without reducing the generality of the media
+                    type.
+                
 </p>
 <a name="anchor4"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4"></a><h3>4.&nbsp;
-Identifying an ALPS Document</h3>
+<a name="rfc.section.1.3"></a><h3>1.3.&nbsp;
+A Simple ALPS Example</h3>
 
-<p>
-                ALPS vocabularies are identified by a unique URL. 
-                The URL SHOULD point to a valid ALPS document. The URL MAY 
-                point to a human-readable document that describes the ALPS
-                specification for the identified use case.  
-
-                Although the URI SHOULD point to a resource that contains a 
-                definition of the semantics of the relation type, clients 
-                SHOULD NOT automatically access that resource to avoid
-                overburdening its server.
-                
-                [I almost feel like we should have two URLs, an ALPS permalink
-                and a human-readable doc. Or should we suggest the use of content
-                negotiation? -leonardr]
-
-                All ALPS URIs MUST be unique and all ALPS documents intended
-                for public consumption SHOULD be registered in the ALPS Registry
-                located
-                at [TK].
-            
+<p>[TK]
 </p>
 <a name="anchor5"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5"></a><h3>5.&nbsp;
+<a name="rfc.section.1.4"></a><h3>1.4.&nbsp;
+Identifying an ALPS Document</h3>
+
+<p>
+                    ALPS vocabularies are identified by a unique URL. 
+                    The URL SHOULD point to a valid ALPS document. The URL MAY 
+                    point to a human-readable document that describes the ALPS
+                    specification for the identified use case.  
+                
+</p>
+<p>
+                    Although the URI SHOULD point to a resource that contains a 
+                    definition of the semantics of the relation type, clients 
+                    SHOULD NOT automatically access that resource to avoid
+                    overburdening its server.
+                
+</p>
+<p>
+                    [I almost feel like we should have two URLs, an ALPS permalink
+                    and a human-readable doc. Or should we suggest the use of content
+                    negotiation? -leonardr]
+                
+</p>
+<p>
+                    All ALPS URIs MUST be unique and all ALPS documents intended
+                    for public consumption SHOULD be registered in the ALPS Registry
+                    located
+                    at [TK].
+                
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
 ALPS Documents</h3>
 
 <p>
@@ -376,195 +401,153 @@ ALPS Documents</h3>
                 semantic type]
             
 </p>
-<a name="anchor6"></a><br /><hr />
+<a name="anchor7"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+<a name="rfc.section.2.1"></a><h3>2.1.&nbsp;
 Compliance</h3>
 
 <p>
                     An implementation is not compliant if it fails to satisfy
-                    one or more of the MUST or REQUIRED level requirements. An implementation that
-                    satisfies all the MUST or REQUIRED level and all the SHOULD level
-                    requirements is said to be "unconditionally compliant"; one that satisfies all
-                    the MUST level requirements but not all the SHOULD level requirements is
-                    said to be "conditionally compliant."
-                
-</p>
-<a name="anchor7"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
-ALPS Document Properties</h3>
-
-<p>
-                    The ALPS media type defines a small set of properties. The
-                    properties appear in both the XML and JSON formats, but are expressed
-                    in  different ways. Below is a list of the properties that can
-                    appear in an ALPS document.
+                    one or more of the MUST or REQUIRED level requirements. 
+                    An implementation that satisfies all the MUST or REQUIRED 
+                    level and all the SHOULD level requirements is said to be 
+                    "unconditionally compliant"; one that satisfies all
+                    the MUST level requirements but not all the SHOULD level 
+                    requirements is said to be "conditionally compliant."
                 
 </p>
 <a name="anchor8"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.1"></a><h3>5.2.1.&nbsp;
-alps</h3>
+<a name="rfc.section.2.2"></a><h3>2.2.&nbsp;
+ALPS Document Properties</h3>
 
 <p>
-                    Indicates the root of the ALPS document. This MUST be the
-                    first property
-                    in the document. This property SHOULD have one or more
-                    +element+ child 
-                    properties.
-                
-</p>
-<p>
-                    [Would it be okay to remove the 'must be the first property
-                    in the
-                    document' requirement? This would allow an ALPS doc to be
-                    embedded in
-                    other docs. It would also make it possible to define ALPS
-                    as a
-                    microformat. -leonardr]
+                    The ALPS media type defines a small set of properties. The
+                    properties appear in both the XML and JSON formats, but are 
+                    expressed in  different ways. Below is a list of the 
+                    properties that can appear in an ALPS document.
                 
 </p>
 <a name="anchor9"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.2"></a><h3>5.2.2.&nbsp;
-appears</h3>
+<a name="rfc.section.2.2.1"></a><h3>2.2.1.&nbsp;
+'alps'</h3>
 
 <p>
-                    Indicates the appearance rules to apply to the related
-                    +element+.
-                    Valid values for this element are: 'MUST', 'SHOULD', and 'MAY'. These
-                    values are to be treated as defined in RFC 2119. The
-                    +appears+
-                    property SHOULD appear as a property of the +element+
-                    and/or +child+
-                    elements. If this property does not appear, the value
-                    SHOULD be
-                    treated as 'MAY'.
-                     
-</p>
-<p>
-                
-                    [You've removed MUST NOT and the default MUST NOT for
-                    top-level
-                    elements, which makes it difficult to define documents like
-                    hCalendar. I've written an alternate section below.
-                    -leonardr]
+                        Indicates the root of the ALPS document. This property 
+                        SHOULD have one or more 'element' child 
+                        properties.
                     
-</p>
-<p>
-                 
-                    Indicates the appearance rules for the related +element+ in
-                    a
-                    representation. All valid values for this property are
-                    terms defined in RFC
-                    2119, and have the meaning given in that standard.
-                   
-</p>
-<p>
-                  
-                    The +appears+ property MAY appear as a property of the
-                    +element+
-                    block. This controls whether the element may appear at the
-                    "top
-                    level"; that is, not enclosed in any other element defined
-                    by this
-                    ALPS document. The formal meaning of "top level" varies by
-                    the media
-                    type; see "Applying ALPS to Existing Media Types" for
-                    definitions. [that's TK -leonardr]
-                  
-</p>
-<p>
-                   
-                    Valid values for +appears+ in an +element+ block are: 'MUST',
-                    'SHOULD', 'MAY', and 'MUST NOT'. If this property does not
-                    appear, the
-                    value SHOULD be treated as 'MUST NOT'.
-                 
-</p>
-<p>
-                    
-                    The +appears+ property MAY appear as a property of
-                    a +child+
-                    block. This controls the rules by which the referenced
-                    element may
-                    appear as a child of the enclosing +element+. The formal
-                    meaning of
-                    "enclosing +element+" varies by the media type; see
-                    "Applying ALPS to
-                    Existing Media Types" for definitions. [that's TK -leonardr]
-                
-</p>
-<p>
-                    Valid values for +appears+ in an +child+ block are: 'MUST',
-                    'SHOULD', and 'MAY'. If this property does not appear, the
-                    value
-                    SHOULD be treated as 'MAY'.
-                
 </p>
 <a name="anchor10"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.3"></a><h3>5.2.3.&nbsp;
-cardinality</h3>
+<a name="rfc.section.2.2.2"></a><h3>2.2.2.&nbsp;
+'appears'</h3>
 
 <p>
-                    Indicates the number of times the related +element+ can
-                    appear. Valid
-                    values are 'single' and 'many'.
-                  
-</p>
-<p>                
-                    The +cardinality+ property MAY appear as a property of an
-                    +element+
-                    block. This controls how many times that element may be
-                    used at the
-                    "top level" within a single representation.
-                 
-</p>
-<p>
-                    The +cardinality+ property MAY appear as a property of
-                    a +child+
-                    block. This controls how many times the child element may
-                    occur within
-                    its enclosing element.
-                
-</p>
-<p>
-                    If this property does not appear, the value SHOULD be
-                    treated as
-                    'many'.
+                    Indicates the appearance rules for the related 'element' in
+                    a representation. All valid values for this property are
+                    terms defined in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>, and have the 
+                    meaning given in that standard.
                 
 </p>
 <a name="anchor11"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.4"></a><h3>5.2.4.&nbsp;
-child</h3>
+<a name="rfc.section.2.2.2.1"></a><h3>2.2.2.1.&nbsp;
+Applied to the 'element' block</h3>
 
 <p>
-                    Links to a child element of the related +element+ This MAY
-                    appear in
-                    the ALPS document as a child of an +element+ block. The
-                    +child+
-                    property MAY have an +href+ property pointing to
-                    a definition of an
-                    +element+ block (see +href+ for details).
-                
+                        The 'appears' property MAY appear as a property of the
+                        'element' block. This controls whether the element may 
+                        appear at the "top level"; that is, not enclosed in any 
+                        other element defined by this ALPS document. The formal 
+                        meaning of "top level" varies by the media type; see 
+                        <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for  definitions. 
+                    
 </p>
 <p>
-                    If no +href+ appears, then the +child+ property takes on
-                    the same
-                    features as the +element+ property. [Which ones? It would
-                    also be good
-                    to mention here which properties the +child+ tag supports,
-                    as you do for
-                    +element+. -leonardr]
-                
+                        Valid values for 'appears' in an 'element' block are: "MUST",
+                        "SHOULD", "MAY", and "MUST NOT". If this property does not
+                        appear, the value SHOULD be treated as "MUST NOT".
+                    
 </p>
 <a name="anchor12"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.5"></a><h3>5.2.5.&nbsp;
-description</h3>
+<a name="rfc.section.2.2.2.2"></a><h3>2.2.2.2.&nbsp;
+Applied to the 'child' block</h3>
+
+<p>
+                        The 'appears' property MAY appear as a property of
+                        a 'child' block. This controls the rules by which the 
+                        referenced element may appear as a child of the 
+                        enclosing 'element'. The formal meaning of
+                        "enclosing 'element'" varies by the media type; see
+                        <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for definitions.
+                    
+</p>
+<p>
+                        Valid values for 'appears' in an 'child' block are: "MUST",
+                        "SHOULD", and "MAY". If this property does not appear, the
+                        value  SHOULD be treated as "MAY".
+                    
+</p>
+<a name="anchor13"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.3"></a><h3>2.2.3.&nbsp;
+'cardinality'</h3>
+
+<p>
+                    Indicates the number of times the related 'element' can
+                    appear. Valid values are "single" and "many".
+                     If this property does not appear, the value SHOULD be
+                    treated as "many".
+                
+</p>
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.3.1"></a><h3>2.2.3.1.&nbsp;
+Applied to the 'element' block</h3>
+
+<p>                
+                        The 'cardinality' property MAY appear as a property of an
+                        'element' block. This controls how many times that element 
+                        may be used at the "top level" within a single representation.
+                    
+</p>
+<a name="anchor15"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.3.2"></a><h3>2.2.3.2.&nbsp;
+Applied to the 'child' block</h3>
+
+<p>
+                        The 'cardinality' property MAY appear as a property of
+                        a 'child' block. This controls how many times the 'child' 
+                        element may occur within its enclosing element.
+                    
+</p>
+<a name="anchor16"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.4"></a><h3>2.2.4.&nbsp;
+'child'</h3>
+
+<p>
+                    Links to a child element of the related 'element' This MAY
+                    appear in the ALPS document as a child of an 'element' block. 
+                    The 'child' property MAY have an 'href' property pointing to
+                    a definition of an 'element' block (see 'href' for details).
+                
+</p>
+<p>
+                    If no 'href'' appears, then the 'child'' property takes on
+                    the same features as the 'element'' property. [Which ones? 
+                    It would also be good to mention here which properties the 
+                    'child' tag supports, as you do for 'element''. -leonardr]
+                
+</p>
+<a name="anchor17"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.5"></a><h3>2.2.5.&nbsp;
+'description'</h3>
 
 <p>
                     A text field that contains free-form, usually
@@ -572,270 +555,296 @@ description</h3>
                 
 </p>
 <p>
-                    A +description+ block SHOULD appear as a child of
-                    +element+. When
-                    present, it describes the meaning and use of the related
-                    +element+.
+                    A 'description'' block SHOULD appear as a child of
+                    'element''. When present, it describes the meaning and use 
+                    of the related 'element'.
                 
 </p>
 <p>
-                    A +description+ block MAY appear as a child of +child+.
-                    When present,
-                    it describes the meaning of the relationship between the
-                    +element+ and
-                    its +child+.
+                    A 'description'' block MAY appear as a child of the 'child'
+                    block. When present, it describes the meaning of the 
+                    relationship between the 'element' and its 'child'.
                 
 </p>
 <p>
-                    A +description+ block MAY appear as a child of +alps+. When
-                    present,
-                    it describes the purpose of the ALPS document as a whole.
+                    A 'description'' block MAY appear as a child of 'alps'. 
+                    When present, it describes the purpose of the ALPS document 
+                    as a whole.
                 
 </p>
 <p>
-                    [When writing the example docs I kept wanting to use HTML
-                    markup. Obviously you can do this in ALPS+XML by using
-                    namespaces. Can
-                    we explicitly say that the contents of +description+ may be
-                    HTML
-                    markup, a la the contents of an Atom story? -leonardr]
-                
-</p>
-<a name="anchor13"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.6"></a><h3>5.2.6.&nbsp;
-element</h3>
-
-<p>
-                    Identifies a semantic descriptor. One or more +element+
-                    blocks SHOULD
-                    appear as children of the +alps+ property.
-                
-</p>
-<p>
-                    This property MUST have the following properties:
-                
-</p>
-<blockquote class="text">
-<p>id
-</p>
-<p>type
-</p>
-</blockquote>
-<p>
-                    It SHOULD have the following properties:
-                
-</p>
-<blockquote class="text">
-<p>appears
-</p>
-</blockquote>
-<p>
-                    It MAY have the following properties:
-                
-</p>
-<blockquote class="text">
-<p>cardinality
-</p>
-<p>child
-</p>
-<p>description
-</p>
-<p>name
-</p>
-</blockquote>
-<a name="anchor14"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.7"></a><h3>5.2.7.&nbsp;
-ext</h3>
-
-<a name="anchor15"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.8"></a><h3>5.2.8.&nbsp;
-name</h3>
-
-<p>
-                    Indicates the name of the +element+ as found in generic
-                    representations. It MAY appear as a property of the
-                    +element+.
-                
-</p>
-<p>
-                    This is used when the +element+'s name is used as an +id+
-                    value
-                    elsewhere in the ALPS document. For instance, if a single
-                    ALPS
-                    document defines an element descriptor called 'customer'
-                    and a
-                    safe-idempotent control called 'customer', they can't both
-                    have
-                    +id="customer"+ in the ALPS document. One of them needs to
-                    have some
-                    other +id+, and to set +name="customer"+.
-                
-</p>
-<a name="anchor16"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.9"></a><h3>5.2.9.&nbsp;
-href</h3>
-
-<p>
-                    Points to an +element+ either within the existing ALPS
-                    document or in
-                    another ALPS document.
-                
-</p>
-<p>
-                    The +href+ attribute MUST appear as part of the +child+
-                    element. The
-                    value MUST be a valid URL, with a fragment identifier,
-                    resolving to an
-                    +element+ within an ALPS document.
-                
-</p>
-<p>
-                    [Should &lt;alps&gt; itself support +href+ so it can link to
-                        itself or a
-                        full human-readable doc? Or should we allow a general
-                        &lt;link&gt; tag so you can do rel="help"?]
-
-                            \[ Earlier you said that +child+ didn't need href.
-                            -leonardr \]
-
-                            [I have a half-baked idea about using +href+ within
-                            +element+ as well.
-                            This would let you copy the +fn+ descriptor defined
-                            in hCard into your
-                            custom ALPS document (for performance reasons) but
-                            still make it clear
-                            that your +fn+ descriptor has the same meaning as
-                            the one defined in
-                            hCard. -leonardr]
-                
-</p>
-<a name="anchor17"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.10"></a><h3>5.2.10.&nbsp;
-id</h3>
-
-<p>
-                    A document-wide unique identifier for the related element.
-                    This MUST
-                    appear as a property of each +element+.
-                
-</p>
-<p>
-                    The value of this property will appear within generic
-                    representations
-                    as the name of a semantic descriptor or hypermedia control
-                    (see
-                    Applying ALPS to Existing Media Types for details). The
-                    exception is
-                    when an element defines +name+ as well as +id+. In that
-                    case, the
-                    value of +name+ contains the name of the semantic
-                    descriptor or
-                    hypermedia control, and the value of +id+ is just a unique
-                    ID.
-                
-</p>
-<p>
-                    When applied to an ALPS document, a URI fragment identifier
-                    points to
-                    the element with the appropriate +id+. For example, The
-                    fragment
-                    identifier +customer+ in the URI
-                    +http://example.com/#customer+ refers
-                    to an ALPS element with +id+ set to +customer+.
-                
-</p>
-<p>
-                    A relative URL with a fragment identifier (e.g. "#customer") refers to
-                    an element within the ALPS document containing the
-                    reference.
+                    The 'description' element has one OPTIONAL sub-element:
+                    'format' with two possible values:
+                    </p>
+<ol class="text">
+<li>"text"
+</li>
+<li>"html"
+</li>
+</ol><p>
+                    If the 'format' property is set to "html" the content
+                    within the 'description' block MUST be treated as HTML markup.
+                    If no 'format' property is present, the content SHOULD be
+                    treated as plain text.
                 
 </p>
 <a name="anchor18"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.11"></a><h3>5.2.11.&nbsp;
-type</h3>
+<a name="rfc.section.2.2.6"></a><h3>2.2.6.&nbsp;
+'element'</h3>
 
 <p>
-                    Indicates the type of representation control to which the
-                    +element+ is
-                    applied. This MUST appear for each +element+. Four values
-                    are defined:
+                    Identifies a semantic descriptor. One or more 'element'
+                    blocks SHOULD appear as children of the 'alps' property.
                 
 </p>
 <p>
-                    \[ Would it be OK to say that the default is 'descriptor'?
-                    -leonardr \]
-                
-</p>
+                    This property MUST have the following properties:
+                    </p>
 <ol class="text">
-<li>
-                        'descriptor' refers to a state element (e.g.
-                        +HTML.SPAN+, +HTML.INPUT+, etc.).
-                    
+<li>id
 </li>
-<li>
-                        'safe-idempotent' refers to a hypermedia control that
-                      triggers a safe,
-                      idempotent state transition (i.e. +HTTP.GET+,
-                      +HTTP.HEAD+, etc.).
-                    
+<li>type
 </li>
-<li>
-                        'unsafe-idempotent' refers to a hypermedia control
-                       that triggers an
-                       unsafe, idempotent state transition (i.e. +HTTP.PUT+,
-                       +HTTP.DELETE+ etc.).
-                   
-</li>
-<li>
-                       'unsafe-nonidempotent' refers to a hypermedia control
-                        that triggers an
-                        unsafe, non-idempotent state transition (i.e.
-                        +HTTP.POST+).
-                    
-</li>
-</ol>
+</ol><p>
+                
+</p>
 <p>
-                    \[ How about just idempotent and nonidempotent?
-                        -leonardr \]
+                    It SHOULD have the following properties:
+                    </p>
+<ol class="text">
+<li>appears
+</li>
+</ol><p>
+                
+</p>
+<p>
+                    It MAY have the following properties:
+                    </p>
+<ol class="text">
+<li>cardinality
+</li>
+<li>child
+</li>
+<li>description
+</li>
+<li>name
+</li>
+</ol><p>
                 
 </p>
 <a name="anchor19"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2.12"></a><h3>5.2.12.&nbsp;
-version</h3>
+<a name="rfc.section.2.2.7"></a><h3>2.2.7.&nbsp;
+'ext'</h3>
 
 <p>
-                    Indicates the version number of the ALPS document. This
-                    SHOULD appear as a 
-                    property of the +alps+ property. Currently the only valid
-                    value is '1.0'. 
-                    If no value appears, then it SHOULD be set to '1.0'.
+                    The 'ext' element can be used to extend the ALPS document
+                    with author-specific information. It provides a way to 
+                    customize ALPS documents with additional properties not
+                    covered in this specification. This is an OPTIONAL element.
+                
+</p>
+<p>
+                    The 'ext' element has to properties. The 'name' property
+                    MUST appear for the 'ext' element. It's value MUST be a
+                    URI. The 'value' property MAY appear for the 'ext' element.
+                    It's value is undefined in this specification.
+                
+</p>
+<p>
+                    Here is an XML representation of the 'ext' element:
+                
+</p>
+<p>
+                    &lt;ext name="{uri}" value="" /&gt;
+                
+</p>
+<p> 
+                    Tihe 'ext' element MAY appear as a child of the following
+                    elements:
+                    </p>
+<ol class="text">
+<li>'alps'
+</li>
+<li>'element'
+</li>
+<li>'child'
+</li>
+</ol><p>
+                
+</p>
+<p>
+                    Since the 'ext' element has no specific meaning within 
+                    the this specification, it MUST be ignored by any
+                    application that does not understand it's use and meaning.
+                
+</p>
+<p>
+                    Authors who define 'ext' elements SHOULD register these
+                    extensions with the ALPS Registry (see <a class='info' href='#alps-registry'>Section&nbsp;4<span> (</span><span class='info'>The ALPS Registry</span><span>)</span></a>) and use the URI provided by
+                    the registry in the 'name' property of their extension.
                 
 </p>
 <a name="anchor20"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.3"></a><h3>5.3.&nbsp;
-XML Representation</h3>
+<a name="rfc.section.2.2.8"></a><h3>2.2.8.&nbsp;
+'href'</h3>
 
+<p>
+                    Points to an 'element' either within the existing ALPS
+                    document or in another ALPS document.
+                
+</p>
+<p>
+                    The 'href'' attribute MUST appear as part of the 'child'
+                    element. The value MUST be a valid URL, with a fragment 
+                    identifier, resolving to an 'element' within an ALPS 
+                    document.
+                
+</p>
+<p>
+                    [Should &lt;alps&gt; itself support +href+ so it can link 
+                    to itself or a full human-readable doc? Or should we allow 
+                    a general &lt;link&gt; tag so you can do rel="help"?]
+
+                    [Earlier you said that +child+ didn't need href. -leonardr]
+
+                    [I have a half-baked idea about using +href+ within
+                    'element' as well.  This would let you copy the +fn+ 
+                    descriptor defined in hCard into your custom ALPS document 
+                    (for performance reasons) but still make it clear that 
+                    your +fn+ descriptor has the same meaning as the one defined 
+                    in hCard. -leonardr]
+                
+</p>
 <a name="anchor21"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.4"></a><h3>5.4.&nbsp;
-JSON Representation</h3>
+<a name="rfc.section.2.2.9"></a><h3>2.2.9.&nbsp;
+'id'</h3>
 
+<p>
+                    A document-wide unique identifier for the related element.
+                    This MUST appear as a property of each 'element'.
+                
+</p>
+<p>
+                    The value of this property will appear within generic
+                    representations as the name of a semantic descriptor or 
+                    hypermedia control (see <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for 
+                    details). The exception is when an element defines 'name'
+                    as well as 'id'. In that case, the value of 'name'
+                    contains the name of the semantic descriptor or
+                    hypermedia control, and the value of 'id'' is just a unique
+                    ID for the current document.
+                
+</p>
+<p>
+                    When applied to an ALPS document, a URI fragment identifier
+                    points to the element with the appropriate 'id''. For example, 
+                    the fragment identifier "customer" in the URI
+                    http://example.com/#customer refers to an ALPS element 
+                    with 'id' set to "customer".
+                
+</p>
+<p>
+                    A relative URL with a fragment identifier (e.g. "#customer") 
+                    refers to an element within the ALPS document containing the
+                    reference.
+                
+</p>
 <a name="anchor22"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.5"></a><h3>5.5.&nbsp;
-RDFs+OWL Representation</h3>
+<a name="rfc.section.2.2.10"></a><h3>2.2.10.&nbsp;
+'name'</h3>
 
+<p>
+                    Indicates the name of the 'element'' as found in generic
+                    representations. It MAY appear as a property of the
+                    'element'.
+                
+</p>
+<p>
+                    This is used when the name of the 'element' is used as an 
+                    'id' value elsewhere in the ALPS document. For instance, 
+                    if a single ALPS document defines an element descriptor 
+                    called "customer" and a safe-idempotent control called 
+                    "customer", they can't both have 'id="customer"' in the 
+                    ALPS document. One of them needs to have some other 'id', 
+                    and to set 'name="customer"''.
+                
+</p>
 <a name="anchor23"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6"></a><h3>6.&nbsp;
+<a name="rfc.section.2.2.11"></a><h3>2.2.11.&nbsp;
+'type'</h3>
+
+<p>
+                    Indicates the type of representation control to which the
+                    element is applied. This MUST appear for each element. 
+                    Four valid values are defined:
+                
+                    </p>
+<ol class="text">
+<li>
+                            "descriptor"" refers to a state element (e.g.
+                            HTML.SPAN, HTML.INPUT, etc.).
+                        
+</li>
+<li>
+                           "safe"' refers to a hypermedia control that
+                           triggers a safe, idempotent state transition 
+                           (i.e. HTTP.GET, HTTP.HEAD, etc.).
+                        
+</li>
+<li>
+                            "idempotent" refers to a hypermedia control
+                            that triggers an unsafe, idempotent state 
+                            transition (i.e. HTTP.PUT, HTTP.DELETE etc.).
+                       
+</li>
+<li>
+                            "unsafe" refers to a hypermedia control
+                            that triggers an unsafe, non-idempotent state 
+                            transition (i.e. HTTP.POST).
+                        
+</li>
+</ol><p>
+                    
+                    If no 'type' property is associated with the element
+                    then the 'type="descriptor"' is implied.
+                    
+                
+</p>
+<a name="anchor24"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.12"></a><h3>2.2.12.&nbsp;
+'version'</h3>
+
+<p>
+                    Indicates the version number of the ALPS document. This
+                    SHOULD appear as a property of the 'alps'' property. 
+                    Currently the only valid value is "1.0". 
+                    If no value appears, then it SHOULD be set to "1.0".
+                
+</p>
+<a name="xml-representation"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3"></a><h3>2.3.&nbsp;
+XML Representation</h3>
+
+<p>[TK]
+</p>
+<a name="json-representation"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.4"></a><h3>2.4.&nbsp;
+JSON Representation</h3>
+
+<p>[TK]
+</p>
+<a name="instructions"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
 Instructions on Applying ALPS to Existing Media Types</h3>
 
 <p>
@@ -852,101 +861,368 @@ Instructions on Applying ALPS to Existing Media Types</h3>
                 type you have to define "enclosing element", "link", etc]
             
 </p>
-<a name="anchor24"></a><br /><hr />
+<a name="a-simple-alps-document"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6.1"></a><h3>6.1.&nbsp;
+<a name="rfc.section.3.1"></a><h3>3.1.&nbsp;
 A Simple ALPS Document</h3>
 
-<a name="anchor25"></a><br /><hr />
+<p>[TK]
+</p>
+<a name="html-example"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6.2"></a><h3>6.2.&nbsp;
+<a name="rfc.section.3.2"></a><h3>3.2.&nbsp;
 HTML Example</h3>
 
-<a name="anchor26"></a><br /><hr />
+<p>[TK]
+</p>
+<a name="collection-json-example"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6.3"></a><h3>6.3.&nbsp;
+<a name="rfc.section.3.3"></a><h3>3.3.&nbsp;
 Collection+JSON Example</h3>
 
-<a name="anchor27"></a><br /><hr />
+<a name="linking-to-alps-documents"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6.4"></a><h3>6.4.&nbsp;
+<a name="rfc.section.3.4"></a><h3>3.4.&nbsp;
 Linking to ALPS Documents</h3>
 
 <p>
                     When a representation links to an ALPS document describing
-                    its
-                    semantics, the "profile" link relation (found in the
-                    IANA link
-                    registry) SHOULD be used to describe the relationship
-                    between the
-                    representation and the ALPS document.
+                    its semantics, the "profile" link relation (found in the
+                    IANA link registry) SHOULD be used to describe the relationship
+                    between the representation and the ALPS document.
                 
 </p>
 <p>
                     A single representation may be "profile"-ed more than one
-                    ALPS
-                    document. If two ALPS documents give conflicting semantics
-                    for the
-                    same element, the document linked to earlier in the
-                    representation
-                    SHOULD take precedence.
+                    ALPS  document. If two ALPS documents give conflicting semantics
+                    for the same element, the document linked to earlier in the
+                    representation SHOULD take precedence.
                 
 </p>
-<a name="anchor28"></a><br /><hr />
+<a name="alps-registry"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.7"></a><h3>7.&nbsp;
+<a name="rfc.section.4"></a><h3>4.&nbsp;
 The ALPS Registry</h3>
 
-<a name="anchor29"></a><br /><hr />
+<a name="what-is-the-alps-registry"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.7.1"></a><h3>7.1.&nbsp;
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
 What is the ALPS Registry</h3>
 
-<a name="anchor30"></a><br /><hr />
+<p>[TK]
+</p>
+<a name="searching-the-registry"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.7.2"></a><h3>7.2.&nbsp;
+<a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
 Searching the Registry</h3>
 
-<a name="anchor31"></a><br /><hr />
+<p>[TK]
+</p>
+<a name="contributing-to-the-registry"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.7.3"></a><h3>7.3.&nbsp;
+<a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
 Contributing to the Registry</h3>
 
-<a name="anchor32"></a><br /><hr />
+<p>[TK]
+</p>
+<a name="iana-considerations"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.8"></a><h3>8.&nbsp;
+<a name="rfc.section.5"></a><h3>5.&nbsp;
 IANA Considerations</h3>
 
 <p>
-                <a class='info' href='#comment.anchor33'>[anchor33]<span> (</span><span class='info'>INSERT TEXT</span><span>)</span></a><a name='anchor33'></a>
+                 This specification establishes two media types:
+                 'application/alps+xml' and 'application/alps+json'
             
 </p>
-<a name="anchor34"></a><br /><hr />
+<a name="iana-alps-xml"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.9"></a><h3>9.&nbsp;
-Security Considerations</h3>
+<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+application/alps+xml</h3>
 
 <p>
-                <a class='info' href='#comment.anchor35'>[anchor35]<span> (</span><span class='info'>INSERT TEXT</span><span>)</span></a><a name='anchor35'></a>
-            
+                    </p>
+<blockquote class="text"><dl>
+<dt>Type name:</dt>
+<dd>
+                            application
+                        
+</dd>
+<dt>Subtype name:</dt>
+<dd>
+                            alps+xml
+                        
+</dd>
+<dt>Required parameters:</dt>
+<dd>
+                            None
+                        
+</dd>
+<dt>Optional parameters:</dt>
+<dd>
+                            
+<blockquote class="text"><dl>
+<dt>charset</dt>
+<dd>
+                                    This parameter has identical semantics to the
+                                    charset parameter of the 'application/xml'
+                                    media type as specified in <a class='info' href='#RFC3023'>[RFC3023]<span> (</span><span class='info'>Murata, M., St. Laurent, S., and D. Kohn, &ldquo;XML Media Types,&rdquo; January&nbsp;2001.</span><span>)</span></a>.
+                                
+</dd>
+</dl></blockquote>
+                        
+</dd>
+<dt>Encoding considerations:</dt>
+<dd>
+                            
+<blockquote class="text"><dl>
+<dt>binary</dt>
+<dd>
+                                    Same as encoding considerations of
+                                    application/xml as specified in <a class='info' href='#RFC3023'>[RFC3023]<span> (</span><span class='info'>Murata, M., St. Laurent, S., and D. Kohn, &ldquo;XML Media Types,&rdquo; January&nbsp;2001.</span><span>)</span></a>.
+                                
+</dd>
+</dl></blockquote>
+                        
+</dd>
+<dt>Security considerations:</dt>
+<dd>
+                            This format shares security issues common to all XML
+                            content types. It does not provide executable content. 
+                            Information contained in ALPS documents do not 
+                            require privacy or integrity services.
+                        
+</dd>
+<dt>Interoperability considerations:</dt>
+<dd>
+                            ALPS is not described by a DTD and applies only
+                            the well-formedness rules of XML. It should only 
+                            be parsed by a non-validating parser.
+                        
+</dd>
+<dt>Published specification:</dt>
+<dd>
+                            This Document
+                        
+</dd>
+<dt>Applications that use this media type:</dt>
+<dd>
+                            Various
+                        
+</dd>
+<dt>Additional information:</dt>
+<dd>
+                            
+<blockquote class="text"><dl>
+<dt>magic number(s):</dt>
+<dd>
+                                    none
+                                
+</dd>
+<dt>file extensions:</dt>
+<dd>
+                                    .xml
+                                
+</dd>
+<dt>macintosh type file code:</dt>
+<dd>
+                                    TEXT
+                                
+</dd>
+<dt>object idenfiers:</dt>
+<dd>
+                                    none
+                                
+</dd>
+</dl></blockquote>
+                        
+</dd>
+<dt>person to contact for further information:</dt>
+<dd>
+                            
+<blockquote class="text"><dl>
+<dt>Name:</dt>
+<dd>
+                                    Mike Amundsen
+                                
+</dd>
+<dt>Email:</dt>
+<dd>
+                                    mca@amundsen.com
+                                
+</dd>
+</dl></blockquote>
+                        
+</dd>
+<dt>Intended usage:</dt>
+<dd>
+                            Common
+                        
+</dd>
+<dt>Author/change controller:</dt>
+<dd>
+                            Mike Amundsen
+                        
+</dd>
+</dl></blockquote><p>
+                
 </p>
-<a name="anchor36"></a><br /><hr />
+<a name="iana-alps-json"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.10"></a><h3>10.&nbsp;
-Internationalisation Considerations</h3>
+<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
+application/alps+json</h3>
 
 <p>
-                <a class='info' href='#comment.anchor37'>[anchor37]<span> (</span><span class='info'>INSERT TEXT (CONSIDER RFC 5987)</span><span>)</span></a><a name='anchor37'></a>
+                    </p>
+<blockquote class="text"><dl>
+<dt>Type name:</dt>
+<dd>
+                            application
+                        
+</dd>
+<dt>Subtype name:</dt>
+<dd>
+                            alps+json
+                        
+</dd>
+<dt>Required parameters:</dt>
+<dd>
+                            None
+                        
+</dd>
+<dt>Optional parameters:</dt>
+<dd>
+                            None
+                        
+</dd>
+<dt>Encoding considerations:</dt>
+<dd>
+                            binary
+                        
+</dd>
+<dt>Security considerations:</dt>
+<dd>
+                            This media type shares security issues common to
+                            all JSON content types. See <a class='info' href='#RFC4627'>[RFC4627]<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> 
+                            Section #6 for additional information. ALPS+JSON
+                            does not provide executable content.
+                            Information contained in ALPS+JSON documents
+                            do not require privacy or integrity services.
+                        
+</dd>
+<dt>Interoperability considerations:</dt>
+<dd>
+                            None
+                        
+</dd>
+<dt>Published specification:</dt>
+<dd>
+                            This Document
+                        
+</dd>
+<dt>Applications that use this media type:</dt>
+<dd>
+                            Various
+                        
+</dd>
+<dt>Additional information:</dt>
+<dd>
+                            
+<blockquote class="text"><dl>
+<dt>magic number(s):</dt>
+<dd>
+                                    none
+                                
+</dd>
+<dt>file extensions:</dt>
+<dd>
+                                    .json
+                                
+</dd>
+<dt>macintosh type file code:</dt>
+<dd>
+                                    TEXT
+                                
+</dd>
+<dt>object idenfiers:</dt>
+<dd>
+                                    none
+                                
+</dd>
+</dl></blockquote>
+                        
+</dd>
+<dt>person to contact for further information:</dt>
+<dd>
+                            
+<blockquote class="text"><dl>
+<dt>Name:</dt>
+<dd>
+                                    Mike Amundsen
+                                
+</dd>
+<dt>Email:</dt>
+<dd>
+                                    mca@amundsen.com
+                                
+</dd>
+</dl></blockquote>
+                        
+</dd>
+<dt>Intended usage:</dt>
+<dd>
+                            Common
+                        
+</dd>
+<dt>Author/change controller:</dt>
+<dd>
+                            Mike Amundsen
+                        
+</dd>
+</dl></blockquote><p>
+                
+</p>
+<a name="internationalization"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+Internationalization Considerations</h3>
+
+<p>[TK]
+</p>
+<p>
+                <a class='info' href='#comment.anchor25'>[anchor25]<span> (</span><span class='info'>insert text (consider rfc 5987)</span><span>)</span></a><a name='anchor25'></a>
             
 </p>
+<a name="anchor26"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.7"></a><h3>7.&nbsp;
+Acknowledgements</h3>
+
+<p>[TK]
+</p>
+<a name="rfc.references"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8"></a><h3>8.&nbsp;
+References</h3>
+
 <a name="rfc.references1"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<h3>11.&nbsp;Normative References</h3>
+<h3>8.1.&nbsp;Normative References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
-<td class="author-text"><a href="mailto:sob at harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997.</td></tr>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3023">[RFC3023]</a></td>
+<td class="author-text">Murata, M., St. Laurent, S., and D. Kohn, &ldquo;<a href="http://tools.ietf.org/html/rfc3023">XML Media Types</a>,&rdquo; RFC&nbsp;3023, January&nbsp;2001 (<a href="http://www.rfc-editor.org/rfc/rfc3023.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC4627">[RFC4627]</a></td>
+<td class="author-text">Crockford, D., &ldquo;<a href="http://tools.ietf.org/html/rfc4627">The application/json Media Type for JavaScript Object Notation (JSON)</a>,&rdquo; RFC&nbsp;4627, July&nbsp;2006 (<a href="http://www.rfc-editor.org/rfc/rfc4627.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC5988">[RFC5988]</a></td>
-<td class="author-text"><a href="mailto:mnot at mnot.net">Nottingham, M.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>,&rdquo; RFC&nbsp;5988, October&nbsp;2010.</td></tr>
+<td class="author-text">Nottingham, M., &ldquo;<a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>,&rdquo; RFC&nbsp;5988, October&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5988.txt">TXT</a>).</td></tr>
+</table>
+
+<a name="rfc.references2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>8.2.&nbsp;Informative References</h3>
+<table width="99%" border="0">
 </table>
 
 <a name="rfc.authors"></a><br /><hr />
