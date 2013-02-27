@@ -143,8 +143,8 @@
 <table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
 <tr><td class="header">Network Working Group</td><td class="header">M. Amundsen</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">Layer 7 Technologies</td></tr>
-<tr><td class="header">Expires: August 29, 2013</td><td class="header">L. Richardson</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">February 25, 2013</td></tr>
+<tr><td class="header">Expires: August 31, 2013</td><td class="header">L. Richardson</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">February 27, 2013</td></tr>
 </table></td></tr></table>
 <h1><br />Application-Level Profile Semantics (ALPS)<br />draft-amundsen-richardson-alps-00</h1>
 
@@ -155,8 +155,7 @@
                 semantic descriptions (similar to those defined by HTML
                 microformats) in a way that incorporates both human-readable documentation
                 and machine-readable instructions on applying semantic descriptions
-                to elements within a wide range of media-type
-                representations.
+                to elements within a wide range of media-type representations.
             
 </p>
 <h3>Editorial Note (To be removed by RFC Editor)</h3>
@@ -182,7 +181,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on August 29, 2013.</p>
+This Internet-Draft will expire on August 31, 2013.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -217,29 +216,33 @@ ALPS Documents<br />
 Compliance<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">2.2.</a>&nbsp;
 ALPS Document Properties<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">2.2.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-alps">2.2.1.</a>&nbsp;
 'alps'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">2.2.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-appears">2.2.2.</a>&nbsp;
 'appears'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">2.2.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-cardinality">2.2.3.</a>&nbsp;
 'cardinality'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">2.2.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-child">2.2.4.</a>&nbsp;
 'child'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor17">2.2.5.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-description">2.2.5.</a>&nbsp;
 'description'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor18">2.2.6.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-element">2.2.6.</a>&nbsp;
 'element'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor19">2.2.7.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-ext">2.2.7.</a>&nbsp;
 'ext'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor20">2.2.8.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-format">2.2.8.</a>&nbsp;
+'format'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-href">2.2.9.</a>&nbsp;
 'href'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor21">2.2.9.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-id">2.2.10.</a>&nbsp;
 'id'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor22">2.2.10.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-name">2.2.11.</a>&nbsp;
 'name'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">2.2.11.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-type">2.2.12.</a>&nbsp;
 'type'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">2.2.12.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-value">2.2.13.</a>&nbsp;
+'value'<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-version">2.2.14.</a>&nbsp;
 'version'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#xml-representation">2.3.</a>&nbsp;
 XML Representation<br />
@@ -271,7 +274,7 @@ application/alps+xml<br />
 application/alps+json<br />
 <a href="#internationalization">6.</a>&nbsp;
 Internationalization Considerations<br />
-<a href="#anchor26">7.</a>&nbsp;
+<a href="#anchor14">7.</a>&nbsp;
 Acknowledgements<br />
 <a href="#rfc.references1">8.</a>&nbsp;
 References<br />
@@ -293,9 +296,10 @@ Introduction</h3>
                 in a way that incorporates both human-readable documentation
                 and machine-readable instructions on applying semantic descriptions
                 to elements within application-agnostic media-type representations
-                (such as HTML, HAL, Collection+JSON, and Siren). This document also
-                sets a standard for creating and registering ALPS document identifers
-                and provides suggested conventions for applying ALPS descriptors to
+                (such as HTML, HAL, Collection+JSON, Siren, etc.). This document also
+                identifies an ALPS Registry, sets a standard for creating and 
+                registering ALPS document identifers in that registry, and 
+                provides suggested conventions for applying ALPS descriptions to
                 existing media types.
             
 </p>
@@ -428,7 +432,7 @@ ALPS Document Properties</h3>
                     properties that can appear in an ALPS document.
                 
 </p>
-<a name="anchor9"></a><br /><hr />
+<a name="prop-alps"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.1"></a><h3>2.2.1.&nbsp;
 'alps'</h3>
@@ -439,19 +443,38 @@ ALPS Document Properties</h3>
                         properties.
                     
 </p>
-<a name="anchor10"></a><br /><hr />
+<p>
+                        Examples:
+                        </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                                &lt;alps&gt;...&lt;/alps&gt;
+                            
+</dd>
+<dt>JSON:</dt>
+<dd>
+                                {"alps" : ... }
+                            
+</dd>
+</dl></blockquote><p>
+                    
+</p>
+<a name="prop-appears"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.2"></a><h3>2.2.2.&nbsp;
 'appears'</h3>
 
 <p>
-                    Indicates the appearance rules for the related 'element' in
+                    Indicates the appearance rules for the related 
+                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>  or 
+                    <a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a> in
                     a representation. All valid values for this property are
                     terms defined in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>, and have the 
                     meaning given in that standard.
                 
 </p>
-<a name="anchor11"></a><br /><hr />
+<a name="anchor9"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.2.1"></a><h3>2.2.2.1.&nbsp;
 Applied to the 'element' block</h3>
@@ -466,12 +489,29 @@ Applied to the 'element' block</h3>
                     
 </p>
 <p>
+                        Examples:
+                        </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                                &lt;element ... appears="MUST NOT"&gt;
+                            
+</dd>
+<dt>JSON:</dt>
+<dd>
+                                {"element" : "{..., "appears" : "MUST NOT"}}
+                            
+</dd>
+</dl></blockquote><p>
+                    
+</p>
+<p>
                         Valid values for 'appears' in an 'element' block are: "MUST",
                         "SHOULD", "MAY", and "MUST NOT". If this property does not
                         appear, the value SHOULD be treated as "MUST NOT".
                     
 </p>
-<a name="anchor12"></a><br /><hr />
+<a name="anchor10"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.2.2"></a><h3>2.2.2.2.&nbsp;
 Applied to the 'child' block</h3>
@@ -486,24 +526,43 @@ Applied to the 'child' block</h3>
                     
 </p>
 <p>
+                        Examples:
+                        </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                                &lt;child ... appears="MUST NOT"&gt;
+                            
+</dd>
+<dt>JSON:</dt>
+<dd>
+                                {"child" : "{..., "appears" : "MUST NOT"}}
+                            
+</dd>
+</dl></blockquote><p>
+                    
+</p>
+<p>
                         Valid values for 'appears' in an 'child' block are: "MUST",
                         "SHOULD", and "MAY". If this property does not appear, the
                         value  SHOULD be treated as "MAY".
                     
 </p>
-<a name="anchor13"></a><br /><hr />
+<a name="prop-cardinality"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.3"></a><h3>2.2.3.&nbsp;
 'cardinality'</h3>
 
 <p>
-                    Indicates the number of times the related 'element' can
+                    Indicates the number of times the related 
+                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> or
+                    <a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a> can
                     appear. Valid values are "single" and "many".
                      If this property does not appear, the value SHOULD be
                     treated as "many".
                 
 </p>
-<a name="anchor14"></a><br /><hr />
+<a name="anchor11"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.3.1"></a><h3>2.2.3.1.&nbsp;
 Applied to the 'element' block</h3>
@@ -514,7 +573,24 @@ Applied to the 'element' block</h3>
                         may be used at the "top level" within a single representation.
                     
 </p>
-<a name="anchor15"></a><br /><hr />
+<p>
+                        Examples:
+                        </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                                &lt;element ... candinality="many"&gt;
+                            
+</dd>
+<dt>JSON:</dt>
+<dd>
+                                {"element" : "{..., "cardinaltiy" : "many"}}
+                            
+</dd>
+</dl></blockquote><p>
+                    
+</p>
+<a name="anchor12"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.3.2"></a><h3>2.2.3.2.&nbsp;
 Applied to the 'child' block</h3>
@@ -525,26 +601,70 @@ Applied to the 'child' block</h3>
                         element may occur within its enclosing element.
                     
 </p>
-<a name="anchor16"></a><br /><hr />
+<p>
+                        Examples:
+                        </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                                &lt;child ... cardinality="single"&gt;
+                            
+</dd>
+<dt>JSON:</dt>
+<dd>
+                                {"child" : "{..., "cardinality" : "single"}}
+                            
+</dd>
+</dl></blockquote><p>
+                    
+</p>
+<a name="prop-child"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.4"></a><h3>2.2.4.&nbsp;
 'child'</h3>
 
 <p>
-                    Links to a child element of the related 'element' This MAY
-                    appear in the ALPS document as a child of an 'element' block. 
-                    The 'child' property MAY have an 'href' property pointing to
-                    a definition of an 'element' block (see 'href' for details).
+                    Identifies a child of the <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>
+                    block. The 'child' 
+                    block is almost identical to the 'element' block and MUST
+                    only appear as a direct child of 'element.' This is the 
+                    way ALPS authors can reuse existing 'element' blocks in the
+                    current or any external ALPS document.
                 
 </p>
 <p>
-                    If no 'href'' appears, then the 'child'' property takes on
-                    the same features as the 'element'' property. [Which ones? 
-                    It would also be good to mention here which properties the 
-                    'child' tag supports, as you do for 'element''. -leonardr]
+                    The 'child' element MUST have at least an 
+                    <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a> or 
+                    <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a>
+                    property. It MAY have both. Additionally, the 'child' element 
+                    MAY have any of the following proeprties:
+                    </p>
+<ol class="text">
+<li><a class='info' href='#prop-appears'>'appears'<span> (</span><span class='info'>'appears'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-cardinality'>'cardinality'<span> (</span><span class='info'>'cardinality'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-name'>'name'<span> (</span><span class='info'>'name'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-type'>'type'<span> (</span><span class='info'>'type'</span><span>)</span></a>
+</li>
+</ol><p>
                 
 </p>
-<a name="anchor17"></a><br /><hr />
+<p>
+                    The 'href' property MUST be a dereferencable URL that points 
+                    to another 'element' block either within the current ALPS
+                    document or in another document. If the 'child' element 
+                    has an 'href' property, any other properties of the 'child' 
+                    element (e.g. 'appears', 'cardinality', etc.) MUST override
+                    corresponding properties in the referred 'element'.
+                
+</p>
+<a name="prop-description"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.5"></a><h3>2.2.5.&nbsp;
 'description'</h3>
@@ -555,26 +675,96 @@ Applied to the 'child' block</h3>
                 
 </p>
 <p>
-                    A 'description'' block SHOULD appear as a child of
-                    'element''. When present, it describes the meaning and use 
+                    A 'description' block SHOULD appear as a child of
+                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>. 
+                    When present, it describes the meaning and use 
                     of the related 'element'.
+                    </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;element ... &gt;
+    &lt;description&gt;...&lt;/description&gt;
+&lt;/element&gt;
+</pre></div>
+                        
+</dd>
+<dt>JSON:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"element" : {...}
+    {"description" : {"value" : "..."}
+}
+</pre></div>
+                        
+</dd>
+</dl></blockquote><p>
                 
 </p>
 <p>
-                    A 'description'' block MAY appear as a child of the 'child'
+                    A 'description' block MAY appear as a child of the 
+                    <a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a>
                     block. When present, it describes the meaning of the 
                     relationship between the 'element' and its 'child'.
+                    </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;child ... &gt;
+    &lt;description&gt;...&lt;/description&gt;
+&lt;/child&gt;
+</pre></div>
+                        
+</dd>
+<dt>JSON:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"child" : {...}
+    {"description" : {"value" : "..."}
+}
+</pre></div>
+                        
+</dd>
+</dl></blockquote><p>
+                    
                 
 </p>
 <p>
-                    A 'description'' block MAY appear as a child of 'alps'. 
+                    A 'description' block MAY appear as a child of 
+                    <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>. 
                     When present, it describes the purpose of the ALPS document 
                     as a whole.
+                    </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;alps&gt;
+    &lt;description&gt;...&lt;/description&gt;
+    ...
+&lt;/apls&gt;
+</pre></div>
+                        
+</dd>
+<dt>JSON:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"alps :
+   "description" : { "value" : "..."},
+   ...
+}
+</pre></div>
+                        
+</dd>
+</dl></blockquote><p>
+                    
                 
 </p>
 <p>
                     The 'description' element has one OPTIONAL sub-element:
-                    'format' with two possible values:
+                    <a class='info' href='#prop-format'>'format'<span> (</span><span class='info'>'format'</span><span>)</span></a> with two possible values:
                     </p>
 <ol class="text">
 <li>"text"
@@ -586,54 +776,68 @@ Applied to the 'child' block</h3>
                     within the 'description' block MUST be treated as HTML markup.
                     If no 'format' property is present, the content SHOULD be
                     treated as plain text.
+                    </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;description format="html"&gt;
+   &lt;h1&gt;Date of Birth&lt;/h1&gt;
+   &lt;p&gt;...&lt;/p&gt;
+&lt;/description&gt;
+</pre></div>
+                        
+</dd>
+<dt>JSON:</dt>
+<dd>
+                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{"description" :
+    {"format" : "text" : "value" : "Date of Birth ..."}
+}
+</pre></div>
+                        
+</dd>
+</dl></blockquote><p>
                 
 </p>
-<a name="anchor18"></a><br /><hr />
+<a name="prop-element"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.6"></a><h3>2.2.6.&nbsp;
 'element'</h3>
 
 <p>
                     Identifies a semantic descriptor. One or more 'element'
-                    blocks SHOULD appear as children of the 'alps' property.
+                    blocks SHOULD appear as children of the <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> block.
                 
 </p>
 <p>
-                    This property MUST have the following properties:
+                    The 'element' property MUST have an 
+                    <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a> property.
+                    It SHOULD have an 
+                    <a class='info' href='#prop-appears'>'appears'<span> (</span><span class='info'>'appears'</span><span>)</span></a> and a 
+                    <a class='info' href='#prop-type'>'type'<span> (</span><span class='info'>'type'</span><span>)</span></a> property. See the
+                    documentation for these properties for the default values
+                    when they are missing.
+                
+</p>
+<p>
+                    The 'element' MAY have the following properties:
                     </p>
 <ol class="text">
-<li>id
+<li><a class='info' href='#prop-cardinality'>'cardinality'<span> (</span><span class='info'>'cardinality'</span><span>)</span></a>
 </li>
-<li>type
+<li><a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a>
+</li>
+<li><a class='info' href='#prop-name'>'name'<span> (</span><span class='info'>'name'</span><span>)</span></a>
 </li>
 </ol><p>
                 
 </p>
-<p>
-                    It SHOULD have the following properties:
-                    </p>
-<ol class="text">
-<li>appears
-</li>
-</ol><p>
-                
-</p>
-<p>
-                    It MAY have the following properties:
-                    </p>
-<ol class="text">
-<li>cardinality
-</li>
-<li>child
-</li>
-<li>description
-</li>
-<li>name
-</li>
-</ol><p>
-                
-</p>
-<a name="anchor19"></a><br /><hr />
+<a name="prop-ext"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.7"></a><h3>2.2.7.&nbsp;
 'ext'</h3>
@@ -646,30 +850,47 @@ Applied to the 'child' block</h3>
                 
 </p>
 <p>
-                    The 'ext' element has to properties. The 'name' property
+                    The 'ext' element has to properties. The 
+                    <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a> property
                     MUST appear for the 'ext' element. It's value MUST be a
-                    URI. The 'value' property MAY appear for the 'ext' element.
-                    It's value is undefined in this specification.
+                    URI. The 
+                    <a class='info' href='#prop-value'>'value'<span> (</span><span class='info'>'value'</span><span>)</span></a> 
+                    property MAY appear for the 'ext' element.
+                    The meaning and use of the value property is described in 
+                    the document found by dereferencing the 'href' property
+                    of the 'ext' element. 
                 
 </p>
 <p>
-                    Here is an XML representation of the 'ext' element:
+                    Examples:
+                    </p>
+<blockquote class="text"><dl>
+<dt>XML:</dt>
+<dd>
+                            &lt;ext href="http://alps.io/extensions/range.alps"
+                            value="north south east west" &gt;
+                        
+</dd>
+<dt>JSON:</dt>
+<dd>
+                            {"ext" : {"href"
+                            : "http://alps.io/extensions/range.alps",
+                            value="north south east west"}}
+                        
+</dd>
+</dl></blockquote><p>
                 
 </p>
 <p>
-                    &lt;ext name="{uri}" value="" /&gt;
-                
-</p>
-<p> 
-                    Tihe 'ext' element MAY appear as a child of the following
+                    The 'ext' element MAY appear as a child of the following
                     elements:
                     </p>
 <ol class="text">
-<li>'alps'
+<li><a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>
 </li>
-<li>'element'
+<li><a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a>
 </li>
-<li>'child'
+<li><a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>
 </li>
 </ol><p>
                 
@@ -686,30 +907,49 @@ Applied to the 'child' block</h3>
                     the registry in the 'name' property of their extension.
                 
 </p>
-<a name="anchor20"></a><br /><hr />
+<a name="prop-format"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.2.8"></a><h3>2.2.8.&nbsp;
+'format'</h3>
+
+<p>
+                    Indicates whether the associated content in the should be 
+                    treated as 'text' or 'html'. This property MAY appear as
+                    a property of the <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a> 
+                    element.
+                
+</p>
+<a name="prop-href"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.9"></a><h3>2.2.9.&nbsp;
 'href'</h3>
 
 <p>
-                    Points to an 'element' either within the existing ALPS
+                    Points to an 
+                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>
+                    either within the existing ALPS
                     document or in another ALPS document.
                 
 </p>
 <p>
-                    The 'href'' attribute MUST appear as part of the 'child'
+                    The 'href' attribute MUST appear as part of the 
+                    <a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a>
                     element. The value MUST be a valid URL, with a fragment 
                     identifier, resolving to an 'element' within an ALPS 
                     document.
                 
 </p>
 <p>
+                    [TK let's talk about these items - MCA]
+                
+</p>
+<p>
                     [Should &lt;alps&gt; itself support +href+ so it can link 
                     to itself or a full human-readable doc? Or should we allow 
                     a general &lt;link&gt; tag so you can do rel="help"?]
-
-                    [Earlier you said that +child+ didn't need href. -leonardr]
-
+                
+</p>
+<p>
                     [I have a half-baked idea about using +href+ within
                     'element' as well.  This would let you copy the +fn+ 
                     descriptor defined in hCard into your custom ALPS document 
@@ -718,25 +958,28 @@ Applied to the 'child' block</h3>
                     in hCard. -leonardr]
                 
 </p>
-<a name="anchor21"></a><br /><hr />
+<a name="prop-id"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.2.2.9"></a><h3>2.2.9.&nbsp;
+<a name="rfc.section.2.2.10"></a><h3>2.2.10.&nbsp;
 'id'</h3>
 
 <p>
                     A document-wide unique identifier for the related element.
-                    This MUST appear as a property of each 'element'.
+                    This MUST appear as a property of each 
+                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>.
                 
 </p>
 <p>
                     The value of this property will appear within generic
                     representations as the name of a semantic descriptor or 
                     hypermedia control (see <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for 
-                    details). The exception is when an element defines 'name'
-                    as well as 'id'. In that case, the value of 'name'
-                    contains the name of the semantic descriptor or
-                    hypermedia control, and the value of 'id'' is just a unique
-                    ID for the current document.
+                    details). The exception is when an element defines 
+                    <a class='info' href='#prop-name'>'name'<span> (</span><span class='info'>'name'</span><span>)</span></a>
+                    as well as 
+                    <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a>. In that case, the value 
+                    of 'name' contains the name of the semantic descriptor or
+                    hypermedia control, and the value of 'id' is just a unique
+                    internal identifier for the current document.
                 
 </p>
 <p>
@@ -753,30 +996,32 @@ Applied to the 'child' block</h3>
                     reference.
                 
 </p>
-<a name="anchor22"></a><br /><hr />
+<a name="prop-name"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.2.2.10"></a><h3>2.2.10.&nbsp;
+<a name="rfc.section.2.2.11"></a><h3>2.2.11.&nbsp;
 'name'</h3>
 
 <p>
-                    Indicates the name of the 'element'' as found in generic
-                    representations. It MAY appear as a property of the
-                    'element'.
+                    Indicates the name of the 
+                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> as found in 
+                    generic representations. It MAY appear as a property of 
+                    'element' and <a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a>.
                 
 </p>
 <p>
-                    This is used when the name of the 'element' is used as an 
-                    'id' value elsewhere in the ALPS document. For instance, 
+                    This is used when the name of the 'element' or 'child' 
+                    is used as an <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a> 
+                    value elsewhere in the ALPS document. For instance, 
                     if a single ALPS document defines an element descriptor 
                     called "customer" and a safe-idempotent control called 
                     "customer", they can't both have 'id="customer"' in the 
                     ALPS document. One of them needs to have some other 'id', 
-                    and to set 'name="customer"''.
+                    and to set 'name="customer"'.
                 
 </p>
-<a name="anchor23"></a><br /><hr />
+<a name="prop-type"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.2.2.11"></a><h3>2.2.11.&nbsp;
+<a name="rfc.section.2.2.12"></a><h3>2.2.12.&nbsp;
 'type'</h3>
 
 <p>
@@ -787,12 +1032,12 @@ Applied to the 'child' block</h3>
                     </p>
 <ol class="text">
 <li>
-                            "descriptor"" refers to a state element (e.g.
+                            "descriptor" refers to a state element (e.g.
                             HTML.SPAN, HTML.INPUT, etc.).
                         
 </li>
 <li>
-                           "safe"' refers to a hypermedia control that
+                           "safe" refers to a hypermedia control that
                            triggers a safe, idempotent state transition 
                            (i.e. HTTP.GET, HTTP.HEAD, etc.).
                         
@@ -816,14 +1061,26 @@ Applied to the 'child' block</h3>
                     
                 
 </p>
-<a name="anchor24"></a><br /><hr />
+<a name="prop-value"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.2.2.12"></a><h3>2.2.12.&nbsp;
+<a name="rfc.section.2.2.13"></a><h3>2.2.13.&nbsp;
+'value'</h3>
+
+<p>
+                    Contains a string value. It MAY appear as a property of
+                    the <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
+                    and the <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a> elements.
+                
+</p>
+<a name="prop-version"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.14"></a><h3>2.2.14.&nbsp;
 'version'</h3>
 
 <p>
                     Indicates the version number of the ALPS document. This
-                    SHOULD appear as a property of the 'alps'' property. 
+                    SHOULD appear as a property of the 
+                    <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> property. 
                     Currently the only valid value is "1.0". 
                     If no value appears, then it SHOULD be set to "1.0".
                 
@@ -1190,10 +1447,10 @@ Internationalization Considerations</h3>
 <p>[TK]
 </p>
 <p>
-                <a class='info' href='#comment.anchor25'>[anchor25]<span> (</span><span class='info'>insert text (consider rfc 5987)</span><span>)</span></a><a name='anchor25'></a>
+                <a class='info' href='#comment.anchor13'>[anchor13]<span> (</span><span class='info'>insert text (consider rfc 5987)</span><span>)</span></a><a name='anchor13'></a>
             
 </p>
-<a name="anchor26"></a><br /><hr />
+<a name="anchor14"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.7"></a><h3>7.&nbsp;
 Acknowledgements</h3>

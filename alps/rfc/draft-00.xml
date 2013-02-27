@@ -49,8 +49,7 @@
                 semantic descriptions (similar to those defined by HTML
                 microformats) in a way that incorporates both human-readable documentation
                 and machine-readable instructions on applying semantic descriptions
-                to elements within a wide range of media-type
-                representations.
+                to elements within a wide range of media-type representations.
             </t>
         </abstract>
         <note title="Editorial Note (To be removed by RFC Editor)">
@@ -71,9 +70,10 @@
                 in a way that incorporates both human-readable documentation
                 and machine-readable instructions on applying semantic descriptions
                 to elements within application-agnostic media-type representations
-                (such as HTML, HAL, Collection+JSON, and Siren). This document also
-                sets a standard for creating and registering ALPS document identifers
-                and provides suggested conventions for applying ALPS descriptors to
+                (such as HTML, HAL, Collection+JSON, Siren, etc.). This document also
+                identifies an ALPS Registry, sets a standard for creating and 
+                registering ALPS document identifers in that registry, and 
+                provides suggested conventions for applying ALPS descriptions to
                 existing media types.
             </t>
             <t>
@@ -170,16 +170,29 @@
                     expressed in  different ways. Below is a list of the 
                     properties that can appear in an ALPS document.
                 </t>
-                <section title="'alps'">
+                <section anchor="prop-alps" title="'alps'">
                     <t>
                         Indicates the root of the ALPS document. This property 
                         SHOULD have one or more 'element' child 
                         properties.
                     </t>
+                    <t>
+                        Examples:
+                        <list style="hanging">
+                            <t hangText="XML:">
+                                &lt;alps&gt;...&lt;/alps&gt;
+                            </t>
+                            <t hangText="JSON:">
+                                {"alps" : ... }
+                            </t>
+                        </list>
+                    </t>
                 </section>
-                <section title="'appears'">
+                <section anchor="prop-appears" title="'appears'">
                 <t>
-                    Indicates the appearance rules for the related 'element' in
+                    Indicates the appearance rules for the related 
+                    <xref target="prop-element">'element'</xref>  or 
+                    <xref target="prop-child">'child'</xref> in
                     a representation. All valid values for this property are
                     terms defined in <xref target="RFC2119" />, and have the 
                     meaning given in that standard.
@@ -192,6 +205,17 @@
                         other element defined by this ALPS document. The formal 
                         meaning of "top level" varies by the media type; see 
                         <xref target="instructions"/> for  definitions. 
+                    </t>
+                    <t>
+                        Examples:
+                        <list style="hanging">
+                            <t hangText="XML:">
+                                &lt;element ... appears="MUST NOT"&gt;
+                            </t>
+                            <t hangText="JSON:">
+                                {"element" : "{..., "appears" : "MUST NOT"}}
+                            </t>
+                        </list>
                     </t>
                     <t>
                         Valid values for 'appears' in an 'element' block are: "MUST",
@@ -209,15 +233,28 @@
                         <xref target="instructions" /> for definitions.
                     </t>
                     <t>
+                        Examples:
+                        <list style="hanging">
+                            <t hangText="XML:">
+                                &lt;child ... appears="MUST NOT"&gt;
+                            </t>
+                            <t hangText="JSON:">
+                                {"child" : "{..., "appears" : "MUST NOT"}}
+                            </t>
+                        </list>
+                    </t>
+                    <t>
                         Valid values for 'appears' in an 'child' block are: "MUST",
                         "SHOULD", and "MAY". If this property does not appear, the
                         value  SHOULD be treated as "MAY".
                     </t>
                 </section>
             </section>
-            <section title="'cardinality'">
+            <section anchor="prop-cardinality" title="'cardinality'">
                 <t>
-                    Indicates the number of times the related 'element' can
+                    Indicates the number of times the related 
+                    <xref target="prop-element">'element'</xref> or
+                    <xref target="prop-child">'child'</xref> can
                     appear. Valid values are "single" and "many".
                      If this property does not appear, the value SHOULD be
                     treated as "many".
@@ -228,6 +265,17 @@
                         'element' block. This controls how many times that element 
                         may be used at the "top level" within a single representation.
                     </t>
+                    <t>
+                        Examples:
+                        <list style="hanging">
+                            <t hangText="XML:">
+                                &lt;element ... candinality="many"&gt;
+                            </t>
+                            <t hangText="JSON:">
+                                {"element" : "{..., "cardinaltiy" : "many"}}
+                            </t>
+                        </list>
+                    </t>
                 </section>
                 <section title="Applied to the 'child' block">
                     <t>
@@ -235,45 +283,130 @@
                         a 'child' block. This controls how many times the 'child' 
                         element may occur within its enclosing element.
                     </t>
+                    <t>
+                        Examples:
+                        <list style="hanging">
+                            <t hangText="XML:">
+                                &lt;child ... cardinality="single"&gt;
+                            </t>
+                            <t hangText="JSON:">
+                                {"child" : "{..., "cardinality" : "single"}}
+                            </t>
+                        </list>
+                    </t>
                 </section>
             </section>
-            <section title="'child'">
+            <section anchor="prop-child" title="'child'">
                 <t>
-                    Links to a child element of the related 'element' This MAY
-                    appear in the ALPS document as a child of an 'element' block. 
-                    The 'child' property MAY have an 'href' property pointing to
-                    a definition of an 'element' block (see 'href' for details).
+                    Identifies a child of the <xref target="prop-element">'element'</xref>
+                    block. The 'child' 
+                    block is almost identical to the 'element' block and MUST
+                    only appear as a direct child of 'element.' This is the 
+                    way ALPS authors can reuse existing 'element' blocks in the
+                    current or any external ALPS document.
                 </t>
                 <t>
-                    If no 'href'' appears, then the 'child'' property takes on
-                    the same features as the 'element'' property. [Which ones? 
-                    It would also be good to mention here which properties the 
-                    'child' tag supports, as you do for 'element''. -leonardr]
+                    The 'child' element MUST have at least an 
+                    <xref target="prop-id">'id'</xref> or 
+                    <xref target="prop-href">'href'</xref>
+                    property. It MAY have both. Additionally, the 'child' element 
+                    MAY have any of the following proeprties:
+                    <list style="numbers">
+                        <t><xref target="prop-appears">'appears'</xref></t>
+                        <t><xref target="prop-cardinality">'cardinality'</xref></t>
+                        <t><xref target="prop-description">'description'</xref></t>
+                        <t><xref target="prop-ext">'ext'</xref></t>
+                        <t><xref target="prop-name">'name'</xref></t>
+                        <t><xref target="prop-type">'type'</xref></t>
+                    </list>
+                </t>
+                <t>
+                    The 'href' property MUST be a dereferencable URL that points 
+                    to another 'element' block either within the current ALPS
+                    document or in another document. If the 'child' element 
+                    has an 'href' property, any other properties of the 'child' 
+                    element (e.g. 'appears', 'cardinality', etc.) MUST override
+                    corresponding properties in the referred 'element'.
                 </t>
             </section>
-            <section title="'description'">
+            <section anchor="prop-description" title="'description'">
                 <t>
                     A text field that contains free-form, usually
                     human-readable, text.
                 </t>
                 <t>
-                    A 'description'' block SHOULD appear as a child of
-                    'element''. When present, it describes the meaning and use 
+                    A 'description' block SHOULD appear as a child of
+                    <xref target="prop-element">'element'</xref>. 
+                    When present, it describes the meaning and use 
                     of the related 'element'.
+                    <list style="hanging">
+                        <t hangText="XML:">
+                            <artwork> <![CDATA[
+<element ... >
+    <description>...</description>
+</element>
+                        ]]></artwork>
+                        </t>
+                        <t hangText="JSON:">
+                            <artwork><![CDATA[
+{"element" : {...}
+    {"description" : {"value" : "..."}
+}
+                        ]]></artwork>
+                        </t>
+                    </list>
                 </t>
                 <t>
-                    A 'description'' block MAY appear as a child of the 'child'
+                    A 'description' block MAY appear as a child of the 
+                    <xref target="prop-child">'child'</xref>
                     block. When present, it describes the meaning of the 
                     relationship between the 'element' and its 'child'.
+                    <list style="hanging">
+                        <t hangText="XML:">
+                            <artwork> <![CDATA[
+<child ... >
+    <description>...</description>
+</child>
+                        ]]></artwork>
+                        </t>
+                        <t hangText="JSON:">
+                            <artwork><![CDATA[
+{"child" : {...}
+    {"description" : {"value" : "..."}
+}
+                        ]]></artwork>
+                        </t>
+                    </list>
+                    
                 </t>
                 <t>
-                    A 'description'' block MAY appear as a child of 'alps'. 
+                    A 'description' block MAY appear as a child of 
+                    <xref target="prop-alps">'alps'</xref>. 
                     When present, it describes the purpose of the ALPS document 
                     as a whole.
+                    <list style="hanging">
+                        <t hangText="XML:">
+                            <artwork> <![CDATA[
+<alps>
+    <description>...</description>
+    ...
+</apls>
+                        ]]></artwork>
+                        </t>
+                        <t hangText="JSON:">
+                            <artwork><![CDATA[
+{"alps :
+   "description" : { "value" : "..."},
+   ...
+}
+                        ]]></artwork>
+                        </t>
+                    </list>
+                    
                 </t>
                 <t>
                     The 'description' element has one OPTIONAL sub-element:
-                    'format' with two possible values:
+                    <xref target="prop-format">'format'</xref> with two possible values:
                     <list style="numbers">
                         <t>"text"</t>
                         <t>"html"</t>
@@ -282,37 +415,52 @@
                     within the 'description' block MUST be treated as HTML markup.
                     If no 'format' property is present, the content SHOULD be
                     treated as plain text.
+                    <list style="hanging">
+                        <t hangText="XML:">
+                            <artwork> <![CDATA[
+<description format="html">
+   <h1>Date of Birth</h1>
+   <p>...</p>
+</description>
+                        ]]></artwork>
+                        </t>
+                        <t hangText="JSON:">
+                            <artwork><![CDATA[
+{"description" : 
+    {"format" : "text" : "value" : "Date of Birth ..."}
+}
+                        ]]></artwork>
+                        </t>
+                    </list>
                 </t>
             </section>
-            <section title="'element'">
+            <section anchor="prop-element" title="'element'">
                 <t>
                     Identifies a semantic descriptor. One or more 'element'
-                    blocks SHOULD appear as children of the 'alps' property.
+                    blocks SHOULD appear as children of the <xref
+                        target="prop-alps">'alps'</xref> block.
                 </t>
                 <t>
-                    This property MUST have the following properties:
-                    <list style="numbers">
-                        <t>id</t>
-                        <t>type</t>
-                    </list>
+                    The 'element' property MUST have an 
+                    <xref target="prop-id">'id'</xref> property.
+                    It SHOULD have an 
+                    <xref target="prop-appears">'appears'</xref> and a 
+                    <xref target="prop-type">'type'</xref> property. See the
+                    documentation for these properties for the default values
+                    when they are missing.
                 </t>
                 <t>
-                    It SHOULD have the following properties:
+                    The 'element' MAY have the following properties:
                     <list style="numbers">
-                        <t>appears</t>
-                    </list>
-                </t>
-                <t>
-                    It MAY have the following properties:
-                    <list style="numbers">
-                        <t>cardinality</t>
-                        <t>child</t>
-                        <t>description</t>
-                        <t>name</t>
+                        <t><xref target="prop-cardinality">'cardinality'</xref></t>
+                        <t><xref target="prop-child">'child'</xref></t>
+                        <t><xref target="prop-description">'description'</xref></t>
+                        <t><xref target="prop-ext">'ext'</xref></t>
+                        <t><xref target="prop-name">'name'</xref></t>
                     </list>
                 </t>
             </section>
-            <section title="'ext'">
+            <section anchor="prop-ext" title="'ext'">
                <t>
                     The 'ext' element can be used to extend the ALPS document
                     with author-specific information. It provides a way to 
@@ -320,24 +468,37 @@
                     covered in this specification. This is an OPTIONAL element.
                 </t>
                 <t>
-                    The 'ext' element has to properties. The 'name' property
+                    The 'ext' element has to properties. The 
+                    <xref target="prop-href">'href'</xref> property
                     MUST appear for the 'ext' element. It's value MUST be a
-                    URI. The 'value' property MAY appear for the 'ext' element.
-                    It's value is undefined in this specification.
+                    URI. The 
+                    <xref target="prop-value">'value'</xref> 
+                    property MAY appear for the 'ext' element.
+                    The meaning and use of the value property is described in 
+                    the document found by dereferencing the 'href' property
+                    of the 'ext' element. 
                 </t>
                 <t>
-                    Here is an XML representation of the 'ext' element:
+                    Examples:
+                    <list style="hanging">
+                        <t hangText="XML:">
+                            &lt;ext href="http://alps.io/extensions/range.alps"
+                            value="north south east west" &gt;
+                        </t>
+                        <t hangText="JSON:">
+                            {"ext" : {"href"
+                            : "http://alps.io/extensions/range.alps",
+                            value="north south east west"}}
+                        </t>
+                    </list>
                 </t>
                 <t>
-                    &lt;ext name="{uri}" value="" /&gt;
-                </t>
-                <t> 
-                    Tihe 'ext' element MAY appear as a child of the following
+                    The 'ext' element MAY appear as a child of the following
                     elements:
                     <list style="numbers">
-                        <t>'alps'</t>
-                        <t>'element'</t>
-                        <t>'child'</t>
+                        <t><xref target="prop-alps">'alps'</xref></t>
+                        <t><xref target="prop-child">'child'</xref></t>
+                        <t><xref target="prop-element">'element'</xref></t>
                     </list>
                 </t>
                 <t>
@@ -352,24 +513,37 @@
                     the registry in the 'name' property of their extension.
                 </t>
             </section>
-            <section title="'href'">
+            <section anchor="prop-format" title="'format'">
                 <t>
-                    Points to an 'element' either within the existing ALPS
+                    Indicates whether the associated content in the should be 
+                    treated as 'text' or 'html'. This property MAY appear as
+                    a property of the <xref target="prop-description">'description'</xref> 
+                    element.
+                </t>
+            </section>
+            <section anchor="prop-href" title="'href'">
+                <t>
+                    Points to an 
+                    <xref target="prop-element">'element'</xref>
+                    either within the existing ALPS
                     document or in another ALPS document.
                 </t>
                 <t>
-                    The 'href'' attribute MUST appear as part of the 'child'
+                    The 'href' attribute MUST appear as part of the 
+                    <xref target="prop-child">'child'</xref>
                     element. The value MUST be a valid URL, with a fragment 
                     identifier, resolving to an 'element' within an ALPS 
                     document.
                 </t>
                 <t>
+                    [TK let's talk about these items - MCA]
+                </t>
+                <t>
                     [Should &lt;alps&gt; itself support +href+ so it can link 
                     to itself or a full human-readable doc? Or should we allow 
                     a general &lt;link&gt; tag so you can do rel="help"?]
-
-                    [Earlier you said that +child+ didn't need href. -leonardr]
-
+                </t>
+                <t>
                     [I have a half-baked idea about using +href+ within
                     'element' as well.  This would let you copy the +fn+ 
                     descriptor defined in hCard into your custom ALPS document 
@@ -378,20 +552,23 @@
                     in hCard. -leonardr]
                 </t>
             </section>
-            <section title="'id'">
+            <section anchor="prop-id" title="'id'">
                 <t>
                     A document-wide unique identifier for the related element.
-                    This MUST appear as a property of each 'element'.
+                    This MUST appear as a property of each 
+                    <xref target="prop-element">'element'</xref>.
                 </t>
                 <t>
                     The value of this property will appear within generic
                     representations as the name of a semantic descriptor or 
                     hypermedia control (see <xref target="instructions" /> for 
-                    details). The exception is when an element defines 'name'
-                    as well as 'id'. In that case, the value of 'name'
-                    contains the name of the semantic descriptor or
-                    hypermedia control, and the value of 'id'' is just a unique
-                    ID for the current document.
+                    details). The exception is when an element defines 
+                    <xref target="prop-name">'name'</xref>
+                    as well as 
+                    <xref target="prop-id">'id'</xref>. In that case, the value 
+                    of 'name' contains the name of the semantic descriptor or
+                    hypermedia control, and the value of 'id' is just a unique
+                    internal identifier for the current document.
                 </t>
                 <t>
                     When applied to an ALPS document, a URI fragment identifier
@@ -406,23 +583,25 @@
                     reference.
                 </t>
             </section>
-            <section title="'name'">
+            <section anchor="prop-name" title="'name'">
                 <t>
-                    Indicates the name of the 'element'' as found in generic
-                    representations. It MAY appear as a property of the
-                    'element'.
+                    Indicates the name of the 
+                    <xref target="prop-element">'element'</xref> as found in 
+                    generic representations. It MAY appear as a property of 
+                    'element' and <xref target="prop-child">'child'</xref>.
                 </t>
                 <t>
-                    This is used when the name of the 'element' is used as an 
-                    'id' value elsewhere in the ALPS document. For instance, 
+                    This is used when the name of the 'element' or 'child' 
+                    is used as an <xref target="prop-id">'id'</xref> 
+                    value elsewhere in the ALPS document. For instance, 
                     if a single ALPS document defines an element descriptor 
                     called "customer" and a safe-idempotent control called 
                     "customer", they can't both have 'id="customer"' in the 
                     ALPS document. One of them needs to have some other 'id', 
-                    and to set 'name="customer"''.
+                    and to set 'name="customer"'.
                 </t>
             </section>
-           <section title="'type'">
+            <section anchor="prop-type" title="'type'">
                 <t>
                     Indicates the type of representation control to which the
                     element is applied. This MUST appear for each element. 
@@ -430,11 +609,11 @@
                 
                     <list style="numbers">
                         <t>
-                            "descriptor"" refers to a state element (e.g.
+                            "descriptor" refers to a state element (e.g.
                             HTML.SPAN, HTML.INPUT, etc.).
                         </t>
                         <t>
-                           "safe"' refers to a hypermedia control that
+                           "safe" refers to a hypermedia control that
                            triggers a safe, idempotent state transition 
                            (i.e. HTTP.GET, HTTP.HEAD, etc.).
                         </t>
@@ -455,10 +634,18 @@
                     
                 </t>
             </section>
-            <section title="'version'">
+            <section anchor="prop-value" title="'value'">
+                <t>
+                    Contains a string value. It MAY appear as a property of
+                    the <xref target="prop-description">'description'</xref>
+                    and the <xref target="prop-ext">'ext'</xref> elements.
+                </t>
+            </section>
+            <section anchor="prop-version" title="'version'">
                 <t>
                     Indicates the version number of the ALPS document. This
-                    SHOULD appear as a property of the 'alps'' property. 
+                    SHOULD appear as a property of the 
+                    <xref target="prop-alps">'alps'</xref> property. 
                     Currently the only valid value is "1.0". 
                     If no value appears, then it SHOULD be set to "1.0".
                 </t>
