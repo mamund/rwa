@@ -128,36 +128,36 @@ Table of Contents
        2.2.3.  'cardinality'  . . . . . . . . . . . . . . . . . . . .  7
        2.2.4.  'child'  . . . . . . . . . . . . . . . . . . . . . . .  7
        2.2.5.  'description'  . . . . . . . . . . . . . . . . . . . .  8
-       2.2.6.  'element'  . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.7.  'ext'  . . . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.8.  'format' . . . . . . . . . . . . . . . . . . . . . . . 11
-       2.2.9.  'href' . . . . . . . . . . . . . . . . . . . . . . . . 11
+       2.2.6.  'element'  . . . . . . . . . . . . . . . . . . . . . .  9
+       2.2.7.  'ext'  . . . . . . . . . . . . . . . . . . . . . . . .  9
+       2.2.8.  'format' . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.9.  'href' . . . . . . . . . . . . . . . . . . . . . . . . 10
        2.2.10. 'id' . . . . . . . . . . . . . . . . . . . . . . . . . 11
-       2.2.11. 'name' . . . . . . . . . . . . . . . . . . . . . . . . 12
-       2.2.12. 'type' . . . . . . . . . . . . . . . . . . . . . . . . 12
-       2.2.13. 'value'  . . . . . . . . . . . . . . . . . . . . . . . 13
-       2.2.14. 'version'  . . . . . . . . . . . . . . . . . . . . . . 13
-     2.3.  XML Representation . . . . . . . . . . . . . . . . . . . . 13
-     2.4.  JSON Representation  . . . . . . . . . . . . . . . . . . . 13
-   3.  Instructions on Applying ALPS to Existing Media Types  . . . . 13
-     3.1.  A Simple ALPS Document . . . . . . . . . . . . . . . . . . 13
-     3.2.  HTML Example . . . . . . . . . . . . . . . . . . . . . . . 13
-     3.3.  Collection+JSON Example  . . . . . . . . . . . . . . . . . 13
-     3.4.  Linking to ALPS Documents  . . . . . . . . . . . . . . . . 13
-   4.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . . 14
-     4.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . . 14
-     4.2.  Searching the Registry . . . . . . . . . . . . . . . . . . 14
-     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 14
-   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 14
-     5.1.  application/alps+xml . . . . . . . . . . . . . . . . . . . 14
-     5.2.  application/alps+json  . . . . . . . . . . . . . . . . . . 15
-   6.  Internationalization Considerations  . . . . . . . . . . . . . 16
-   7.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 16
-   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 16
-     8.1.  Normative References . . . . . . . . . . . . . . . . . . . 16
-     8.2.  Informative References . . . . . . . . . . . . . . . . . . 17
-
-
+       2.2.11. 'name' . . . . . . . . . . . . . . . . . . . . . . . . 11
+       2.2.12. 'type' . . . . . . . . . . . . . . . . . . . . . . . . 11
+       2.2.13. 'value'  . . . . . . . . . . . . . . . . . . . . . . . 12
+       2.2.14. 'version'  . . . . . . . . . . . . . . . . . . . . . . 12
+     2.3.  ALPS Representations . . . . . . . . . . . . . . . . . . . 12
+       2.3.1.  Sample HTML  . . . . . . . . . . . . . . . . . . . . . 12
+       2.3.2.  XML Representation . . . . . . . . . . . . . . . . . . 13
+       2.3.3.  JSON Representation  . . . . . . . . . . . . . . . . . 14
+   3.  Instructions on Applying ALPS to Existing Media Types  . . . . 17
+     3.1.  A Simple ALPS Document . . . . . . . . . . . . . . . . . . 17
+     3.2.  HTML Example . . . . . . . . . . . . . . . . . . . . . . . 17
+     3.3.  Collection+JSON Example  . . . . . . . . . . . . . . . . . 17
+     3.4.  Linking to ALPS Documents  . . . . . . . . . . . . . . . . 17
+   4.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . . 17
+     4.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . . 17
+     4.2.  Searching the Registry . . . . . . . . . . . . . . . . . . 17
+     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 17
+   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 18
+     5.1.  application/alps+xml . . . . . . . . . . . . . . . . . . . 18
+     5.2.  application/alps+json  . . . . . . . . . . . . . . . . . . 19
+   6.  Internationalization Considerations  . . . . . . . . . . . . . 20
+   7.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 20
+   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+     8.1.  Normative References . . . . . . . . . . . . . . . . . . . 20
+     8.2.  Informative References . . . . . . . . . . . . . . . . . . 20
 
 
 
@@ -416,30 +416,30 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    (Section 2.2.6).  When present, it describes the meaning and use of
    the related 'element'.
 
-   XML:
+   XML:  <element ... > <description>...</description> </element>
 
-   <element ... >
-       <description>...</description>
-   </element>
-
-   JSON:
-
-   {"element" : {...}
-       {"description" : {"value" : "..."}
-   }
+   JSON:  {"element" : {...} {"description" : {"value" : "..."} }
 
    A 'description' block MAY appear as a child of the 'child'
    (Section 2.2.4) block.  When present, it describes the meaning of the
    relationship between the 'element' and its 'child'.
 
-   XML:
+   XML:  <child ... > <description>...</description> </child>
 
-   <child ... >
-       <description>...</description>
-   </child>
+   JSON:  {"child" : {...} {"description" : {"value" : "..."} }
 
+   A 'description' block MAY appear as a child of 'alps'
+   (Section 2.2.1).  When present, it describes the purpose of the ALPS
+   document as a whole.
 
+   XML:  <alps> <description>...</description> ... </apls>
 
+   JSON:  {"alps : "description" : { "value" : "..."}, ... }
+
+   The 'description' element has one OPTIONAL sub-element: 'format'
+   (Section 2.2.8) with two possible values:
+
+   1.  "text"
 
 
 
@@ -449,61 +449,17 @@ Amundsen & Richardson    Expires August 31, 2013                [Page 8]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-   JSON:
-
-   {"child" : {...}
-       {"description" : {"value" : "..."}
-   }
-
-   A 'description' block MAY appear as a child of 'alps'
-   (Section 2.2.1).  When present, it describes the purpose of the ALPS
-   document as a whole.
-
-   XML:
-
-   <alps>
-       <description>...</description>
-       ...
-   </apls>
-
-   JSON:
-
-   {"alps :
-      "description" : { "value" : "..."},
-      ...
-   }
-
-   The 'description' element has one OPTIONAL sub-element: 'format'
-   (Section 2.2.8) with two possible values:
-
-   1.  "text"
-
    2.  "html"
 
    If the 'format' property is set to "html" the content within the
    'description' block MUST be treated as HTML markup.  If no 'format'
    property is present, the content SHOULD be treated as plain text.
 
-   XML:
+   XML:  <description format="html"> <h1>Date of Birth</h1> <p>...</p>
+      </description>
 
-   <description format="html">
-      <h1>Date of Birth</h1>
-      <p>...</p>
-   </description>
-
-   JSON:
-
-   {"description" :
-       {"format" : "text" : "value" : "Date of Birth ..."}
-   }
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 9]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
+   JSON:  {"description" : {"format" : "text" : "value" : "Date of Birth
+      ..."} }
 
 2.2.6.  'element'
 
@@ -541,6 +497,14 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    the document found by dereferencing the 'href' property of the 'ext'
    element.
 
+
+
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 9]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    Examples:
 
    XML:  <ext href="http://alps.io/extensions/range.alps" value="north
@@ -552,14 +516,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    The 'ext' element MAY appear as a child of the following elements:
 
    1.  'alps' (Section 2.2.1)
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 10]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
 
    2.  'child' (Section 2.2.4)
 
@@ -597,6 +553,14 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    [I have a half-baked idea about using +href+ within 'element' as
    well.  This would let you copy the +fn+ descriptor defined in hCard
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 10]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    into your custom ALPS document (for performance reasons) but still
    make it clear that your +fn+ descriptor has the same meaning as the
    one defined in hCard. -leonardr]
@@ -609,14 +573,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    The value of this property will appear within generic representations
    as the name of a semantic descriptor or hypermedia control (see
    Section 3 for details).  The exception is when an element defines
-
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 11]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    'name' (Section 2.2.11) as well as 'id' (Section 2.2.10).  In that
    case, the value of 'name' contains the name of the semantic
    descriptor or hypermedia control, and the value of 'id' is just a
@@ -652,6 +608,15 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    1.  "descriptor" refers to a state element (e.g.  HTML.SPAN,
        HTML.INPUT, etc.).
 
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 11]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    2.  "safe" refers to a hypermedia control that triggers a safe,
        idempotent state transition (i.e.  HTTP.GET, HTTP.HEAD, etc.).
 
@@ -665,14 +630,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    If no 'type' property is associated with the element then the
    'type="descriptor"' is implied.
 
-
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 12]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
 2.2.13.  'value'
 
    Contains a string value.  It MAY appear as a property of the
@@ -685,13 +642,260 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    Currently the only valid value is "1.0".  If no value appears, then
    it SHOULD be set to "1.0".
 
-2.3.  XML Representation
+2.3.  ALPS Representations
 
-   [TK]
+   ALPS documents can be represented in either XML or JSON format.  This
+   section contains notes on how the ALPS properties appear in each
+   format along with examples to guide ALPS document authors.
 
-2.4.  JSON Representation
+2.3.1.  Sample HTML
 
-   [TK]
+   Below is a simple HTML document that contains a handful of semantic
+   descriptors and transition instructions.  This document was genrated
+   from the XML and JSON ALPS documents that follow.  Use this HTML
+   document as a guide when evaluating the XML and JSON examples.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 12]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+   <!-- sample HTML document -->
+   <html>
+       <head>
+           <link rel="profile" href="http://alps.io/documents/search" />
+       </head>
+       <body>
+           <form class="search" action="..." method="get">
+               <input type="text" name="search" value="..." />
+               <select name="resultType">
+                   <option value="summary" />
+                   <option value="detailed" />
+               </select>
+               <input type="submit" />
+           </form>
+       </body>
+   </html>
+
+                                HTML Sample
+
+2.3.2.  XML Representation
+
+2.3.2.1.  XML Representation Notes
+
+   In the XML version of ALPS documents, the following properties always
+   appear as XML elements: 'alps' (Section 2.2.1), 'child'
+   (Section 2.2.4), 'description' (Section 2.2.5), 'element'
+   (Section 2.2.6), and 'ext' (Section 2.2.7).  All other ALPS
+   properties appear as XML attributes.
+
+2.3.2.2.  Complete XML Representation
+
+   Below is an example of an applcation/alps+xml representation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 13]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+<?xml version="1.0"?>
+<alps version="1.0">
+    <description format="html">
+        <h1>A Sample ALPS+XML Document</h1>
+    </description>
+
+    <element id="search" type="safe" cardinality="single" appears="MUST NOT">
+        <description format="text">
+            A search form with a two inputs.
+        </description>
+        <child href="#resultType" />
+        <child id="value"
+            name="search"
+            type="descriptor"
+            cardinality="single"
+            appears="MAY">
+            <description>input for search</description>
+        </child>
+    </element>
+
+    <element id="resultType"
+        type="descriptor"
+        cardinality="single"
+        appears="MAY"
+        <description>results format</description>
+        <ext href="http://alps.io/ext/range" value="summary,detail" />
+    </element>
+</alps>
+
+                        Complete XML Representation
+
+2.3.3.  JSON Representation
+
+2.3.3.1.  JSON Representation Notes
+
+   When representing ALPS documents in the JSON format, the 'child'
+   (Section 2.2.4), 'element' (Section 2.2.6) and 'ext' (Section 2.2.7)
+   properties are always express as arrays of anonymous objects - even
+   when there is only one member in the array.
+
+
+
+
+
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 14]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+   For example:
+
+   "element" : [
+       {
+           "id" : "search",
+           "type" : "safe"
+           "child" : [
+               {"href" : "#value"},
+               {
+                   "id" : "resultType",
+                   "type" : "descriptor",
+                   "ext" : [
+                       {
+                           "href" : "http://alps.io/ext/range",
+                           "value" : "summary,detail"
+                       }
+                   ]
+               }
+           ]
+       },
+       {
+           "id" : "#value",
+           "type" : "descriptor"
+       }
+
+   ]
+
+                            Arrays in ALPS+JSON
+
+   The 'description' (Section 2.2.5) description is always expressed as
+   a named object.
+
+   For example:
+
+   {
+       "description" : {
+           "format" : "text",
+           "value" : "Rules are imporant"
+       }
+   }
+
+                         Descriptions in ALPS+JSON
+
+2.3.3.2.  Complete Representation
+
+   Below is a example of the application/alps+json representation of an
+   ALPS document.
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 15]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
+// http://alps.io/documents/search
+{
+    "alps" : {
+        "version" : "1.0",
+        "description" : {
+        "format" : "html", "value" : "<h1>A sample ALPS+JSON document</h1>"
+        },
+        "element" : [
+            {
+                "id" : "search",
+                "type" : "safe",
+                "cardinality" : "single",
+                "appears" : "MUST NOT",
+                "description" : {"value" : "A search form with a two inputs"},
+                "child" : [
+                    {"href" : "#value"},
+                    {"href" : "#resultType"}
+                ]
+            },
+            {
+                "id" : "value",
+                "name" : "search",
+                "type" : "descriptor",
+                "cardinality" : "single",
+                "appears" : "MAY",
+                "description" : {"value" : "input for search"}
+            },
+            {
+                "id" : "resultType",
+                "type" : "descriptor",
+                "cardinality" : "single",
+                "appears" : "MAY",
+                "description" : {"value" : "results format"},
+                "ext" : [
+                    {
+                        "href" : "http://alps.io/ext/range",
+                        "value" : "summary,detail"
+                    }
+                ]
+            }
+
+        ]
+    }
+}
+
+                     Complete ALPS+JSON Representation
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 16]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
 
 3.  Instructions on Applying ALPS to Existing Media Types
 
@@ -722,13 +926,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    registry) SHOULD be used to describe the relationship between the
    representation and the ALPS document.
 
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 13]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    A single representation may be "profile"-ed more than one ALPS
    document.  If two ALPS documents give conflicting semantics for the
    same element, the document linked to earlier in the representation
@@ -747,6 +944,14 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 4.3.  Contributing to the Registry
 
    [TK]
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 17]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
 
 5.  IANA Considerations
 
@@ -777,14 +982,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
       Information contained in ALPS documents do not require privacy or
       integrity services.
 
-
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 14]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    Interoperability considerations:  ALPS is not described by a DTD and
       applies only the well-formedness rules of XML.  It should only be
       parsed by a non-validating parser.
@@ -800,6 +997,17 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
       file extensions:  .xml
 
       macintosh type file code:  TEXT
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 18]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
 
       object idenfiers:  none
 
@@ -831,16 +1039,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
       content.  Information contained in ALPS+JSON documents do not
       require privacy or integrity services.
 
-
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 15]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    Interoperability considerations:  None
 
    Published specification:  This Document
@@ -857,6 +1055,16 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
       object idenfiers:  none
 
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 19]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    person to contact for further information:
 
       Name:  Mike Amundsen
@@ -871,7 +1079,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    [TK]
 
-   [[anchor13: insert text (consider rfc 5987)]]
+   [[anchor17: insert text (consider rfc 5987)]]
 
 7.  Acknowledgements
 
@@ -890,13 +1098,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    [RFC4627]  Crockford, D., "The application/json Media Type for
               JavaScript Object Notation (JSON)", RFC 4627, July 2006.
 
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 16]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    [RFC5988]  Nottingham, M., "Web Linking", RFC 5988, October 2010.
 
 8.2.  Informative References
@@ -908,6 +1109,16 @@ Authors' Addresses
 
    EMail: mca@amundsen.com
    URI:   http://amundsen.com
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 20]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
    Leonard Richardson
@@ -948,5 +1159,18 @@ Authors' Addresses
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 17]
+
+
+
+
+
+
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 21]
 

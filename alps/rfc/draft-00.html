@@ -244,9 +244,13 @@ ALPS Document Properties<br />
 'value'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#prop-version">2.2.14.</a>&nbsp;
 'version'<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xml-representation">2.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#representations">2.3.</a>&nbsp;
+ALPS Representations<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#html-representation">2.3.1.</a>&nbsp;
+Sample HTML<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#xml-representation">2.3.2.</a>&nbsp;
 XML Representation<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#json-representation">2.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#json-representation">2.3.3.</a>&nbsp;
 JSON Representation<br />
 <a href="#instructions">3.</a>&nbsp;
 Instructions on Applying ALPS to Existing Media Types<br />
@@ -274,7 +278,7 @@ application/alps+xml<br />
 application/alps+json<br />
 <a href="#internationalization">6.</a>&nbsp;
 Internationalization Considerations<br />
-<a href="#anchor14">7.</a>&nbsp;
+<a href="#anchor18">7.</a>&nbsp;
 Acknowledgements<br />
 <a href="#rfc.references1">8.</a>&nbsp;
 References<br />
@@ -683,20 +687,16 @@ Applied to the 'child' block</h3>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 &lt;element ... &gt;
     &lt;description&gt;...&lt;/description&gt;
 &lt;/element&gt;
-</pre></div>
                         
 </dd>
 <dt>JSON:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {"element" : {...}
     {"description" : {"value" : "..."}
 }
-</pre></div>
                         
 </dd>
 </dl></blockquote><p>
@@ -711,20 +711,16 @@ Applied to the 'child' block</h3>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 &lt;child ... &gt;
     &lt;description&gt;...&lt;/description&gt;
 &lt;/child&gt;
-</pre></div>
                         
 </dd>
 <dt>JSON:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {"child" : {...}
     {"description" : {"value" : "..."}
 }
-</pre></div>
                         
 </dd>
 </dl></blockquote><p>
@@ -740,26 +736,21 @@ Applied to the 'child' block</h3>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 &lt;alps&gt;
     &lt;description&gt;...&lt;/description&gt;
     ...
 &lt;/apls&gt;
-</pre></div>
                         
 </dd>
 <dt>JSON:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 {"alps :
    "description" : { "value" : "..."},
    ...
 }
-</pre></div>
                         
 </dd>
 </dl></blockquote><p>
-                    
                 
 </p>
 <p>
@@ -780,21 +771,17 @@ Applied to the 'child' block</h3>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 &lt;description format="html"&gt;
    &lt;h1&gt;Date of Birth&lt;/h1&gt;
    &lt;p&gt;...&lt;/p&gt;
 &lt;/description&gt;
-</pre></div>
                         
 </dd>
 <dt>JSON:</dt>
 <dd>
-                            <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-{"description" :
+{"description" : 
     {"format" : "text" : "value" : "Date of Birth ..."}
 }
-</pre></div>
                         
 </dd>
 </dl></blockquote><p>
@@ -1085,19 +1072,246 @@ Applied to the 'child' block</h3>
                     If no value appears, then it SHOULD be set to "1.0".
                 
 </p>
-<a name="xml-representation"></a><br /><hr />
+<a name="representations"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.2.3"></a><h3>2.3.&nbsp;
+ALPS Representations</h3>
+
+<p>
+                ALPS documents can be represented in either XML or JSON
+                format. This section contains notes on how the ALPS properties
+                appear in each format along with examples to guide ALPS
+                document authors.
+            
+</p>
+<a name="html-representation"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.1"></a><h3>2.3.1.&nbsp;
+Sample HTML</h3>
+
+<p>
+                    Below is a simple HTML document that contains a handful
+                    of semantic descriptors and transition instructions.
+                    This document was genrated from the  XML and JSON  
+                    ALPS documents that follow. Use this HTML document as a
+                    guide when evaluating the XML and JSON examples.
+                    <br /><hr class="insert" />
+</p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;!-- sample HTML document --&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="profile" href="http://alps.io/documents/search" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form class="search" action="..." method="get"&gt;
+            &lt;input type="text" name="search" value="..." /&gt;
+            &lt;select name="resultType"&gt;
+                &lt;option value="summary" /&gt;
+                &lt;option value="detailed" /&gt;
+            &lt;/select&gt;
+            &lt;input type="submit" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre></div><p>
+<table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;HTML Sample&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+                
+</p>
+<a name="xml-representation"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.2"></a><h3>2.3.2.&nbsp;
 XML Representation</h3>
 
-<p>[TK]
+<a name="anchor13"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.2.1"></a><h3>2.3.2.1.&nbsp;
+XML Representation Notes</h3>
+
+<p>
+                        In the XML version of ALPS documents, the following
+                        properties always appear as XML elements: 
+                        <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>, 
+                        <a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a>,
+                        <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>,
+                        <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>, and
+                        <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a>.
+                        All other ALPS properties appear as XML attributes.
+                    
+</p>
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.2.2"></a><h3>2.3.2.2.&nbsp;
+Complete XML Representation</h3>
+
+<p>
+                        Below is an example of an applcation/alps+xml
+                        representation.
+                        <br /><hr class="insert" />
+</p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;?xml version="1.0"?&gt;
+&lt;alps version="1.0"&gt;
+    &lt;description format="html"&gt;
+        &lt;h1&gt;A Sample ALPS+XML Document&lt;/h1&gt;
+    &lt;/description&gt;
+
+    &lt;element id="search" type="safe" cardinality="single" appears="MUST NOT"&gt;
+        &lt;description format="text"&gt;
+            A search form with a two inputs.
+        &lt;/description&gt;
+        &lt;child href="#resultType" /&gt;
+        &lt;child id="value"
+            name="search"
+            type="descriptor"
+            cardinality="single"
+            appears="MAY"&gt;
+            &lt;description&gt;input for search&lt;/description&gt;
+        &lt;/child&gt;
+    &lt;/element&gt;
+
+    &lt;element id="resultType"
+        type="descriptor"
+        cardinality="single"
+        appears="MAY"
+        &lt;description&gt;results format&lt;/description&gt;
+        &lt;ext href="http://alps.io/ext/range" value="summary,detail" /&gt;
+    &lt;/element&gt;
+&lt;/alps&gt;
+</pre></div><p>
+<table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Complete XML Representation&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+                    
 </p>
 <a name="json-representation"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.2.4"></a><h3>2.4.&nbsp;
+<a name="rfc.section.2.3.3"></a><h3>2.3.3.&nbsp;
 JSON Representation</h3>
 
-<p>[TK]
+<a name="anchor15"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.3.1"></a><h3>2.3.3.1.&nbsp;
+JSON Representation Notes</h3>
+
+<p>
+                        When representing ALPS documents in the JSON format, the 
+                        <a class='info' href='#prop-child'>'child'<span> (</span><span class='info'>'child'</span><span>)</span></a>,   
+                        <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> and
+                        <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a> properties are
+                        always express as arrays of anonymous objects - even when 
+                        there is only one member in the array.
+                        <br /><hr class="insert" />
+
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+"element" : [
+    {
+        "id" : "search",
+        "type" : "safe"
+        "child" : [
+            {"href" : "#value"},
+            {
+                "id" : "resultType",
+                "type" : "descriptor",
+                "ext" : [
+                    {
+                        "href" : "http://alps.io/ext/range",
+                        "value" : "summary,detail"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id" : "#value",
+        "type" : "descriptor"
+    }
+
+]
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Arrays in ALPS+JSON&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+                    
+
+<p>
+                        The <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
+                        description is always expressed as a named object.
+                    
+</p>
+<p>
+                        <br /><hr class="insert" />
+
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{
+    "description" : {
+        "format" : "text",
+        "value" : "Rules are imporant"
+    }
+}
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Descriptions in ALPS+JSON&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+                    
+
+<a name="anchor16"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.3.2"></a><h3>2.3.3.2.&nbsp;
+Complete Representation</h3>
+
+<p>
+                        Below is a example of the application/alps+json
+                        representation of an ALPS document.
+                        <br /><hr class="insert" />
+</p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+// http://alps.io/documents/search
+{
+    "alps" : {
+        "version" : "1.0",
+        "description" : {
+        "format" : "html", "value" : "&lt;h1&gt;A sample ALPS+JSON document&lt;/h1&gt;"
+        },
+        "element" : [
+            {
+                "id" : "search",
+                "type" : "safe",
+                "cardinality" : "single",
+                "appears" : "MUST NOT",
+                "description" : {"value" : "A search form with a two inputs"},
+                "child" : [
+                    {"href" : "#value"},
+                    {"href" : "#resultType"}
+                ]
+            },
+            {
+                "id" : "value",
+                "name" : "search",
+                "type" : "descriptor",
+                "cardinality" : "single",
+                "appears" : "MAY",
+                "description" : {"value" : "input for search"}
+            },
+            {
+                "id" : "resultType",
+                "type" : "descriptor",
+                "cardinality" : "single",
+                "appears" : "MAY",
+                "description" : {"value" : "results format"},
+                "ext" : [
+                    {
+                        "href" : "http://alps.io/ext/range",
+                        "value" : "summary,detail"
+                    }
+                ]
+            }
+
+        ]
+    }
+}
+</pre></div><p>
+<table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Complete ALPS+JSON Representation&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+                    
 </p>
 <a name="instructions"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1447,10 +1661,10 @@ Internationalization Considerations</h3>
 <p>[TK]
 </p>
 <p>
-                <a class='info' href='#comment.anchor13'>[anchor13]<span> (</span><span class='info'>insert text (consider rfc 5987)</span><span>)</span></a><a name='anchor13'></a>
+                <a class='info' href='#comment.anchor17'>[anchor17]<span> (</span><span class='info'>insert text (consider rfc 5987)</span><span>)</span></a><a name='anchor17'></a>
             
 </p>
-<a name="anchor14"></a><br /><hr />
+<a name="anchor18"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.7"></a><h3>7.&nbsp;
 Acknowledgements</h3>

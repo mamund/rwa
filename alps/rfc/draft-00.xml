@@ -340,20 +340,16 @@
                     When present, it describes the meaning and use 
                     of the related 'element'.
                     <list style="hanging">
-                        <t hangText="XML:">
-                            <artwork> <![CDATA[
+                        <t hangText="XML:"><![CDATA[
 <element ... >
     <description>...</description>
 </element>
-                        ]]></artwork>
-                        </t>
-                        <t hangText="JSON:">
-                            <artwork><![CDATA[
+                        ]]></t>
+                        <t hangText="JSON:"><![CDATA[
 {"element" : {...}
     {"description" : {"value" : "..."}
 }
-                        ]]></artwork>
-                        </t>
+                        ]]></t>
                     </list>
                 </t>
                 <t>
@@ -362,20 +358,16 @@
                     block. When present, it describes the meaning of the 
                     relationship between the 'element' and its 'child'.
                     <list style="hanging">
-                        <t hangText="XML:">
-                            <artwork> <![CDATA[
+                        <t hangText="XML:"><![CDATA[
 <child ... >
     <description>...</description>
 </child>
-                        ]]></artwork>
-                        </t>
-                        <t hangText="JSON:">
-                            <artwork><![CDATA[
+                        ]]></t>
+                        <t hangText="JSON:"><![CDATA[
 {"child" : {...}
     {"description" : {"value" : "..."}
 }
-                        ]]></artwork>
-                        </t>
+                        ]]></t>
                     </list>
                     
                 </t>
@@ -385,24 +377,19 @@
                     When present, it describes the purpose of the ALPS document 
                     as a whole.
                     <list style="hanging">
-                        <t hangText="XML:">
-                            <artwork> <![CDATA[
+                        <t hangText="XML:"><![CDATA[
 <alps>
     <description>...</description>
     ...
 </apls>
-                        ]]></artwork>
-                        </t>
-                        <t hangText="JSON:">
-                            <artwork><![CDATA[
+                        ]]></t>
+                        <t hangText="JSON:"><![CDATA[
 {"alps :
    "description" : { "value" : "..."},
    ...
 }
-                        ]]></artwork>
-                        </t>
+                        ]]></t>
                     </list>
-                    
                 </t>
                 <t>
                     The 'description' element has one OPTIONAL sub-element:
@@ -416,21 +403,17 @@
                     If no 'format' property is present, the content SHOULD be
                     treated as plain text.
                     <list style="hanging">
-                        <t hangText="XML:">
-                            <artwork> <![CDATA[
+                        <t hangText="XML:"><![CDATA[
 <description format="html">
    <h1>Date of Birth</h1>
    <p>...</p>
 </description>
-                        ]]></artwork>
-                        </t>
-                        <t hangText="JSON:">
-                            <artwork><![CDATA[
+                        ]]></t>
+                        <t hangText="JSON:"><![CDATA[
 {"description" : 
     {"format" : "text" : "value" : "Date of Birth ..."}
 }
-                        ]]></artwork>
-                        </t>
+                        ]]></t>
                     </list>
                 </t>
             </section>
@@ -651,11 +634,206 @@
                 </t>
             </section>
         </section>
-        <section anchor="xml-representation" title="XML Representation">
-            <t>[TK]</t>
-        </section>
-        <section anchor="json-representation" title="JSON Representation">
-            <t>[TK]</t>
+        <section anchor="representations" title="ALPS Representations">
+            <t>
+                ALPS documents can be represented in either XML or JSON
+                format. This section contains notes on how the ALPS properties
+                appear in each format along with examples to guide ALPS
+                document authors.
+            </t>
+            <section anchor="html-representation" title="Sample HTML">
+                <t>
+                    Below is a simple HTML document that contains a handful
+                    of semantic descriptors and transition instructions.
+                    This document was genrated from the  XML and JSON  
+                    ALPS documents that follow. Use this HTML document as a
+                    guide when evaluating the XML and JSON examples.
+                    <figure title="HTML Sample">
+                        <artwork><![CDATA[
+<!-- sample HTML document -->                    
+<html>
+    <head>
+        <link rel="profile" href="http://alps.io/documents/search" />
+    </head>
+    <body>
+        <form class="search" action="..." method="get">
+            <input type="text" name="search" value="..." />
+            <select name="resultType">
+                <option value="summary" />
+                <option value="detailed" />
+            </select>
+            <input type="submit" />
+        </form>
+    </body>
+</html>                           
+                        ]]></artwork>
+                    </figure>
+                </t>
+            </section>
+            <section anchor="xml-representation" title="XML Representation">
+                <section title="XML Representation Notes">
+                    <t>
+                        In the XML version of ALPS documents, the following
+                        properties always appear as XML elements: 
+                        <xref target="prop-alps">'alps'</xref>, 
+                        <xref target="prop-child">'child'</xref>,
+                        <xref target="prop-description">'description'</xref>,
+                        <xref target="prop-element">'element'</xref>, and
+                        <xref target="prop-ext">'ext'</xref>.
+                        All other ALPS properties appear as XML attributes.
+                    </t>
+                </section>
+                <section title="Complete XML Representation">
+                    <t>
+                        Below is an example of an applcation/alps+xml
+                        representation.
+                        <figure title="Complete XML Representation">
+                            <artwork><![CDATA[
+<?xml version="1.0"?>
+<alps version="1.0">
+    <description format="html">
+        <h1>A Sample ALPS+XML Document</h1>
+    </description>
+
+    <element id="search" type="safe" cardinality="single" appears="MUST NOT">
+        <description format="text">
+            A search form with a two inputs.
+        </description>
+        <child href="#resultType" />
+        <child id="value"
+            name="search" 
+            type="descriptor" 
+            cardinality="single"
+            appears="MAY">
+            <description>input for search</description>
+        </child>
+    </element>
+
+    <element id="resultType"
+        type="descriptor"
+        cardinality="single"
+        appears="MAY"
+        <description>results format</description>
+        <ext href="http://alps.io/ext/range" value="summary,detail" />
+    </element>
+</alps>
+                            ]]></artwork>
+                        </figure>
+                    </t>
+                </section>
+            </section>
+            <section anchor="json-representation" title="JSON Representation">
+                <section title="JSON Representation Notes">
+                    <t>
+                        When representing ALPS documents in the JSON format, the 
+                        <xref target="prop-child">'child'</xref>,   
+                        <xref target="prop-element">'element'</xref> and
+                        <xref target="prop-ext">'ext'</xref> properties are
+                        always express as arrays of anonymous objects - even when 
+                        there is only one member in the array.
+                        <figure title="Arrays in ALPS+JSON">
+                            <preamble>For example:</preamble>
+                            <artwork>
+"element" : [
+    {
+        "id" : "search",
+        "type" : "safe"
+        "child" : [
+            {"href" : "#value"},
+            {
+                "id" : "resultType",
+                "type" : "descriptor",
+                "ext" : [
+                    {
+                        "href" : "http://alps.io/ext/range",
+                        "value" : "summary,detail"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id" : "#value",
+        "type" : "descriptor"
+    }
+
+]
+                            </artwork>
+                        </figure>
+                    </t>
+                    <t>
+                        The <xref target="prop-description">'description'</xref>
+                        description is always expressed as a named object.
+                    </t>
+                    <t>
+                        <figure title="Descriptions in ALPS+JSON">
+                            <preamble>For example:</preamble>
+                            <artwork>
+{
+    "description" : {
+        "format" : "text", 
+        "value" : "Rules are imporant"
+    }
+}
+                            </artwork>
+                        </figure>
+                    </t>
+                </section>
+                <section title="Complete Representation">
+                    <t>
+                        Below is a example of the application/alps+json
+                        representation of an ALPS document.
+                        <figure title="Complete ALPS+JSON Representation">
+                            <artwork><![CDATA[
+// http://alps.io/documents/search
+{ 
+    "alps" : {
+        "version" : "1.0",
+        "description" : {
+        "format" : "html", "value" : "<h1>A sample ALPS+JSON document</h1>"
+        },
+        "element" : [
+            {
+                "id" : "search", 
+                "type" : "safe",
+                "cardinality" : "single",
+                "appears" : "MUST NOT",
+                "description" : {"value" : "A search form with a two inputs"},
+                "child" : [
+                    {"href" : "#value"},
+                    {"href" : "#resultType"}
+                ]
+            },
+            {
+                "id" : "value",
+                "name" : "search",
+                "type" : "descriptor",
+                "cardinality" : "single",
+                "appears" : "MAY",
+                "description" : {"value" : "input for search"}
+            },
+            {
+                "id" : "resultType",
+                "type" : "descriptor",
+                "cardinality" : "single",
+                "appears" : "MAY",
+                "description" : {"value" : "results format"},
+                "ext" : [
+                    {
+                        "href" : "http://alps.io/ext/range", 
+                        "value" : "summary,detail"
+                    }
+                ]
+            }
+
+        ]  
+    }
+}
+                            ]]></artwork>
+                        </figure>
+                    </t>
+                </section>
+            </section>
         </section>
     </section>
     <section anchor="instructions" 
