@@ -1157,7 +1157,10 @@ Complete XML Representation</h3>
         &lt;h1&gt;A Sample ALPS+XML Document&lt;/h1&gt;
     &lt;/description&gt;
 
-    &lt;element id="search" type="safe" cardinality="single" appears="MUST NOT"&gt;
+    &lt;element id="search"
+        type="safe"
+        cardinality="single"
+        appears="MUST NOT"&gt;
         &lt;description format="text"&gt;
             A search form with a two inputs.
         &lt;/description&gt;
@@ -1176,7 +1179,9 @@ Complete XML Representation</h3>
         cardinality="single"
         appears="MAY"
         &lt;description&gt;results format&lt;/description&gt;
-        &lt;ext href="http://alps.io/ext/range" value="summary,detail" /&gt;
+        &lt;ext
+            href="http://alps.io/ext/range"
+            value="summary,detail" /&gt;
     &lt;/element&gt;
 &lt;/alps&gt;
 </pre></div><p>
@@ -1269,7 +1274,8 @@ Complete Representation</h3>
     "alps" : {
         "version" : "1.0",
         "description" : {
-        "format" : "html", "value" : "&lt;h1&gt;A sample ALPS+JSON document&lt;/h1&gt;"
+            "format" : "html",
+            "value" : "&lt;h1&gt;A sample ALPS+JSON document&lt;/h1&gt;"
         },
         "element" : [
             {
@@ -1277,7 +1283,9 @@ Complete Representation</h3>
                 "type" : "safe",
                 "cardinality" : "single",
                 "appears" : "MUST NOT",
-                "description" : {"value" : "A search form with a two inputs"},
+                "description" : {"value" :
+                    "A search form with a two inputs"
+                },
                 "child" : [
                     {"href" : "#value"},
                     {"href" : "#resultType"}

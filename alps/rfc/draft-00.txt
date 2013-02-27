@@ -149,7 +149,7 @@ Table of Contents
    4.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . . 17
      4.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . . 17
      4.2.  Searching the Registry . . . . . . . . . . . . . . . . . . 17
-     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 17
+     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 18
    5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 18
      5.1.  application/alps+xml . . . . . . . . . . . . . . . . . . . 18
      5.2.  application/alps+json  . . . . . . . . . . . . . . . . . . 19
@@ -729,34 +729,39 @@ Amundsen & Richardson    Expires August 31, 2013               [Page 13]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-<?xml version="1.0"?>
-<alps version="1.0">
-    <description format="html">
-        <h1>A Sample ALPS+XML Document</h1>
-    </description>
+   <?xml version="1.0"?>
+   <alps version="1.0">
+       <description format="html">
+           <h1>A Sample ALPS+XML Document</h1>
+       </description>
 
-    <element id="search" type="safe" cardinality="single" appears="MUST NOT">
-        <description format="text">
-            A search form with a two inputs.
-        </description>
-        <child href="#resultType" />
-        <child id="value"
-            name="search"
-            type="descriptor"
-            cardinality="single"
-            appears="MAY">
-            <description>input for search</description>
-        </child>
-    </element>
+       <element id="search"
+           type="safe"
+           cardinality="single"
+           appears="MUST NOT">
+           <description format="text">
+               A search form with a two inputs.
+           </description>
+           <child href="#resultType" />
+           <child id="value"
+               name="search"
+               type="descriptor"
+               cardinality="single"
+               appears="MAY">
+               <description>input for search</description>
+           </child>
+       </element>
 
-    <element id="resultType"
-        type="descriptor"
-        cardinality="single"
-        appears="MAY"
-        <description>results format</description>
-        <ext href="http://alps.io/ext/range" value="summary,detail" />
-    </element>
-</alps>
+       <element id="resultType"
+           type="descriptor"
+           cardinality="single"
+           appears="MAY"
+           <description>results format</description>
+           <ext
+               href="http://alps.io/ext/range"
+               value="summary,detail" />
+       </element>
+   </alps>
 
                         Complete XML Representation
 
@@ -768,11 +773,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    (Section 2.2.4), 'element' (Section 2.2.6) and 'ext' (Section 2.2.7)
    properties are always express as arrays of anonymous objects - even
    when there is only one member in the array.
-
-
-
-
-
 
 
 
@@ -841,53 +841,53 @@ Amundsen & Richardson    Expires August 31, 2013               [Page 15]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-// http://alps.io/documents/search
-{
-    "alps" : {
-        "version" : "1.0",
-        "description" : {
-        "format" : "html", "value" : "<h1>A sample ALPS+JSON document</h1>"
-        },
-        "element" : [
-            {
-                "id" : "search",
-                "type" : "safe",
-                "cardinality" : "single",
-                "appears" : "MUST NOT",
-                "description" : {"value" : "A search form with a two inputs"},
-                "child" : [
-                    {"href" : "#value"},
-                    {"href" : "#resultType"}
-                ]
-            },
-            {
-                "id" : "value",
-                "name" : "search",
-                "type" : "descriptor",
-                "cardinality" : "single",
-                "appears" : "MAY",
-                "description" : {"value" : "input for search"}
-            },
-            {
-                "id" : "resultType",
-                "type" : "descriptor",
-                "cardinality" : "single",
-                "appears" : "MAY",
-                "description" : {"value" : "results format"},
-                "ext" : [
-                    {
-                        "href" : "http://alps.io/ext/range",
-                        "value" : "summary,detail"
-                    }
-                ]
-            }
+   // http://alps.io/documents/search
+   {
+       "alps" : {
+           "version" : "1.0",
+           "description" : {
+               "format" : "html",
+               "value" : "<h1>A sample ALPS+JSON document</h1>"
+           },
+           "element" : [
+               {
+                   "id" : "search",
+                   "type" : "safe",
+                   "cardinality" : "single",
+                   "appears" : "MUST NOT",
+                   "description" : {"value" :
+                       "A search form with a two inputs"
+                   },
+                   "child" : [
+                       {"href" : "#value"},
+                       {"href" : "#resultType"}
+                   ]
+               },
+               {
+                   "id" : "value",
+                   "name" : "search",
+                   "type" : "descriptor",
+                   "cardinality" : "single",
+                   "appears" : "MAY",
+                   "description" : {"value" : "input for search"}
+               },
+               {
+                   "id" : "resultType",
+                   "type" : "descriptor",
+                   "cardinality" : "single",
+                   "appears" : "MAY",
+                   "description" : {"value" : "results format"},
+                   "ext" : [
+                       {
+                           "href" : "http://alps.io/ext/range",
+                           "value" : "summary,detail"
+                       }
+                   ]
+               }
 
-        ]
-    }
-}
-
-                     Complete ALPS+JSON Representation
-
+           ]
+       }
+   }
 
 
 
@@ -896,6 +896,8 @@ Amundsen & Richardson    Expires August 31, 2013               [Page 16]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
+
+                     Complete ALPS+JSON Representation
 
 3.  Instructions on Applying ALPS to Existing Media Types
 
@@ -941,9 +943,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    [TK]
 
-4.3.  Contributing to the Registry
 
-   [TK]
 
 
 
@@ -952,6 +952,10 @@ Amundsen & Richardson    Expires August 31, 2013               [Page 17]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
+
+4.3.  Contributing to the Registry
+
+   [TK]
 
 5.  IANA Considerations
 
@@ -994,10 +998,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
       magic number(s):  none
 
-      file extensions:  .xml
-
-      macintosh type file code:  TEXT
-
 
 
 
@@ -1008,6 +1008,10 @@ Amundsen & Richardson    Expires August 31, 2013               [Page 18]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
+
+      file extensions:  .xml
+
+      macintosh type file code:  TEXT
 
       object idenfiers:  none
 
@@ -1051,10 +1055,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
       file extensions:  .json
 
-      macintosh type file code:  TEXT
-
-      object idenfiers:  none
-
 
 
 
@@ -1064,6 +1064,10 @@ Amundsen & Richardson    Expires August 31, 2013               [Page 19]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
+
+      macintosh type file code:  TEXT
+
+      object idenfiers:  none
 
    person to contact for further information:
 
@@ -1102,13 +1106,9 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 8.2.  Informative References
 
-Authors' Addresses
 
-   Mike Amundsen
-   Layer 7 Technologies
 
-   EMail: mca@amundsen.com
-   URI:   http://amundsen.com
+
 
 
 
@@ -1121,19 +1121,19 @@ Amundsen & Richardson    Expires August 31, 2013               [Page 20]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
+Authors' Addresses
+
+   Mike Amundsen
+   Layer 7 Technologies
+
+   EMail: mca@amundsen.com
+   URI:   http://amundsen.com
+
+
    Leonard Richardson
 
    EMail: leonardr@segfault.org
    URI:   http://crummy.com
-
-
-
-
-
-
-
-
-
 
 
 

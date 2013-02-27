@@ -695,7 +695,10 @@
         <h1>A Sample ALPS+XML Document</h1>
     </description>
 
-    <element id="search" type="safe" cardinality="single" appears="MUST NOT">
+    <element id="search" 
+        type="safe" 
+        cardinality="single" 
+        appears="MUST NOT">
         <description format="text">
             A search form with a two inputs.
         </description>
@@ -714,7 +717,9 @@
         cardinality="single"
         appears="MAY"
         <description>results format</description>
-        <ext href="http://alps.io/ext/range" value="summary,detail" />
+        <ext 
+            href="http://alps.io/ext/range" 
+            value="summary,detail" />
     </element>
 </alps>
                             ]]></artwork>
@@ -790,7 +795,8 @@
     "alps" : {
         "version" : "1.0",
         "description" : {
-        "format" : "html", "value" : "<h1>A sample ALPS+JSON document</h1>"
+            "format" : "html", 
+            "value" : "<h1>A sample ALPS+JSON document</h1>"
         },
         "element" : [
             {
@@ -798,7 +804,9 @@
                 "type" : "safe",
                 "cardinality" : "single",
                 "appears" : "MUST NOT",
-                "description" : {"value" : "A search form with a two inputs"},
+                "description" : {"value" : 
+                    "A search form with a two inputs"
+                },
                 "child" : [
                     {"href" : "#value"},
                     {"href" : "#resultType"}
@@ -1066,7 +1074,6 @@
             &rfc5988;
         </references>
         <references title="Informative References">
-           <t>[TK]</t>
        </references>
     </back>
 </rfc>
