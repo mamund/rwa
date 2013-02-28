@@ -126,39 +126,39 @@ Table of Contents
        2.2.1.  'alps' . . . . . . . . . . . . . . . . . . . . . . . .  5
        2.2.2.  'appears'  . . . . . . . . . . . . . . . . . . . . . .  6
        2.2.3.  'cardinality'  . . . . . . . . . . . . . . . . . . . .  7
-       2.2.4.  'child'  . . . . . . . . . . . . . . . . . . . . . . .  7
-       2.2.5.  'description'  . . . . . . . . . . . . . . . . . . . .  8
-       2.2.6.  'element'  . . . . . . . . . . . . . . . . . . . . . .  9
-       2.2.7.  'ext'  . . . . . . . . . . . . . . . . . . . . . . . .  9
-       2.2.8.  'format' . . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.9.  'href' . . . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.10. 'id' . . . . . . . . . . . . . . . . . . . . . . . . . 11
-       2.2.11. 'name' . . . . . . . . . . . . . . . . . . . . . . . . 11
-       2.2.12. 'type' . . . . . . . . . . . . . . . . . . . . . . . . 11
-       2.2.13. 'value'  . . . . . . . . . . . . . . . . . . . . . . . 12
-       2.2.14. 'version'  . . . . . . . . . . . . . . . . . . . . . . 12
-     2.3.  ALPS Representations . . . . . . . . . . . . . . . . . . . 12
-       2.3.1.  Sample HTML  . . . . . . . . . . . . . . . . . . . . . 12
-       2.3.2.  XML Representation . . . . . . . . . . . . . . . . . . 13
-       2.3.3.  JSON Representation  . . . . . . . . . . . . . . . . . 14
-   3.  Instructions on Applying ALPS to Existing Media Types  . . . . 17
-     3.1.  A Simple ALPS Document . . . . . . . . . . . . . . . . . . 17
-     3.2.  HTML Example . . . . . . . . . . . . . . . . . . . . . . . 17
-     3.3.  Collection+JSON Example  . . . . . . . . . . . . . . . . . 17
-     3.4.  Linking to ALPS Documents  . . . . . . . . . . . . . . . . 17
-   4.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . . 17
-     4.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . . 17
-     4.2.  Searching the Registry . . . . . . . . . . . . . . . . . . 17
-     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 18
-   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 18
-     5.1.  application/alps+xml . . . . . . . . . . . . . . . . . . . 18
-     5.2.  application/alps+json  . . . . . . . . . . . . . . . . . . 19
-   6.  Internationalization Considerations  . . . . . . . . . . . . . 20
-   7.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 20
-   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 20
-     8.1.  Normative References . . . . . . . . . . . . . . . . . . . 20
-     8.2.  Informative References . . . . . . . . . . . . . . . . . . 20
-
+       2.2.4.  'description'  . . . . . . . . . . . . . . . . . . . .  7
+       2.2.5.  'element'  . . . . . . . . . . . . . . . . . . . . . .  8
+       2.2.6.  'ext'  . . . . . . . . . . . . . . . . . . . . . . . .  8
+       2.2.7.  'format' . . . . . . . . . . . . . . . . . . . . . . .  9
+       2.2.8.  'href' . . . . . . . . . . . . . . . . . . . . . . . .  9
+       2.2.9.  'id' . . . . . . . . . . . . . . . . . . . . . . . . .  9
+       2.2.10. 'link' . . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.11. 'name' . . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.12. 'rel'  . . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.13. 'type' . . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.14. 'value'  . . . . . . . . . . . . . . . . . . . . . . . 11
+       2.2.15. 'version'  . . . . . . . . . . . . . . . . . . . . . . 11
+     2.3.  ALPS Representations . . . . . . . . . . . . . . . . . . . 11
+       2.3.1.  Sample HTML  . . . . . . . . . . . . . . . . . . . . . 11
+       2.3.2.  XML Representation . . . . . . . . . . . . . . . . . . 12
+       2.3.3.  JSON Representation  . . . . . . . . . . . . . . . . . 13
+   3.  Instructions on Applying ALPS to Existing Media Types  . . . . 16
+     3.1.  A Simple ALPS Document . . . . . . . . . . . . . . . . . . 16
+     3.2.  HTML Example . . . . . . . . . . . . . . . . . . . . . . . 16
+     3.3.  Collection+JSON Example  . . . . . . . . . . . . . . . . . 16
+     3.4.  Linking to ALPS Documents  . . . . . . . . . . . . . . . . 16
+   4.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . . 16
+     4.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . . 16
+     4.2.  Searching the Registry . . . . . . . . . . . . . . . . . . 16
+     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 17
+   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 17
+     5.1.  application/alps+xml . . . . . . . . . . . . . . . . . . . 17
+     5.2.  application/alps+json  . . . . . . . . . . . . . . . . . . 18
+   6.  Internationalization Considerations  . . . . . . . . . . . . . 19
+   7.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 19
+   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+     8.1.  Normative References . . . . . . . . . . . . . . . . . . . 19
+     8.2.  Informative References . . . . . . . . . . . . . . . . . . 19
 
 
 
@@ -290,17 +290,17 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 2.2.2.  'appears'
 
    Indicates the appearance rules for the related 'element'
-   (Section 2.2.6) or 'child' (Section 2.2.4) in a representation.  All
-   valid values for this property are terms defined in [RFC2119], and
-   have the meaning given in that standard.
+   (Section 2.2.5) in a a representation.  All valid values for this
+   property are terms defined in [RFC2119], and have the meaning given
+   in that standard.
 
-2.2.2.1.  Applied to the 'element' block
+2.2.2.1.  Applied to a 'top-level' 'element' block
 
-   The 'appears' property MAY appear as a property of the 'element'
-   block.  This controls whether the element may appear at the "top
-   level"; that is, not enclosed in any other element defined by this
-   ALPS document.  The formal meaning of "top level" varies by the media
-   type; see Section 3 for definitions.
+   The 'appears' property MAY appear as a property of a "top level"
+   'element' block.  This controls whether the element may appear at the
+   "top level"; that is, not enclosed in any other element defined by
+   this ALPS document.  The formal meaning of "top level" varies by the
+   media type; see Section 3 for definitions.
 
    Examples:
 
@@ -308,27 +308,27 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    JSON:  {"element" : "{..., "appears" : "MUST NOT"}}
 
-   Valid values for 'appears' in an 'element' block are: "MUST",
-   "SHOULD", "MAY", and "MUST NOT".  If this property does not appear,
-   the value SHOULD be treated as "MUST NOT".
+   Valid values for 'appears' in a top-level 'element' block are:
+   "MUST", "SHOULD", "MAY", and "MUST NOT".  If this property does not
+   appear, the value SHOULD be treated as "MUST NOT".
 
-2.2.2.2.  Applied to the 'child' block
+2.2.2.2.  Applied to 'non top-level' element block
 
-   The 'appears' property MAY appear as a property of a 'child' block.
-   This controls the rules by which the referenced element may appear as
-   a child of the enclosing 'element'.  The formal meaning of "enclosing
-   'element'" varies by the media type; see Section 3 for definitions.
+   The 'appears' property MAY appear as a property of a 'non top-level'
+   'element' block.  This controls the rules by which the referenced
+   element may appear as a child of the enclosing 'element'.  The formal
+   meaning of "enclosing 'element'" varies by the media type; see
+   Section 3 for definitions.
 
    Examples:
 
-   XML:  <child ... appears="MUST NOT">
+   XML:  <element ... appears="MAY">
 
-   JSON:  {"child" : "{..., "appears" : "MUST NOT"}}
+   JSON:  {"element" : "{..., "appears" : "MAY"}}
 
-   Valid values for 'appears' in an 'child' block are: "MUST", "SHOULD",
-   and "MAY".  If this property does not appear, the value SHOULD be
-   treated as "MAY".
-
+   Valid values for 'appears' in a 'non top-level' 'element' are:
+   "MUST", "SHOULD", and "MAY".  If this property does not appear, the
+   value SHOULD be treated as "MAY".
 
 
 
@@ -339,16 +339,9 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 2.2.3.  'cardinality'
 
-   Indicates the number of times the related 'element' (Section 2.2.6)
-   or 'child' (Section 2.2.4) can appear.  Valid values are "single" and
-   "many".  If this property does not appear, the value SHOULD be
-   treated as "many".
-
-2.2.3.1.  Applied to the 'element' block
-
-   The 'cardinality' property MAY appear as a property of an 'element'
-   block.  This controls how many times that element may be used at the
-   "top level" within a single representation.
+   Indicates the number of times the related 'element' (Section 2.2.5)
+   can appear.  Valid values are "single" and "many".  If this property
+   does not appear, the value SHOULD be treated as "many".
 
    Examples:
 
@@ -356,77 +349,17 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    JSON:  {"element" : "{..., "cardinaltiy" : "many"}}
 
-2.2.3.2.  Applied to the 'child' block
-
-   The 'cardinality' property MAY appear as a property of a 'child'
-   block.  This controls how many times the 'child' element may occur
-   within its enclosing element.
-
-   Examples:
-
-   XML:  <child ... cardinality="single">
-
-   JSON:  {"child" : "{..., "cardinality" : "single"}}
-
-2.2.4.  'child'
-
-   Identifies a child of the 'element' (Section 2.2.6) block.  The
-   'child' block is almost identical to the 'element' block and MUST
-   only appear as a direct child of 'element.'  This is the way ALPS
-   authors can reuse existing 'element' blocks in the current or any
-   external ALPS document.
-
-   The 'child' element MUST have at least an 'id' (Section 2.2.10) or
-   'href' (Section 2.2.9) property.  It MAY have both.  Additionally,
-   the 'child' element MAY have any of the following proeprties:
-
-   1.  'appears' (Section 2.2.2)
-
-   2.  'cardinality' (Section 2.2.3)
-
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 7]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
-   3.  'description' (Section 2.2.5)
-
-   4.  'ext' (Section 2.2.7)
-
-   5.  'name' (Section 2.2.11)
-
-   6.  'type' (Section 2.2.12)
-
-   The 'href' property MUST be a dereferencable URL that points to
-   another 'element' block either within the current ALPS document or in
-   another document.  If the 'child' element has an 'href' property, any
-   other properties of the 'child' element (e.g. 'appears',
-   'cardinality', etc.)  MUST override corresponding properties in the
-   referred 'element'.
-
-2.2.5.  'description'
+2.2.4.  'description'
 
    A text field that contains free-form, usually human-readable, text.
 
    A 'description' block SHOULD appear as a child of 'element'
-   (Section 2.2.6).  When present, it describes the meaning and use of
+   (Section 2.2.5).  When present, it describes the meaning and use of
    the related 'element'.
 
    XML:  <element ... > <description>...</description> </element>
 
    JSON:  {"element" : {...} {"description" : {"value" : "..."} }
-
-   A 'description' block MAY appear as a child of the 'child'
-   (Section 2.2.4) block.  When present, it describes the meaning of the
-   relationship between the 'element' and its 'child'.
-
-   XML:  <child ... > <description>...</description> </child>
-
-   JSON:  {"child" : {...} {"description" : {"value" : "..."} }
 
    A 'description' block MAY appear as a child of 'alps'
    (Section 2.2.1).  When present, it describes the purpose of the ALPS
@@ -437,17 +370,9 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    JSON:  {"alps : "description" : { "value" : "..."}, ... }
 
    The 'description' element has one OPTIONAL sub-element: 'format'
-   (Section 2.2.8) with two possible values:
+   (Section 2.2.7) with two possible values:
 
    1.  "text"
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 8]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
 
    2.  "html"
 
@@ -458,68 +383,83 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    XML:  <description format="html"> <h1>Date of Birth</h1> <p>...</p>
       </description>
 
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 7]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    JSON:  {"description" : {"format" : "text" : "value" : "Date of Birth
       ..."} }
 
-2.2.6.  'element'
+2.2.5.  'element'
 
    Identifies a semantic descriptor.  One or more 'element' blocks
-   SHOULD appear as children of the 'alps' (Section 2.2.1) block.
+   SHOULD appear as children of the 'alps' (Section 2.2.1) block.  It
+   may also appear as a child of itself; the 'element' property can be
+   nested.
 
-   The 'element' property MUST have an 'id' (Section 2.2.10) property.
-   It SHOULD have an 'appears' (Section 2.2.2) and a 'type'
-   (Section 2.2.12) property.  See the documentation for these
-   properties for the default values when they are missing.
+   The 'element' property MUST have at least an 'id' (Section 2.2.9) or
+   'href' (Section 2.2.8) property.  It MAY have both.  Additionally,
+   the it MAY have any of the following proeprties:
 
-   The 'element' MAY have the following properties:
+   1.  'appears' (Section 2.2.2)
 
-   1.  'cardinality' (Section 2.2.3)
+   2.  'cardinality' (Section 2.2.3)
 
-   2.  'child' (Section 2.2.4)
+   3.  'description' (Section 2.2.4)
 
-   3.  'description' (Section 2.2.5)
-
-   4.  'ext' (Section 2.2.7)
+   4.  'ext' (Section 2.2.6)
 
    5.  'name' (Section 2.2.11)
 
-2.2.7.  'ext'
+   6.  'type' (Section 2.2.13)
+
+   The 'href' property MUST be a dereferencable URL that points to
+   another 'element' block either within the current ALPS document or in
+   another document.  If 'element' has an 'href' property, any other
+   properties of the 'child' element (e.g. 'appears', 'cardinality',
+   etc.)  MUST override corresponding properties in the referred
+   (nested) 'element'.
+
+2.2.6.  'ext'
 
    The 'ext' element can be used to extend the ALPS document with
    author-specific information.  It provides a way to customize ALPS
    documents with additional properties not covered in this
    specification.  This is an OPTIONAL element.
 
-   The 'ext' element has to properties.  The 'href' (Section 2.2.9)
+   The 'ext' element has two properties.  The 'href' (Section 2.2.8)
    property MUST appear for the 'ext' element.  It's value MUST be a
-   URI.  The 'value' (Section 2.2.13) property MAY appear for the 'ext'
+   URI.  The 'value' (Section 2.2.14) property MAY appear for the 'ext'
    element.  The meaning and use of the value property is described in
    the document found by dereferencing the 'href' property of the 'ext'
    element.
 
+   Examples:
 
 
 
-Amundsen & Richardson    Expires August 31, 2013                [Page 9]
+Amundsen & Richardson    Expires August 31, 2013                [Page 8]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-   Examples:
+   XML:  <ext href="http://alps.io/ext/directions" value="north south
+      east west" >
 
-   XML:  <ext href="http://alps.io/extensions/range.alps" value="north
-      south east west" >
-
-   JSON:  {"ext" : {"href" : "http://alps.io/extensions/range.alps",
+   JSON:  {"ext" : {"href" : "http://alps.io/ext/directions",
       value="north south east west"}}
 
    The 'ext' element MAY appear as a child of the following elements:
 
    1.  'alps' (Section 2.2.1)
 
-   2.  'child' (Section 2.2.4)
-
-   3.  'element' (Section 2.2.6)
+   2.  'element' (Section 2.2.5)
 
    Since the 'ext' element has no specific meaning within the this
    specification, it MUST be ignored by any application that does not
@@ -529,51 +469,46 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    with the ALPS Registry (see Section 4) and use the URI provided by
    the registry in the 'name' property of their extension.
 
-2.2.8.  'format'
+2.2.7.  'format'
 
    Indicates whether the associated content in the should be treated as
    'text' or 'html'.  This property MAY appear as a property of the
-   'description' (Section 2.2.5) element.
+   'description' (Section 2.2.4) element.
 
-2.2.9.  'href'
+2.2.8.  'href'
 
-   Points to an 'element' (Section 2.2.6) either within the existing
-   ALPS document or in another ALPS document.
+   Contains a resolvable URI.
 
-   The 'href' attribute MUST appear as part of the 'child'
-   (Section 2.2.4) element.  The value MUST be a valid URL, with a
-   fragment identifier, resolving to an 'element' within an ALPS
-   document.
+   When it appears as a property of 'element' (Section 2.2.5), 'href'
+   points to another 'element' either within the existing ALPS document
+   or in another ALPS document.
 
-   [TK let's talk about these items - MCA]
+   When it appears as a property of 'ext' (Section 2.2.6), 'href' points
+   to an external document which provides the defintion of the
+   extension.
 
-   [Should <alps> itself support +href+ so it can link to itself or a
-   full human-readable doc?  Or should we allow a general <link> tag so
-   you can do rel="help"?]
+   When it appears as a property of 'link' (Section 2.2.10) 'href'
+   points to an external document whose relationship to the current
+   document is described by the associated 'rel' (Section 2.2.12)
+   property.
 
-   [I have a half-baked idea about using +href+ within 'element' as
-   well.  This would let you copy the +fn+ descriptor defined in hCard
+2.2.9.  'id'
+
+   A document-wide unique identifier for the related element.  This MAY
+   appear as a property of each 'element' (Section 2.2.5).
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 10]
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 9]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-   into your custom ALPS document (for performance reasons) but still
-   make it clear that your +fn+ descriptor has the same meaning as the
-   one defined in hCard. -leonardr]
-
-2.2.10.  'id'
-
-   A document-wide unique identifier for the related element.  This MUST
-   appear as a property of each 'element' (Section 2.2.6).
-
    The value of this property will appear within generic representations
    as the name of a semantic descriptor or hypermedia control (see
    Section 3 for details).  The exception is when an element defines
-   'name' (Section 2.2.11) as well as 'id' (Section 2.2.10).  In that
+   'name' (Section 2.2.11) as well as 'id' (Section 2.2.9).  In that
    case, the value of 'name' contains the name of the semantic
    descriptor or hypermedia control, and the value of 'id' is just a
    unique internal identifier for the current document.
@@ -586,56 +521,70 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    A relative URL with a fragment identifier (e.g. "#customer") refers
    to an element within the ALPS document containing the reference.
 
+2.2.10.  'link'
+
+   Identifies a link between the current property and some other
+   external resource.  Can be applied to the 'alps' (Section 2.2.1) and
+   the 'element' (Section 2.2.5) properties.
+
+   The 'link' property MUST have two sub-properties: 'href'
+   (Section 2.2.8) and 'rel' (Section 2.2.12).
+
 2.2.11.  'name'
 
-   Indicates the name of the 'element' (Section 2.2.6) as found in
-   generic representations.  It MAY appear as a property of 'element'
-   and 'child' (Section 2.2.4).
+   Indicates the name of the 'element' (Section 2.2.5) as found in
+   generic representations.  It MAY appear as a property of 'element'.
 
    This is used when the name of the 'element' or 'child' is used as an
-   'id' (Section 2.2.10) value elsewhere in the ALPS document.  For
+   'id' (Section 2.2.9) value elsewhere in the ALPS document.  For
    instance, if a single ALPS document defines an element descriptor
    called "customer" and a safe-idempotent control called "customer",
    they can't both have 'id="customer"' in the ALPS document.  One of
    them needs to have some other 'id', and to set 'name="customer"'.
 
-2.2.12.  'type'
+2.2.12.  'rel'
+
+   Contains a [RFC5988] approved value (e.g. an IANA-registered link
+   relations type or a URI).
+
+   Appears as a property of link (Section 2.2.10).
+
+2.2.13.  'type'
 
    Indicates the type of representation control to which the element is
    applied.  This MUST appear for each element.  Four valid values are
-   defined:
-
-   1.  "descriptor" refers to a state element (e.g.  HTML.SPAN,
-       HTML.INPUT, etc.).
 
 
 
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 11]
+Amundsen & Richardson    Expires August 31, 2013               [Page 10]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-   2.  "safe" refers to a hypermedia control that triggers a safe,
-       idempotent state transition (i.e.  HTTP.GET, HTTP.HEAD, etc.).
+   defined:
 
-   3.  "idempotent" refers to a hypermedia control that triggers an
-       unsafe, idempotent state transition (i.e.  HTTP.PUT, HTTP.DELETE
-       etc.).
+   descriptor  A state element (e.g.  HTML.SPAN, HTML.INPUT, etc.)  OR a
+      hypermedia control that triggers a safe, idempotent transition
+      (i.e.  HTTP.GET, HTTP.HEAD, etc.).
 
-   4.  "unsafe" refers to a hypermedia control that triggers an unsafe,
-       non-idempotent state transition (i.e.  HTTP.POST).
+   safe  A hypermedia control that triggers a safe, idempotent state
+      transition (i.e.  HTTP.GET, HTTP.HEAD, etc.).
+
+   idempotent  A hypermedia control that triggers an unsafe, idempotent
+      state transition (i.e.  HTTP.PUT, HTTP.DELETE etc.).
+
+   unsafe  A hypermedia control that triggers an unsafe, non-idempotent
+      state transition (i.e.  HTTP.POST).
 
    If no 'type' property is associated with the element then the
    'type="descriptor"' is implied.
 
-2.2.13.  'value'
+2.2.14.  'value'
 
    Contains a string value.  It MAY appear as a property of the
-   'description' (Section 2.2.5) and the 'ext' (Section 2.2.7) elements.
+   'description' (Section 2.2.4) and the 'ext' (Section 2.2.6) elements.
 
-2.2.14.  'version'
+2.2.15.  'version'
 
    Indicates the version number of the ALPS document.  This SHOULD
    appear as a property of the 'alps' (Section 2.2.1) property.
@@ -663,12 +612,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 12]
+Amundsen & Richardson    Expires August 31, 2013               [Page 11]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -697,10 +641,9 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 2.3.2.1.  XML Representation Notes
 
    In the XML version of ALPS documents, the following properties always
-   appear as XML elements: 'alps' (Section 2.2.1), 'child'
-   (Section 2.2.4), 'description' (Section 2.2.5), 'element'
-   (Section 2.2.6), and 'ext' (Section 2.2.7).  All other ALPS
-   properties appear as XML attributes.
+   appear as XML elements: 'alps' (Section 2.2.1), 'description'
+   (Section 2.2.4), 'element' (Section 2.2.5), and 'ext'
+   (Section 2.2.6).  All other ALPS properties appear as XML attributes.
 
 2.3.2.2.  Complete XML Representation
 
@@ -724,7 +667,8 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 13]
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 12]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -742,14 +686,14 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
            <description format="text">
                A search form with a two inputs.
            </description>
-           <child href="#resultType" />
-           <child id="value"
+           <element href="#resultType" />
+           <element id="value"
                name="search"
                type="descriptor"
                cardinality="single"
                appears="MAY">
                <description>input for search</description>
-           </child>
+           </element>
        </element>
 
        <element id="resultType"
@@ -769,10 +713,10 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 2.3.3.1.  JSON Representation Notes
 
-   When representing ALPS documents in the JSON format, the 'child'
-   (Section 2.2.4), 'element' (Section 2.2.6) and 'ext' (Section 2.2.7)
-   properties are always express as arrays of anonymous objects - even
-   when there is only one member in the array.
+   When representing ALPS documents in the JSON format, the 'element'
+   (Section 2.2.5) and 'ext' (Section 2.2.6) properties are always
+   express as arrays of anonymous objects - even when there is only one
+   member in the array.
 
 
 
@@ -780,7 +724,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 14]
+Amundsen & Richardson    Expires August 31, 2013               [Page 13]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -791,7 +735,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
        {
            "id" : "search",
            "type" : "safe"
-           "child" : [
+           "element" : [
                {"href" : "#value"},
                {
                    "id" : "resultType",
@@ -814,7 +758,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
                             Arrays in ALPS+JSON
 
-   The 'description' (Section 2.2.5) description is always expressed as
+   The 'description' (Section 2.2.4) description is always expressed as
    a named object.
 
    For example:
@@ -836,7 +780,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 15]
+Amundsen & Richardson    Expires August 31, 2013               [Page 14]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -892,7 +836,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 16]
+Amundsen & Richardson    Expires August 31, 2013               [Page 15]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -948,7 +892,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 17]
+Amundsen & Richardson    Expires August 31, 2013               [Page 16]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -1004,7 +948,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 18]
+Amundsen & Richardson    Expires August 31, 2013               [Page 17]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -1060,7 +1004,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 19]
+Amundsen & Richardson    Expires August 31, 2013               [Page 18]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -1083,7 +1027,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    [TK]
 
-   [[anchor17: insert text (consider rfc 5987)]]
+   [[anchor15: insert text (consider rfc 5987)]]
 
 7.  Acknowledgements
 
@@ -1116,7 +1060,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 20]
+Amundsen & Richardson    Expires August 31, 2013               [Page 19]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -1172,5 +1116,5 @@ Authors' Addresses
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 21]
+Amundsen & Richardson    Expires August 31, 2013               [Page 20]
 
