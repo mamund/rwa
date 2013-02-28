@@ -64,47 +64,47 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
 
+Table of Contents
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  4
+     1.1.  Notational Conventions . . . . . . . . . . . . . . . . . .  4
+     1.2.  Motivation . . . . . . . . . . . . . . . . . . . . . . . .  4
+       1.2.1.  Describing Domain-Specific Semantics . . . . . . . . .  4
+       1.2.2.  ALPS-based Server Implementations  . . . . . . . . . .  5
+       1.2.3.  ALPS-based Client Implementations  . . . . . . . . . .  5
+     1.3.  A Simple ALPS Example  . . . . . . . . . . . . . . . . . .  5
+     1.4.  Identifying an ALPS Document . . . . . . . . . . . . . . .  5
+   2.  ALPS Documents . . . . . . . . . . . . . . . . . . . . . . . .  6
+     2.1.  Compliance . . . . . . . . . . . . . . . . . . . . . . . .  6
+     2.2.  ALPS Document Properties . . . . . . . . . . . . . . . . .  6
+       2.2.1.  'alps' . . . . . . . . . . . . . . . . . . . . . . . .  6
+       2.2.2.  'appears'  . . . . . . . . . . . . . . . . . . . . . .  6
+       2.2.3.  'cardinality'  . . . . . . . . . . . . . . . . . . . .  7
+       2.2.4.  'description'  . . . . . . . . . . . . . . . . . . . .  8
+       2.2.5.  'element'  . . . . . . . . . . . . . . . . . . . . . .  8
+       2.2.6.  'ext'  . . . . . . . . . . . . . . . . . . . . . . . .  9
+       2.2.7.  'format' . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.8.  'href' . . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.9.  'id' . . . . . . . . . . . . . . . . . . . . . . . . . 10
+       2.2.10. 'link' . . . . . . . . . . . . . . . . . . . . . . . . 11
+       2.2.11. 'name' . . . . . . . . . . . . . . . . . . . . . . . . 11
+       2.2.12. 'rel'  . . . . . . . . . . . . . . . . . . . . . . . . 11
+       2.2.13. 'type' . . . . . . . . . . . . . . . . . . . . . . . . 12
+       2.2.14. 'value'  . . . . . . . . . . . . . . . . . . . . . . . 12
+       2.2.15. 'version'  . . . . . . . . . . . . . . . . . . . . . . 12
+     2.3.  ALPS Representations . . . . . . . . . . . . . . . . . . . 12
+       2.3.1.  Sample HTML  . . . . . . . . . . . . . . . . . . . . . 12
+       2.3.2.  XML Representation . . . . . . . . . . . . . . . . . . 13
+       2.3.3.  JSON Representation  . . . . . . . . . . . . . . . . . 14
+   3.  Instructions on Applying ALPS to Existing Media Types  . . . . 17
+     3.1.  A Simple ALPS Document . . . . . . . . . . . . . . . . . . 17
+     3.2.  HTML Example . . . . . . . . . . . . . . . . . . . . . . . 17
+     3.3.  Collection+JSON Example  . . . . . . . . . . . . . . . . . 17
+     3.4.  Linking to ALPS Documents  . . . . . . . . . . . . . . . . 17
+   4.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . . 17
+     4.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . . 17
+     4.2.  Searching the Registry . . . . . . . . . . . . . . . . . . 17
+     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 18
 
 
 
@@ -113,52 +113,52 @@ Amundsen & Richardson    Expires August 31, 2013                [Page 2]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
-Table of Contents
+   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 18
+     5.1.  application/alps+xml . . . . . . . . . . . . . . . . . . . 18
+     5.2.  application/alps+json  . . . . . . . . . . . . . . . . . . 19
+   6.  Internationalization Considerations  . . . . . . . . . . . . . 20
+   7.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 20
+   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+     8.1.  Normative References . . . . . . . . . . . . . . . . . . . 20
+     8.2.  Informative References . . . . . . . . . . . . . . . . . . 20
 
-   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  4
-     1.1.  Notational Conventions . . . . . . . . . . . . . . . . . .  4
-     1.2.  Motivation . . . . . . . . . . . . . . . . . . . . . . . .  4
-     1.3.  A Simple ALPS Example  . . . . . . . . . . . . . . . . . .  4
-     1.4.  Identifying an ALPS Document . . . . . . . . . . . . . . .  4
-   2.  ALPS Documents . . . . . . . . . . . . . . . . . . . . . . . .  5
-     2.1.  Compliance . . . . . . . . . . . . . . . . . . . . . . . .  5
-     2.2.  ALPS Document Properties . . . . . . . . . . . . . . . . .  5
-       2.2.1.  'alps' . . . . . . . . . . . . . . . . . . . . . . . .  5
-       2.2.2.  'appears'  . . . . . . . . . . . . . . . . . . . . . .  6
-       2.2.3.  'cardinality'  . . . . . . . . . . . . . . . . . . . .  7
-       2.2.4.  'description'  . . . . . . . . . . . . . . . . . . . .  7
-       2.2.5.  'element'  . . . . . . . . . . . . . . . . . . . . . .  8
-       2.2.6.  'ext'  . . . . . . . . . . . . . . . . . . . . . . . .  8
-       2.2.7.  'format' . . . . . . . . . . . . . . . . . . . . . . .  9
-       2.2.8.  'href' . . . . . . . . . . . . . . . . . . . . . . . .  9
-       2.2.9.  'id' . . . . . . . . . . . . . . . . . . . . . . . . .  9
-       2.2.10. 'link' . . . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.11. 'name' . . . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.12. 'rel'  . . . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.13. 'type' . . . . . . . . . . . . . . . . . . . . . . . . 10
-       2.2.14. 'value'  . . . . . . . . . . . . . . . . . . . . . . . 11
-       2.2.15. 'version'  . . . . . . . . . . . . . . . . . . . . . . 11
-     2.3.  ALPS Representations . . . . . . . . . . . . . . . . . . . 11
-       2.3.1.  Sample HTML  . . . . . . . . . . . . . . . . . . . . . 11
-       2.3.2.  XML Representation . . . . . . . . . . . . . . . . . . 12
-       2.3.3.  JSON Representation  . . . . . . . . . . . . . . . . . 13
-   3.  Instructions on Applying ALPS to Existing Media Types  . . . . 16
-     3.1.  A Simple ALPS Document . . . . . . . . . . . . . . . . . . 16
-     3.2.  HTML Example . . . . . . . . . . . . . . . . . . . . . . . 16
-     3.3.  Collection+JSON Example  . . . . . . . . . . . . . . . . . 16
-     3.4.  Linking to ALPS Documents  . . . . . . . . . . . . . . . . 16
-   4.  The ALPS Registry  . . . . . . . . . . . . . . . . . . . . . . 16
-     4.1.  What is the ALPS Registry  . . . . . . . . . . . . . . . . 16
-     4.2.  Searching the Registry . . . . . . . . . . . . . . . . . . 16
-     4.3.  Contributing to the Registry . . . . . . . . . . . . . . . 17
-   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 17
-     5.1.  application/alps+xml . . . . . . . . . . . . . . . . . . . 17
-     5.2.  application/alps+json  . . . . . . . . . . . . . . . . . . 18
-   6.  Internationalization Considerations  . . . . . . . . . . . . . 19
-   7.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 19
-   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 19
-     8.1.  Normative References . . . . . . . . . . . . . . . . . . . 19
-     8.2.  Informative References . . . . . . . . . . . . . . . . . . 19
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,21 +202,21 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    being implemented (i.e. accounting, contact management, etc.) rather
    than the media type used in the representations.
 
+1.2.1.  Describing Domain-Specific Semantics
+
    Instead of creating (and registering) an entirely new media type
-   (i.e. 'application/accounting'), representation authors can use an
-   ALPS "profile" to apply application-level semantic descriptions to
-   elements defined by the generic media type.  This increases the
-   specificity of the representation without reducing the generality of
-   the media type.
+   (i.e. 'application/accounting'), representation authors can create an
+   ALPS document that describes a "profile" of the target domain; one
+   that contains the vital appliation-level semantic descriptors and
+   transitions.  This profilel can then be consistently applied to a
+   wide range of media types by server implementors and successfully
+   consumed by client applications.  This focus on defining appliction-
+   level semantics independent of transfer protocol or media type design
+   makes it possible to increase the specificity of the representations
+   without reducing the generality of the media type casrrying the
+   representation.
 
-1.3.  A Simple ALPS Example
 
-   [TK]
-
-1.4.  Identifying an ALPS Document
-
-   ALPS vocabularies are identified by a unique URL.  The URL SHOULD
-   point to a valid ALPS document.  The URL MAY point to a human-
 
 
 
@@ -225,20 +225,61 @@ Amundsen & Richardson    Expires August 31, 2013                [Page 4]
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
+1.2.2.  ALPS-based Server Implementations
+
+   Server implementors can use ALPS documents as a basis for building
+   domain-specific solutions without having to create their own custom
+   media type or re-invent the vocabulary and transition set for a
+   common domain (e.g. accounting, microblogging, etc.).  By using the
+   ALPS document as a guide, servers can map internal data to commonly-
+   understood semantic descriptors and state transitions and increase
+   the likelyhood that existing client applications (those who share the
+   same understanding of the ALPS document) will be able to successfully
+   interact with that server.
+
+1.2.3.  ALPS-based Client Implementations
+
+   Armed with an ALPS document as a "profile" for the received
+   representation, client applications can locate and identify semantic
+   descriptors of interest within the response.  Client applications can
+   "code for the profile" and better adjust to detailed changes to the
+   response layout.
+
+1.3.  A Simple ALPS Example
+
+   [TK maybe put the YouTypeItWePostIt stuff here? -mca]
+
+1.4.  Identifying an ALPS Document
+
+   ALPS vocabularies are identified by a unique URL.  The URL SHOULD
+   point to a valid ALPS document.  The URL MAY point to a human-
    readable document that describes the ALPS specification for the
-   identified use case.
+   identified use case.  [TK change this to MUST and drop the last
+   sentence? -mca]
 
    Although the URI SHOULD point to a resource that contains a
    definition of the semantics of the relation type, clients SHOULD NOT
    automatically access that resource to avoid overburdening its server.
 
-   [I almost feel like we should have two URLs, an ALPS permalink and a
-   human-readable doc.  Or should we suggest the use of content
-   negotiation? -leonardr]
+   [TK I almost feel like we should have two URLs, an ALPS permalink and
+   a human-readable doc.  Or should we suggest the use of content
+   negotiation? -leonardr] [This can be handled by the LINK element now,
+   right? -mca]
 
    All ALPS URIs MUST be unique and all ALPS documents intended for
    public consumption SHOULD be registered in the ALPS Registry located
    at [TK].
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 5]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
 
 2.  ALPS Documents
 
@@ -249,9 +290,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    meaning, and their use.  Additional subsections provide specific
    details on how to construct a valid ALPS document in XML and in JSON
    format.
-
-   [LR: need a section that syas URL can be used as an abstract semantic
-   type]
 
 2.1.  Compliance
 
@@ -264,22 +302,15 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 2.2.  ALPS Document Properties
 
-   The ALPS media type defines a small set of properties.  The
+   The ALPS media type defines a small set of properties.  These
    properties appear in both the XML and JSON formats, but are expressed
-   in different ways.  Below is a list of the properties that can appear
-   in an ALPS document.
+   in different ways depending on the format.  Below is a list of the
+   properties that can appear in an ALPS document.
 
 2.2.1.  'alps'
 
    Indicates the root of the ALPS document.  This property SHOULD have
    one or more 'element' child properties.
-
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 5]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
 
    Examples:
 
@@ -298,6 +329,14 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    The 'appears' property MAY appear as a property of a "top level"
    'element' block.  This controls whether the element may appear at the
+
+
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 6]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    "top level"; that is, not enclosed in any other element defined by
    this ALPS document.  The formal meaning of "top level" varies by the
    media type; see Section 3 for definitions.
@@ -330,13 +369,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    "MUST", "SHOULD", and "MAY".  If this property does not appear, the
    value SHOULD be treated as "MAY".
 
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 6]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
 2.2.3.  'cardinality'
 
    Indicates the number of times the related 'element' (Section 2.2.5)
@@ -348,6 +380,18 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    XML:  <element ... candinality="many">
 
    JSON:  {"element" : "{..., "cardinaltiy" : "many"}}
+
+
+
+
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 7]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
 
 2.2.4.  'description'
 
@@ -383,16 +427,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    XML:  <description format="html"> <h1>Date of Birth</h1> <p>...</p>
       </description>
 
-
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 7]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    JSON:  {"description" : {"format" : "text" : "value" : "Date of Birth
       ..."} }
 
@@ -405,7 +439,15 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    The 'element' property MUST have at least an 'id' (Section 2.2.9) or
    'href' (Section 2.2.8) property.  It MAY have both.  Additionally,
-   the it MAY have any of the following proeprties:
+   the 'element' MAY have any of the following proeprties:
+
+
+
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 8]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
 
    1.  'appears' (Section 2.2.2)
 
@@ -421,10 +463,16 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    The 'href' property MUST be a dereferencable URL that points to
    another 'element' block either within the current ALPS document or in
-   another document.  If 'element' has an 'href' property, any other
-   properties of the 'child' element (e.g. 'appears', 'cardinality',
-   etc.)  MUST override corresponding properties in the referred
-   (nested) 'element'.
+   another ALPS document.
+
+   If 'element' has an 'href' property, then 'element' is inheriting all
+   the attributes and and sub-properties of what is pointed to by
+   'href'.  When 'element' has a property defined locally, that property
+   value takes precedence over any inherited property value.  Since
+   there is no limit to the nesting of elements -- even ones linked
+   remotely -- it is important to process all element chains starting
+   from the 'bottom' to make sure you have collected all the available
+   properties and have established the correct value for each of them.
 
 2.2.6.  'ext'
 
@@ -442,13 +490,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    Examples:
 
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 8]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    XML:  <ext href="http://alps.io/ext/directions" value="north south
       east west" >
 
@@ -456,6 +497,13 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
       value="north south east west"}}
 
    The 'ext' element MAY appear as a child of the following elements:
+
+
+
+Amundsen & Richardson    Expires August 31, 2013                [Page 9]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
 
    1.  'alps' (Section 2.2.1)
 
@@ -497,14 +545,6 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    A document-wide unique identifier for the related element.  This MAY
    appear as a property of each 'element' (Section 2.2.5).
 
-
-
-
-Amundsen & Richardson    Expires August 31, 2013                [Page 9]
-
-Internet-Draft     Application-Level Profile Semantics     February 2013
-
-
    The value of this property will appear within generic representations
    as the name of a semantic descriptor or hypermedia control (see
    Section 3 for details).  The exception is when an element defines
@@ -513,13 +553,31 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
    descriptor or hypermedia control, and the value of 'id' is just a
    unique internal identifier for the current document.
 
+
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 10]
+
+Internet-Draft     Application-Level Profile Semantics     February 2013
+
+
    When applied to an ALPS document, a URI fragment identifier points to
-   the element with the appropriate 'id''.  For example, the fragment
+   the element with the appropriate 'id'.  For example, the fragment
    identifier "customer" in the URI http://example.com/#customer refers
    to an ALPS element with 'id' set to "customer".
 
    A relative URL with a fragment identifier (e.g. "#customer") refers
    to an element within the ALPS document containing the reference.
+
+   The complete URI (including the fragement) forms an "abstract
+   semantic type" identifier.  This is a resolvable URI (URL) that can
+   be used as a type indicator within ALPS documents.
+
+   In most cases, the 'id' value will be used as the link relation type
+   value for safe transitions.  For this reason, when selecting 'id'
+   values and defining 'element' semantics, it is important to avoid
+   creating conflicts with existing IANA-registered values.  In cases
+   where this does conflict occur, the results are indeterminate.
 
 2.2.10.  'link'
 
@@ -549,32 +607,34 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    Appears as a property of link (Section 2.2.10).
 
-2.2.13.  'type'
-
-   Indicates the type of representation control to which the element is
-   applied.  This MUST appear for each element.  Four valid values are
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 10]
+
+
+Amundsen & Richardson    Expires August 31, 2013               [Page 11]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
+2.2.13.  'type'
+
+   Indicates the type of representation control to which the element is
+   applied.  This MUST appear for each element.  Four valid values are
    defined:
 
-   descriptor  A state element (e.g.  HTML.SPAN, HTML.INPUT, etc.)  OR a
-      hypermedia control that triggers a safe, idempotent transition
+   "descriptor"  A state element (e.g.  HTML.SPAN, HTML.INPUT, etc.)  OR
+      a hypermedia control that triggers a safe, idempotent transition
       (i.e.  HTTP.GET, HTTP.HEAD, etc.).
 
-   safe  A hypermedia control that triggers a safe, idempotent state
+   "safe"  A hypermedia control that triggers a safe, idempotent state
       transition (i.e.  HTTP.GET, HTTP.HEAD, etc.).
 
-   idempotent  A hypermedia control that triggers an unsafe, idempotent
-      state transition (i.e.  HTTP.PUT, HTTP.DELETE etc.).
+   "idempotent"  A hypermedia control that triggers an unsafe,
+      idempotent state transition (i.e.  HTTP.PUT, HTTP.DELETE etc.).
 
-   unsafe  A hypermedia control that triggers an unsafe, non-idempotent
-      state transition (i.e.  HTTP.POST).
+   "unsafe"  A hypermedia control that triggers an unsafe, non-
+      idempotent state transition (i.e.  HTTP.POST).
 
    If no 'type' property is associated with the element then the
    'type="descriptor"' is implied.
@@ -608,11 +668,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-
-
-
-
-Amundsen & Richardson    Expires August 31, 2013               [Page 11]
+Amundsen & Richardson    Expires August 31, 2013               [Page 12]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -668,7 +724,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 12]
+Amundsen & Richardson    Expires August 31, 2013               [Page 13]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -724,7 +780,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 13]
+Amundsen & Richardson    Expires August 31, 2013               [Page 14]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -780,7 +836,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 14]
+Amundsen & Richardson    Expires August 31, 2013               [Page 15]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -836,7 +892,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 15]
+Amundsen & Richardson    Expires August 31, 2013               [Page 16]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -892,7 +948,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 16]
+Amundsen & Richardson    Expires August 31, 2013               [Page 17]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -948,7 +1004,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 17]
+Amundsen & Richardson    Expires August 31, 2013               [Page 18]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -1004,7 +1060,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 18]
+Amundsen & Richardson    Expires August 31, 2013               [Page 19]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -1027,7 +1083,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
    [TK]
 
-   [[anchor15: insert text (consider rfc 5987)]]
+   [[anchor18: insert text (consider rfc 5987)]]
 
 7.  Acknowledgements
 
@@ -1060,7 +1116,7 @@ Internet-Draft     Application-Level Profile Semantics     February 2013
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 19]
+Amundsen & Richardson    Expires August 31, 2013               [Page 20]
 
 Internet-Draft     Application-Level Profile Semantics     February 2013
 
@@ -1116,5 +1172,5 @@ Authors' Addresses
 
 
 
-Amundsen & Richardson    Expires August 31, 2013               [Page 20]
+Amundsen & Richardson    Expires August 31, 2013               [Page 21]
 

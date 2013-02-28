@@ -99,18 +99,49 @@
                     contact management, etc.) rather than the media type used 
                     in the representations.
                 </t>
-                <t>
-                    Instead of creating (and registering) an entirely new media
-                    type (i.e. 'application/accounting'), representation 
-                    authors can use an ALPS "profile" to apply application-level 
-                    semantic descriptions to elements  defined by the generic 
-                    media type. This increases the  specificity of  the 
-                    representation without reducing the generality of the media
-                    type.
-                </t>
-            </section>
+                <section title="Describing Domain-Specific Semantics">
+                    <t>
+                        Instead of creating (and registering) an entirely new media
+                        type (i.e. 'application/accounting'), representation 
+                        authors can create an ALPS document that describes a "profile"
+                        of the target domain; one that contains the vital
+                        appliation-level semantic descriptors and transitions. This
+                        profilel can then be consistently applied to a wide range
+                        of media types by server implementors and successfully
+                        consumed by client applications. This focus on defining 
+                        appliction-level semantics independent of transfer protocol or
+                        media type design makes it possible to increase the specificity 
+                        of the representations without reducing the generality of 
+                        the media type casrrying the representation.
+                    </t>
+                </section>
+                <section title="ALPS-based Server Implementations">
+                   <t>
+                        Server implementors can use ALPS documents as a basis for
+                        building domain-specific solutions without having to
+                        create their own custom media type or re-invent the
+                        vocabulary and transition set for a common domain (e.g.
+                        accounting, microblogging, etc.). By using the ALPS
+                        document as a guide, servers can map internal data to
+                        commonly-understood semantic descriptors and state
+                        transitions and increase the likelyhood that existing
+                        client applications (those who share the same understanding
+                        of the ALPS document) will be able to successfully interact
+                        with that server.
+                    </t>
+                </section>
+                <section title="ALPS-based Client Implementations">
+                    <t>
+                        Armed with an ALPS document as a "profile" for the received
+                        representation, client applications can locate and identify
+                        semantic descriptors of interest within the response.
+                        Client applications can "code for the profile" and better
+                        adjust to detailed changes to the response layout.
+                    </t>
+                </section>
+           </section>
             <section title="A Simple ALPS Example">
-                <t>[TK]</t>
+                <t>[TK maybe put the YouTypeItWePostIt stuff here? -mca]</t>
             </section>
             <section title="Identifying an ALPS Document">
                 <t>
@@ -118,6 +149,7 @@
                     The URL SHOULD point to a valid ALPS document. The URL MAY 
                     point to a human-readable document that describes the ALPS
                     specification for the identified use case.  
+                    [TK change this to MUST and drop the last sentence? -mca]
                 </t>
                 <t>
                     Although the URI SHOULD point to a resource that contains a 
@@ -126,9 +158,10 @@
                     overburdening its server.
                 </t>
                 <t>
-                    [I almost feel like we should have two URLs, an ALPS permalink
+                    [TK I almost feel like we should have two URLs, an ALPS permalink
                     and a human-readable doc. Or should we suggest the use of content
-                    negotiation? -leonardr]
+                    negotiation? -leonardr] [This can be handled by the LINK 
+                    element now, right? -mca] 
                 </t>
                 <t>
                     All ALPS URIs MUST be unique and all ALPS documents intended
@@ -148,10 +181,6 @@
                 and their use. Additional subsections provide specific details
                 on how to construct a valid ALPS document in XML and in JSON format.
             </t>
-            <t>
-                [LR: need a section that syas URL can be used as an abstract
-                semantic type]
-            </t>
             <section title="Compliance">
                 <t>
                     An implementation is not compliant if it fails to satisfy
@@ -165,10 +194,11 @@
             </section>
             <section title="ALPS Document Properties">
                 <t>
-                    The ALPS media type defines a small set of properties. The
-                    properties appear in both the XML and JSON formats, but are 
-                    expressed in  different ways. Below is a list of the 
-                    properties that can appear in an ALPS document.
+                    The ALPS media type defines a small set of properties.
+                    These properties appear in both the XML and JSON formats, 
+                    but are expressed in  different ways depending on the format. 
+                    Below is a list of the properties that can appear in an 
+                    ALPS document.
                 </t>
                 <section anchor="prop-alps" title="'alps'">
                     <t>
@@ -351,7 +381,7 @@
                     The 'element' property MUST have at least an 
                     <xref target="prop-id">'id'</xref> or 
                     <xref target="prop-href">'href'</xref>
-                    property. It MAY have both. Additionally, the it 
+                    property. It MAY have both. Additionally, the 'element' 
                     MAY have any of the following proeprties:
                     <list style="numbers">
                         <t><xref target="prop-appears">'appears'</xref></t>
@@ -365,10 +395,20 @@
                 <t>
                     The 'href' property MUST be a dereferencable URL that points 
                     to another 'element' block either within the current ALPS
-                    document or in another document. If 'element' 
-                    has an 'href' property, any other properties of the 'child' 
-                    element (e.g. 'appears', 'cardinality', etc.) MUST override
-                    corresponding properties in the referred (nested) 'element'.
+                    document or in another ALPS document. 
+                </t>
+                <t>
+                    If 'element' has an 'href' property, then 'element' is
+                    inheriting all the attributes and and sub-properties 
+                    of what is pointed
+                    to by 'href'. When 'element' has a property  defined 
+                    locally, that property value takes precedence over any inherited
+                    property value. Since there is no limit to the nesting
+                    of elements -- even ones linked remotely -- it is important
+                    to process all element chains starting from the 'bottom' 
+                    to make sure you have collected all the available
+                    properties and have established the correct value for each
+                    of them.
                 </t>
             </section>
             <section anchor="prop-ext" title="'ext'">
@@ -475,7 +515,7 @@
                 </t>
                 <t>
                     When applied to an ALPS document, a URI fragment identifier
-                    points to the element with the appropriate 'id''. For example, 
+                    points to the element with the appropriate 'id'. For example, 
                     the fragment identifier "customer" in the URI
                     http://example.com/#customer refers to an ALPS element 
                     with 'id' set to "customer".
@@ -484,6 +524,20 @@
                     A relative URL with a fragment identifier (e.g. "#customer") 
                     refers to an element within the ALPS document containing the
                     reference.
+                </t>
+                <t>
+                    The complete URI (including the fragement) forms
+                    an "abstract semantic type" identifier. This is
+                    a resolvable URI (URL) that can be used as a type indicator
+                    within ALPS documents.
+                </t>
+                <t>
+                    In most cases, the 'id' value will be used as the link relation
+                    type value for safe transitions. For this reason, when 
+                    selecting 'id' values and defining 'element' semantics, 
+                    it is important to avoid creating conflicts with existing
+                    IANA-registered values. In cases where this does conflict 
+                    occur, the results are indeterminate.
                 </t>
             </section>
             <section anchor="prop-link" title="'link'">
@@ -533,23 +587,23 @@
                     Four valid values are defined:
                 
                     <list style="hanging">
-                        <t hangText="descriptor">
+                        <t hangText="&quot;descriptor&quot;">
                             A state element (e.g.
                             HTML.SPAN, HTML.INPUT, etc.) OR a hypermedia
                             control that triggers a safe, idempotent
                             transition (i.e. HTTP.GET, HTTP.HEAD, etc.).
                         </t>
-                        <t hangText="safe">
+                        <t hangText="&quot;safe&quot;">
                            A hypermedia control that
                            triggers a safe, idempotent state transition 
                            (i.e. HTTP.GET, HTTP.HEAD, etc.).
                         </t>
-                        <t hangText="idempotent">
+                        <t hangText="&quot;idempotent&quot;">
                             A hypermedia control
                             that triggers an unsafe, idempotent state 
                             transition (i.e. HTTP.PUT, HTTP.DELETE etc.).
                        </t>
-                       <t hangText="unsafe">
+                       <t hangText="&quot;unsafe&quot;">
                             A hypermedia control
                             that triggers an unsafe, non-idempotent state 
                             transition (i.e. HTTP.POST).
