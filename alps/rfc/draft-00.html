@@ -143,19 +143,23 @@
 <table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
 <tr><td class="header">Network Working Group</td><td class="header">M. Amundsen</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">Layer 7 Technologies</td></tr>
-<tr><td class="header">Expires: August 31, 2013</td><td class="header">L. Richardson</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">February 27, 2013</td></tr>
+<tr><td class="header">Expires: September 1, 2013</td><td class="header">L. Richardson</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">February 28, 2013</td></tr>
 </table></td></tr></table>
 <h1><br />Application-Level Profile Semantics (ALPS)<br />draft-amundsen-richardson-alps-00</h1>
 
 <h3>Abstract</h3>
 
 <p>
-                This document describes a media type for defining application-level
-                semantic descriptions (similar to those defined by HTML
-                microformats) in a way that incorporates both human-readable documentation
-                and machine-readable instructions on applying semantic descriptions
-                to elements within a wide range of media-type representations.
+                This document describes ALPS, a data format for
+                defining simple descriptions of application-level
+                semantics, similar in complexity to HTML
+                microformats. An ALPS document can be used as a
+                profile to explain the application semantics of a
+                document with an application-agnostic media type (such
+                as HTML, HAL, Collection+JSON, or Siren). This
+                increases the reusability of profile documents across
+                media types.
             
 </p>
 <h3>Editorial Note (To be removed by RFC Editor)</h3>
@@ -181,7 +185,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on August 31, 2013.</p>
+This Internet-Draft will expire on September 1, 2013.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -303,22 +307,40 @@ Informative References<br />
 Introduction</h3>
 
 <p>
-                This document describes a media type for defining application-level
-                semantic descriptions (similar to those defined by HTML microformats)
-                in a way that incorporates both human-readable documentation
-                and machine-readable instructions on applying semantic descriptions
-                to elements within application-agnostic media-type representations
-                (such as HTML, HAL, Collection+JSON, Siren, etc.). This document also
-                identifies an ALPS Registry, sets a standard for creating and 
-                registering ALPS document identifers in that registry, and 
-                provides suggested conventions for applying ALPS descriptions to
-                existing media types.
+              This document describes ALPS, a media type for defining
+              simple descriptions of application-level semantics,
+              similar in complexity to HTML microformats. These
+              descriptions contain both human-readable and
+              machine-readable explanations of the semantics.
             
 </p>
 <p>
-                This document registers two media-type identifiers with the
-                IANA:  'application/alps+xml' ("ALPS+XML") and 
-                'application/alps+json' ("ALPS+JSON").
+              An ALPS document can be used as a profile to explain the
+              application semantics of a document with an
+              application-agnostic media type (such as HTML, HAL,
+              Collection+JSON, or Siren).
+            
+</p>
+<p>
+              This document identifies a registry for ALPS documents,
+              and sets a standard for creating and registering ALPS
+              document identifiers with that registry.
+            
+</p>
+<p>
+              This document also identifies a registry for normative
+              human-readable instructions on applying an ALPS document
+              as a profile to a document with a given media type. It
+              sets a standard for registering media types with that
+              registry. It gives some non-normative examples in which
+              a single ALPS document is applied as a profile to
+              documents with different media types.
+            
+</p>
+<p>
+              This document registers two media-type identifiers with
+              the IANA: 'application/alps+xml' ("ALPS+XML") and
+              'application/alps+json' ("ALPS+JSON").
             
 </p>
 <a name="anchor2"></a><br /><hr />
@@ -327,9 +349,10 @@ Introduction</h3>
 Notational Conventions</h3>
 
 <p>
-                The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-                "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-                document are to be interpreted as described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>.
+                The key words "MUST", "MUST NOT", "REQUIRED", "SHALL",
+                "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",
+                "MAY", and "OPTIONAL" in this document are to be
+                interpreted as described in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>.
                 
 </p>
 <a name="anchor3"></a><br /><hr />
@@ -338,14 +361,16 @@ Notational Conventions</h3>
 Motivation</h3>
 
 <p>
-                    When implementing a hypermedia client/server application using
-                    a general media type (i.e. HTML, Atom, Collection+JSON, etc.),
-                    client and server instances need to share application-specific
-                    information such as data element names, link relation values, 
-                    and state transfer parameters. This information is directly 
-                    related to the application being implemented (i.e. accounting, 
-                    contact management, etc.) rather than the media type used 
-                    in the representations.
+                    When implementing a hypermedia client/server
+                    application using a general media type (HTML,
+                    Atom, Collection+JSON, etc.), client and server
+                    instances need to share an understanding of
+                    domain-specific information such as data element
+                    names, link relation values, and state transfer
+                    parameters. This information is directly related
+                    to the application being implemented
+                    (i.e. accounting, contact management, etc.) rather
+                    than the media type used in the representations.
                 
 </p>
 <a name="anchor4"></a><br /><hr />
@@ -354,18 +379,22 @@ Motivation</h3>
 Describing Domain-Specific Semantics</h3>
 
 <p>
-                        Instead of creating (and registering) an entirely new media
-                        type (i.e. 'application/accounting'), representation 
-                        authors can create an ALPS document that describes a "profile"
-                        of the target domain; one that contains the vital
-                        appliation-level semantic descriptors and transitions. This
-                        profilel can then be consistently applied to a wide range
-                        of media types by server implementors and successfully
-                        consumed by client applications. This focus on defining 
-                        appliction-level semantics independent of transfer protocol or
-                        media type design makes it possible to increase the specificity 
-                        of the representations without reducing the generality of 
-                        the media type casrrying the representation.
+                        Instead of creating and registering an
+                        entirely new media type
+                        (i.e. 'application/accounting'),
+                        representation authors can create an ALPS
+                        document that describes a "profile" of the
+                        target domain; one that explains the vital
+                        domain-specific semantic descriptors and state
+                        transitions. This profile can then be
+                        consistently applied to a wide range of media
+                        types by server implementors and successfully
+                        consumed by client applications. The focus on
+                        defining application-level semantics
+                        independent of transfer protocol or media type
+                        makes it possible to serve
+                        application-specific representations using an
+                        application-agnostic media type.
                     
 </p>
 <a name="anchor5"></a><br /><hr />
@@ -374,17 +403,20 @@ Describing Domain-Specific Semantics</h3>
 ALPS-based Server Implementations</h3>
 
 <p>
-                        Server implementors can use ALPS documents as a basis for
-                        building domain-specific solutions without having to
-                        create their own custom media type or re-invent the
-                        vocabulary and transition set for a common domain (e.g.
-                        accounting, microblogging, etc.). By using the ALPS
-                        document as a guide, servers can map internal data to
-                        commonly-understood semantic descriptors and state
-                        transitions and increase the likelyhood that existing
-                        client applications (those who share the same understanding
-                        of the ALPS document) will be able to successfully interact
-                        with that server.
+                        Server implementors can use ALPS documents as
+                        a basis for building domain-specific solutions
+                        without having to create their own custom
+                        media type or re-invent the vocabulary and
+                        transition set for a common domain (e.g.
+                        accounting, microblogging, etc.). Using a
+                        preexisting ALPS profile as a guide, servers
+                        can map internal data to commonly-understood
+                        semantic descriptors and state transitions,
+                        increasing the likelihood that existing client
+                        applications (those who share the same
+                        understanding of the ALPS document) will be
+                        able to successfully interact with that
+                        server.
                     
 </p>
 <a name="anchor6"></a><br /><hr />
@@ -393,11 +425,14 @@ ALPS-based Server Implementations</h3>
 ALPS-based Client Implementations</h3>
 
 <p>
-                        Armed with an ALPS document as a "profile" for the received
-                        representation, client applications can locate and identify
-                        semantic descriptors of interest within the response.
-                        Client applications can "code for the profile" and better
-                        adjust to detailed changes to the response layout.
+                        Armed with an ALPS document as a "profile" for
+                        the received representation, client
+                        applications can identify the link relations
+                        and semantic descriptors within it.  Client
+                        applications can "code for the profile" and
+                        better adjust to detailed changes to the
+                        response layout, or even the wholesale
+                        replacement of one media type with another.
                     
 </p>
 <a name="anchor7"></a><br /><hr />
@@ -405,7 +440,42 @@ ALPS-based Client Implementations</h3>
 <a name="rfc.section.1.3"></a><h3>1.3.&nbsp;
 A Simple ALPS Example</h3>
 
+<p>This ALPS document describes [TK.]
+</p>
 <p>[TK maybe put the YouTypeItWePostIt stuff here? -mca]
+</p>
+<p>[That's complicated since it involves an unsafe state
+              transition. We wouldn't be able to show a plain JSON
+              version. I think a contact-manager type application
+              would work better? -leonardr]
+</p>
+<p>This HTML document uses the ALPS profile to express a
+              set of application-level semantics on top of the semantics
+              defined by HTML.
+</p>
+<p>[TK]
+</p>
+<p>This HAL document uses the same profile to epress the
+              same application-level semantics.
+</p>
+<p>[TK]
+</p>
+<p>This JSON document uses the same profile to express
+              the same application-level semantics.
+</p>
+<p>[TK]
+</p>
+<p>Since the 'application/json' media type defines no
+              hypermedia controls, the ALPS profile must be brought in
+              using the 'Link' HTTP header:
+</p>
+<p>Link: http://example.com/profiles/TK.alps;rel="profile"
+</p>
+<p>But with the profile in place, additional hypermedia
+              controls become visible. An understanding of the ALPS
+              profile reveals that the '[TK]' property of the
+              top-level JSON object is intended to be a hypermedia
+              link.
 </p>
 <a name="anchor8"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -413,32 +483,24 @@ A Simple ALPS Example</h3>
 Identifying an ALPS Document</h3>
 
 <p>
-                    ALPS vocabularies are identified by a unique URL. 
-                    The URL SHOULD point to a valid ALPS document. The URL MAY 
-                    point to a human-readable document that describes the ALPS
-                    specification for the identified use case.  
-                    [TK change this to MUST and drop the last sentence? -mca]
+                  An ALPS vocabulary is identified by a unique URL.
+                  The URL MUST resolve to a valid ALPS document. The
+                  server MAY use HTTP content negotiation to serve a
+                  human-readable description of the ALPS vocabulary to
+                  clients that request an HTML representation.  [TK
+                  how's that? or should we stick to [link rel="help"]?
+                  -leonardr]
                 
 </p>
 <p>
-                    Although the URI SHOULD point to a resource that contains a 
-                    definition of the semantics of the relation type, clients 
-                    SHOULD NOT automatically access that resource to avoid
-                    overburdening its server.
+                  A client SHOULD NOT automatically resolve an ALPS
+                  vocabulary URL, to avoid overburdening its server.
                 
 </p>
 <p>
-                    [TK I almost feel like we should have two URLs, an ALPS permalink
-                    and a human-readable doc. Or should we suggest the use of content
-                    negotiation? -leonardr] [This can be handled by the LINK 
-                    element now, right? -mca] 
-                
-</p>
-<p>
-                    All ALPS URIs MUST be unique and all ALPS documents intended
-                    for public consumption SHOULD be registered in the ALPS Registry
-                    located
-                    at [TK].
+                  All ALPS URLs MUST be unique and all ALPS documents
+                  intended for public consumption SHOULD be registered
+                  with the ALPS Registry located at [TK].
                 
 </p>
 <a name="anchor9"></a><br /><hr />
@@ -447,13 +509,15 @@ Identifying an ALPS Document</h3>
 ALPS Documents</h3>
 
 <p>
-                ALPS Documents contain a machine-readable
-                collection of identifying strings and their human-readable
-                explanations. An ALPS document can be represented in either 
-                XML or JSON format. This section identifies the general 
-                elements and properties of an ALPS document, their meaning, 
-                and their use. Additional subsections provide specific details
-                on how to construct a valid ALPS document in XML and in JSON format.
+              An ALPS document contains a machine-readable collection
+              of identifying strings and their human-readable
+              explanations. An ALPS document can be represented in
+              either XML or JSON format. This section identifies the
+              general elements and properties of an ALPS document,
+              their meaning, and their use, independent of how the
+              document is represented. <a class='info' href='#representations'>Section&nbsp;2.3<span> (</span><span class='info'>ALPS Representations</span><span>)</span></a> provides specific details on
+              constructing a valid ALPS document in XML and in JSON
+              format.
             
 </p>
 <a name="anchor10"></a><br /><hr />
@@ -462,14 +526,15 @@ ALPS Documents</h3>
 Compliance</h3>
 
 <p>
-                    An implementation is not compliant if it fails to satisfy
-                    one or more of the MUST or REQUIRED level requirements. 
-                    An implementation that satisfies all the MUST or REQUIRED 
-                    level and all the SHOULD level requirements is said to be 
-                    "unconditionally compliant"; one that satisfies all
-                    the MUST level requirements but not all the SHOULD level 
-                    requirements is said to be "conditionally compliant."
-                
+                An implementation is not compliant if it fails to
+                satisfy one or more of the MUST or REQUIRED level
+                requirements.  An implementation that satisfies all
+                the MUST or REQUIRED level and all the SHOULD level
+                requirements is said to be "unconditionally
+                compliant"; one that satisfies all the MUST level
+                requirements but not all the SHOULD level requirements
+                is said to be "conditionally compliant."
+              
 </p>
 <a name="anchor11"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -477,12 +542,11 @@ Compliance</h3>
 ALPS Document Properties</h3>
 
 <p>
-                    The ALPS media type defines a small set of properties.
-                    These properties appear in both the XML and JSON formats, 
-                    but are expressed in  different ways depending on the format. 
-                    Below is a list of the properties that can appear in an 
-                    ALPS document.
-                
+                The ALPS media type defines a small set of
+                properties. These properties appear in both the XML
+                and JSON formats. Below is a list of the properties
+                that can appear in an ALPS document.
+              
 </p>
 <a name="prop-alps"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -490,27 +554,27 @@ ALPS Document Properties</h3>
 'alps'</h3>
 
 <p>
-                        Indicates the root of the ALPS document. This property 
-                        SHOULD have one or more 'element' child 
-                        properties.
-                    
+                  Indicates the root of the ALPS document. This
+                  property is REQUIRED, and it SHOULD have one or more
+                  'element' child properties.
+                
 </p>
 <p>
-                        Examples:
-                        </p>
+                  Examples:
+                  </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                                &lt;alps&gt;...&lt;/alps&gt;
-                            
+                      &lt;alps&gt;...&lt;/alps&gt;
+                    
 </dd>
 <dt>JSON:</dt>
 <dd>
-                                {"alps" : ... }
-                            
+                      {"alps" : ... }
+                    
 </dd>
 </dl></blockquote><p>
-                    
+                
 </p>
 <a name="prop-appears"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -518,11 +582,10 @@ ALPS Document Properties</h3>
 'appears'</h3>
 
 <p>
-                    Indicates the appearance rules for the related 
-                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>  in a
-                    a representation. All valid values for this property are
-                    terms defined in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>, and have the 
-                    meaning given in that standard.
+                  Indicates the appearance rules for the related <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> in a a
+                  representation. All valid values for this property
+                  are terms defined in <a class='info' href='#RFC2119'>[RFC2119]<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a>, and
+                  have the meaning given in that standard.
                 
 </p>
 <a name="anchor12"></a><br /><hr />
@@ -531,37 +594,43 @@ ALPS Document Properties</h3>
 Applied to a 'top-level' 'element' block</h3>
 
 <p>
-                        The 'appears' property MAY appear as a property of a
-                        "top level" 'element' block. This controls whether the 
-                        element may appear at the "top level"; that is, not 
-                        enclosed in any 
-                        other element defined by this ALPS document. The formal 
-                        meaning of "top level" varies by the media type; see 
-                        <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for  definitions. 
-                    
+                    The 'appears' property MAY appear as a property
+                    of a "top level" 'element' block. This controls
+                    whether the element may appear at the "top
+                    level"; that is, not enclosed in any other
+                    element defined by this ALPS document. The
+                    formal meanings of "top level" and "enclosed in"
+                    vary by the media type of the representation
+                    document; see <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for
+                    definitions.
+                  
 </p>
 <p>
-                        Examples:
-                        </p>
+                    Examples:
+                    </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                                &lt;element ... appears="MUST NOT"&gt;
-                            
+                        &lt;element ... appears="MUST NOT"&gt;
+                      
 </dd>
 <dt>JSON:</dt>
 <dd>
-                                {"element" : "{..., "appears" : "MUST NOT"}}
-                            
+                        {"element" : "{..., "appears" : "MUST NOT"}}
+                      
 </dd>
 </dl></blockquote><p>
-                    
+                  
 </p>
 <p>
-                        Valid values for 'appears' in a top-level 'element' block are: "MUST",
-                        "SHOULD", "MAY", and "MUST NOT". If this property does not
-                        appear, the value SHOULD be treated as "MUST NOT".
-                    
+                    Valid values for 'appears' in a top-level
+                    'element' block are: "MUST", "SHOULD", "MAY",
+                    and "MUST NOT". If this property does not
+                    appear, the value SHOULD be treated as "MUST
+                    NOT". [TK that comes from microformats. But for
+                    schema.org a better default value is "MAY". I
+                    don't know which is better. -LR]
+                  
 </p>
 <a name="anchor13"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -569,36 +638,38 @@ Applied to a 'top-level' 'element' block</h3>
 Applied to 'non top-level' element block</h3>
 
 <p>
-                        The 'appears' property MAY appear as a property of
-                        a 'non top-level' 'element' block. This controls the rules by which the 
-                        referenced element may appear as a child of the 
-                        enclosing 'element'. The formal meaning of
-                        "enclosing 'element'" varies by the media type; see
-                        <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for definitions.
-                    
+                    The 'appears' property MAY appear as a property of
+                    a 'non top-level' 'element' block. This controls
+                    the rules by which the referenced element may
+                    appear as a child of the enclosing 'element'. The
+                    formal meaning of "enclosing 'element'" varies by
+                    the media type of the representation document; see
+                    <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for definitions.
+                  
 </p>
 <p>
-                        Examples:
-                        </p>
+                    Examples:
+                    </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                                &lt;element ... appears="MAY"&gt;
-                            
+                        &lt;element ... appears="MAY"&gt;
+                      
 </dd>
 <dt>JSON:</dt>
 <dd>
-                                {"element" : "{..., "appears" : "MAY"}}
-                            
+                        {"element" : "{..., "appears" : "MAY"}}
+                      
 </dd>
 </dl></blockquote><p>
-                    
+                  
 </p>
 <p>
-                        Valid values for 'appears' in a 'non top-level' 'element' are: "MUST",
-                        "SHOULD", and "MAY". If this property does not appear, the
-                        value  SHOULD be treated as "MAY".
-                    
+                    Valid values for 'appears' in a 'non top-level'
+                    'element' are: "MUST", "SHOULD", and "MAY". If
+                    this property does not appear, the value SHOULD be
+                    treated as "MAY".
+                  
 </p>
 <a name="prop-cardinality"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -606,29 +677,28 @@ Applied to 'non top-level' element block</h3>
 'cardinality'</h3>
 
 <p>
-                    Indicates the number of times the related 
-                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> can
-                    appear. Valid values are "single" and "many".
-                     If this property does not appear, the value SHOULD be
-                    treated as "many".
+                  Indicates the number of times the related <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> can
+                  appear. Valid values are "single" and "many".  If
+                  this property does not appear, the value SHOULD be
+                  treated as "many".
                 
 </p>
 <p>
-                        Examples:
-                        </p>
+                  Examples:
+                  </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                                &lt;element ... candinality="many"&gt;
-                            
+                      &lt;element ... candinality="many"&gt;
+                    
 </dd>
 <dt>JSON:</dt>
 <dd>
-                                {"element" : "{..., "cardinaltiy" : "many"}}
-                            
+                      {"element" : "{..., "cardinaltiy" : "many"}}
+                    
 </dd>
 </dl></blockquote><p>
-                    
+                
 </p>
 <a name="prop-description"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -636,15 +706,16 @@ Applied to 'non top-level' element block</h3>
 'description'</h3>
 
 <p>
-                    A text field that contains free-form, usually
-                    human-readable, text.
+                  A text field that contains free-form, usually
+                  human-readable, text.  [TK my experience w/WADL is
+                  that an href option would be useful here.]
                 
 </p>
 <p>
-                    A 'description' block SHOULD appear as a child of
-                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>. 
-                    When present, it describes the meaning and use 
-                    of the related 'element'.
+                  A 'description' block SHOULD appear as a child of
+                  <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>.  When
+                  present, it describes the meaning and use of the
+                  related 'element'.
                     </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
@@ -665,11 +736,10 @@ Applied to 'non top-level' element block</h3>
                 
 </p>
 <p>
-                    A 'description' block MAY appear as a child of 
-                    <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>. 
-                    When present, it describes the purpose of the ALPS document 
-                    as a whole.
-                    </p>
+                  A 'description' block MAY appear as a child of <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>.  When present, it
+                  describes the purpose of the ALPS document as a
+                  whole.
+                  </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
@@ -691,20 +761,21 @@ Applied to 'non top-level' element block</h3>
                 
 </p>
 <p>
-                    The 'description' element has one OPTIONAL sub-element:
-                    <a class='info' href='#prop-format'>'format'<span> (</span><span class='info'>'format'</span><span>)</span></a> with two possible values:
-                    </p>
+                  The 'description' element has one OPTIONAL sub-element:
+                  <a class='info' href='#prop-format'>'format'<span> (</span><span class='info'>'format'</span><span>)</span></a> with two possible values:
+                  </p>
 <ol class="text">
 <li>"text"
 </li>
 <li>"html"
 </li>
 </ol><p>
-                    If the 'format' property is set to "html" the content
-                    within the 'description' block MUST be treated as HTML markup.
-                    If no 'format' property is present, the content SHOULD be
-                    treated as plain text.
-                    </p>
+                  If the 'format' property is set to "html" the
+                  content within the 'description' block MUST be
+                  treated as HTML markup.  If no 'format' property is
+                  present, the content SHOULD be treated as plain
+                  text.
+                  </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
@@ -730,19 +801,20 @@ Applied to 'non top-level' element block</h3>
 'element'</h3>
 
 <p>
-                    Identifies a semantic descriptor. One or more 'element'
-                    blocks SHOULD appear as children of the <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> block. It may also
-                    appear as a child of itself; the 'element' property can
-                    be nested.
+                  Identifies a semantic descriptor. [TK is this the
+                  right term to use here? Is a link relation a
+                  semantic descriptor? -leonardr] One or more
+                  'element' blocks SHOULD appear as children of the
+                  <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> block. It may
+                  also appear as a child of itself; that is, the
+                  'element' property may be nested.
                 
 </p>
 <p>
-                    The 'element' property MUST have at least an 
-                    <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a> or 
-                    <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a>
-                    property. It MAY have both. Additionally, the 'element' 
-                    MAY have any of the following proeprties:
-                    </p>
+                  The 'element' property MUST have either an <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a> or <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a> attribute. It MAY
+                  have both. Additionally, the 'element' MAY have any
+                  of the following attributes:
+                  </p>
 <ol class="text">
 <li><a class='info' href='#prop-appears'>'appears'<span> (</span><span class='info'>'appears'</span><span>)</span></a>
 </li>
@@ -760,23 +832,27 @@ Applied to 'non top-level' element block</h3>
                 
 </p>
 <p>
-                    The 'href' property MUST be a dereferencable URL that points 
-                    to another 'element' block either within the current ALPS
-                    document or in another ALPS document. 
+                  If present, the 'href' property MUST be a
+                  dereferenceable URL that points to another 'element'
+                  block either within the current ALPS document or in
+                  another ALPS document.  [TK we were considering
+                  getting rid of href and seeing what happened. -LR]
                 
 </p>
 <p>
-                    If 'element' has an 'href' property, then 'element' is
-                    inheriting all the attributes and and sub-properties 
-                    of what is pointed
-                    to by 'href'. When 'element' has a property  defined 
-                    locally, that property value takes precedence over any inherited
-                    property value. Since there is no limit to the nesting
-                    of elements -- even ones linked remotely -- it is important
-                    to process all element chains starting from the 'bottom' 
-                    to make sure you have collected all the available
-                    properties and have established the correct value for each
-                    of them.
+                  If 'element' has an 'href' attribute, then 'element'
+                  is inheriting all the attributes and sub-properties
+                  of the element pointed to by 'href'. When 'element'
+                  has a property defined locally, that property value
+                  takes precedence over any inherited property
+                  value. Since there is no limit to the nesting of
+                  elements -- even ones linked remotely -- it is
+                  important to process all element chains starting
+                  from the 'bottom' to make sure you have collected
+                  all the available properties and have established
+                  the correct value for each of them. [TK but this
+                  contradicts the rule that clients should not
+                  automatically fetch ALPS documents. -leonardr]
                 
 </p>
 <a name="prop-ext"></a><br /><hr />
@@ -785,48 +861,48 @@ Applied to 'non top-level' element block</h3>
 'ext'</h3>
 
 <p>
-                    The 'ext' element can be used to extend the ALPS document
-                    with author-specific information. It provides a way to 
-                    customize ALPS documents with additional properties not
-                    covered in this specification. This is an OPTIONAL element.
+                 The 'ext' element can be used to extend the ALPS
+                 document with author-specific information. It
+                 provides a way to customize ALPS documents with
+                 additional properties not covered in this
+                 specification. This is an OPTIONAL element.
                 
 </p>
 <p>
-                    The 'ext' element has two properties. The 
-                    <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a> property
-                    MUST appear for the 'ext' element. It's value MUST be a
-                    URI. The 
-                    <a class='info' href='#prop-value'>'value'<span> (</span><span class='info'>'value'</span><span>)</span></a> 
-                    property MAY appear for the 'ext' element.
-                    The meaning and use of the value property is described in 
-                    the document found by dereferencing the 'href' property
-                    of the 'ext' element. 
+                  The 'ext' element has two properties. The <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a> property MUST
+                  appear for the 'ext' element. It's value MUST be a
+                  URI. [TK below you say it must be
+                  resolveable. -leonardr] The <a class='info' href='#prop-value'>'value'<span> (</span><span class='info'>'value'</span><span>)</span></a> property MAY
+                  appear for the 'ext' element.  The meaning and use
+                  of the value property is described in the document
+                  found by dereferencing the 'href' property of the
+                  'ext' element.
                 
 </p>
 <p>
-                    Examples:
-                    </p>
+                  Examples:
+                  </p>
 <blockquote class="text"><dl>
 <dt>XML:</dt>
 <dd>
-                            &lt;ext href="http://alps.io/ext/directions"
-                            value="north south east west" &gt;
-                        
+                      &lt;ext href="http://alps.io/ext/directions"
+                      value="north south east west" &gt;
+                    
 </dd>
 <dt>JSON:</dt>
 <dd>
-                            {"ext" : {"href"
-                            : "http://alps.io/ext/directions",
-                            value="north south east west"}}
-                        
+                      {"ext" : {"href"
+                      : "http://alps.io/ext/directions",
+                      value="north south east west"}}
+                    
 </dd>
 </dl></blockquote><p>
                 
 </p>
 <p>
-                    The 'ext' element MAY appear as a child of the following
-                    elements:
-                    </p>
+                  The 'ext' element MAY appear as a child of the following
+                  elements:
+                  </p>
 <ol class="text">
 <li><a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>
 </li>
@@ -836,15 +912,15 @@ Applied to 'non top-level' element block</h3>
                 
 </p>
 <p>
-                    Since the 'ext' element has no specific meaning within 
-                    the this specification, it MUST be ignored by any
-                    application that does not understand it's use and meaning.
+                  Since the 'ext' element has no specific meaning
+                  within this specification, it MUST be ignored by any
+                  application that does not understand its meaning.
                 
 </p>
 <p>
-                    Authors who define 'ext' elements SHOULD register these
-                    extensions with the ALPS Registry (see <a class='info' href='#alps-registry'>Section&nbsp;4<span> (</span><span class='info'>The ALPS Registry</span><span>)</span></a>) and use the URI provided by
-                    the registry in the 'name' property of their extension.
+                  Authors who define 'ext' elements SHOULD register these
+                  extensions with the ALPS Registry (see <a class='info' href='#alps-registry'>Section&nbsp;4<span> (</span><span class='info'>The ALPS Registry</span><span>)</span></a>) and use the URI provided by
+                  the registry in the 'name' property of their extension.
                 
 </p>
 <a name="prop-format"></a><br /><hr />
@@ -853,10 +929,12 @@ Applied to 'non top-level' element block</h3>
 'format'</h3>
 
 <p>
-                    Indicates whether the associated content in the should be 
-                    treated as 'text' or 'html'. This property MAY appear as
-                    a property of the <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a> 
-                    element.
+                  Indicates whether textual content associated with
+                  the element should be treated as plain text ('text')
+                  or HTML ('html'). Other values for this attribute
+                  are undefined. [TK I added that. -leonardr] This
+                  attribute MAY appear as an attribute of the <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
+                  element.
                 
 </p>
 <a name="prop-href"></a><br /><hr />
@@ -865,29 +943,27 @@ Applied to 'non top-level' element block</h3>
 'href'</h3>
 
 <p>
-                    Contains a resolvable URI.
+                  Contains a resolvable URL.
                 
 </p>
 <p>
-                    When it appears as a property of 
-                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>, 'href' points
-                    to another 'element' either within the existing ALPS
-                    document or in another ALPS document.
+                  When it appears as an attribute of <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>, 'href'
+                  points to another 'element' either within the
+                  existing ALPS document or in another ALPS document.
                 
 </p>
 <p>
-                    When it appears as a property of  
-                    <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a>, 'href' points to an
-                    external document which provides the defintion of the
-                    extension.
+                  When it appears as an attribute of <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a>, 'href' points to an
+                  external document which provides the defintion of
+                  the extension.
                 
 </p>
 <p>
-                    When it appears as a property of 
-                    <a class='info' href='#prop-link'>'link'<span> (</span><span class='info'>'link'</span><span>)</span></a> 'href' points to
-                    an external document whose relationship to the current
-                    document is described by the associated 
-                    <a class='info' href='#prop-rel'>'rel'<span> (</span><span class='info'>'rel'</span><span>)</span></a> property.
+                  When it appears as an attribute of <a class='info' href='#prop-link'>'link'<span> (</span><span class='info'>'link'</span><span>)</span></a> 'href' points to an
+                  external document whose relationship to the current
+                  document [TK or element? -leonardr] is described by
+                  the associated <a class='info' href='#prop-rel'>'rel'<span> (</span><span class='info'>'rel'</span><span>)</span></a>
+                  property.
                 
 </p>
 <a name="prop-id"></a><br /><hr />
@@ -896,53 +972,66 @@ Applied to 'non top-level' element block</h3>
 'id'</h3>
 
 <p>
-                    A document-wide unique identifier for the related element.
-                    This MAY appear as a property of each 
-                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>.
-                
+                A document-wide unique identifier for the related
+                element. This MAY appear as an attribute of an <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>.
+              
 </p>
 <p>
-                    The value of this property will appear within generic
-                    representations as the name of a semantic descriptor or 
-                    hypermedia control (see <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for 
-                    details). The exception is when an element defines 
-                    <a class='info' href='#prop-name'>'name'<span> (</span><span class='info'>'name'</span><span>)</span></a>
-                    as well as 
-                    <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a>. In that case, the value 
-                    of 'name' contains the name of the semantic descriptor or
-                    hypermedia control, and the value of 'id' is just a unique
-                    internal identifier for the current document.
-                
+                The value of this attribute will appear within
+                generic representations as the name of a semantic
+                descriptor or hypermedia control (see <a class='info' href='#instructions'>Section&nbsp;3<span> (</span><span class='info'>Instructions on Applying ALPS to Existing Media Types</span><span>)</span></a> for details). The exception
+                is when an element defines <a class='info' href='#prop-name'>'name'<span> (</span><span class='info'>'name'</span><span>)</span></a> as well as <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a>. In that case, the
+                value of 'name' contains the name of the semantic
+                descriptor or hypermedia control, and the value of
+                'id' is just a unique identifier internal to the
+                ALPS document.
+              
 </p>
 <p>
-                    When applied to an ALPS document, a URI fragment identifier
-                    points to the element with the appropriate 'id'. For example, 
-                    the fragment identifier "customer" in the URI
-                    http://example.com/#customer refers to an ALPS element 
-                    with 'id' set to "customer".
-                
+                When applied to an ALPS document, a URI fragment
+                identifier points to the element with the
+                appropriate 'id'. For example, the fragment
+                identifier "customer" in the URI
+                http://example.com/#customer refers to an ALPS
+                element with 'id' set to "customer".
+              
 </p>
 <p>
-                    A relative URL with a fragment identifier (e.g. "#customer") 
-                    refers to an element within the ALPS document containing the
-                    reference.
-                
+                A relative URL with a fragment identifier
+                (e.g. "#customer") refers to an element within the
+                ALPS document containing the reference.
+              
 </p>
 <p>
-                    The complete URI (including the fragement) forms
-                    an "abstract semantic type" identifier. This is
-                    a resolvable URI (URL) that can be used as a type indicator
-                    within ALPS documents.
-                
+                The complete URI to an ALPS element (including the
+                fragement) forms an "abstract semantic type"
+                identifier. This is a resolvable URI (URL) that can
+                be used to indicate the type of a resource; for
+                instance, it can be used as the value of the
+                IANA-registered link relation "type".
+              
 </p>
 <p>
-                    In most cases, the 'id' value will be used as the link relation
-                    type value for safe transitions. For this reason, when 
-                    selecting 'id' values and defining 'element' semantics, 
-                    it is important to avoid creating conflicts with existing
-                    IANA-registered values. In cases where this does conflict 
-                    occur, the results are indeterminate.
-                
+                An element that defines a state transition
+                establishes an extension link relation whose name is
+                the unqualified URI of the
+                element. (e.g. rel="http://example.com/#purchased-by")
+                However, within representations that include the
+                defining ALPS document as a profile, the element's
+                'id' may be used on its own as a registered link
+                relation. (e.g. rel="purchased-by")
+              
+</p>
+<p>
+                For this reason, when selecting 'id' values and
+                defining 'element' semantics, it is important to
+                avoid creating conflicts with existing
+                IANA-registered values. If it is unclear whether a
+                registered link relation in a representation
+                document refers to a relation registered with IANA
+                or a relation registered in an ALPS profile, the
+                semantics of that link are undefined.
+              
 </p>
 <a name="prop-link"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -950,17 +1039,17 @@ Applied to 'non top-level' element block</h3>
 'link'</h3>
 
 <p>
-                    Identifies a link between the current property and some
-                    other external resource. Can be applied to the 
-                    <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> and the 
-                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> properties.
-                
+                Identifies a link between the current ALPS element and some
+                other (possibly external) resource. Can be applied to the 
+                <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> and the 
+                <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> elements.
+              
 </p>
 <p>
-                    The 'link' property MUST have two sub-properties:
-                    <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a>  and 
-                    <a class='info' href='#prop-rel'>'rel'<span> (</span><span class='info'>'rel'</span><span>)</span></a>.
-                
+                The 'link' property MUST define the two attributes
+                <a class='info' href='#prop-href'>'href'<span> (</span><span class='info'>'href'</span><span>)</span></a>  and 
+                <a class='info' href='#prop-rel'>'rel'<span> (</span><span class='info'>'rel'</span><span>)</span></a>.
+              
 </p>
 <a name="prop-name"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -968,21 +1057,25 @@ Applied to 'non top-level' element block</h3>
 'name'</h3>
 
 <p>
-                    Indicates the name of the 
-                    <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> as found in 
-                    generic representations. It MAY appear as a property of 
+                  Indicates the name of the 
+                  <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> as found in 
+                  generic representations. It MAY appear as a property of 
                     'element'.
                 
 </p>
 <p>
-                    This is used when the name of the 'element' or 'child' 
-                    is used as an <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a> 
-                    value elsewhere in the ALPS document. For instance, 
-                    if a single ALPS document defines an element descriptor 
-                    called "customer" and a safe-idempotent control called 
-                    "customer", they can't both have 'id="customer"' in the 
-                    ALPS document. One of them needs to have some other 'id', 
-                    and to set 'name="customer"'.
+                  This is used when the name of the 'element' or
+                  'child' is used as an <a class='info' href='#prop-id'>'id'<span> (</span><span class='info'>'id'</span><span>)</span></a> value elsewhere in the
+                  ALPS document. For instance, if a single ALPS
+                  document defines a semantic descriptor called
+                  "customer" and a safe-idempotent control called
+                  "customer", they can't both have 'id="customer"' in
+                  the ALPS document. One of them needs to have some
+                  other 'id', and to set 'name="customer"'.  [TK now
+                  that we say that a semantic descriptor can also be a
+                  safe-idempotent control, i think this is either
+                  unnecessary, or we can say that the use of name is a
+                  design smell. -leonardr]
                 
 </p>
 <a name="prop-rel"></a><br /><hr />
@@ -991,12 +1084,19 @@ Applied to 'non top-level' element block</h3>
 'rel'</h3>
 
 <p>
-                    Contains a <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a> approved value (e.g.
-                    an IANA-registered link relations type or a URI).
+                  Contains a <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a> approved
+                  value: either an extension link relation (a URI)
+                  or a registered link relation (a short string).
                 
 </p>
 <p>
-                    Appears as a property of <a class='info' href='#prop-link'>link<span> (</span><span class='info'>'link'</span><span>)</span></a>.
+                  Appears as a property of <a class='info' href='#prop-link'>link<span> (</span><span class='info'>'link'</span><span>)</span></a>.
+                
+</p>
+<p>
+                  A link relation defined within an ALPS document MAY
+                  NOT be used as a registered link relation within the
+                  same document. [I added this.-leonardr]
                 
 </p>
 <a name="prop-type"></a><br /><hr />
@@ -1005,47 +1105,45 @@ Applied to 'non top-level' element block</h3>
 'type'</h3>
 
 <p>
-                    Indicates the type of representation control to which the
-                    element is applied. This MUST appear for each element. 
-                    Four valid values are defined:
+                Indicates the type of representation control to which
+                the element is applied. This MUST appear for each
+                element.  Four valid values are defined:
                 
-                    </p>
+                </p>
 <blockquote class="text"><dl>
 <dt>&quot;descriptor&quot;</dt>
 <dd>
-                            A state element (e.g.
-                            HTML.SPAN, HTML.INPUT, etc.) OR a hypermedia
-                            control that triggers a safe, idempotent
-                            transition (i.e. HTTP.GET, HTTP.HEAD, etc.).
-                        
+                    A state element (e.g.  HTML.SPAN, HTML.INPUT,
+                    etc.) OR a hypermedia control that triggers a
+                    safe, idempotent transition (e.g. HTTP.GET or
+                    HTTP.HEAD).
+                  
 </dd>
 <dt>&quot;safe&quot;</dt>
 <dd>
-                           A hypermedia control that
-                           triggers a safe, idempotent state transition 
-                           (i.e. HTTP.GET, HTTP.HEAD, etc.).
-                        
+                    A hypermedia control that triggers a safe,
+                    idempotent state transition (e.g. HTTP.GET or
+                    HTTP.HEAD).
+                  
 </dd>
 <dt>&quot;idempotent&quot;</dt>
 <dd>
-                            A hypermedia control
-                            that triggers an unsafe, idempotent state 
-                            transition (i.e. HTTP.PUT, HTTP.DELETE etc.).
-                       
+                    A hypermedia control that triggers an unsafe,
+                    idempotent state transition (e.g. HTTP.PUT or
+                    HTTP.DELETE).
+                  
 </dd>
 <dt>&quot;unsafe&quot;</dt>
 <dd>
-                            A hypermedia control
-                            that triggers an unsafe, non-idempotent state 
-                            transition (i.e. HTTP.POST).
-                        
+                    A hypermedia control that triggers an unsafe,
+                    non-idempotent state transition (e.g. HTTP.POST).
+                  
 </dd>
 </dl></blockquote><p>
                     
-                    If no 'type' property is associated with the element
-                    then the 'type="descriptor"' is implied.
-                    
-                
+                If no 'type' attribute is associated with the element
+                then the 'type="descriptor"' is implied.
+              
 </p>
 <a name="prop-value"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1053,10 +1151,10 @@ Applied to 'non top-level' element block</h3>
 'value'</h3>
 
 <p>
-                    Contains a string value. It MAY appear as a property of
-                    the <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
-                    and the <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a> elements.
-                
+                Contains a string value. It MAY appear as an attribute
+                of the <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a> and the
+                <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a> elements.
+              
 </p>
 <a name="prop-version"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1064,12 +1162,12 @@ Applied to 'non top-level' element block</h3>
 'version'</h3>
 
 <p>
-                    Indicates the version number of the ALPS document. This
-                    SHOULD appear as a property of the 
-                    <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> property. 
-                    Currently the only valid value is "1.0". 
-                    If no value appears, then it SHOULD be set to "1.0".
-                
+                Indicates the version of the ALPS specification used
+                in the document. This SHOULD appear as a property of
+                the <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a> property.
+                Currently the only valid value is "1.0".  If no value
+                appears, then 'version="1.0"' is implied.
+              
 </p>
 <a name="representations"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1077,11 +1175,11 @@ Applied to 'non top-level' element block</h3>
 ALPS Representations</h3>
 
 <p>
-                ALPS documents can be represented in either XML or JSON
-                format. This section contains notes on how the ALPS properties
-                appear in each format along with examples to guide ALPS
-                document authors.
-            
+            An ALPS document may be represented in either XML or JSON
+            format. This section contains notes on how the ALPS
+            elements and attributes appear in each format, along with
+            examples to guide ALPS document authors.
+          
 </p>
 <a name="html-representation"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1089,12 +1187,13 @@ ALPS Representations</h3>
 Sample HTML</h3>
 
 <p>
-                    Below is a simple HTML document that contains a handful
-                    of semantic descriptors and transition instructions.
-                    This document was genrated from the  XML and JSON  
-                    ALPS documents that follow. Use this HTML document as a
-                    guide when evaluating the XML and JSON examples.
-                    <br /><hr class="insert" />
+              Below is a simple HTML document that contains a handful
+              of semantic descriptors and transition instructions.
+              This document was genrated from the XML and JSON ALPS
+              documents that follow. Use this HTML document as a guide
+              when evaluating the XML and JSON examples.
+
+              <br /><hr class="insert" />
 </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 &lt;!-- sample HTML document --&gt;
@@ -1129,14 +1228,10 @@ XML Representation</h3>
 XML Representation Notes</h3>
 
 <p>
-                        In the XML version of ALPS documents, the following
-                        properties always appear as XML elements: 
-                        <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>, 
-                        <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>,
-                        <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>, and
-                        <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a>.
-                        All other ALPS properties appear as XML attributes.
-                    
+                In the XML version of an ALPS document, the following
+                elements always appear as XML elements: <a class='info' href='#prop-alps'>'alps'<span> (</span><span class='info'>'alps'</span><span>)</span></a>, <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>, <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a>, and <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a>.  All other ALPS
+                elements appear as XML attributes.
+              
 </p>
 <a name="anchor15"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1144,9 +1239,9 @@ XML Representation Notes</h3>
 Complete XML Representation</h3>
 
 <p>
-                        Below is an example of an applcation/alps+xml
-                        representation.
-                        <br /><hr class="insert" />
+                Below is an example of an applcation/alps+xml
+                representation.
+                <br /><hr class="insert" />
 </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 &lt;?xml version="1.0"?&gt;
@@ -1185,7 +1280,7 @@ Complete XML Representation</h3>
 </pre></div><p>
 <table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Complete XML Representation&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
 
-                    
+              
 </p>
 <a name="json-representation"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1198,12 +1293,13 @@ JSON Representation</h3>
 JSON Representation Notes</h3>
 
 <p>
-                        When representing ALPS documents in the JSON format, the 
-                        <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> and
-                        <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a> properties are
-                        always express as arrays of anonymous objects - even when 
-                        there is only one member in the array.
-                        <br /><hr class="insert" />
+                When representing ALPS documents in JSON format,
+                the <a class='info' href='#prop-element'>'element'<span> (</span><span class='info'>'element'</span><span>)</span></a> and
+                <a class='info' href='#prop-ext'>'ext'<span> (</span><span class='info'>'ext'</span><span>)</span></a> elements are
+                always expressed as arrays of anonymous objects - even
+                when there is only one member in the array.
+
+                <br /><hr class="insert" />
 
 <p>For example:
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
@@ -1233,15 +1329,15 @@ JSON Representation Notes</h3>
 ]
 </pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Arrays in ALPS+JSON&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
 
-                    
+              
 
 <p>
-                        The <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
-                        description is always expressed as a named object.
-                    
+                The <a class='info' href='#prop-description'>'description'<span> (</span><span class='info'>'description'</span><span>)</span></a>
+                element is always expressed as a named object.
+              
 </p>
 <p>
-                        <br /><hr class="insert" />
+                <br /><hr class="insert" />
 
 <p>For example:
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
@@ -1253,7 +1349,7 @@ JSON Representation Notes</h3>
 }
 </pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Descriptions in ALPS+JSON&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
 
-                    
+              
 
 <a name="anchor17"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1261,9 +1357,9 @@ JSON Representation Notes</h3>
 Complete Representation</h3>
 
 <p>
-                        Below is a example of the application/alps+json
-                        representation of an ALPS document.
-                        <br /><hr class="insert" />
+                Below is a example of the application/alps+json
+                representation of an ALPS document.
+                <br /><hr class="insert" />
 </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 // http://alps.io/documents/search
@@ -1316,7 +1412,7 @@ Complete Representation</h3>
 </pre></div><p>
 <table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Complete ALPS+JSON Representation&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
 
-                    
+              
 </p>
 <a name="instructions"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1324,18 +1420,23 @@ Complete Representation</h3>
 Instructions on Applying ALPS to Existing Media Types</h3>
 
 <p>
-                ALPS documents can be applied to many existing hypermedia
-                types. Below are a set of instructional examples on how to 
-                apply ALPS information to existing media types.
-                These examples are informative. The most up-to-date
-                guidance on applying ALPS documents to existing media types are
-                available at the official ALPS Web site (http://alps.io).
-            
+        An ALPS document can be applied to many existing hypermedia
+        types. Below are a set of instructional examples on how to
+        apply ALPS information to existing media types.  These
+        examples are informative. The most up-to-date guidance on
+        applying ALPS documents to existing media types are available
+        at the official ALPS Web site (http://alps.io). [I implied
+        earlier there would be a formal registry. -leonardr]
+      
 </p>
 <p>
-                [LR:say what it takes to explain how alps applies to a media
-                type you have to define "enclosing element", "link", etc]
-            
+        [LR:say what it takes to explain how alps applies to a media
+        type you have to define "enclosing element", "link", etc]
+      
+</p>
+<p>[It looks like this section repeats the example at the
+      beginning. It should suffice at this point to simply spell out
+      the informative rules.]
 </p>
 <a name="a-simple-alps-document"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1362,18 +1463,26 @@ Collection+JSON Example</h3>
 Linking to ALPS Documents</h3>
 
 <p>
-                    When a representation links to an ALPS document describing
-                    its semantics, the "profile" link relation (found in the
-                    IANA link registry) SHOULD be used to describe the relationship
-                    between the representation and the ALPS document.
-                
+          To indicate that an ALPS profile describes the semantics of
+          some representation document, the representation document
+          MUST be linked to the ALPS document using the "profile" link
+          relation (found in the IANA registry of link relations). [TK
+          I changed should to must. -leonardr] If the media type of
+          the representation document has no native ability to link to
+          other resources, or no ability to express link relations,
+          the HTTP header 'Link' [TK ref] MAY be used to connect the
+          representation document and the ALPS profile.
+        
 </p>
 <p>
-                    A single representation may be "profile"-ed more than one
-                    ALPS  document. If two ALPS documents give conflicting semantics
-                    for the same element, the document linked to earlier in the
-                    representation SHOULD take precedence.
-                
+          A single representation document may be described by more
+          than one ALPS profile. If two ALPS profiles give conflicting
+          semantics for the same element, the document linked to
+          earlier in the representation SHOULD take precedence. A
+          profile linked to using the 'Link' header takes precedence
+          over a profile linked to within the representation document
+          itself.
+        
 </p>
 <a name="alps-registry"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1407,9 +1516,11 @@ Contributing to the Registry</h3>
 IANA Considerations</h3>
 
 <p>
-                 This specification establishes two media types:
-                 'application/alps+xml' and 'application/alps+json'
-            
+        This specification establishes two media types:
+        'application/alps+xml' and 'application/alps+json' [I think
+        these media types should support the 'profile'
+        parameter. -leonardr]
+      
 </p>
 <a name="iana-alps-xml"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1417,131 +1528,131 @@ IANA Considerations</h3>
 application/alps+xml</h3>
 
 <p>
-                    </p>
+          </p>
 <blockquote class="text"><dl>
 <dt>Type name:</dt>
 <dd>
-                            application
-                        
+              application
+            
 </dd>
 <dt>Subtype name:</dt>
 <dd>
-                            alps+xml
-                        
+              alps+xml
+            
 </dd>
 <dt>Required parameters:</dt>
 <dd>
-                            None
-                        
+              None
+            
 </dd>
 <dt>Optional parameters:</dt>
 <dd>
-                            
+              
 <blockquote class="text"><dl>
 <dt>charset</dt>
 <dd>
-                                    This parameter has identical semantics to the
-                                    charset parameter of the 'application/xml'
-                                    media type as specified in <a class='info' href='#RFC3023'>[RFC3023]<span> (</span><span class='info'>Murata, M., St. Laurent, S., and D. Kohn, &ldquo;XML Media Types,&rdquo; January&nbsp;2001.</span><span>)</span></a>.
-                                
+                  This parameter has identical semantics to the
+                  charset parameter of the 'application/xml'
+                  media type as specified in <a class='info' href='#RFC3023'>[RFC3023]<span> (</span><span class='info'>Murata, M., St. Laurent, S., and D. Kohn, &ldquo;XML Media Types,&rdquo; January&nbsp;2001.</span><span>)</span></a>.
+                
 </dd>
 </dl></blockquote>
-                        
+            
 </dd>
 <dt>Encoding considerations:</dt>
 <dd>
-                            
+              
 <blockquote class="text"><dl>
 <dt>binary</dt>
 <dd>
-                                    Same as encoding considerations of
-                                    application/xml as specified in <a class='info' href='#RFC3023'>[RFC3023]<span> (</span><span class='info'>Murata, M., St. Laurent, S., and D. Kohn, &ldquo;XML Media Types,&rdquo; January&nbsp;2001.</span><span>)</span></a>.
-                                
+                  Same as encoding considerations of
+                  application/xml as specified in <a class='info' href='#RFC3023'>[RFC3023]<span> (</span><span class='info'>Murata, M., St. Laurent, S., and D. Kohn, &ldquo;XML Media Types,&rdquo; January&nbsp;2001.</span><span>)</span></a>.
+                
 </dd>
 </dl></blockquote>
-                        
+            
 </dd>
 <dt>Security considerations:</dt>
 <dd>
-                            This format shares security issues common to all XML
-                            content types. It does not provide executable content. 
-                            Information contained in ALPS documents do not 
-                            require privacy or integrity services.
-                        
+              This format shares security issues common to all XML
+              content types. It does not provide executable content. 
+              Information contained in ALPS documents do not 
+              require privacy or integrity services.
+            
 </dd>
 <dt>Interoperability considerations:</dt>
 <dd>
-                            ALPS is not described by a DTD and applies only
-                            the well-formedness rules of XML. It should only 
-                            be parsed by a non-validating parser.
-                        
+              ALPS is not described by a DTD and applies only
+              the well-formedness rules of XML. It should only 
+              be parsed by a non-validating parser.
+            
 </dd>
 <dt>Published specification:</dt>
 <dd>
-                            This Document
-                        
+              This Document
+            
 </dd>
 <dt>Applications that use this media type:</dt>
 <dd>
-                            Various
-                        
+              Various
+            
 </dd>
 <dt>Additional information:</dt>
 <dd>
-                            
+              
 <blockquote class="text"><dl>
 <dt>magic number(s):</dt>
 <dd>
-                                    none
-                                
+                  none
+                
 </dd>
 <dt>file extensions:</dt>
 <dd>
-                                    .xml
-                                
+                  .xml
+                
 </dd>
 <dt>macintosh type file code:</dt>
 <dd>
-                                    TEXT
-                                
+                  TEXT
+                
 </dd>
 <dt>object idenfiers:</dt>
 <dd>
-                                    none
-                                
+                  none
+                
 </dd>
 </dl></blockquote>
-                        
+            
 </dd>
 <dt>person to contact for further information:</dt>
 <dd>
-                            
+              
 <blockquote class="text"><dl>
 <dt>Name:</dt>
 <dd>
-                                    Mike Amundsen
-                                
+                  Mike Amundsen
+                
 </dd>
 <dt>Email:</dt>
 <dd>
-                                    mca@amundsen.com
-                                
+                  mca@amundsen.com
+                
 </dd>
 </dl></blockquote>
-                        
+            
 </dd>
 <dt>Intended usage:</dt>
 <dd>
-                            Common
-                        
+              Common
+            
 </dd>
 <dt>Author/change controller:</dt>
 <dd>
-                            Mike Amundsen
-                        
+              Mike Amundsen
+            
 </dd>
 </dl></blockquote><p>
-                
+        
 </p>
 <a name="iana-alps-json"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1549,114 +1660,114 @@ application/alps+xml</h3>
 application/alps+json</h3>
 
 <p>
-                    </p>
+          </p>
 <blockquote class="text"><dl>
 <dt>Type name:</dt>
 <dd>
-                            application
-                        
+              application
+            
 </dd>
 <dt>Subtype name:</dt>
 <dd>
-                            alps+json
-                        
+              alps+json
+            
 </dd>
 <dt>Required parameters:</dt>
 <dd>
-                            None
-                        
+              None
+            
 </dd>
 <dt>Optional parameters:</dt>
 <dd>
-                            None
-                        
+              None
+            
 </dd>
 <dt>Encoding considerations:</dt>
 <dd>
-                            binary
-                        
+              binary
+            
 </dd>
 <dt>Security considerations:</dt>
 <dd>
-                            This media type shares security issues common to
-                            all JSON content types. See <a class='info' href='#RFC4627'>[RFC4627]<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> 
-                            Section #6 for additional information. ALPS+JSON
-                            does not provide executable content.
-                            Information contained in ALPS+JSON documents
-                            do not require privacy or integrity services.
-                        
+              This media type shares security issues common to all
+              JSON content types. See <a class='info' href='#RFC4627'>[RFC4627]<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> Section
+              #6 for additional information. ALPS+JSON does not
+              provide executable content.  Information contained in
+              ALPS+JSON documents do not require privacy or integrity
+              services.
+            
 </dd>
 <dt>Interoperability considerations:</dt>
 <dd>
-                            None
-                        
+              None
+            
 </dd>
 <dt>Published specification:</dt>
 <dd>
-                            This Document
-                        
+              This Document
+            
 </dd>
 <dt>Applications that use this media type:</dt>
 <dd>
-                            Various
-                        
+              Various
+            
 </dd>
 <dt>Additional information:</dt>
 <dd>
-                            
+              
 <blockquote class="text"><dl>
 <dt>magic number(s):</dt>
 <dd>
-                                    none
-                                
+                  none
+                
 </dd>
 <dt>file extensions:</dt>
 <dd>
-                                    .json
-                                
+                  .json
+                
 </dd>
 <dt>macintosh type file code:</dt>
 <dd>
-                                    TEXT
-                                
+                  TEXT
+                
 </dd>
 <dt>object idenfiers:</dt>
 <dd>
-                                    none
-                                
+                  none
+                
 </dd>
 </dl></blockquote>
-                        
+            
 </dd>
 <dt>person to contact for further information:</dt>
 <dd>
-                            
+              
 <blockquote class="text"><dl>
 <dt>Name:</dt>
 <dd>
-                                    Mike Amundsen
-                                
+                  Mike Amundsen
+                
 </dd>
 <dt>Email:</dt>
 <dd>
-                                    mca@amundsen.com
-                                
+                  mca@amundsen.com
+                
 </dd>
 </dl></blockquote>
-                        
+            
 </dd>
 <dt>Intended usage:</dt>
 <dd>
-                            Common
-                        
+              Common
+            
 </dd>
 <dt>Author/change controller:</dt>
 <dd>
-                            Mike Amundsen
-                        
+              Mike Amundsen
+            
 </dd>
 </dl></blockquote><p>
-                
+        
 </p>
 <a name="internationalization"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1666,8 +1777,8 @@ Internationalization Considerations</h3>
 <p>[TK]
 </p>
 <p>
-                <a class='info' href='#comment.anchor18'>[anchor18]<span> (</span><span class='info'>insert text (consider rfc 5987)</span><span>)</span></a><a name='anchor18'></a>
-            
+        <a class='info' href='#comment.anchor18'>[anchor18]<span> (</span><span class='info'>insert text (consider rfc 5987)</span><span>)</span></a><a name='anchor18'></a>
+      
 </p>
 <a name="anchor19"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
