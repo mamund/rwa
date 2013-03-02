@@ -183,42 +183,229 @@
            </section>
 
             <section title="A Simple ALPS Example">
-              <t>This ALPS document describes [TK.]</t>
+                <t>
+                    Below is an ALPS document that describes elements of a simple 
+                    contact request/response interaction. It defines a single, 
+                    safe state transition (i.e. HTML.GET form) with the 'id' 
+                    value of "collection." This hypermedia control has one input 
+                    value ("nameSearch"). When executed, it will return one or 
+                    more "contact" type items in the response. The "contact" 
+                    semantic descriptor and it's subordinate descriptors 
+                    ("fullName", "email", and "phone") are also defined.
+                </t>
+              <figure title="ALPS Contact Profile document">
+                  <artwork><![CDATA[
+ <alps version="1.0">
+    <doc format="text">
+        A list of contacts
+    </doc>
 
-              <t>[TK maybe put the YouTypeItWePostIt stuff here? -mca]</t>
+    <!-- a hypermedia control for returning contacts -->
+    <descriptor id="collection"
+        type="safe"
+        appears="MUST"
+        rt="contact">
+        <doc>
+            simple link/form for getting a list of contacts
+        </doc>
+        <descriptor id="nameSearch"
+            type="semantic"
+            appears="SHOULD" 
+            cardinality="single">
+            <doc>
+                input for search form
+            </doc>
+        </descriptor>
+    </descriptor>
 
-              <t>[That's complicated since it involves an unsafe state
-              transition. We wouldn't be able to show a plain JSON
-              version. I think a contact-manager type application
-              would work better? -leonardr]</t>
+    <!--  a contact: one or more of these may be returned -->
+    <descriptor id="contact" 
+        type="semantic"
+        cardinality="many">
+        <descriptor id="item"
+            type="safe"
+            appears="MUST">
+            <doc>
+                link to individual contact
+            </doc>
+        </descriptor>
+        <descriptor id="fullName" 
+            type="semantic" 
+            appears="MUST" />
+        <descriptor id="email"
+            type="semantic"
+            appears="SHOULD" />
+        <descriptor id="phone"
+            type="semantic"
+            appears="MAY" />
+    </descriptor>
 
-              <t>This HTML document uses the ALPS profile to express a
-              set of application-level semantics on top of the semantics
-              defined by HTML.</t>
+</alps>
+               ]]></artwork>
+        </figure>
 
-              <t>[TK]</t>
+        <t>
+            Implementing the ALPS Contact Profile in HTML involves supporting
+            the descriptors in the ALPS document. In this case, there are two
+            "top level" descriptors: the safe transition request ("collection") 
+            and the "contact" semantic block. Below is a single document that
+            shows both these elements in a representation.
+        </t>
+
+        <figure title="HTML ALPS Contact Representation">
+            <artwork><![CDATA[
+<html>
+    <head>
+        <link rel="profile" href="http://alsp.io/profiles/contact" />
+        <link rel="type" href="http://alps.io/profiles/contact#contact" />
+    </head>
+    <body>
+        <form class="collection"
+            method="get" 
+            action="http://example.org/contacts/">
+            <label>Name:</label>
+            <input name="nameSearch" value="" />
+            <input type="submit" value="Search" />
+        </form>
+
+        <table class="contact">
+            <tr>
+                <td>
+                    <a href="http://example.org/contacts/1" rel="item">
+                        <span class="fullName">Ann Arbuckle</span>
+                    </a>
+                </td>
+                <td>
+                    <span class="email">aa@example.org</span>
+                </td>
+                <td>
+                    <span class="phone">123.456.7890</span>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <a href="http://example.org/contacts/100" rel="item">
+                        <span class="fullName">Zelda Zackney</span>
+                    </a>
+                </td>
+                <td>
+                    <span class="email">zz@example.org</span>
+                </td>
+                <td>
+                    <span class="phone">098.765.4321</span>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
+              ]]></artwork>
+        </figure>
+
+
 
               <t>This HAL document uses the same profile to epress the
               same application-level semantics.</t>
 
-              <t>[TK]</t>
+            <figure title="HAL XML Contacts Representation">
+                <artwork><![CDATA[
+<resource href="http://example.org/contacts/">
+    <link rel="type" href="http://alps.io/profiles/contacts#contact" />
+    <link rel="collection" 
+        href="http://example.org/contacts/{?nameSearch}"
+        templated="true" />
+    <resource rel="item" href="http://example.org/contacts/1">
+        <link rel="type" href="http://alps.io/profiles/contacts#contact" />
+        <fullName>Ann Arbuckle</fullName>
+        <email>aa@example.org</email>
+        <phone>123.456.7890</phone>
+    </resource>
+    <resource rel="item" href="http://example.org/contacts/100">
+        <link rel="type" href="http://alps.io/profiles/contacts#contact" />
+        <fullName>Zelda Zackney</fullName>
+        <email>zz@example.org</email>
+        <phone>987.664.3210</phone>
+    </resource>
+</resource>
+                    ]]></artwork>
+            </figure>
 
-              <t>This JSON document uses the same profile to express
+              <t>This Collection+JSON document uses the same profile to express
               the same application-level semantics.</t>
 
-              <t>[TK]</t>
+              <figure title="Collection+JSON Contacts Representation">
+                <artwork><![CDATA[
+{
+    "collection" : {
+        "version" : "1.0",
+        "href" : "http://example.org/contacts/",
 
-              <t>Since the 'application/json' media type defines no
-              hypermedia controls, the ALPS profile must be brought in
-              using the 'Link' HTTP header:</t>
+        "links" : [
+            {
+                "rel" : "profile", 
+                "href" : "http://alps.io/profiles/contacts"
+            },
+            {
+                "rel" : "type", 
+                "href" : "http://alps.io/profiles/contacts#contact"
+            }
+        ],
 
-              <t>Link: http://example.com/profiles/TK.alps;rel="profile"</t>
+        "queries" : [
+            {
+                "rel" : "collection", 
+                "rt" : "contact", 
+                "href" : "http://example.org/contacts/",
+                "data" : [
+                    {
+                        "name" : "nameSearch", 
+                        "value" : "", 
+                        "prompt" :  "Search Name"
+                    }
+                ]
+            }
+        ],
 
-              <t>But with the profile in place, additional hypermedia
-              controls become visible. An understanding of the ALPS
-              profile reveals that the '[TK]' property of the
-              top-level JSON object is intended to be a hypermedia
-              link.</t>
+        "items" : [
+            {
+                "href" : "http://example.org/contacts/1",
+                "rel" : "item",
+                "rt" : "contact",
+                "data" : [
+                    {"name" : "fullName", "value" : "Ann Arbuckle" },
+                    {"name" : "email", "value" : "aa@example.org" },
+                    {"name" : "email", "value" : "123.456.7890" }
+                ],
+                "links" : [
+                    {
+                        "rel" : "type", 
+                        "href" : "http://alps.io/profiles/contacts#contact"
+                    }
+                ]
+            },
+            {
+                "href" : "http://example.org/contacts/100",
+                "rel" : "item",
+                "rt" : "contact",
+                "data" : [
+                    {"name" : "fullName", "value" : "Zelda Zackney" },
+                    {"name" : "email", "value" : "zz@example.org" },
+                    {"name" : "email", "value" : "987.654.3210" }
+                ],
+                 "links" : [
+                    {
+                        "rel" : "type", 
+                        "href" : "http://alps.io/profiles/contacts#contact"
+                    }
+                ]
+            }
+        ]
+    }
+}
+                
+               ]]></artwork>
+              </figure>
+
             </section>
 
             <section title="Identifying an ALPS Document">

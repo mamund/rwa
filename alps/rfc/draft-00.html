@@ -440,43 +440,220 @@ ALPS-based Client Implementations</h3>
 <a name="rfc.section.1.3"></a><h3>1.3.&nbsp;
 A Simple ALPS Example</h3>
 
-<p>This ALPS document describes [TK.]
-</p>
-<p>[TK maybe put the YouTypeItWePostIt stuff here? -mca]
-</p>
-<p>[That's complicated since it involves an unsafe state
-              transition. We wouldn't be able to show a plain JSON
-              version. I think a contact-manager type application
-              would work better? -leonardr]
-</p>
-<p>This HTML document uses the ALPS profile to express a
-              set of application-level semantics on top of the semantics
-              defined by HTML.
-</p>
-<p>[TK]
-</p>
+<p>
+                    Below is an ALPS document that describes elements of a simple 
+                    contact request/response interaction. It defines a single, 
+                    safe state transition (i.e. HTML.GET form) with the 'id' 
+                    value of "collection." This hypermedia control has one input 
+                    value ("nameSearch"). When executed, it will return one or 
+                    more "contact" type items in the response. The "contact" 
+                    semantic descriptor and it's subordinate descriptors 
+                    ("fullName", "email", and "phone") are also defined.
+                
+</p><br /><hr class="insert" />
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+ &lt;alps version="1.0"&gt;
+    &lt;doc format="text"&gt;
+        A list of contacts
+    &lt;/doc&gt;
+
+    &lt;!-- a hypermedia control for returning contacts --&gt;
+    &lt;descriptor id="collection"
+        type="safe"
+        appears="MUST"
+        rt="contact"&gt;
+        &lt;doc&gt;
+            simple link/form for getting a list of contacts
+        &lt;/doc&gt;
+        &lt;descriptor id="nameSearch"
+            type="semantic"
+            appears="SHOULD"
+            cardinality="single"&gt;
+            &lt;doc&gt;
+                input for search form
+            &lt;/doc&gt;
+        &lt;/descriptor&gt;
+    &lt;/descriptor&gt;
+
+    &lt;!--  a contact: one or more of these may be returned --&gt;
+    &lt;descriptor id="contact"
+        type="semantic"
+        cardinality="many"&gt;
+        &lt;descriptor id="item"
+            type="safe"
+            appears="MUST"&gt;
+            &lt;doc&gt;
+                link to individual contact
+            &lt;/doc&gt;
+        &lt;/descriptor&gt;
+        &lt;descriptor id="fullName"
+            type="semantic"
+            appears="MUST" /&gt;
+        &lt;descriptor id="email"
+            type="semantic"
+            appears="SHOULD" /&gt;
+        &lt;descriptor id="phone"
+            type="semantic"
+            appears="MAY" /&gt;
+    &lt;/descriptor&gt;
+
+&lt;/alps&gt;
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;ALPS Contact Profile document&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+<p>
+            Implementing the ALPS Contact Profile in HTML involves supporting
+            the descriptors in the ALPS document. In this case, there are two
+            "top level" descriptors: the safe transition request ("collection") 
+            and the "contact" semantic block. Below is a single document that
+            shows both these elements in a representation.
+        
+</p><br /><hr class="insert" />
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;link rel="profile" href="http://alsp.io/profiles/contact" /&gt;
+        &lt;link rel="type" href="http://alps.io/profiles/contact#contact" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form class="collection"
+            method="get"
+            action="http://example.org/contacts/"&gt;
+            &lt;label&gt;Name:&lt;/label&gt;
+            &lt;input name="nameSearch" value="" /&gt;
+            &lt;input type="submit" value="Search" /&gt;
+        &lt;/form&gt;
+
+        &lt;table class="contact"&gt;
+            &lt;tr&gt;
+                &lt;td&gt;
+                    &lt;a href="http://example.org/contacts/1" rel="item"&gt;
+                        &lt;span class="fullName"&gt;Ann Arbuckle&lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;span class="email"&gt;aa@example.org&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;span class="phone"&gt;123.456.7890&lt;/span&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;tr&gt;
+                &lt;td&gt;
+                    &lt;a href="http://example.org/contacts/100" rel="item"&gt;
+                        &lt;span class="fullName"&gt;Zelda Zackney&lt;/span&gt;
+                    &lt;/a&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;span class="email"&gt;zz@example.org&lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;span class="phone"&gt;098.765.4321&lt;/span&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;HTML ALPS Contact Representation&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
 <p>This HAL document uses the same profile to epress the
               same application-level semantics.
-</p>
-<p>[TK]
-</p>
-<p>This JSON document uses the same profile to express
+</p><br /><hr class="insert" />
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;resource href="http://example.org/contacts/"&gt;
+    &lt;link rel="type" href="http://alps.io/profiles/contacts#contact" /&gt;
+    &lt;link rel="collection"
+        href="http://example.org/contacts/{?nameSearch}"
+        templated="true" /&gt;
+    &lt;resource rel="item" href="http://example.org/contacts/1"&gt;
+        &lt;link rel="type" href="http://alps.io/profiles/contacts#contact" /&gt;
+        &lt;fullName&gt;Ann Arbuckle&lt;/fullName&gt;
+        &lt;email&gt;aa@example.org&lt;/email&gt;
+        &lt;phone&gt;123.456.7890&lt;/phone&gt;
+    &lt;/resource&gt;
+    &lt;resource rel="item" href="http://example.org/contacts/100"&gt;
+        &lt;link rel="type" href="http://alps.io/profiles/contacts#contact" /&gt;
+        &lt;fullName&gt;Zelda Zackney&lt;/fullName&gt;
+        &lt;email&gt;zz@example.org&lt;/email&gt;
+        &lt;phone&gt;987.664.3210&lt;/phone&gt;
+    &lt;/resource&gt;
+&lt;/resource&gt;
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;HAL XML Contacts Representation&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
+<p>This Collection+JSON document uses the same profile to express
               the same application-level semantics.
-</p>
-<p>[TK]
-</p>
-<p>Since the 'application/json' media type defines no
-              hypermedia controls, the ALPS profile must be brought in
-              using the 'Link' HTTP header:
-</p>
-<p>Link: http://example.com/profiles/TK.alps;rel="profile"
-</p>
-<p>But with the profile in place, additional hypermedia
-              controls become visible. An understanding of the ALPS
-              profile reveals that the '[TK]' property of the
-              top-level JSON object is intended to be a hypermedia
-              link.
-</p>
+</p><br /><hr class="insert" />
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+{
+    "collection" : {
+        "version" : "1.0",
+        "href" : "http://example.org/contacts/",
+
+        "links" : [
+            {
+                "rel" : "profile",
+                "href" : "http://alps.io/profiles/contacts"
+            },
+            {
+                "rel" : "type",
+                "href" : "http://alps.io/profiles/contacts#contact"
+            }
+        ],
+
+        "queries" : [
+            {
+                "rel" : "collection",
+                "rt" : "contact",
+                "href" : "http://example.org/contacts/",
+                "data" : [
+                    {
+                        "name" : "nameSearch",
+                        "value" : "",
+                        "prompt" :  "Search Name"
+                    }
+                ]
+            }
+        ],
+
+        "items" : [
+            {
+                "href" : "http://example.org/contacts/1",
+                "rel" : "item",
+                "rt" : "contact",
+                "data" : [
+                    {"name" : "fullName", "value" : "Ann Arbuckle" },
+                    {"name" : "email", "value" : "aa@example.org" },
+                    {"name" : "email", "value" : "123.456.7890" }
+                ],
+                "links" : [
+                    {
+                        "rel" : "type",
+                        "href" : "http://alps.io/profiles/contacts#contact"
+                    }
+                ]
+            },
+            {
+                "href" : "http://example.org/contacts/100",
+                "rel" : "item",
+                "rt" : "contact",
+                "data" : [
+                    {"name" : "fullName", "value" : "Zelda Zackney" },
+                    {"name" : "email", "value" : "zz@example.org" },
+                    {"name" : "email", "value" : "987.654.3210" }
+                ],
+                 "links" : [
+                    {
+                        "rel" : "type",
+                        "href" : "http://alps.io/profiles/contacts#contact"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+</pre></div><table border="0" cellpadding="0" cellspacing="2" align="center"><tr><td align="center"><font face="monaco, MS Sans Serif" size="1"><b>&nbsp;Collection+JSON Contacts Representation&nbsp;</b></font><br /></td></tr></table><hr class="insert" />
+
 <a name="anchor8"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.1.4"></a><h3>1.4.&nbsp;
