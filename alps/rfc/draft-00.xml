@@ -229,7 +229,8 @@
                   human-readable description of the ALPS vocabulary to
                   clients that request an HTML representation.  [TK
                   how's that? or should we stick to [link rel="help"]?
-                  -leonardr]
+                  -leonardr :: Maybe we should be silent on the matter
+                  here? -mca]
                 </t>
                 <t>
                   A client SHOULD NOT automatically resolve an ALPS
@@ -282,7 +283,7 @@
                 <t>
                   Indicates the root of the ALPS document. This
                   property is REQUIRED, and it SHOULD have one or more
-                  'element' child properties.
+                  <xref target="prop-descriptor">'descriptor'</xref> child properties.
                 </t>
                 <t>
                   Examples:
@@ -300,17 +301,17 @@
               <section anchor="prop-appears" title="'appears'">
                 <t>
                   Indicates the appearance rules for the related <xref
-                  target="prop-element">'element'</xref> in a a
+                  target="prop-descriptor">'descriptor'</xref> in a a
                   representation. All valid values for this property
                   are terms defined in <xref target="RFC2119" />, and
                   have the meaning given in that standard.
                 </t>
                 
-                <section title="Applied to a 'top-level' 'element' block">
+                <section title="Applied to a top-level 'descriptor'">
                   <t>
                     The 'appears' property MAY appear as a property
-                    of a "top level" 'element' block. This controls
-                    whether the element may appear at the "top
+                    of a "top level" 'descriptor'. This controls
+                    whether the the 'descriptor' may appear at the "top
                     level"; that is, not enclosed in any other
                     element defined by this ALPS document. The
                     formal meanings of "top level" and "enclosed in"
@@ -331,21 +332,23 @@
                   </t>
                   <t>
                     Valid values for 'appears' in a top-level
-                    'element' block are: "MUST", "SHOULD", "MAY",
+                    'descriptor' are: "MUST", "SHOULD", "MAY",
                     and "MUST NOT". If this property does not
                     appear, the value SHOULD be treated as "MUST
                     NOT". [TK that comes from microformats. But for
                     schema.org a better default value is "MAY". I
-                    don't know which is better. -LR]
+                    don't know which is better. -LR :: I think MA
+                    is fine and that means no diff for top-level
+                    or enclosed descriptors! -mca]
                   </t>
                 </section>
-                <section title="Applied to 'non top-level' element block">
+                <section title="Applied to an enclosing 'descriptor'">
                   <t>
                     The 'appears' property MAY appear as a property of
-                    a 'non top-level' 'element' block. This controls
+                    an enclosing 'descriptor. This controls
                     the rules by which the referenced element may
-                    appear as a child of the enclosing 'element'. The
-                    formal meaning of "enclosing 'element'" varies by
+                    appear as a child of the enclosing 'descriptor'. The
+                    formal meaning of "enclosing 'descriptor'" varies by
                     the media type of the representation document; see
                     <xref target="instructions" /> for definitions.
                   </t>
@@ -361,8 +364,8 @@
                     </list>
                   </t>
                   <t>
-                    Valid values for 'appears' in a 'non top-level'
-                    'element' are: "MUST", "SHOULD", and "MAY". If
+                    Valid values for 'appears' in an enclosing
+                    'descriptor' are: "MUST", "SHOULD", and "MAY". If
                     this property does not appear, the value SHOULD be
                     treated as "MAY".
                   </t>
@@ -372,7 +375,7 @@
               <section anchor="prop-cardinality" title="'cardinality'">
                 <t>
                   Indicates the number of times the related <xref
-                  target="prop-element">'element'</xref> can
+                  target="prop-descriptor">'descriptor'</xref> can
                   appear. Valid values are "single" and "many".  If
                   this property does not appear, the value SHOULD be
                   treated as "many".
@@ -390,53 +393,17 @@
                 </t>
               </section>
 
-              <section anchor="prop-description" title="'description'">
+              <section anchor="prop-doc" title="'doc'">
                 <t>
                   A text field that contains free-form, usually
-                  human-readable, text.  [TK my experience w/WADL is
-                  that an href option would be useful here.]
-                </t>
-                <t>
-                  A 'description' block SHOULD appear as a child of
-                  <xref target="prop-element">'element'</xref>.  When
-                  present, it describes the meaning and use of the
-                  related 'element'.
-                    <list style="hanging">
-                        <t hangText="XML:"><![CDATA[
-<element ... >
-    <description>...</description>
-</element>
-                        ]]></t>
-                        <t hangText="JSON:"><![CDATA[
-{"element" : {...}
-    {"description" : {"value" : "..."}
-}
-                        ]]></t>
-                    </list>
-                </t>
-                <t>
-                  A 'description' block MAY appear as a child of <xref
-                  target="prop-alps">'alps'</xref>.  When present, it
-                  describes the purpose of the ALPS document as a
-                  whole.
-                  <list style="hanging">
-                    <t hangText="XML:"><![CDATA[
-<alps>
-    <description>...</description>
-    ...
-</apls>
-                        ]]></t>
-                    <t hangText="JSON:"><![CDATA[
-{"alps :
-   "description" : { "value" : "..."},
-   ...
-}
-                        ]]></t>
-                  </list>
-                </t>
-                <t>
-                  The 'description' element has one OPTIONAL sub-element:
-                  <xref target="prop-format">'format'</xref> with two possible values:
+                  human-readable, text.  
+                    The 'doc' element MAY have two properties:
+                    <xref target="prop-href">'href'</xref> and
+                    <xref target="prop-format">'format'</xref>.
+                    If the 'href' property appears it SHOULD contain
+                    a dereferencable URL that points to human-readable
+                    text. If the 'format' property appears it SHOULD
+                    contain one of two possible values:
                   <list style="numbers">
                     <t>"text"</t>
                     <t>"html"</t>
@@ -460,29 +427,68 @@
                         ]]></t>
                   </list>
                 </t>
-            </section>
-
-            <section anchor="prop-element" title="'element'">
+                <t>
+                  A 'doc' element SHOULD appear as a child of
+                  <xref target="prop-descriptor">'descriptor'</xref>.  When
+                  present, it describes the meaning and use of the
+                  related 'descriptor'.
+                    <list style="hanging">
+                        <t hangText="XML:"><![CDATA[
+<element ... >
+    <description>...</description>
+</element>
+                        ]]></t>
+                        <t hangText="JSON:"><![CDATA[
+{"element" : {...}
+    {"description" : {"value" : "..."}
+}
+                        ]]></t>
+                    </list>
+                </t>
+                <t>
+                  The 'doc' element MAY appear as a child of <xref
+                  target="prop-alps">'alps'</xref>.  When present, it
+                  describes the purpose of the ALPS document as a
+                  whole.
+                  <list style="hanging">
+                    <t hangText="XML:"><![CDATA[
+<alps>
+    <description>...</description>
+    ...
+</apls>
+                        ]]></t>
+                    <t hangText="JSON:"><![CDATA[
+{"alps :
+   "description" : { "value" : "..."},
+   ...
+}
+                        ]]></t>
+                  </list>
+                </t>
+           </section>
+           
+           <section anchor="prop-descriptor" title="'descriptor'">
                 <t>
                   Identifies a semantic descriptor. [TK is this the
                   right term to use here? Is a link relation a
-                  semantic descriptor? -leonardr] One or more
-                  'element' blocks SHOULD appear as children of the
-                  <xref target="prop-alps">'alps'</xref> block. It may
+                  semantic descriptor? -leonardr :: I think we're OK here. A 
+                  link rel is a semantic identifier? -mca] One or more
+                  'descriptor' elements SHOULD appear as children of
+                  <xref target="prop-alps">'alps'</xref>. It may
                   also appear as a child of itself; that is, the
-                  'element' property may be nested.
+                  'descriptor' property may be nested.
                 </t>
 
                 <t>
-                  The 'element' property MUST have either an <xref
+                  The 'descriptor' property MUST have either an <xref
                   target="prop-id">'id'</xref> or <xref
                   target="prop-href">'href'</xref> attribute. It MAY
-                  have both. Additionally, the 'element' MAY have any
+                  have both. Additionally, the 'descriptor' MAY have any
                   of the following attributes:
                   <list style="numbers">
                     <t><xref target="prop-appears">'appears'</xref></t>
                     <t><xref target="prop-cardinality">'cardinality'</xref></t>
-                    <t><xref target="prop-description">'description'</xref></t>
+                    <t><xref target="prop-doc">'doc'</xref></t>
                     <t><xref target="prop-ext">'ext'</xref></t>
                     <t><xref target="prop-name">'name'</xref></t>
                     <t><xref target="prop-type">'type'</xref></t>
@@ -490,26 +496,30 @@
                 </t>
                 <t>
                   If present, the 'href' property MUST be a
-                  dereferenceable URL that points to another 'element'
-                  block either within the current ALPS document or in
+                  dereferenceable URL that points to another 'descriptor'
+                  either within the current ALPS document or in
                   another ALPS document.  [TK we were considering
-                  getting rid of href and seeing what happened. -LR]
+                  getting rid of href and seeing what happened. -LR
+                  :: I;m torn on this one. We could insist only frag-ids
+                  are allowed, but i don't think that helps much. -mca]
                 </t>
 
                 <t>
-                  If 'element' has an 'href' attribute, then 'element'
+                  If 'descriptor' has an 'href' attribute, then 'descriptor'
                   is inheriting all the attributes and sub-properties
-                  of the element pointed to by 'href'. When 'element'
+                  of the element pointed to by 'href'. When 'descriptor'
                   has a property defined locally, that property value
                   takes precedence over any inherited property
                   value. Since there is no limit to the nesting of
                   elements -- even ones linked remotely -- it is
-                  important to process all element chains starting
-                  from the 'bottom' to make sure you have collected
+                  important to process 'all descriptor' chains starting
+                  from the bottom to make sure you have collected
                   all the available properties and have established
                   the correct value for each of them. [TK but this
                   contradicts the rule that clients should not
-                  automatically fetch ALPS documents. -leonardr]
+                  automatically fetch ALPS documents. -leonardr
+                  :: fetching to resolve the descriptor chain need not
+                  be done 'automatically', right? -mca]
                 </t>
             </section>
 
@@ -526,8 +536,7 @@
                   The 'ext' element has two properties. The <xref
                   target="prop-href">'href'</xref> property MUST
                   appear for the 'ext' element. It's value MUST be a
-                  URI. [TK below you say it must be
-                  resolveable. -leonardr] The <xref
+                  value URI and it SHOULD be resolveable. The <xref
                   target="prop-value">'value'</xref> property MAY
                   appear for the 'ext' element.  The meaning and use
                   of the value property is described in the document
@@ -554,7 +563,7 @@
                   elements:
                   <list style="numbers">
                     <t><xref target="prop-alps">'alps'</xref></t>
-                    <t><xref target="prop-element">'element'</xref></t>
+                    <t><xref target="prop-descriptor">'descriptor'</xref></t>
                   </list>
                 </t>
                 <t>
@@ -575,9 +584,9 @@
                   Indicates whether textual content associated with
                   the element should be treated as plain text ('text')
                   or HTML ('html'). Other values for this attribute
-                  are undefined. [TK I added that. -leonardr] This
+                  are undefined. This
                   attribute MAY appear as an attribute of the <xref
-                  target="prop-description">'description'</xref>
+                  target="prop-doc">'doc'</xref>
                   element.
                 </t>
             </section>
@@ -588,8 +597,8 @@
                 </t>
                 <t>
                   When it appears as an attribute of <xref
-                  target="prop-element">'element'</xref>, 'href'
-                  points to another 'element' either within the
+                  target="prop-descriptor">'descriptor'</xref>, 'href'
+                  points to another 'descriptor' either within the
                   existing ALPS document or in another ALPS document.
                 </t>
                 <t>
@@ -598,22 +607,27 @@
                   external document which provides the defintion of
                   the extension.
                 </t>
-
                 <t>
                   When it appears as an attribute of <xref
                   target="prop-link">'link'</xref> 'href' points to an
                   external document whose relationship to the current
-                  document [TK or element? -leonardr] is described by
+                  document or 'descriptor' is described by
                   the associated <xref target="prop-rel">'rel'</xref>
                   property.
-                </t> 
+              </t> 
+              <t>
+                  When it appears as an attribute of 
+                  <xref target="prop-doc">'doc'</xref>, 'href' points to a
+                  document that contains human-readable text that describes
+                  the associated 'descriptor' or ALPS document.
+              </t>
             </section>
-
+            
             <section anchor="prop-id" title="'id'">
               <t>
                 A document-wide unique identifier for the related
                 element. This MAY appear as an attribute of an <xref
-                target="prop-element">'element'</xref>.
+                target="prop-descriptor">'descriptor'</xref>.
               </t>
 
               <t>
@@ -621,7 +635,7 @@
                 generic representations as the name of a semantic
                 descriptor or hypermedia control (see <xref
                 target="instructions" /> for details). The exception
-                is when an element defines <xref
+                is when a 'descriptor' defines <xref
                 target="prop-name">'name'</xref> as well as <xref
                 target="prop-id">'id'</xref>. In that case, the
                 value of 'name' contains the name of the semantic
@@ -632,21 +646,21 @@
 
               <t>
                 When applied to an ALPS document, a URI fragment
-                identifier points to the element with the
+                identifier points to the 'descriptor' with the
                 appropriate 'id'. For example, the fragment
                 identifier "customer" in the URI
                 http://example.com/#customer refers to an ALPS
-                element with 'id' set to "customer".
+                'desdriptor' with 'id' set to "customer".
               </t>
 
               <t>
                 A relative URL with a fragment identifier
-                (e.g. "#customer") refers to an element within the
+                (e.g. "#customer") refers to an 'descriptor' within the
                 ALPS document containing the reference.
               </t>
 
               <t>
-                The complete URI to an ALPS element (including the
+                The complete URI to an ALPS 'descriptor' (including the
                 fragement) forms an "abstract semantic type"
                 identifier. This is a resolvable URI (URL) that can
                 be used to indicate the type of a resource; for
@@ -655,19 +669,19 @@
               </t>
 
               <t>
-                An element that defines a state transition
+                A 'descrtiptor' that defines a state transition
                 establishes an extension link relation whose name is
                 the unqualified URI of the
                 element. (e.g. rel="http://example.com/#purchased-by")
                 However, within representations that include the
-                defining ALPS document as a profile, the element's
+                defining ALPS document as a profile, the descriptor's
                 'id' may be used on its own as a registered link
                 relation. (e.g. rel="purchased-by")
               </t>
 
               <t>
                 For this reason, when selecting 'id' values and
-                defining 'element' semantics, it is important to
+                defining 'descriptor' semantics, it is important to
                 avoid creating conflicts with existing
                 IANA-registered values. If it is unclear whether a
                 registered link relation in a representation
@@ -682,7 +696,7 @@
                 Identifies a link between the current ALPS element and some
                 other (possibly external) resource. Can be applied to the 
                 <xref target="prop-alps">'alps'</xref> and the 
-                <xref target="prop-element">'element'</xref> elements.
+                <xref target="prop-descriptor">'descriptor'</xref> elements.
               </t>
               <t>
                 The 'link' property MUST define the two attributes
@@ -694,13 +708,13 @@
             <section anchor="prop-name" title="'name'">
                 <t>
                   Indicates the name of the 
-                  <xref target="prop-element">'element'</xref> as found in 
+                  <xref target="prop-descriptor">'descriptor'</xref> as found in 
                   generic representations. It MAY appear as a property of 
-                    'element'.
+                    'descriptor'.
                 </t>
                 <t>
-                  This is used when the name of the 'element' or
-                  'child' is used as an <xref
+                  This is used when the name of the 'descriptor'
+                  is used as an <xref
                   target="prop-id">'id'</xref> value elsewhere in the
                   ALPS document. For instance, if a single ALPS
                   document defines a semantic descriptor called
@@ -711,7 +725,8 @@
                   that we say that a semantic descriptor can also be a
                   safe-idempotent control, i think this is either
                   unnecessary, or we can say that the use of name is a
-                  design smell. -leonardr]
+                  design smell. -leonardr :: if we use ALPS to describe
+                  and existing design, this may be unavoidable. --mca]
                 </t>
             </section>
 
@@ -728,7 +743,7 @@
                 <t>
                   A link relation defined within an ALPS document MAY
                   NOT be used as a registered link relation within the
-                  same document. [I added this.-leonardr]
+                  same document. [TK MAY NOT or SHOULD NOT? -mca]
                 </t>
             </section>
 
@@ -773,7 +788,7 @@
               <t>
                 Contains a string value. It MAY appear as an attribute
                 of the <xref
-                target="prop-description">'description'</xref> and the
+                target="prop-doc">'doc'</xref> and the
                 <xref target="prop-ext">'ext'</xref> elements.
               </t>
             </section>
@@ -832,12 +847,12 @@
             <section title="XML Representation Notes">
               <t>
                 In the XML version of an ALPS document, the following
-                elements always appear as XML elements: <xref
+                ALPS properties always appear as XML elements: <xref
                 target="prop-alps">'alps'</xref>, <xref
-                target="prop-description">'description'</xref>, <xref
-                target="prop-element">'element'</xref>, and <xref
+                target="prop-doc">'doc'</xref>, <xref
+                target="prop-descriptor">'descriptor'</xref>, and <xref
                 target="prop-ext">'ext'</xref>.  All other ALPS
-                elements appear as XML attributes.
+                properties appear as XML attributes.
               </t>
             </section>
             <section title="Complete XML Representation">
@@ -848,32 +863,30 @@
                             <artwork><![CDATA[
 <?xml version="1.0"?>
 <alps version="1.0">
-    <description format="html">
-        <h1>A Sample ALPS+XML Document</h1>
-    </description>
+    <doc href="http://example.org/samples/full/doc.html" />
 
-    <element id="search" 
+    <descriptor id="search" 
         type="safe" 
         cardinality="single" 
         appears="MUST NOT">
-        <description format="text">
+        <doc format="text">
             A search form with a two inputs.
-        </description>
-        <element href="#resultType" />
-        <element id="value"
+        </doc>
+        <descriptor href="#resultType" />
+        <descriptor id="value"
             name="search" 
-            type="descriptor" 
+            type="semantic" 
             cardinality="single"
             appears="MAY">
-            <description>input for search</description>
-        </element>
-    </element>
+            <ddoc>input for search</doc>
+        </descriptor>
+    </descriptor>
 
-    <element id="resultType"
-        type="descriptor"
+    <descriptor id="resultType"
+        type="semantic"
         cardinality="single"
         appears="MAY"
-        <description>results format</description>
+        <doc>results format</doc>
         <ext 
             href="http://alps.io/ext/range" 
             value="summary,detail" />
@@ -889,23 +902,23 @@
             <section title="JSON Representation Notes">
               <t>
                 When representing ALPS documents in JSON format,
-                the <xref target="prop-element">'element'</xref> and
-                <xref target="prop-ext">'ext'</xref> elements are
+                the <xref target="prop-descriptor">'descriptor'</xref> and
+                <xref target="prop-ext">'ext'</xref> properties are
                 always expressed as arrays of anonymous objects - even
                 when there is only one member in the array.
 
                 <figure title="Arrays in ALPS+JSON">
                   <preamble>For example:</preamble>
                   <artwork>
-"element" : [
+"descriptor" : [
     {
         "id" : "search",
         "type" : "safe"
-        "element" : [
+        "descriptor" : [
             {"href" : "#value"},
             {
                 "id" : "resultType",
-                "type" : "descriptor",
+                "type" : "semantic",
                 "ext" : [
                     {
                         "href" : "http://alps.io/ext/range",
@@ -917,23 +930,22 @@
     },
     {
         "id" : "#value",
-        "type" : "descriptor"
+        "type" : "semantic"
     }
-
 ]
                   </artwork>
                 </figure>
               </t>
               <t>
-                The <xref target="prop-description">'description'</xref>
-                element is always expressed as a named object.
+                The <xref target="prop-doc">'doc'</xref>
+                property is always expressed as a named object.
               </t>
               <t>
                 <figure title="Descriptions in ALPS+JSON">
                   <preamble>For example:</preamble>
                   <artwork>
 {
-    "description" : {
+    "doc" : {
         "format" : "text", 
         "value" : "Rules are imporant"
     }
@@ -952,33 +964,31 @@
 { 
     "alps" : {
         "version" : "1.0",
-        "description" : {
-            "format" : "html", 
-            "value" : "<h1>A sample ALPS+JSON document</h1>"
+        "doc" : {
+            "href" : "http://example.org/samples/full/doc.html"
         },
-        "element" : [
+        "descriptor" : [
             {
                 "id" : "search", 
                 "type" : "safe",
                 "cardinality" : "single",
                 "appears" : "MUST NOT",
-                "description" : {"value" : 
+                "doc" : {"value" : 
                     "A search form with a two inputs"
                 },
-                "child" : [
-                    {"href" : "#value"},
+                "descriptor" : [
+                    {
+                        "id" : "value",
+                        "name" : "search",
+                        "type" : "descriptor",
+                        "cardinality" : "single",
+                        "appears" : "MAY",
+                        "doc" : {"value" : "input for search"}
+                    },
                     {"href" : "#resultType"}
                 ]
             },
-            {
-                "id" : "value",
-                "name" : "search",
-                "type" : "descriptor",
-                "cardinality" : "single",
-                "appears" : "MAY",
-                "description" : {"value" : "input for search"}
-            },
-            {
+           {
                 "id" : "resultType",
                 "type" : "descriptor",
                 "cardinality" : "single",
@@ -991,7 +1001,6 @@
                     }
                 ]
             }
-
         ]  
     }
 }
@@ -1039,11 +1048,14 @@
           some representation document, the representation document
           MUST be linked to the ALPS document using the "profile" link
           relation (found in the IANA registry of link relations). [TK
-          I changed should to must. -leonardr] If the media type of
+          I changed should to must. -leonardr :: Which means no one can EVER
+          use Link header or media-type "profile" methods. is that what we want? -mca] 
+          If the media type of
           the representation document has no native ability to link to
           other resources, or no ability to express link relations,
-          the HTTP header 'Link' [TK ref] MAY be used to connect the
-          representation document and the ALPS profile.
+          the HTTP header 'Link' <xref target="RFC5988" /> 
+          MAY be used to connect the  representation document and the 
+          ALPS profile.
         </t>
 
         <t>
@@ -1076,9 +1088,7 @@
     <section anchor="iana-considerations" title="IANA Considerations">
       <t>
         This specification establishes two media types:
-        'application/alps+xml' and 'application/alps+json' [I think
-        these media types should support the 'profile'
-        parameter. -leonardr]
+        'application/alps+xml' and 'application/alps+json' 
       </t>
       <section anchor="iana-alps-xml" title="application/alps+xml">
         <t>
@@ -1098,7 +1108,19 @@
                   This parameter has identical semantics to the
                   charset parameter of the 'application/xml'
                   media type as specified in <xref target="RFC3023" />.
-                </t>
+              </t>
+              <t hangText="profile">
+                A whitespace-separated list of IRIs identifying specific
+                constraints or conventions that apply to an ALPS document.
+                A profile must not change the semantics of the resource
+                representation when processed without profile knowledge, so
+                that clients both with and without knowledge of a profiled
+                resource can safely use the same representation. The profile
+                parameter may also be used by clients to express their
+                preferences in the content negotiation process. It is
+                recommended that profile IRIs are dereferenceable and provide
+                useful documentation at that IRI. 
+              </t>
               </list>
             </t>
             <t hangText="Encoding considerations:">
@@ -1175,7 +1197,20 @@
               None
             </t>
             <t hangText="Optional parameters:">
-              None
+                <list style="hanging">
+                    <t hangText="profile">
+                A whitespace-separated list of IRIs identifying specific
+                constraints or conventions that apply to an ALPS document.
+                A profile must not change the semantics of the resource
+                representation when processed without profile knowledge, so
+                that clients both with and without knowledge of a profiled
+                resource can safely use the same representation. The profile
+                parameter may also be used by clients to express their
+                preferences in the content negotiation process. It is
+                recommended that profile IRIs are dereferenceable and provide
+                useful documentation at that IRI. 
+                    </t>
+                </list>
             </t>
             <t hangText="Encoding considerations:">
               binary
