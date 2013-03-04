@@ -981,6 +981,15 @@
                 </t>
             </section>
 
+            <section anchor="prop-rt" title="'rt'">
+              <t>
+                [TK I noticed you added rt to the example but it
+                wasn't defined here. I'm also not convinced we need to
+                add rt to ALPS itself, as opposed to saying it's OK to
+                use ALPS URIs as rt in other formats. -leonardr]
+              </t>
+            </section>
+
             <section anchor="prop-type" title="'type'">
               <t>
                 Indicates the type of representation control to which
