@@ -10,30 +10,38 @@
       <p>Describes a common profile for implementing Maze+XML.</p>
   </doc>
 
-  <descriptor id="hmaze" 
-    type="semantic"
-    cardinality="single"
-    appears="SHOULD">
+  <!-- this is the primary container for all the other descriptors -->
+  <descriptor id="hmaze" type="semantic" cardinality="single" appears="SHOULD">
     <doc>Indicates the parent tag of Maze+XML document.</doc>
     <descriptor href="#collection" type="semantic" cardinality="single" appears="MAY"/>
     <descriptor href="#maze"       type="semantic" cardinality="single" appears="MAY"/>
     <descriptor href="#cell"       type="semantic" cardinality="many" appears="MAY" />  
   </descriptor>
 
-  <descriptor id="collection">
+  <!-- can appear anywhere in the representation -->
+  <descriptor id="error" type="semantic" cardinality="single" appears="MAY">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#error-element" />
+    <doc>Describes an error message.</doc>
+  </descriptor>
+
+  <!-- can only appear within a container -->
+  <descriptor id="collection" type="semantic" appears="MUST NOT">
     <link rel="help" href="http://amundsen.com/media-types/maze/format/#collection-rel" />
     <doc>Describes a collection of mazes.</doc>    
     <descriptor href="#maze-link" name="maze" type="safe" rt="cell" cardinality="many" appears="MAY" />  
   </descriptor>
-            
-  <descriptor id="maze" type="semantic" cardinality="single" appears="MAY">
+
+  <!-- can only appear within a container -->
+  <descriptor id="maze" type="semantic" appears="MUST NOT">
     <link rel="help" href="http://amundsen.com/media-types/maze/format/#item-element" />
     <doc>Describes an individual maze.</doc>
   </descriptor>
-  
-  <descriptor id="cell">
+
+  <!-- can only appear within a container -->
+  <descriptor id="cell" type="semantic" appears="MUST NOT">
     <link rel="help" href="http://amundsen.com/media-types/maze/format/#cell-element" />
     <doc>Describes a cell in a maze.</doc>
+    <descriptor href="#title"   type="semantic" cardinality="single" appears="MAY" />
     <descriptor href="#north"   type="safe" rt="cell" cardinality="single" appears="MAY" />
     <descriptor href="#south"   type="safe" rt="cell" cardinality="single" appears="MAY" />
     <descriptor href="#east"    type="safe" rt="cell" cardinality="single" appears="MAY" />
@@ -43,15 +51,15 @@
     <descriptor href="#exit"    type="safe" cardinality="single" appears="MAY" />            
   </descriptor>
 
-  <descriptor id="error" type="semantic" cardinality="single" appears="MAY">
-    <link rel="help" href="http://amundsen.com/media-types/maze/format/#error-element" />
-    <doc>Describes an error message.</doc>
-  </descriptor>
-
-  <descriptor id="title" type="semantic" cardinality="single" appears="MAY">
+  <!-- can only appear within a container -->
+  <descriptor id="title" type="semantic" appears="MUST NOT">
     <doc>Contains the name of the cell. NOTE: This is still missing from the Maze+XML spec! (MCA)</doc>
   </descriptor>
-                  
+
+  <!-- 
+    Define all these as able to appear anywhere in a representation.
+    When called from containers (above), they cannot appear anywhere, tho.
+  -->
   <descriptor id="maze-link">
     <link rel="help" href="http://amundsen.com/media-types/maze/format/#maze-rel" />
     <doc>Links to a particular maze.</doc>
