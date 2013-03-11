@@ -65,7 +65,7 @@ def record_as_descriptor(record):
     data = []
     data.append(' <descriptor id="%(relation)s" type="safe" appears="MAY">' % values)
     data.append('  <link rel="help" href="%(help_link)s"/>' % values)
-    data.append('  <description type="html">')
+    data.append('  <description format="html">')
     data.append('   <p>%s</p>%s' % (description.decode_contents(), note))
     data.append('  </description>')
     data.append(' </descriptor>')
