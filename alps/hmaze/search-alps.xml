@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet href="documentation.xsl" ?>
+<alps>
+    <link rel="self" href="http://alps.io/profiles/search" />
+    <doc format="html">
+        <h2>Search</h2>
+        <p>Describes a common profile for implementing simple searching.</p>
+    </doc>
+  
+    <descriptor id="search" 
+        type="safe"
+        cardinality="single"
+        appears="SHOULD">
+        <doc format="html">
+            <p>The transition that initiates the search.</p>
+        </doc>
+    
+        <descriptor id="keyword"
+            type="semantic"
+            cardinality="single"
+            appears="SHOULD">
+            <doc format="html">
+                <p> 
+                    Variable to send when executing the search.
+                </p>
+            </doc>    
+        </descriptor>
+        
+    </descriptor>
+    
+</alps>
