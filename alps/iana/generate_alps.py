@@ -9,6 +9,7 @@ IANA_GO_BASE = "http://www.iana.org/go/"
 
 PREFIX = """<?xml version="1.0" ?>
 <alps>
+ <link rel="self" href="http://alps.io/iana/relations"/>
  <link rel="help" href="http://www.iana.org/assignments/link-relations/link-relations.xml"/>
 
  <doc format="html">
