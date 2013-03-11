@@ -6,53 +6,80 @@
 <body>
 <h1>Documentation</h1>
 <doc format="html">
-        <h2>hMaze</h2>
-        <p>Describes a common profile for implementing the hMaze microformat.</p>
-    </doc><ul class="link">
-<li>rel:self = <a href="http://alps.io/profiles/hmaze" rel="self">http://alps.io/profiles/hmaze</a>
+      <h2>hMaze</h2>
+      <p>Describes a common profile for implementing Maze+XML.</p>
+  </doc><ul class="link">
+<li>rel:self = <a href="http://alps.io/profiles/maze-xml" rel="self">http://alps.io/profiles/maze-xml</a>
 </li>
 <li>rel:help = <a href="http://amundsen.com/media-types/maze/" rel="help">http://amundsen.com/media-types/maze/</a>
 </li>
 </ul>
-    
-    
 
-    
   
-    <div class="descriptor">
+  
+
+  
+
+  <div class="descriptor">
 <h4 class="id">hmaze</h4>
-<doc>Indicates the parent tag of an hMaze document.</doc><ul class="attributes">
+<doc>Indicates the parent tag of Maze+XML document.</doc><ul class="attributes">
 <li>id : hmaze</li>
 <li>type : semantic</li>
 <li>cardinality : single</li>
 <li>appears : SHOULD</li>
 <li>Contains: <div class="descriptor">
-<h4 class="id">collection</h4>
-<doc>Describes a collection of mazes.</doc><ul class="link"><li>rel: = <a href="http://tools.ietf.org/html/rfc6573#section-2.2" rel="">http://tools.ietf.org/html/rfc6573#section-2.2</a>
-</li></ul>
+<h4 class="id"></h4>
 <ul class="attributes">
-<li>id : collection</li>
+<li>href : #collection</li>
 <li>type : semantic</li>
-<li>rt : maze</li>
 <li>cardinality : single</li>
 <li>appears : MAY</li>
-<li>Contains: <div class="descriptor">
-<h4 class="id">maze_link</h4>
-<doc>Links to a particular maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#maze-rel" rel="help">http://amundsen.com/media-types/maze/format/#maze-rel</a>
-</li></ul>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
 <ul class="attributes">
-<li>id : maze_link</li>
-<li>name : maze</li>
-<li>type : safe</li>
-<li>rt : cell</li>
+<li>href : #maze</li>
+<li>type : semantic</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #cell</li>
+<li>type : semantic</li>
 <li>cardinality : many</li>
-<li>appears : SHOULD</li>
+<li>appears : MAY</li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<div class="descriptor">
+
+  <div class="descriptor">
+<h4 class="id">collection</h4>
+<doc>Describes a collection of mazes.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#collection-rel" rel="help">http://amundsen.com/media-types/maze/format/#collection-rel</a>
+</li></ul>
+<ul class="attributes">
+<li>id : collection</li>
+<li>Contains: <div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #maze-link</li>
+<li>name : maze</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : many</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+            
+  <div class="descriptor">
 <h4 class="id">maze</h4>
 <doc>Describes an individual maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#item-element" rel="help">http://amundsen.com/media-types/maze/format/#item-element</a>
 </li></ul>
@@ -63,7 +90,87 @@
 <li>appears : MAY</li>
 </ul>
 </div>
+  
+  <div class="descriptor">
+<h4 class="id">cell</h4>
+<doc>Describes a cell in a maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#cell-element" rel="help">http://amundsen.com/media-types/maze/format/#cell-element</a>
+</li></ul>
+<ul class="attributes">
+<li>id : cell</li>
+<li>Contains: <div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #north</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
 <div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #south</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #east</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #west</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #start</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #current</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #exit</li>
+<li>type : safe</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+
+  <div class="descriptor">
 <h4 class="id">error</h4>
 <doc>Describes an error message.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#error-element" rel="help">http://amundsen.com/media-types/maze/format/#error-element</a>
 </li></ul>
@@ -74,118 +181,96 @@
 <li>appears : MAY</li>
 </ul>
 </div>
-<div class="descriptor">
-<h4 class="id">cell</h4>
-<doc>Describes a cell in a maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#cell-element" rel="help">http://amundsen.com/media-types/maze/format/#cell-element</a>
-</li></ul>
-<ul class="attributes">
-<li>id : cell</li>
-<li>type : semantic</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
-<li>Contains: <div class="descriptor">
+
+  <div class="descriptor">
 <h4 class="id">title</h4>
 <doc>Contains the name of the cell. NOTE: This is still missing from the Maze+XML spec! (MCA)</doc><ul class="attributes">
 <li>id : title</li>
 <li>type : semantic</li>
 <li>cardinality : single</li>
 <li>appears : MAY</li>
-<li>Contains: <div class="descriptor">
+</ul>
+</div>
+                  
+  <div class="descriptor">
+<h4 class="id">maze-link</h4>
+<doc>Links to a particular maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#maze-rel" rel="help">http://amundsen.com/media-types/maze/format/#maze-rel</a>
+</li></ul>
+<ul class="attributes"><li>id : maze-link</li></ul>
+</div>
+
+  <div class="descriptor">
 <h4 class="id">north</h4>
-<doc>Refers to a resource that is "north" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://microformats.org/wiki/rel-north" rel="help">http://microformats.org/wiki/rel-north</a>
+<doc>Refers to a resource that is "north" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#north-rel" rel="help">http://amundsen.com/media-types/maze/format/#north-rel</a>
 </li></ul>
 <ul class="attributes">
 <li>id : north</li>
 <li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
 </ul>
 </div>
-<div class="descriptor">
+
+  <div class="descriptor">
 <h4 class="id">south</h4>
-<doc>Refers to a resource that is "south" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://microformats.org/wiki/rel-south" rel="help">http://microformats.org/wiki/rel-south</a>
+<doc>Refers to a resource that is "south" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#south-rel" rel="help">http://amundsen.com/media-types/maze/format/#south-rel</a>
 </li></ul>
 <ul class="attributes">
 <li>id : south</li>
 <li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
 </ul>
 </div>
-<div class="descriptor">
+
+  <div class="descriptor">
 <h4 class="id">east</h4>
-<doc>Refers to a resource that is "east" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://microformats.org/wiki/rel-east" rel="help">http://microformats.org/wiki/rel-east</a>
+<doc>Refers to a resource that is "east" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#east-rel" rel="help">http://amundsen.com/media-types/maze/format/#east-rel</a>
 </li></ul>
 <ul class="attributes">
 <li>id : east</li>
 <li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
 </ul>
 </div>
-<div class="descriptor">
+
+  <div class="descriptor">
 <h4 class="id">west</h4>
-<doc>Refers to a resource that is "west" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://microformats.org/wiki/rel-west" rel="help">http://microformats.org/wiki/rel-west</a>
+<doc>Refers to a resource that is "west" of the current resource.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#west-rel" rel="help">http://amundsen.com/media-types/maze/format/#west-rel</a>
 </li></ul>
 <ul class="attributes">
 <li>id : west</li>
 <li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
 </ul>
 </div>
-<div class="descriptor">
-<h4 class="id">exit</h4>
-<doc>
-                Refers to a resource that represents the exit 
-                or end of the current client actvity or process.
-              </doc><ul class="link"><li>rel:help = <a href="http://microformats.org/wiki/rel-exit" rel="help">http://microformats.org/wiki/rel-exit</a>
-</li></ul>
-<ul class="attributes">
-<li>id : exit</li>
-<li>type : safe</li>
-<li>rt : resource</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
-</ul>
-</div>
-<div class="descriptor">
-<h4 class="id">current</h4>
-<doc>Refers to a resource containing the most recent item(s) in a collection of resources.</doc><ul class="link"><li>rel:help = <a href="http://www.iana.org/assignments/link-relations/link-relations.xml#current" rel="help">http://www.iana.org/assignments/link-relations/link-relations.xml#current</a>
-</li></ul>
-<ul class="attributes">
-<li>id : current</li>
-<li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
-</ul>
-</div>
-<div class="descriptor">
+
+  <div class="descriptor">
 <h4 class="id">start</h4>
-<doc>Refers to the first resource in a collection of resources.</doc><ul class="link"><li>rel:help = <a href="http://microformats.org/wiki/rel-start" rel="help">http://microformats.org/wiki/rel-start</a>
+<doc>Refers to the first resource in a collection of resources.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#start-rel" rel="help">http://amundsen.com/media-types/maze/format/#start-rel</a>
 </li></ul>
 <ul class="attributes">
 <li>id : start</li>
 <li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
 </ul>
 </div>
-</li>
+
+  <div class="descriptor">
+<h4 class="id">current</h4>
+<doc>Refers to a resource containing the most recent item(s) in a collection of resources.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#current-rel" rel="help">http://amundsen.com/media-types/maze/format/#current-rel</a>
+</li></ul>
+<ul class="attributes">
+<li>id : current</li>
+<li>type : safe</li>
 </ul>
 </div>
-</li>
+  
+  <div class="descriptor">
+<h4 class="id">exit</h4>
+<doc>
+      Refers to a resource that represents the exit 
+      or end of the current client actvity or process.
+    </doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#exit-rel" rel="help">http://amundsen.com/media-types/maze/format/#exit-rel</a>
+</li></ul>
+<ul class="attributes">
+<li>id : exit</li>
+<li>type : safe</li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-    
+
 </body>
 </html>

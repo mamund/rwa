@@ -1,138 +1,98 @@
 <?xml version="1.0" ?>
 <?xml-stylesheet href="documentation.xsl" ?>
 <alps>
-    <link rel="self" href="http://alps.io/profiles/hmaze" />
-    <link rel="help" href="http://amundsen.com/media-types/maze/" />
 
-    <doc format="html">
-        <h2>hMaze</h2>
-        <p>Describes a common profile for implementing the hMaze microformat.</p>
-    </doc>
+  <link rel="self" href="http://alps.io/profiles/maze-xml" />
+  <link rel="help" href="http://amundsen.com/media-types/maze/" />
+
+  <doc format="html">
+      <h2>hMaze</h2>
+      <p>Describes a common profile for implementing Maze+XML.</p>
+  </doc>
+
+  <descriptor id="hmaze" 
+    type="semantic"
+    cardinality="single"
+    appears="SHOULD">
+    <doc>Indicates the parent tag of Maze+XML document.</doc>
+    <descriptor href="#collection" type="semantic" cardinality="single" appears="MAY"/>
+    <descriptor href="#maze"       type="semantic" cardinality="single" appears="MAY"/>
+    <descriptor href="#cell"       type="semantic" cardinality="many" appears="MAY" />  
+  </descriptor>
+
+  <descriptor id="collection">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#collection-rel" />
+    <doc>Describes a collection of mazes.</doc>    
+    <descriptor href="#maze-link" name="maze" type="safe" rt="cell" cardinality="many" appears="MAY" />  
+  </descriptor>
+            
+  <descriptor id="maze" type="semantic" cardinality="single" appears="MAY">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#item-element" />
+    <doc>Describes an individual maze.</doc>
+  </descriptor>
   
-    <descriptor id="hmaze" 
-        type="semantic"
-        cardinality="single"
-        appears="SHOULD">
-        <doc>Indicates the parent tag of an hMaze document.</doc>
-    
-        <descriptor id="collection"
-            type="semantic"
-            rt="maze"
-            cardinality="single"
-            appears="MAY">
-            <link re="help" href="http://tools.ietf.org/html/rfc6573#section-2.2" />
-            <doc>Describes a collection of mazes.</doc>    
-            
-            <descriptor id="maze_link" name="maze"
-              type="safe"
-              rt="cell"
-              cardinality="many"
-              appears="SHOULD">
-              <link rel="help" href="http://amundsen.com/media-types/maze/format/#maze-rel" />
-              <doc>Links to a particular maze.</doc>
-            </descriptor>
-              
-        </descriptor>
-        
-        <descriptor id="maze"
-          type="semantic"
-          cardinality="single"
-          appears="MAY">
-          <link rel="help" href="http://amundsen.com/media-types/maze/format/#item-element" />
-          <doc>Describes an individual maze.</doc>
-        </descriptor>
-        
-        <descriptor id="error"
-          type="semantic"
-          cardinality="single"
-          appears="MAY">
-          <link rel="help" href="http://amundsen.com/media-types/maze/format/#error-element" />
-          <doc>Describes an error message.</doc>
-        </descriptor>
-        
-        <descriptor id="cell"
-          type="semantic"
-          cardinality="single"
-          appears="MAY">
-          <link rel="help" href="http://amundsen.com/media-types/maze/format/#cell-element" />
-          <doc>Describes a cell in a maze.</doc>
-          
-          <descriptor id="title"
-            type="semantic"
-            cardinality="single"
-            appears="MAY">
-            <doc>Contains the name of the cell. NOTE: This is still missing from the Maze+XML spec! (MCA)</doc>
-            
-            <descriptor id="north"
-              type="safe"
-              rt="cell"
-              cardinality="single"
-              appears="MAY">
-              <link rel="help" href="http://microformats.org/wiki/rel-north" />
-              <doc>Refers to a resource that is "north" of the current resource.</doc>
-            </descriptor>
+  <descriptor id="cell">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#cell-element" />
+    <doc>Describes a cell in a maze.</doc>
+    <descriptor href="#north"   type="safe" rt="cell" cardinality="single" appears="MAY" />
+    <descriptor href="#south"   type="safe" rt="cell" cardinality="single" appears="MAY" />
+    <descriptor href="#east"    type="safe" rt="cell" cardinality="single" appears="MAY" />
+    <descriptor href="#west"    type="safe" rt="cell" cardinality="single" appears="MAY" />
+    <descriptor href="#start"   type="safe" rt="cell" cardinality="single" appears="MAY" />
+    <descriptor href="#current" type="safe" rt="cell" cardinality="single" appears="MAY" />
+    <descriptor href="#exit"    type="safe" cardinality="single" appears="MAY" />            
+  </descriptor>
 
-            <descriptor id="south"
-              type="safe"
-              rt="cell"
-              cardinality="single"
-              appears="MAY">
-              <link rel="help" href="http://microformats.org/wiki/rel-south" />
-              <doc>Refers to a resource that is "south" of the current resource.</doc>
-            </descriptor>
+  <descriptor id="error" type="semantic" cardinality="single" appears="MAY">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#error-element" />
+    <doc>Describes an error message.</doc>
+  </descriptor>
 
-            <descriptor id="east"
-              type="safe"
-              rt="cell"
-              cardinality="single"
-              appears="MAY">
-              <link rel="help" href="http://microformats.org/wiki/rel-east" />
-              <doc>Refers to a resource that is "east" of the current resource.</doc>
-            </descriptor>
+  <descriptor id="title" type="semantic" cardinality="single" appears="MAY">
+    <doc>Contains the name of the cell. NOTE: This is still missing from the Maze+XML spec! (MCA)</doc>
+  </descriptor>
+                  
+  <descriptor id="maze-link">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#maze-rel" />
+    <doc>Links to a particular maze.</doc>
+  </descriptor>
 
-            <descriptor id="west"
-              type="safe"
-              rt="cell"
-              cardinality="single"
-              appears="MAY">
-              <link rel="help" href="http://microformats.org/wiki/rel-west" />
-              <doc>Refers to a resource that is "west" of the current resource.</doc>
-            </descriptor>
+  <descriptor id="north" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#north-rel" />
+    <doc>Refers to a resource that is "north" of the current resource.</doc>
+  </descriptor>
 
-            <descriptor id="exit"
-              type="safe"
-              rt="resource"
-              cardinality="single"
-              appears="MAY">
-              <link rel="help" href="http://microformats.org/wiki/rel-exit" />
-              <doc>
-                Refers to a resource that represents the exit 
-                or end of the current client actvity or process.
-              </doc>
-            </descriptor>
+  <descriptor id="south" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#south-rel" />
+    <doc>Refers to a resource that is "south" of the current resource.</doc>
+  </descriptor>
 
-            <descriptor id="current"
-              type="safe"
-              rt="cell"
-              cardinality="single"
-              appears="MAY">
-              <link rel="help" href="http://www.iana.org/assignments/link-relations/link-relations.xml#current" />
-              <doc>Refers to a resource containing the most recent item(s) in a collection of resources.</doc>
-            </descriptor>
+  <descriptor id="east" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#east-rel" />
+    <doc>Refers to a resource that is "east" of the current resource.</doc>
+  </descriptor>
 
-            <descriptor id="start"
-              type="safe"
-              rt="cell"
-              cardinality="single"
-              appears="MAY">
-              <link rel="help" href="http://microformats.org/wiki/rel-start" />
-              <doc>Refers to the first resource in a collection of resources.</doc>
-            </descriptor>
-              
-          </descriptor>
-          
-      </descriptor>
-        
-    </descriptor>
-    
+  <descriptor id="west" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#west-rel" />
+    <doc>Refers to a resource that is "west" of the current resource.</doc>
+  </descriptor>
+
+  <descriptor id="start" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#start-rel" />
+    <doc>Refers to the first resource in a collection of resources.</doc>
+  </descriptor>
+
+  <descriptor id="current" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#current-rel" />
+    <doc>Refers to a resource containing the most recent item(s) in a collection of resources.</doc>
+  </descriptor>
+  
+  <descriptor id="exit" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#exit-rel" />
+    <doc>
+      Refers to a resource that represents the exit 
+      or end of the current client actvity or process.
+    </doc>
+  </descriptor>
+
 </alps>
