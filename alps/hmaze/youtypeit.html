@@ -1,0 +1,253 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Documentation</title>
+</head>
+<body>
+<h1>Documentation</h1>
+<doc format="html">
+        <h2>Yout Type It, We Post It Profile</h2>
+        <p>Describes a common profile for implementing the ytiwpi service.</p>
+        <ul>
+            <li>
+                This profile has six transitions (w/ possible semantic elements)
+                and size semantic descriptors (two of which are containers).
+            </li>
+            <li>
+                There is no indication of 'cardinality' or 'appears' here.
+            </li>
+            <li>
+                There is no assurance that any of the descriptors (transition
+                or semantic) will appear in a response. What is listed here are
+                possible descriptors for the 'YouTypeIt' profile.
+            </li>
+            <li>
+                It is possible that some severs will return other semantic
+                descriptors and/or offer other transitions; that's fine. Any
+                clients that are relying on <i>this</i> profile as a guide will
+                likely ignore those unspecified descriptors.
+            </li>
+        </ul>
+    </doc><ul class="link"><li>rel:self = <a href="http://alps.io/profiles/youtypeit" rel="self">http://alps.io/profiles/youtypeit</a>
+</li></ul>
+
+    
+
+    
+
+    
+
+    
+    <div class="descriptor">
+<h4 class="id" id="collection">collection</h4>
+<doc>Link that returns a list of messages.</doc><ul class="link"><li>rel:help = <a href="http://alps.io/iana#collection" rel="help">http://alps.io/iana#collection</a>
+</li></ul>
+<ul class="attributes">
+<li>id : collection</li>
+<li>type : safe</li>
+<li>rt : <a href="#messageList">#messageList</a>
+</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="item">item</h4>
+<doc>Link that returns a single message.</doc><ul class="link"><li>rel:help = <a href="http://alps.io/iana#item" rel="help">http://alps.io/iana#item</a>
+</li></ul>
+<ul class="attributes">
+<li>id : item</li>
+<li>type : safe</li>
+<li>rt : <a href="#messageItem">#messageItem</a>
+</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="search">search</h4>
+<doc>Use this transition to search for messages</doc><ul class="link"><li>rel:help = <a href="http://alps.io/iana#search" rel="help">http://alps.io/iana#search</a>
+</li></ul>
+<ul class="attributes">
+<li>id : search</li>
+<li>type : safe</li>
+<li>rt : <a href="#messageList">#messageList</a>
+</li>
+<li>Contains: <div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes"><li>href : <a href="#text">#text</a>
+</li></ul>
+</div>
+<div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes"><li>href : <a href="#author">#author</a>
+</li></ul>
+</div>
+<div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes"><li>href : <a href="#messageDate">#messageDate</a>
+</li></ul>
+</div>
+</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="post">post</h4>
+<doc>Use this transition to add a new message to the collection.</doc><ul class="attributes">
+<li>id : post</li>
+<li>type : unsafe</li>
+<li>Contains: <div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#text">#text</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+<div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#author">#author</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="remove">remove</h4>
+<doc>Use this transition to remove a message from the collection,</doc><ul class="attributes">
+<li>id : remove</li>
+<li>type : idempotent</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="update">update</h4>
+<doc>Use this transition to update an existing message.</doc><ul class="attributes">
+<li>id : update</li>
+<li>type : idempotent</li>
+<li>Contains: <div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#text">#text</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+<div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#author">#author</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+
+    
+    <div class="descriptor">
+<h4 class="id" id="messageList">messageList</h4>
+<doc>Represents a list of messages.</doc><ul class="attributes">
+<li>id : messageList</li>
+<li>type : semantic</li>
+<li>Contains: <div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#messageItem">#messageItem</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="messageItem">messageItem</h4>
+<doc>Represents a single message.</doc><ul class="attributes">
+<li>id : messageItem</li>
+<li>type : semantic</li>
+<li>Contains: <div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#text">#text</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+<div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#author">#author</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+<div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#id">#id</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+<div class="contains">
+<h4 class="id" id=""></h4>
+<ul class="attributes">
+<li>href : <a href="#messageDate">#messageDate</a>
+</li>
+<li>type : semantic</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="text">text</h4>
+<doc>Contains the text of the message.</doc><ul class="attributes">
+<li>id : text</li>
+<li>type : semantic</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="author">author</h4>
+<doc>
+            Contains a text string representing the author of the
+            message.
+        </doc><ul class="link"><li>rel:help = <a href="http://microformats.org/wiki/hcard#fn" rel="help">http://microformats.org/wiki/hcard#fn</a>
+</li></ul>
+<ul class="attributes">
+<li>id : author</li>
+<li>type : semantic</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="id">id</h4>
+<doc>Contains the unique identifier of the message.</doc><ul class="attributes">
+<li>id : id</li>
+<li>type : semantic</li>
+</ul>
+</div>
+
+    <div class="descriptor">
+<h4 class="id" id="messageDate">messageDate</h4>
+<doc>
+            Contains an ISO 8601 date representing the date of the
+            message.
+        </doc><ul class="link"><li>rel:help = <a href="http://schema.org/Date" rel="help">http://schema.org/Date</a>
+</li></ul>
+<ul class="attributes">
+<li>id : messageDate</li>
+<li>type : semantic</li>
+</ul>
+</div>
+
+</body>
+</html>

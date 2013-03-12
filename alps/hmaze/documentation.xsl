@@ -33,7 +33,7 @@
 
 <xsl:template match="descriptor">
   <div class="descriptor">
-    <h4 class="id"><xsl:value-of select="@id" /></h4>
+      <h4 class="id" id="{@id}"><xsl:value-of select="@id" /></h4>
     <xsl:if test="count(doc)&gt;0">
       <xsl:copy-of select="doc" disable-output-escaping="yes"/>
     </xsl:if>
@@ -41,15 +41,53 @@
         <xsl:call-template name="call-link" />
     </xsl:if>
     <ul class="attributes">
-      <xsl:for-each select="@*">
-        <li><xsl:value-of select="name()" /> : <xsl:value-of select="." /></li>
+        <xsl:for-each select="@*">
+          <xsl:choose>
+            <xsl:when test="contains(.,'#')">
+              <li><xsl:value-of select="name()" /> : <a href="{.}"><xsl:value-of select="." /></a></li>
+            </xsl:when>
+            <xsl:when test="name()='href'">i
+              <li><xsl:value-of select="name()" /> : <a href="{.}"><xsl:value-of select="." /></a></li>
+            </xsl:when>
+            <xsl:otherwise>
+              <li><xsl:value-of select="name()" /> : <xsl:value-of select="." /></li>
+            </xsl:otherwise>  
+          </xsl:choose>
       </xsl:for-each>
-      <xsl:if test="count(descriptor)&gt;0">
+      <xsl:if test="count(contains)&gt;0">
         <li>Contains: <xsl:apply-templates select="*"/></li>
       </xsl:if>
     </ul>
   </div>
 </xsl:template>
+
+<xsl:template match="contains">
+  <div class="contains">
+      <h4 class="id" id="{@id}"><xsl:value-of select="@id" /></h4>
+    <xsl:if test="count(doc)&gt;0">
+      <xsl:copy-of select="doc" disable-output-escaping="yes"/>
+    </xsl:if>
+    <xsl:if test="count(link)&gt;0">
+        <xsl:call-template name="call-link" />
+    </xsl:if>
+    <ul class="attributes">
+        <xsl:for-each select="@*">
+          <xsl:choose>
+            <xsl:when test="contains(.,'#')">
+              <li><xsl:value-of select="name()" /> : <a href="{.}"><xsl:value-of select="." /></a></li>
+            </xsl:when>
+            <xsl:when test="name()='href'">i
+              <li><xsl:value-of select="name()" /> : <a href="{.}"><xsl:value-of select="." /></a></li>
+            </xsl:when>
+            <xsl:otherwise>
+              <li><xsl:value-of select="name()" /> : <xsl:value-of select="." /></li>
+            </xsl:otherwise>  
+          </xsl:choose>
+      </xsl:for-each>
+    </ul>
+  </div>
+</xsl:template>
+
 
 <xsl:template match="doc">
   <!-- to catch (and not display) doc elements -->

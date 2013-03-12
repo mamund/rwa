@@ -4,12 +4,6 @@
 
     <!--
         focus on transitions and response elements
-
-        five transitions (no indication data elements for them)
-        six semantic desriptors (two of them are containers)
-
-        i guess is can be assumed that the transitions will not
-        require data elements that do not appear in this profile?
     -->
 
     <link rel="self" href="http://alps.io/profiles/youtypeit" />
@@ -17,57 +11,89 @@
     <doc format="html">
         <h2>Yout Type It, We Post It Profile</h2>
         <p>Describes a common profile for implementing the ytiwpi service.</p>
+        <ul>
+            <li>
+                This profile has six transitions (w/ possible semantic elements)
+                and size semantic descriptors (two of which are containers).
+            </li>
+            <li>
+                There is no indication of 'cardinality' or 'appears' here.
+            </li>
+            <li>
+                There is no assurance that any of the descriptors (transition
+                or semantic) will appear in a response. What is listed here are
+                possible descriptors for the 'YouTypeIt' profile.
+            </li>
+            <li>
+                It is possible that some severs will return other semantic
+                descriptors and/or offer other transitions; that's fine. Any
+                clients that are relying on <i>this</i> profile as a guide will
+                likely ignore those unspecified descriptors.
+            </li>
+        </ul>
     </doc>
 
     <!-- transitions:
-         - collection, item == safe transitions
+         - collection, item, search == safe transitions
          - post == unsafe transition
          - remove, update == idempotent transitions
     -->
-    <descriptor id="collection" type="safe" appears="SHOULD">
+    <descriptor id="collection" type="safe" rt="#messageList">
         <link rel="help" href="http://alps.io/iana#collection" />
         <doc>Link that returns a list of messages.</doc>
     </descriptor>
 
-    <descriptor id="item" type="safe" appears="SHOULD">
-        <link rel="help" href="http://alps.io/iana/#item" />
+    <descriptor id="item" type="safe" rt="#messageItem">
+        <link rel="help" href="http://alps.io/iana#item" />
         <doc>Link that returns a single message.</doc>
     </descriptor>
 
-    <descriptor id="post" type="unsafe" appears="SHOULD">
-        <doc>Use this transition to add a new message to the collection.</doc>
+    <descriptor id="search" type="safe" rt="#messageList">
+        <link rel="help" href="http://alps.io/iana#search" />
+        <doc>Use this transition to search for messages</doc>
+        <contains href="#text" />
+        <contains href="#author" />
+        <contains href="#messageDate" />
     </descriptor>
 
-    <descriptor id="remove" type="idempotent" appears="MAY">
+    <descriptor id="post" type="unsafe">
+        <doc>Use this transition to add a new message to the collection.</doc>
+        <contains href="#text" type="semantic" />
+        <contains href="#author" type="semantic" />
+    </descriptor>
+
+    <descriptor id="remove" type="idempotent">
         <doc>Use this transition to remove a message from the collection,</doc>
     </descriptor>
 
-    <descriptor id="update" type="idempotent" appears="MAY">
+    <descriptor id="update" type="idempotent">
         <doc>Use this transition to update an existing message.</doc>
+        <contains href="#text" type="semantic" />
+        <contains href="#author" type="semantic" />
     </descriptor>
 
     <!-- semantic elements:
          - messageList, message == containers
          - text, author, id, date == data elements
     -->
-    <descriptor id="messageList" type="semantic" appears="SHOULD">
+    <descriptor id="messageList" type="semantic">
         <doc>Represents a list of messages.</doc>
-        <contains href="messageItem" type="semantic" appears="MAY" />
+        <contains href="#messageItem" type="semantic" />
     </descriptor>
 
-    <descriptor id="messageItem" type="semantic" appears="MAY">
+    <descriptor id="messageItem" type="semantic">
         <doc>Represents a single message.</doc>
-        <contains href="#text" type="semantic" appears="SHOULD" />
-        <contains href="#author" type="semantic" appears="SHOULD" />
-        <contains href="#id" type="semantic" appears="MAY" />
-        <contains href="#messageDate" type="semantic" appears="MAY" />
+        <contains href="#text" type="semantic" />
+        <contains href="#author" type="semantic" />
+        <contains href="#id" type="semantic" />
+        <contains href="#messageDate" type="semantic" />
     </descriptor>
 
-    <descriptor id="text" type="semantic" appears="SHOULD">
+    <descriptor id="text" type="semantic">
         <doc>Contains the text of the message.</doc>
     </descriptor>
 
-    <descriptor id="author" type="semantic" appears="SHOULD">
+    <descriptor id="author" type="semantic">
         <link rel="help" href="http://microformats.org/wiki/hcard#fn" />
         <doc>
             Contains a text string representing the author of the
@@ -75,11 +101,11 @@
         </doc>
     </descriptor>
 
-    <descriptor id="id" type="semantic" appears="MAY">
+    <descriptor id="id" type="semantic">
         <doc>Contains the unique identifier of the message.</doc>
     </descriptor>
 
-    <descriptor id="messageDate" type="semantic" appears="MAY">
+    <descriptor id="messageDate" type="semantic">
         <link rel="help" href="http://schema.org/Date" />
         <doc>
             Contains an ISO 8601 date representing the date of the
