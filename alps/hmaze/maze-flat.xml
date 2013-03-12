@@ -2,6 +2,8 @@
 <?xml-stylesheet href="documentation.xsl" ?>
 <alps>
 
+  <!-- just a pile of semantic and transition descriptors -->
+
   <link rel="self" href="http://alps.io/profiles/maze-xml" />
   <link rel="help" href="http://amundsen.com/media-types/maze/" />
 
@@ -10,61 +12,36 @@
       <p>Describes a common profile for implementing Maze+XML.</p>
   </doc>
 
-  <!-- this is the primary container for all the other descriptors -->
-  <descriptor id="maze" type="semantic" cardinality="single" appears="SHOULD" contained="false">
+  <!-- semantic items in this profile -->
+  <descriptor id="maze" type="semantic">
     <doc>Indicates the parent tag of Maze+XML document.</doc>
-    <descriptor href="#collection" type="semantic" cardinality="single" appears="MAY"/>
-    <descriptor href="#item"       type="semantic" cardinality="single" appears="MAY"/>
-    <descriptor href="#cell"       type="semantic" cardinality="many"   appears="MAY" />  
-    <descriptor href="#error"      type="semantic" cardinality="single" appears="MAY" />
   </descriptor>
 
-  <!-- these can only appear within a container (e.g. maze) -->
-  <descriptor id="error" type="semantic" contained="true">
+  <descriptor id="collection" type="semantic">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#collection-rel" />
+    <doc>Describes a collection of mazes.</doc>    
+  </descriptor>
+
+  <descriptor id="item" type="semantic">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#item-element" />
+  </descriptor>
+
+  <descriptor id="cell" type="semantic">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#cell-element" />
+    <doc>Describes a cell in a maze.</doc>
+  </descriptor>
+
+  <descriptor id="error" type="semantic">
     <link rel="help" href="http://amundsen.com/media-types/maze/format/#error-element" />
     <doc>Describes an error message.</doc>
   </descriptor>
 
-  <descriptor id="collection" type="semantic" contained="true">
-    <link rel="help" href="http://amundsen.com/media-types/maze/format/#collection-rel" />
-    <doc>Describes a collection of mazes.</doc>    
-    <descriptor href="#maze" name="maze" type="safe" rt="cell" cardinality="many" appears="MAY" />  
-  </descriptor>
-
-  <descriptor id="item" type="semantic" contained="true">
-    <link rel="help" href="http://amundsen.com/media-types/maze/format/#item-element" />
-    <doc>Describes an individual maze.</doc>
-  </descriptor>
-
-  <descriptor id="cell" type="semantic" contained="true">
-    <link rel="help" href="http://amundsen.com/media-types/maze/format/#cell-element" />
-    <doc>Describes a cell in a maze.</doc>
-    <descriptor href="#title"   type="semantic" cardinality="single" appears="SHOULD" />
-    <descriptor href="#current" type="safe" rt="cell" cardinality="single" appears="SHOULD" />
-    <descriptor href="#start"   type="safe" rt="cell" cardinality="single" appears="MAY" />
-    <descriptor href="#north"   type="safe" rt="cell" cardinality="single" appears="MAY" />
-    <descriptor href="#south"   type="safe" rt="cell" cardinality="single" appears="MAY" />
-    <descriptor href="#east"    type="safe" rt="cell" cardinality="single" appears="MAY" />
-    <descriptor href="#west"    type="safe" rt="cell" cardinality="single" appears="MAY" />
-    <descriptor href="#exit"    type="safe" cardinality="single" appears="MAY" />            
-  </descriptor>
-
-  <!-- option #1 -->
-  <descriptor id="title" type="semantic" contained="true">
+  <descriptor id="title" type="semantic">
       <doc>Contains the name of the cell. NOTE: This is still missing from the Maze+XML spec! (MCA)</doc>
   </descriptor>
 
-  <!-- option #2 (indicate valid containers) -->
-  <descriptor id="title" type="semantic" containers="collection maze title">
-      <doc>Contains the name of a collection, maze, or cell.</doc>
-  </descriptor>
-
-  <!-- 
-    these are ref'd above and will (therefore) appear within containers.
-    however, they are not _marked_ as containted="true" here. that means
-    others linking to these items will be able to use them without containers
-  -->
-  <descriptor id="maze">
+  <!-- transition items in this profile -->
+  <descriptor id="maze" type="safe">
     <link rel="help" href="http://amundsen.com/media-types/maze/format/#maze-rel" />
     <doc>Links to a particular maze.</doc>
   </descriptor>

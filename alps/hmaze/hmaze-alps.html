@@ -6,7 +6,7 @@
 <body>
 <h1>Documentation</h1>
 <doc format="html">
-      <h2>hMaze</h2>
+      <h2>Maze+XML Profile</h2>
       <p>Describes a common profile for implementing Maze+XML.</p>
   </doc><ul class="link">
 <li>rel:self = <a href="http://alps.io/profiles/maze-xml" rel="self">http://alps.io/profiles/maze-xml</a>
@@ -20,13 +20,15 @@
 
   
 
+  
   <div class="descriptor">
-<h4 class="id">hmaze</h4>
+<h4 class="id">maze</h4>
 <doc>Indicates the parent tag of Maze+XML document.</doc><ul class="attributes">
-<li>id : hmaze</li>
+<li>id : maze</li>
 <li>type : semantic</li>
 <li>cardinality : single</li>
 <li>appears : SHOULD</li>
+<li>contained : false</li>
 <li>Contains: <div class="descriptor">
 <h4 class="id"></h4>
 <ul class="attributes">
@@ -39,7 +41,7 @@
 <div class="descriptor">
 <h4 class="id"></h4>
 <ul class="attributes">
-<li>href : #maze</li>
+<li>href : #item</li>
 <li>type : semantic</li>
 <li>cardinality : single</li>
 <li>appears : MAY</li>
@@ -54,7 +56,28 @@
 <li>appears : MAY</li>
 </ul>
 </div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #error</li>
+<li>type : semantic</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
 </li>
+</ul>
+</div>
+
+  
+  <div class="descriptor">
+<h4 class="id">error</h4>
+<doc>Describes an error message.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#error-element" rel="help">http://amundsen.com/media-types/maze/format/#error-element</a>
+</li></ul>
+<ul class="attributes">
+<li>id : error</li>
+<li>type : semantic</li>
+<li>contained : true</li>
 </ul>
 </div>
 
@@ -64,10 +87,12 @@
 </li></ul>
 <ul class="attributes">
 <li>id : collection</li>
+<li>type : semantic</li>
+<li>contained : true</li>
 <li>Contains: <div class="descriptor">
 <h4 class="id"></h4>
 <ul class="attributes">
-<li>href : #maze-link</li>
+<li>href : #maze</li>
 <li>name : maze</li>
 <li>type : safe</li>
 <li>rt : cell</li>
@@ -78,26 +103,56 @@
 </li>
 </ul>
 </div>
-            
+
   <div class="descriptor">
-<h4 class="id">maze</h4>
+<h4 class="id">item</h4>
 <doc>Describes an individual maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#item-element" rel="help">http://amundsen.com/media-types/maze/format/#item-element</a>
 </li></ul>
 <ul class="attributes">
-<li>id : maze</li>
+<li>id : item</li>
 <li>type : semantic</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
+<li>contained : true</li>
 </ul>
 </div>
-  
+
   <div class="descriptor">
 <h4 class="id">cell</h4>
 <doc>Describes a cell in a maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#cell-element" rel="help">http://amundsen.com/media-types/maze/format/#cell-element</a>
 </li></ul>
 <ul class="attributes">
 <li>id : cell</li>
+<li>type : semantic</li>
+<li>contained : true</li>
 <li>Contains: <div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #title</li>
+<li>type : semantic</li>
+<li>cardinality : single</li>
+<li>appears : SHOULD</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #current</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : SHOULD</li>
+</ul>
+</div>
+<div class="descriptor">
+<h4 class="id"></h4>
+<ul class="attributes">
+<li>href : #start</li>
+<li>type : safe</li>
+<li>rt : cell</li>
+<li>cardinality : single</li>
+<li>appears : MAY</li>
+</ul>
+</div>
+<div class="descriptor">
 <h4 class="id"></h4>
 <ul class="attributes">
 <li>href : #north</li>
@@ -140,26 +195,6 @@
 <div class="descriptor">
 <h4 class="id"></h4>
 <ul class="attributes">
-<li>href : #start</li>
-<li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
-</ul>
-</div>
-<div class="descriptor">
-<h4 class="id"></h4>
-<ul class="attributes">
-<li>href : #current</li>
-<li>type : safe</li>
-<li>rt : cell</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
-</ul>
-</div>
-<div class="descriptor">
-<h4 class="id"></h4>
-<ul class="attributes">
 <li>href : #exit</li>
 <li>type : safe</li>
 <li>cardinality : single</li>
@@ -170,33 +205,32 @@
 </ul>
 </div>
 
-  <div class="descriptor">
-<h4 class="id">error</h4>
-<doc>Describes an error message.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#error-element" rel="help">http://amundsen.com/media-types/maze/format/#error-element</a>
-</li></ul>
-<ul class="attributes">
-<li>id : error</li>
-<li>type : semantic</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
-</ul>
-</div>
-
+  
   <div class="descriptor">
 <h4 class="id">title</h4>
 <doc>Contains the name of the cell. NOTE: This is still missing from the Maze+XML spec! (MCA)</doc><ul class="attributes">
 <li>id : title</li>
 <li>type : semantic</li>
-<li>cardinality : single</li>
-<li>appears : MAY</li>
+<li>contained : true</li>
 </ul>
 </div>
-                  
+
+  
   <div class="descriptor">
-<h4 class="id">maze-link</h4>
+<h4 class="id">title</h4>
+<doc>Contains the name of a collection, maze, or cell.</doc><ul class="attributes">
+<li>id : title</li>
+<li>type : semantic</li>
+<li>containers : collection maze title</li>
+</ul>
+</div>
+
+  
+  <div class="descriptor">
+<h4 class="id">maze</h4>
 <doc>Links to a particular maze.</doc><ul class="link"><li>rel:help = <a href="http://amundsen.com/media-types/maze/format/#maze-rel" rel="help">http://amundsen.com/media-types/maze/format/#maze-rel</a>
 </li></ul>
-<ul class="attributes"><li>id : maze-link</li></ul>
+<ul class="attributes"><li>id : maze</li></ul>
 </div>
 
   <div class="descriptor">
