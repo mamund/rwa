@@ -2,10 +2,6 @@
 <?xml-stylesheet href="documentation.xsl" ?>
 <alps>
 
-    <!--
-        focus on transitions and response elements
-    -->
-
     <link rel="self" href="http://alps.io/profiles/youtypeit" />
 
     <doc format="html">
@@ -14,7 +10,7 @@
         <ul>
             <li>
                 This profile has six transitions (w/ possible semantic elements)
-                and size semantic descriptors (two of which are containers).
+                and six semantic descriptors (two of which are containers).
             </li>
             <li>
                 There is no indication of 'cardinality' or 'appears' here.
@@ -34,9 +30,9 @@
     </doc>
 
     <!-- transitions:
-         - collection, item, search == safe transitions
          - post == unsafe transition
          - remove, update == idempotent transitions
+         - collection, item, search == safe transitions
     -->
     <descriptor id="collection" type="safe" rt="#messageList">
         <link rel="help" href="http://alps.io/iana#collection" />
@@ -51,9 +47,9 @@
     <descriptor id="search" type="safe" rt="#messageList">
         <link rel="help" href="http://alps.io/iana#search" />
         <doc>Use this transition to search for messages</doc>
-        <contains href="#text" />
-        <contains href="#author" />
-        <contains href="#messageDate" />
+        <contains href="#text" type="semantic" />
+        <contains href="#author" type="semantic" />
+        <contains href="#messageDate" type="semantic" />
     </descriptor>
 
     <descriptor id="post" type="unsafe">
