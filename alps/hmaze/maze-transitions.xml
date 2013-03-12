@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet href="documentation.xsl" ?>
+<alps>
+
+  <!-- 
+    describe transitions. not data representations. 
+    the actual response representation details are left out.
+  -->
+
+  <link rel="self" href="http://alps.io/profiles/maze-xml" />
+  <link rel="help" href="http://amundsen.com/media-types/maze/" />
+
+  <doc format="html">
+      <h2>Maze+XML Profile</h2>
+      <p>Describes a common profile for implementing Maze+XML.</p>
+  </doc>
+
+  <descriptor id="maze" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#maze-rel" />
+    <doc>Links to a particular maze.</doc>
+  </descriptor>
+
+  <descriptor id="north" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#north-rel" />
+    <doc>Refers to a resource that is "north" of the current resource.</doc>
+  </descriptor>
+
+  <descriptor id="south" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#south-rel" />
+    <doc>Refers to a resource that is "south" of the current resource.</doc>
+  </descriptor>
+
+  <descriptor id="east" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#east-rel" />
+    <doc>Refers to a resource that is "east" of the current resource.</doc>
+  </descriptor>
+
+  <descriptor id="west" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#west-rel" />
+    <doc>Refers to a resource that is "west" of the current resource.</doc>
+  </descriptor>
+
+  <descriptor id="start" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#start-rel" />
+    <doc>Refers to the first resource in a collection of resources.</doc>
+  </descriptor>
+
+  <descriptor id="current" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#current-rel" />
+    <doc>Refers to a resource containing the most recent item(s) in a collection of resources.</doc>
+  </descriptor>
+  
+  <descriptor id="exit" type="safe">
+    <link rel="help" href="http://amundsen.com/media-types/maze/format/#exit-rel" />
+    <doc>
+      Refers to a resource that represents the exit 
+      or end of the current client actvity or process.
+    </doc>
+  </descriptor>
+
+  <!-- unsafe transition to create a new maze -->
+  <descriptor id="create" type="unsafe" rt="maze">
+    <link rel="help" href="http://amundsen.com/media-types/maze/" />
+    <doc>
+      Use this link to create a new maze on the target server. Supply
+      a single integer value that represents the number of rooms on 
+      a side of the square (e.g. supplying "5" will create a 5x5 maze).
+      Include a string for the title of the maze.
+    </doc>
+    <contains href="#title" cardinality="single" appears="MAY" />
+    <contains href="#size" cardinaltiy="single" appears="SHOULD" />
+  </descriptor>
+
+  <!-- semantic elements for creating a maze -->
+  <descriptor id="title" type="semantic" />
+  <descriptor id="size" type="semantic" />
+
+</alps>

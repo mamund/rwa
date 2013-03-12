@@ -3,6 +3,7 @@ import sys
 import urllib2
 from bs4 import BeautifulSoup
 
+
 URL = "http://www.iana.org/assignments/link-relations/link-relations.xml"
 
 IANA_GO_BASE = "http://www.iana.org/go/"
