@@ -28,7 +28,7 @@ def all_with_property(tag, property):
     return tag.find_all(property=property)
 
 def fix_doc(doc):
-    return doc.strip().replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", '"')
+    return doc.strip().replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", '"').replace("& ", " &amp; ")
 
 classes = []
 properties = []
@@ -62,48 +62,56 @@ class RDFClass(object):
             superclass_urls.append(c.url)
         if len(superclass_urls) > 0:
             values['href'] = ' href="%s"' % (" ".join(superclass_urls))
+        if self.label == 'Locksmith':
+            import pdb; pdb.set_trace()
             
         values['properties'] = '\n'.join(
-            p.as_alps(self) for p in self.all_properties)
+            p.as_alps(self, defining_class) for defining_class, p in self.all_properties)
         return ALPS_CLASS_BASE % values
 
     @property
     def all_properties(self):
         # Yield all properties defined in this class or superclasses,
         # in alphabetical order.
-        unsorted = []
+        unsorted = [(self, property) for property in self.properties]
+        already_present = set(self.properties)
+
         for superclass_uri in self.superclasses:
             c = classes_by_uri[superclass_uri]
-            unsorted.extend(list(c.all_properties))
-        unsorted.extend(self.properties)
-        for p in sorted(unsorted, key=lambda x: x.label):
-            yield p
+            for defined_by, property in c.all_properties:
+                if property not in already_present:
+                    already_present.add(property)
+                    unsorted.append((defined_by, property))
+        for c, p in sorted(unsorted, key=lambda x: x[1].label):
+            yield c, p
 
 class RDFProperty(object):
 
     def __init__(self, div):
-        self.domain = with_property(div, 'http://schema.org/domain')['href']
-        self.domain_class = classes_by_uri[self.domain]
-        self.domain_class.properties.append(self)
-        self.range = with_property(div, 'http://schema.org/range')['href']
-        self.range_class = classes_by_uri[self.range]
+        self.domains = [x['href'] for x in all_with_property(div, 'http://schema.org/domain')]
+        self.domain_classes = [classes_by_uri[domain] for domain in self.domains]
+        for domain_class in self.domain_classes:
+            domain_class.properties.append(self)
+        
+        self.ranges = [x['href'] for x in all_with_property(div, 'http://schema.org/range')]
+        self.range_classes = [classes_by_uri[range] for range in self.ranges]
         self.comment = with_property(div, 'rdfs:comment').string
         self.label = with_property(div, 'rdfs:label').string
 
-    @property
-    def url(self):
-        return self.domain_class.url + "#" + self.label
+    def url(self, domain_class):
+        return domain_class.url + "#" + self.label
 
-    def as_alps(self, for_class):
+    def as_alps(self, for_class, defined_in_class):
         values = dict(
             label=self.label,
             href="",
-            rt=base_url + self.range_class.label,
+            rt=" ".join(base_url + range_class.label for range_class in self.range_classes),
             doc=fix_doc(self.comment))
-        if for_class != self.domain_class:
-            # This is being included in a subclass of its domain class.
-            # We need to link to the original definition.
-            values['href'] = ' href="%s"' % self.url
+        if defined_in_class != for_class:
+            # This is being included in a subclass of one of its
+            # domain classes.  We need to link to the original
+            # definition.
+            values['href'] = ' href="%s"' % self.url(defined_in_class)
             
         return ALPS_PROPERTY_BASE % values
 
