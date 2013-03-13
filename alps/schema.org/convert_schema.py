@@ -6,7 +6,7 @@ base_url = ""
 output_dir = "output/"
 
 ALPS_CLASS_BASE = """<alps>
- <descriptor id="%(label)s" type="semantic">
+ <descriptor id="%(label)s" type="semantic"%(href)s>
   <doc format="html">
    %(doc)s
   </doc>
@@ -28,7 +28,7 @@ def all_with_property(tag, property):
     return tag.find_all(property=property)
 
 def fix_doc(doc):
-    return doc.strip()q.replace("&lt;", "<").replace("&gt;", ">")
+    return doc.strip().replace("&lt;", "<").replace("&gt;", ">")
 
 classes = []
 properties = []
@@ -55,7 +55,14 @@ class RDFClass(object):
 
     @property
     def as_alps(self):
-        values = dict(label=self.label, doc=fix_doc(self.comment))
+        values = dict(label=self.label, doc=fix_doc(self.comment), href="")
+        superclass_urls = []
+        for superclass_uri in self.superclasses:
+            c = classes_by_uri[superclass_uri]
+            superclass_urls.append(c.url)
+        if len(superclass_urls) > 0:
+            values['href'] = ' href="%s"' % (" ".join(superclass_urls))
+            
         values['properties'] = '\n'.join(
             p.as_alps(self) for p in self.all_properties)
         return ALPS_CLASS_BASE % values
