@@ -1,8 +1,8 @@
 import os
 from bs4 import BeautifulSoup
 
-# base_url = "http://alps.io/schema.org/"
-base_url = ""
+base_url = "http://alps.io/schema.org/"
+# base_url = ""
 output_dir = "output/"
 
 ALPS_CLASS_BASE = """<alps>
@@ -115,5 +115,5 @@ for div in soup.find_all(typeof='rdf:Property'):
     properties.append(RDFProperty(div))
 
 for c in classes:
-    filename = os.path.join(output_dir, c.label)
+    filename = os.path.join(output_dir, c.label + ".xml")
     open(filename, 'w').write(c.as_alps.encode("utf8"))
