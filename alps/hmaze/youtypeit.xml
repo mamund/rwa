@@ -34,13 +34,13 @@
          - remove, update == idempotent transitions
          - collection, item, search == safe transitions
     -->
-    <descriptor id="collection" type="safe" rt="#messageList">
-        <link rel="help" href="http://alps.io/iana#collection" />
+    <descriptor href="http://alps.io/iana#collection" type="safe" rt="#messageList">
+        <link rel="help" href="http://tools.ietf.org/html/rfc6573#section-2.2" />
         <doc>Link that returns a list of messages.</doc>
     </descriptor>
 
-    <descriptor id="item" type="safe" rt="#messageItem">
-        <link rel="help" href="http://alps.io/iana#item" />
+    <descriptor href="http://alps.io/iana#item" type="safe" rt="#messageItem">
+        <link rel="help" href="http://tools.ietf.org/html/rfc6573#section-2.1" />
         <doc>Link that returns a single message.</doc>
     </descriptor>
 
