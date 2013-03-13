@@ -28,7 +28,7 @@ def all_with_property(tag, property):
     return tag.find_all(property=property)
 
 def fix_doc(doc):
-    return doc.strip().replace("&lt;", "<").replace("&gt;", ">")
+    return doc.strip().replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", '"')
 
 classes = []
 properties = []
