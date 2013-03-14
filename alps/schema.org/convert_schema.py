@@ -62,9 +62,6 @@ class RDFClass(object):
             superclass_urls.append(c.url)
         if len(superclass_urls) > 0:
             values['href'] = ' href="%s"' % (" ".join(superclass_urls))
-        if self.label == 'Locksmith':
-            import pdb; pdb.set_trace()
-            
             values['properties'] = '\n'.join(
             p.as_alps(self, defining_class) for defining_class, p in self.all_properties)
         return ALPS_CLASS_BASE % values
