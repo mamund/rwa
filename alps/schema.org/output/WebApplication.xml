@@ -1,0 +1,415 @@
+<alps>
+ <descriptor id="WebApplication" type="semantic" href="http://alps.io/schema.org/SoftwareApplication">
+  <doc format="html">
+   Web applications.
+  </doc>
+    <descriptor id="about" type="semantic" href="http://alps.io/schema.org/CreativeWork#about" rt="http://alps.io/schema.org/Thing">
+   <doc format="html">
+    The subject matter of the content.
+   </doc>
+  </descriptor>
+
+  <descriptor id="accountablePerson" type="semantic" href="http://alps.io/schema.org/CreativeWork#accountablePerson" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    Specifies the Person that is legally accountable for the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   </doc>
+  </descriptor>
+
+  <descriptor id="aggregateRating" type="semantic" href="http://alps.io/schema.org/CreativeWork#aggregateRating" rt="http://alps.io/schema.org/AggregateRating">
+   <doc format="html">
+    The overall rating, based on a collection of reviews or ratings, of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="alternativeHeadline" type="semantic" href="http://alps.io/schema.org/CreativeWork#alternativeHeadline" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A secondary title of the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="applicationCategory" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#applicationCategory" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Type of software application, e.g. "Game, Multimedia".
+   </doc>
+  </descriptor>
+
+  <descriptor id="applicationSubCategory" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#applicationSubCategory" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Subcategory of the application, e.g. "Arcade Game".
+   </doc>
+  </descriptor>
+
+  <descriptor id="applicationSuite" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#applicationSuite" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the application suite to which the application belongs (e.g. Excel belongs to Office)
+   </doc>
+  </descriptor>
+
+  <descriptor id="associatedMedia" type="semantic" href="http://alps.io/schema.org/CreativeWork#associatedMedia" rt="http://alps.io/schema.org/MediaObject">
+   <doc format="html">
+    The media objects that encode this creative work. This property is a synonym for encodings.
+   </doc>
+  </descriptor>
+
+  <descriptor id="audience" type="semantic" href="http://alps.io/schema.org/CreativeWork#audience" rt="http://alps.io/schema.org/Audience">
+   <doc format="html">
+    The intended audience of the work, i.e. the group for whom the work was created.
+   </doc>
+  </descriptor>
+
+  <descriptor id="audio" type="semantic" href="http://alps.io/schema.org/CreativeWork#audio" rt="http://alps.io/schema.org/AudioObject">
+   <doc format="html">
+    An embedded audio object.
+   </doc>
+  </descriptor>
+
+  <descriptor id="author" type="semantic" href="http://alps.io/schema.org/CreativeWork#author" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The author of this content. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.
+   </doc>
+  </descriptor>
+
+  <descriptor id="award" type="semantic" href="http://alps.io/schema.org/CreativeWork#award" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    An award won by this person or for this creative work.
+   </doc>
+  </descriptor>
+
+  <descriptor id="awards" type="semantic" href="http://alps.io/schema.org/CreativeWork#awards" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Awards won by this person or for this creative work. (legacy spelling; see singular form, award)
+   </doc>
+  </descriptor>
+
+  <descriptor id="browserRequirements" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Specifies browser requirements in human-readable text. For example,"requires HTML5 support".
+   </doc>
+  </descriptor>
+
+  <descriptor id="comment" type="semantic" href="http://alps.io/schema.org/CreativeWork#comment" rt="http://alps.io/schema.org/UserComments">
+   <doc format="html">
+    Comments, typically from users, on this CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="contentLocation" type="semantic" href="http://alps.io/schema.org/CreativeWork#contentLocation" rt="http://alps.io/schema.org/Place">
+   <doc format="html">
+    The location of the content.
+   </doc>
+  </descriptor>
+
+  <descriptor id="contentRating" type="semantic" href="http://alps.io/schema.org/CreativeWork#contentRating" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Official rating of a piece of content&#x2014;for example,'MPAA PG-13'.
+   </doc>
+  </descriptor>
+
+  <descriptor id="contributor" type="semantic" href="http://alps.io/schema.org/CreativeWork#contributor" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    A secondary contributor to the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="copyrightHolder" type="semantic" href="http://alps.io/schema.org/CreativeWork#copyrightHolder" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The party holding the legal copyright to the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="copyrightYear" type="semantic" href="http://alps.io/schema.org/CreativeWork#copyrightYear" rt="http://alps.io/schema.org/Number">
+   <doc format="html">
+    The year during which the claimed copyright for the CreativeWork was first asserted.
+   </doc>
+  </descriptor>
+
+  <descriptor id="countriesNotSupported" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#countriesNotSupported" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Countries for which the application is not supported. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+   </doc>
+  </descriptor>
+
+  <descriptor id="countriesSupported" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#countriesSupported" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Countries for which the application is supported. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
+   </doc>
+  </descriptor>
+
+  <descriptor id="creator" type="semantic" href="http://alps.io/schema.org/CreativeWork#creator" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The creator/author of this CreativeWork or UserComments. This is the same as the Author property for CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="dateCreated" type="semantic" href="http://alps.io/schema.org/CreativeWork#dateCreated" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    The date on which the CreativeWork was created.
+   </doc>
+  </descriptor>
+
+  <descriptor id="dateModified" type="semantic" href="http://alps.io/schema.org/CreativeWork#dateModified" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    The date on which the CreativeWork was most recently modified.
+   </doc>
+  </descriptor>
+
+  <descriptor id="datePublished" type="semantic" href="http://alps.io/schema.org/CreativeWork#datePublished" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    Date of first broadcast/publication.
+   </doc>
+  </descriptor>
+
+  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A short description of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="device" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#device" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Device required to run the application. Used in cases where a specific make/model is required to run the application.
+   </doc>
+  </descriptor>
+
+  <descriptor id="discussionUrl" type="semantic" href="http://alps.io/schema.org/CreativeWork#discussionUrl" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    A link to the page containing the comments of the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="downloadUrl" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#downloadUrl" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    If the file can be downloaded, URL to download the binary.
+   </doc>
+  </descriptor>
+
+  <descriptor id="editor" type="semantic" href="http://alps.io/schema.org/CreativeWork#editor" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    Specifies the Person who edited the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="encoding" type="semantic" href="http://alps.io/schema.org/CreativeWork#encoding" rt="http://alps.io/schema.org/MediaObject">
+   <doc format="html">
+    A media object that encode this CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="encodings" type="semantic" href="http://alps.io/schema.org/CreativeWork#encodings" rt="http://alps.io/schema.org/MediaObject">
+   <doc format="html">
+    The media objects that encode this creative work (legacy spelling; see singular form, encoding).
+   </doc>
+  </descriptor>
+
+  <descriptor id="featureList" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#featureList" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Features or modules provided by this application (and possibly required by other applications).
+   </doc>
+  </descriptor>
+
+  <descriptor id="fileFormat" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#fileFormat" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    MIME format of the binary (e.g. application/zip).
+   </doc>
+  </descriptor>
+
+  <descriptor id="fileSize" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#fileSize" rt="http://alps.io/schema.org/Integer">
+   <doc format="html">
+    Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB etc.), KB will be assumed.
+   </doc>
+  </descriptor>
+
+  <descriptor id="genre" type="semantic" href="http://alps.io/schema.org/CreativeWork#genre" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Genre of the creative work
+   </doc>
+  </descriptor>
+
+  <descriptor id="headline" type="semantic" href="http://alps.io/schema.org/CreativeWork#headline" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Headline of the article
+   </doc>
+  </descriptor>
+
+  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="inLanguage" type="semantic" href="http://alps.io/schema.org/CreativeWork#inLanguage" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The language of the content. please use one of the language codes from the <a href='http://tools.ietf.org/html/bcp47'>IETF BCP 47 standard.</a>
+   </doc>
+  </descriptor>
+
+  <descriptor id="installUrl" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#installUrl" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL at which the app may be installed, if different from the URL of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="interactionCount" type="semantic" href="http://alps.io/schema.org/CreativeWork#interactionCount" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A count of a specific user interactions with this item&#x2014;for example, <code>20 UserLikes</code>, <code>5 UserComments</code>, or <code>300 UserDownloads</code>. The user interaction type should be one of the sub types of <a href='UserInteraction'>UserInteraction</a>.
+   </doc>
+  </descriptor>
+
+  <descriptor id="isFamilyFriendly" type="semantic" href="http://alps.io/schema.org/CreativeWork#isFamilyFriendly" rt="http://alps.io/schema.org/Boolean">
+   <doc format="html">
+    Indicates whether this content is family friendly.
+   </doc>
+  </descriptor>
+
+  <descriptor id="keywords" type="semantic" href="http://alps.io/schema.org/CreativeWork#keywords" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The keywords/tags used to describe this content.
+   </doc>
+  </descriptor>
+
+  <descriptor id="memoryRequirements" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#memoryRequirements" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Minimum memory requirements.
+   </doc>
+  </descriptor>
+
+  <descriptor id="mentions" type="semantic" href="http://alps.io/schema.org/CreativeWork#mentions" rt="http://alps.io/schema.org/Thing">
+   <doc format="html">
+    Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.
+   </doc>
+  </descriptor>
+
+  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="offers" type="semantic" href="http://alps.io/schema.org/CreativeWork#offers" rt="http://alps.io/schema.org/Offer">
+   <doc format="html">
+    An offer to sell this item&#x2014;for example, an offer to sell a product, the DVD of a movie, or tickets to an event.
+   </doc>
+  </descriptor>
+
+  <descriptor id="operatingSystem" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#operatingSystem" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Operating systems supported (Windows 7, OSX 10.6, Android 1.6).
+   </doc>
+  </descriptor>
+
+  <descriptor id="permissions" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#permissions" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Permission(s) required to run the app (for example, a mobile app may require full internet access or may run only on wifi).
+   </doc>
+  </descriptor>
+
+  <descriptor id="processorRequirements" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#processorRequirements" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Processor architecture required to run the application (e.g. IA64).
+   </doc>
+  </descriptor>
+
+  <descriptor id="provider" type="semantic" href="http://alps.io/schema.org/CreativeWork#provider" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    Specifies the Person or Organization that distributed the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="publisher" type="semantic" href="http://alps.io/schema.org/CreativeWork#publisher" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The publisher of the creative work.
+   </doc>
+  </descriptor>
+
+  <descriptor id="publishingPrinciples" type="semantic" href="http://alps.io/schema.org/CreativeWork#publishingPrinciples" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    Link to page describing the editorial principles of the organization primarily responsible for the creation of the CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="releaseNotes" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#releaseNotes" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Description of what changed in this version.
+   </doc>
+  </descriptor>
+
+  <descriptor id="requirements" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#requirements" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (Examples: DirectX, Java or .NET runtime).
+   </doc>
+  </descriptor>
+
+  <descriptor id="review" type="semantic" href="http://alps.io/schema.org/CreativeWork#review" rt="http://alps.io/schema.org/Review">
+   <doc format="html">
+    A review of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="reviews" type="semantic" href="http://alps.io/schema.org/CreativeWork#reviews" rt="http://alps.io/schema.org/Review">
+   <doc format="html">
+    Review of the item (legacy spelling; see singular form, review).
+   </doc>
+  </descriptor>
+
+  <descriptor id="screenshot" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#screenshot" rt="http://alps.io/schema.org/ImageObject">
+   <doc format="html">
+    A link to a screenshot image of the app.
+   </doc>
+  </descriptor>
+
+  <descriptor id="softwareVersion" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#softwareVersion" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Version of the software instance.
+   </doc>
+  </descriptor>
+
+  <descriptor id="sourceOrganization" type="semantic" href="http://alps.io/schema.org/CreativeWork#sourceOrganization" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The Organization on whose behalf the creator was working.
+   </doc>
+  </descriptor>
+
+  <descriptor id="storageRequirements" type="semantic" href="http://alps.io/schema.org/SoftwareApplication#storageRequirements" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Storage requirements (free space required).
+   </doc>
+  </descriptor>
+
+  <descriptor id="text" type="semantic" href="http://alps.io/schema.org/CreativeWork#text" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The textual content of this CreativeWork.
+   </doc>
+  </descriptor>
+
+  <descriptor id="thumbnailUrl" type="semantic" href="http://alps.io/schema.org/CreativeWork#thumbnailUrl" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    A thumbnail image relevant to the Thing.
+   </doc>
+  </descriptor>
+
+  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="version" type="semantic" href="http://alps.io/schema.org/CreativeWork#version" rt="http://alps.io/schema.org/Number">
+   <doc format="html">
+    The version of the CreativeWork embodied by a specified resource.
+   </doc>
+  </descriptor>
+
+  <descriptor id="video" type="semantic" href="http://alps.io/schema.org/CreativeWork#video" rt="http://alps.io/schema.org/VideoObject">
+   <doc format="html">
+    An embedded video object.
+   </doc>
+  </descriptor>
+
+ </descriptor>
+</alps>

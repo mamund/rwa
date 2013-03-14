@@ -1,0 +1,91 @@
+<alps>
+ <descriptor id="SportsEvent" type="semantic" href="http://alps.io/schema.org/Event">
+  <doc format="html">
+   Event type: Sports event.
+  </doc>
+    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   </doc>
+  </descriptor>
+
+  <descriptor id="attendee" type="semantic" href="http://alps.io/schema.org/Event#attendee" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    A person or organization attending the event.
+   </doc>
+  </descriptor>
+
+  <descriptor id="attendees" type="semantic" href="http://alps.io/schema.org/Event#attendees" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    A person attending the event (legacy spelling; see singular form, attendee).
+   </doc>
+  </descriptor>
+
+  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A short description of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="endDate" type="semantic" href="http://alps.io/schema.org/Event#endDate" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    The end date and time of the event (in <a href='http://en.wikipedia.org/wiki/ISO_8601'>ISO 8601 date format</a>).
+   </doc>
+  </descriptor>
+
+  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="performer" type="semantic" href="http://alps.io/schema.org/Event#performer" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    A performer at the event&#x2014;for example, a presenter, musician, musical group or actor.
+   </doc>
+  </descriptor>
+
+  <descriptor id="performers" type="semantic" href="http://alps.io/schema.org/Event#performers" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The main performer or performers of the event&#x2014;for example, a presenter, musician, or actor (legacy spelling; see singular form, performer).
+   </doc>
+  </descriptor>
+
+  <descriptor id="startDate" type="semantic" href="http://alps.io/schema.org/Event#startDate" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    The start date and time of the event (in <a href='http://en.wikipedia.org/wiki/ISO_8601'>ISO 8601 date format</a>).
+   </doc>
+  </descriptor>
+
+  <descriptor id="subEvent" type="semantic" href="http://alps.io/schema.org/Event#subEvent" rt="http://alps.io/schema.org/Event">
+   <doc format="html">
+    An Event that is part of this event. For example, a conference event includes many presentations, each are a subEvent of the conference.
+   </doc>
+  </descriptor>
+
+  <descriptor id="subEvents" type="semantic" href="http://alps.io/schema.org/Event#subEvents" rt="http://alps.io/schema.org/Event">
+   <doc format="html">
+    Events that are a part of this event. For example, a conference event includes many presentations, each are subEvents of the conference (legacy spelling; see singular form, subEvent).
+   </doc>
+  </descriptor>
+
+  <descriptor id="superEvent" type="semantic" href="http://alps.io/schema.org/Event#superEvent" rt="http://alps.io/schema.org/Event">
+   <doc format="html">
+    An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.
+   </doc>
+  </descriptor>
+
+  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of the item.
+   </doc>
+  </descriptor>
+
+ </descriptor>
+</alps>

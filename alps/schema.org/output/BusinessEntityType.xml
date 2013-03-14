@@ -1,0 +1,44 @@
+<alps>
+ <descriptor id="BusinessEntityType" type="semantic" href="http://alps.io/schema.org/Enumeration">
+  <doc format="html">
+   A business entity type is a conceptual entity representing the legal form, the size, the main line of business, the position in the value chain, or any combination thereof, of an organization or business person.
+
+    Commonly used values:
+
+    http://purl.org/goodrelations/v1#Business
+    http://purl.org/goodrelations/v1#Enduser
+    http://purl.org/goodrelations/v1#PublicInstitution
+    http://purl.org/goodrelations/v1#Reseller
+  </doc>
+    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   </doc>
+  </descriptor>
+
+  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A short description of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of the item.
+   </doc>
+  </descriptor>
+
+ </descriptor>
+</alps>

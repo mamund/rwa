@@ -1,0 +1,61 @@
+<alps>
+ <descriptor id="ContactPoint" type="semantic" href="http://alps.io/schema.org/StructuredValue">
+  <doc format="html">
+   A contact point&#x2014;for example, a Customer Complaints department.
+  </doc>
+    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   </doc>
+  </descriptor>
+
+  <descriptor id="contactType" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A person or organization can have different contact points, for different purposes. For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.
+   </doc>
+  </descriptor>
+
+  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A short description of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="email" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Email address.
+   </doc>
+  </descriptor>
+
+  <descriptor id="faxNumber" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The fax number.
+   </doc>
+  </descriptor>
+
+  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="telephone" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The telephone number.
+   </doc>
+  </descriptor>
+
+  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of the item.
+   </doc>
+  </descriptor>
+
+ </descriptor>
+</alps>

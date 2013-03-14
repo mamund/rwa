@@ -7,14 +7,12 @@
         <p>Describes a common profile for implementing simple searching.</p>
     </doc>
   
-    <descriptor id="search" 
-        type="safe"
-        cardinality="single"
-        appears="SHOULD">
-        <doc format="html">
-            <p>The transition that initiates the search.</p>
+    <descriptor id="search" type="safe" href="http://alps.io/iana#search">
+        <link rel="help" 
+        <doc>
+            The transition that initiates the search.
         </doc>
-    
+        
         <descriptor id="keyword"
             type="semantic"
             cardinality="single"

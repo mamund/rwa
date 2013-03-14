@@ -1,0 +1,205 @@
+<alps>
+ <descriptor id="Person" type="semantic" href="http://alps.io/schema.org/Thing">
+  <doc format="html">
+   A person (alive, dead, undead, or fictional).
+  </doc>
+    <descriptor id="additionalName" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    An additional name for a Person, can be used for a middle name.
+   </doc>
+  </descriptor>
+
+  <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   </doc>
+  </descriptor>
+
+  <descriptor id="affiliation" type="semantic" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    An organization that this person is affiliated with. For example, a school/university, a club, or a team.
+   </doc>
+  </descriptor>
+
+  <descriptor id="alumniOf" type="semantic" rt="http://alps.io/schema.org/EducationalOrganization">
+   <doc format="html">
+    An educational organizations that the person is an alumni of.
+   </doc>
+  </descriptor>
+
+  <descriptor id="birthDate" type="semantic" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    Date of birth.
+   </doc>
+  </descriptor>
+
+  <descriptor id="children" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    A child of the person.
+   </doc>
+  </descriptor>
+
+  <descriptor id="colleague" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    A colleague of the person.
+   </doc>
+  </descriptor>
+
+  <descriptor id="colleagues" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    A colleague of the person (legacy spelling; see singular form, colleague).
+   </doc>
+  </descriptor>
+
+  <descriptor id="deathDate" type="semantic" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    Date of death.
+   </doc>
+  </descriptor>
+
+  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A short description of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="familyName" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the Name property.
+   </doc>
+  </descriptor>
+
+  <descriptor id="follows" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    The most generic uni-directional social relation.
+   </doc>
+  </descriptor>
+
+  <descriptor id="gender" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Gender of the person.
+   </doc>
+  </descriptor>
+
+  <descriptor id="givenName" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the Name property.
+   </doc>
+  </descriptor>
+
+  <descriptor id="homeLocation" type="semantic" rt="http://alps.io/schema.org/ContactPoint">
+   <doc format="html">
+    A contact location for a person's residence.
+   </doc>
+  </descriptor>
+
+  <descriptor id="honorificPrefix" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
+   </doc>
+  </descriptor>
+
+  <descriptor id="honorificSuffix" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.
+   </doc>
+  </descriptor>
+
+  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="jobTitle" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The job title of the person (for example, Financial Manager).
+   </doc>
+  </descriptor>
+
+  <descriptor id="knows" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    The most generic bi-directional social/work relation.
+   </doc>
+  </descriptor>
+
+  <descriptor id="memberOf" type="semantic" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    An organization to which the person belongs.
+   </doc>
+  </descriptor>
+
+  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="nationality" type="semantic" rt="http://alps.io/schema.org/Country">
+   <doc format="html">
+    Nationality of the person.
+   </doc>
+  </descriptor>
+
+  <descriptor id="parent" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    A parent of this person.
+   </doc>
+  </descriptor>
+
+  <descriptor id="parents" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    A parents of the person (legacy spelling; see singular form, parent).
+   </doc>
+  </descriptor>
+
+  <descriptor id="performerIn" type="semantic" rt="http://alps.io/schema.org/Event">
+   <doc format="html">
+    Event that this person is a performer or participant in.
+   </doc>
+  </descriptor>
+
+  <descriptor id="relatedTo" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    The most generic familial relation.
+   </doc>
+  </descriptor>
+
+  <descriptor id="sibling" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    A sibling of the person.
+   </doc>
+  </descriptor>
+
+  <descriptor id="siblings" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    A sibling of the person (legacy spelling; see singular form, sibling).
+   </doc>
+  </descriptor>
+
+  <descriptor id="spouse" type="semantic" rt="http://alps.io/schema.org/Person">
+   <doc format="html">
+    The person's spouse.
+   </doc>
+  </descriptor>
+
+  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="workLocation" type="semantic" rt="http://alps.io/schema.org/ContactPoint">
+   <doc format="html">
+    A contact location for a person's place of work.
+   </doc>
+  </descriptor>
+
+  <descriptor id="worksFor" type="semantic" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    Organizations that the person works for.
+   </doc>
+  </descriptor>
+
+ </descriptor>
+</alps>

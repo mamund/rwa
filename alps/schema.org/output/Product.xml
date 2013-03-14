@@ -1,0 +1,97 @@
+<alps>
+ <descriptor id="Product" type="semantic" href="http://alps.io/schema.org/Thing">
+  <doc format="html">
+   A product is anything that is made available for saleâfor example, a pair of shoes, a concert ticket, or a car. Commodity services, like haircuts, can also be represented using this type.
+  </doc>
+    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   </doc>
+  </descriptor>
+
+  <descriptor id="color" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The color of the product.
+   </doc>
+  </descriptor>
+
+  <descriptor id="depth" type="semantic" rt="http://alps.io/schema.org/Distance">
+   <doc format="html">
+    The depth of the product.
+   </doc>
+  </descriptor>
+
+  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A short description of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="isAccessoryOrSparePartFor" type="semantic" rt="http://alps.io/schema.org/Product">
+   <doc format="html">
+    A pointer to another product (or multiple products) for which this product is an accessory or spare part.
+   </doc>
+  </descriptor>
+
+  <descriptor id="isConsumableFor" type="semantic" rt="http://alps.io/schema.org/Product">
+   <doc format="html">
+    A pointer to another product (or multiple products) for which this product is a consumable.
+   </doc>
+  </descriptor>
+
+  <descriptor id="isRelatedTo" type="semantic" rt="http://alps.io/schema.org/Product">
+   <doc format="html">
+    A pointer to another, somehow related product (or multiple products).
+   </doc>
+  </descriptor>
+
+  <descriptor id="isSimilarTo" type="semantic" rt="http://alps.io/schema.org/Product">
+   <doc format="html">
+    A pointer to another, functionally similar product (or multiple products).
+   </doc>
+  </descriptor>
+
+  <descriptor id="model" type="semantic" rt="http://alps.io/schema.org/ProductModel">
+   <doc format="html">
+    The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
+   </doc>
+  </descriptor>
+
+  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="productID" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The product identifier, such as ISBN. For example: <code><meta itemprop='productID' content='isbn:123-456-789'/></code>.
+   </doc>
+  </descriptor>
+
+  <descriptor id="releaseDate" type="semantic" rt="http://alps.io/schema.org/Date">
+   <doc format="html">
+    The release date of a product or product model. This can be used to distinguish the exact variant of a product.
+   </doc>
+  </descriptor>
+
+  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="weight" type="semantic" rt="http://alps.io/schema.org/QuantitativeValue">
+   <doc format="html">
+    The weight of the product.
+   </doc>
+  </descriptor>
+
+ </descriptor>
+</alps>

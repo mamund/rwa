@@ -1,0 +1,109 @@
+<alps>
+ <descriptor id="NutritionInformation" type="semantic" href="http://alps.io/schema.org/StructuredValue">
+  <doc format="html">
+   Nutritional information about the recipe.
+  </doc>
+    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+   </doc>
+  </descriptor>
+
+  <descriptor id="calories" type="semantic" rt="http://alps.io/schema.org/Energy">
+   <doc format="html">
+    The number of calories
+   </doc>
+  </descriptor>
+
+  <descriptor id="carbohydrateContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of carbohydrates.
+   </doc>
+  </descriptor>
+
+  <descriptor id="cholesterolContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of milligrams of cholesterol.
+   </doc>
+  </descriptor>
+
+  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    A short description of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="fatContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of fat.
+   </doc>
+  </descriptor>
+
+  <descriptor id="fiberContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of fiber.
+   </doc>
+  </descriptor>
+
+  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The name of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="proteinContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of protein.
+   </doc>
+  </descriptor>
+
+  <descriptor id="saturatedFatContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of saturated fat.
+   </doc>
+  </descriptor>
+
+  <descriptor id="servingSize" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The serving size, in terms of the number of volume or mass
+   </doc>
+  </descriptor>
+
+  <descriptor id="sodiumContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of milligrams of sodium.
+   </doc>
+  </descriptor>
+
+  <descriptor id="sugarContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of sugar.
+   </doc>
+  </descriptor>
+
+  <descriptor id="transFatContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of trans fat.
+   </doc>
+  </descriptor>
+
+  <descriptor id="unsaturatedFatContent" type="semantic" rt="http://alps.io/schema.org/Mass">
+   <doc format="html">
+    The number of grams of unsaturated fat.
+   </doc>
+  </descriptor>
+
+  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of the item.
+   </doc>
+  </descriptor>
+
+ </descriptor>
+</alps>

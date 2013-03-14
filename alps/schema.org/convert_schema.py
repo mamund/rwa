@@ -65,7 +65,7 @@ class RDFClass(object):
         if self.label == 'Locksmith':
             import pdb; pdb.set_trace()
             
-        values['properties'] = '\n'.join(
+            values['properties'] = '\n'.join(
             p.as_alps(self, defining_class) for defining_class, p in self.all_properties)
         return ALPS_CLASS_BASE % values
 

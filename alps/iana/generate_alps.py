@@ -64,11 +64,11 @@ def record_as_descriptor(record):
     values = dict(relation=relation, description=description, note=note,
                   help_link=help_link)
     data = []
-    data.append(' <descriptor id="%(relation)s" type="safe" appears="MAY">' % values)
+    data.append(' <descriptor id="%(relation)s" type="safe">' % values)
     data.append('  <link rel="help" href="%(help_link)s"/>' % values)
-    data.append('  <description format="html">')
+    data.append('  <doc format="html">')
     data.append('   <p>%s</p>%s' % (description.decode_contents(), note))
-    data.append('  </description>')
+    data.append('  </doc>')
     data.append(' </descriptor>')
     data.append('')
     return "\n".join(data)
