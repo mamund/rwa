@@ -108,7 +108,7 @@
    </doc>
   </descriptor>
 
-  <descriptor id="labelDetails" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="labelDetails" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     Link to the drug's label details.
    </doc>
@@ -160,7 +160,7 @@
    </doc>
   </descriptor>
 
-  <descriptor id="prescribingInfo" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="prescribingInfo" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     Link to prescribing information for the drug.
    </doc>

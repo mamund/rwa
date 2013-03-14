@@ -86,7 +86,7 @@
 
   <descriptor href="http://alps.io/schema.org/CreativeWork#discussionUrl"/>
 
-  <descriptor id="downloadUrl" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="downloadUrl" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     If the file can be downloaded, URL to download the binary.
    </doc>
@@ -124,7 +124,7 @@
 
   <descriptor href="http://alps.io/schema.org/CreativeWork#inLanguage"/>
 
-  <descriptor id="installUrl" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="installUrl" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     URL at which the app may be installed, if different from the URL of the item.
    </doc>

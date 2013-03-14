@@ -50,7 +50,7 @@
    </doc>
   </descriptor>
 
-  <descriptor id="contentUrl" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="contentUrl" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     Actual bytes of the media object, for example the image file or video file. (previous spelling: contentURL)
    </doc>
@@ -82,7 +82,7 @@
 
   <descriptor href="http://alps.io/schema.org/CreativeWork#editor"/>
 
-  <descriptor id="embedUrl" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="embedUrl" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     A URL pointing to a player for a specific video. In general, this is the information in the <code>src</code> element of an <code>embed</code> tag and should not be the same as the content of the <code>loc</code> tag. (previous spelling: embedURL)
    </doc>

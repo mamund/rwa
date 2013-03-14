@@ -76,13 +76,13 @@
    </doc>
   </descriptor>
 
-  <descriptor id="map" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="map" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     A URL to a map of the place.
    </doc>
   </descriptor>
 
-  <descriptor id="maps" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="maps" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     A URL to a map of the place (legacy spelling; see singular form, map).
    </doc>

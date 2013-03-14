@@ -128,7 +128,7 @@
 
   <descriptor href="http://alps.io/schema.org/Thing#description"/>
 
-  <descriptor id="discussionUrl" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="discussionUrl" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     A link to the page containing the comments of the CreativeWork.
    </doc>
@@ -216,7 +216,7 @@
    </doc>
   </descriptor>
 
-  <descriptor id="publishingPrinciples" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="publishingPrinciples" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     Link to page describing the editorial principles of the organization primarily responsible for the creation of the CreativeWork.
    </doc>
@@ -246,7 +246,7 @@
    </doc>
   </descriptor>
 
-  <descriptor id="thumbnailUrl" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="thumbnailUrl" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     A thumbnail image relevant to the Thing.
    </doc>

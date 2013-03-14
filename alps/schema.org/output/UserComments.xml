@@ -52,7 +52,7 @@
 
   <descriptor href="http://alps.io/schema.org/Event#performers"/>
 
-  <descriptor id="replyToUrl" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="replyToUrl" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     The URL at which a reply may be posted to the specified UserComment.
    </doc>

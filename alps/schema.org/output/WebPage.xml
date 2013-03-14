@@ -112,7 +112,7 @@
 
   <descriptor href="http://alps.io/schema.org/CreativeWork#publishingPrinciples"/>
 
-  <descriptor id="relatedLink" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="relatedLink" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     A link related to this web page, for example to other related web pages.
    </doc>
@@ -128,13 +128,13 @@
 
   <descriptor href="http://alps.io/schema.org/CreativeWork#reviews"/>
 
-  <descriptor id="significantLink" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="significantLink" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most.
    </doc>
   </descriptor>
 
-  <descriptor id="significantLinks" type="semantic" rt="http://alps.io/schema.org/URL">
+  <descriptor id="significantLinks" type="safe" rt="http://alps.io/schema.org/URL">
    <doc format="html">
     The most significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most (legacy spelling; see singular form, significantLink).
    </doc>

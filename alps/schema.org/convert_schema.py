@@ -15,7 +15,7 @@ ALPS_CLASS_BASE = """<alps>
  </descriptor>
 </alps>"""
 
-ALPS_PROPERTY_BASE = """  <descriptor id="%(label)s" type="semantic"%(href)s rt="%(rt)s">
+ALPS_PROPERTY_BASE = """  <descriptor id="%(label)s" type="%(type)s"%(href)s rt="%(rt)s">
    <doc format="html">
     %(doc)s
    </doc>
@@ -67,7 +67,7 @@ class RDFClass(object):
             superclass_urls.append(c.url)
         if len(superclass_urls) > 0:
             values['href'] = ' href="%s"' % (" ".join(superclass_urls))
-            values['properties'] = '\n'.join(
+        values['properties'] = '\n'.join(
             p.as_alps(self, defining_class) for defining_class, p in self.all_properties)
         return ALPS_CLASS_BASE % values
 
@@ -96,6 +96,13 @@ class RDFProperty(object):
             domain_class.properties.append(self)
         
         self.ranges = [x['href'] for x in all_with_property(div, 'http://schema.org/range')]
+        if len(self.ranges) == 1 and self.ranges[0] == 'http://schema.org/URL':
+            # If the only range is 'http://schema.org/URL', then this is a link
+            # relation.
+            print with_property(div, 'rdfs:label').string
+            self.type = 'safe'
+        else:
+            self.type = 'semantic'
         self.range_classes = [classes_by_uri[range] for range in self.ranges]
         self.comment = with_property(div, 'rdfs:comment').string
         self.label = with_property(div, 'rdfs:label').string
@@ -105,6 +112,7 @@ class RDFProperty(object):
 
     def as_alps(self, for_class, defined_in_class):
         values = dict(
+            type=self.type,
             label=self.label,
             href="",
             rt=" ".join(base_url + range_class.label for range_class in self.range_classes),
