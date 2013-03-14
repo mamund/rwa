@@ -10,7 +10,8 @@ ALPS_CLASS_BASE = """<alps>
   <doc format="html">
    %(doc)s
   </doc>
-  %(properties)s
+
+%(properties)s
  </descriptor>
 </alps>"""
 
@@ -19,6 +20,9 @@ ALPS_PROPERTY_BASE = """  <descriptor id="%(label)s" type="semantic"%(href)s rt=
     %(doc)s
    </doc>
   </descriptor>
+"""
+
+ALPS_PROPERTY_REFERENCE = """  <descriptor%(href)s/>
 """
 
 def with_property(tag, property):
@@ -55,7 +59,8 @@ class RDFClass(object):
 
     @property
     def as_alps(self):
-        values = dict(label=self.label, doc=fix_doc(self.comment), href="")
+        values = dict(label=self.label, doc=fix_doc(self.comment), href="",
+                      properties='')
         superclass_urls = []
         for superclass_uri in self.superclasses:
             c = classes_by_uri[superclass_uri]
@@ -104,13 +109,16 @@ class RDFProperty(object):
             href="",
             rt=" ".join(base_url + range_class.label for range_class in self.range_classes),
             doc=fix_doc(self.comment))
-        if defined_in_class != for_class:
+
+        if defined_in_class == for_class:
+            template = ALPS_PROPERTY_BASE
+        else:
+            template = ALPS_PROPERTY_REFERENCE
             # This is being included in a subclass of one of its
             # domain classes.  We need to link to the original
             # definition.
             values['href'] = ' href="%s"' % self.url(defined_in_class)
-            
-        return ALPS_PROPERTY_BASE % values
+        return template % values
 
 input = open("schema_org_rdfa.html").read()
 soup = BeautifulSoup(input, "xml")

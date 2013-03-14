@@ -3,9 +3,18 @@
   <doc format="html">
    A product is anything that is made available for saleâfor example, a pair of shoes, a concert ticket, or a car. Commodity services, like haircuts, can also be represented using this type.
   </doc>
-    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+
+  <descriptor href="http://alps.io/schema.org/Thing#additionalType"/>
+
+  <descriptor id="aggregateRating" type="semantic" rt="http://alps.io/schema.org/AggregateRating">
    <doc format="html">
-    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+    The overall rating, based on a collection of reviews or ratings, of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="brand" type="semantic" rt="http://alps.io/schema.org/Brand http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
    </doc>
   </descriptor>
 
@@ -15,23 +24,39 @@
    </doc>
   </descriptor>
 
-  <descriptor id="depth" type="semantic" rt="http://alps.io/schema.org/Distance">
+  <descriptor id="depth" type="semantic" rt="http://alps.io/schema.org/Distance http://alps.io/schema.org/QuantitativeValue">
    <doc format="html">
     The depth of the product.
    </doc>
   </descriptor>
 
-  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+  <descriptor href="http://alps.io/schema.org/Thing#description"/>
+
+  <descriptor id="gtin13" type="semantic" rt="http://alps.io/schema.org/Text">
    <doc format="html">
-    A short description of the item.
+    The GTIN-13 code of the product, or the product to which the offer refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit UPC codes can be converted into a GTIN-13 code by simply adding a preceeding zero.
    </doc>
   </descriptor>
 
-  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+  <descriptor id="gtin14" type="semantic" rt="http://alps.io/schema.org/Text">
    <doc format="html">
-    URL of an image of the item.
+    The GTIN-14 code of the product, or the product to which the offer refers.
    </doc>
   </descriptor>
+
+  <descriptor id="gtin8" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The GTIN-8 code of the product, or the product to which the offer refers. This code is also known as EAN/UCC-8 or 8-digit EAN.
+   </doc>
+  </descriptor>
+
+  <descriptor id="height" type="semantic" rt="http://alps.io/schema.org/Distance http://alps.io/schema.org/QuantitativeValue">
+   <doc format="html">
+    The height of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor href="http://alps.io/schema.org/Thing#image"/>
 
   <descriptor id="isAccessoryOrSparePartFor" type="semantic" rt="http://alps.io/schema.org/Product">
    <doc format="html">
@@ -57,15 +82,41 @@
    </doc>
   </descriptor>
 
-  <descriptor id="model" type="semantic" rt="http://alps.io/schema.org/ProductModel">
+  <descriptor id="itemCondition" type="semantic" rt="http://alps.io/schema.org/OfferItemCondition">
+   <doc format="html">
+    A predefined value from OfferItemCondition or a textual description of the condition of the product or service, or the products or services included in the offer.
+   </doc>
+  </descriptor>
+
+  <descriptor id="logo" type="semantic" rt="http://alps.io/schema.org/ImageObject http://alps.io/schema.org/URL">
+   <doc format="html">
+    URL of an image for the logo of the item.
+   </doc>
+  </descriptor>
+
+  <descriptor id="manufacturer" type="semantic" rt="http://alps.io/schema.org/Organization">
+   <doc format="html">
+    The manufacturer of the product.
+   </doc>
+  </descriptor>
+
+  <descriptor id="model" type="semantic" rt="http://alps.io/schema.org/ProductModel http://alps.io/schema.org/Text">
    <doc format="html">
     The model of the product. Use with the URL of a ProductModel or a textual representation of the model identifier. The URL of the ProductModel can be from an external source. It is recommended to additionally provide strong product identifiers via the gtin8/gtin13/gtin14 and mpn properties.
    </doc>
   </descriptor>
 
-  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+  <descriptor id="mpn" type="semantic" rt="http://alps.io/schema.org/Text">
    <doc format="html">
-    The name of the item.
+    The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
+   </doc>
+  </descriptor>
+
+  <descriptor href="http://alps.io/schema.org/Thing#name"/>
+
+  <descriptor id="offers" type="semantic" rt="http://alps.io/schema.org/Offer">
+   <doc format="html">
+    An offer to sell this item&#x2014;for example, an offer to sell a product, the DVD of a movie, or tickets to an event.
    </doc>
   </descriptor>
 
@@ -81,15 +132,35 @@
    </doc>
   </descriptor>
 
-  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+  <descriptor id="review" type="semantic" rt="http://alps.io/schema.org/Review">
    <doc format="html">
-    URL of the item.
+    A review of the item.
    </doc>
   </descriptor>
+
+  <descriptor id="reviews" type="semantic" rt="http://alps.io/schema.org/Review">
+   <doc format="html">
+    Review of the item (legacy spelling; see singular form, review).
+   </doc>
+  </descriptor>
+
+  <descriptor id="sku" type="semantic" rt="http://alps.io/schema.org/Text">
+   <doc format="html">
+    The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.
+   </doc>
+  </descriptor>
+
+  <descriptor href="http://alps.io/schema.org/Thing#url"/>
 
   <descriptor id="weight" type="semantic" rt="http://alps.io/schema.org/QuantitativeValue">
    <doc format="html">
     The weight of the product.
+   </doc>
+  </descriptor>
+
+  <descriptor id="width" type="semantic" rt="http://alps.io/schema.org/Distance http://alps.io/schema.org/QuantitativeValue">
+   <doc format="html">
+    The width of the item.
    </doc>
   </descriptor>
 

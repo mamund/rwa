@@ -1,0 +1,9 @@
+<alps>
+ <descriptor id="Thing" type="semantic">
+  <doc format="html">
+   The most generic type of item.
+  </doc>
+
+
+ </descriptor>
+</alps>

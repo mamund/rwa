@@ -3,23 +3,24 @@
   <doc format="html">
    A structured value representing a monetary amount. Typically, only the subclasses of this type are used for markup.
   </doc>
-    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
+
+  <descriptor href="http://alps.io/schema.org/Thing#additionalType"/>
+
+  <descriptor href="http://alps.io/schema.org/Thing#description"/>
+
+  <descriptor id="eligibleQuantity" type="semantic" rt="http://alps.io/schema.org/QuantitativeValue">
    <doc format="html">
-    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
+    The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.
    </doc>
   </descriptor>
 
-  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+  <descriptor id="eligibleTransactionVolume" type="semantic" rt="http://alps.io/schema.org/PriceSpecification">
    <doc format="html">
-    A short description of the item.
+    The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.
    </doc>
   </descriptor>
 
-  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    URL of an image of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#image"/>
 
   <descriptor id="maxPrice" type="semantic" rt="http://alps.io/schema.org/Number">
    <doc format="html">
@@ -33,15 +34,31 @@
    </doc>
   </descriptor>
 
-  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+  <descriptor href="http://alps.io/schema.org/Thing#name"/>
+
+  <descriptor id="price" type="semantic" rt="http://alps.io/schema.org/Number http://alps.io/schema.org/Text">
    <doc format="html">
-    The name of the item.
+    The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes.
    </doc>
   </descriptor>
 
-  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+  <descriptor id="priceCurrency" type="semantic" rt="http://alps.io/schema.org/Text">
    <doc format="html">
-    URL of the item.
+    The currency (in 3-letter ISO 4217 format) of the offer price or a price component, when attached to PriceSpecification and its subtypes.
+   </doc>
+  </descriptor>
+
+  <descriptor href="http://alps.io/schema.org/Thing#url"/>
+
+  <descriptor id="validFrom" type="semantic" rt="http://alps.io/schema.org/DateTime">
+   <doc format="html">
+    The beginning of the validity of offer, price specification, or opening hours data.
+   </doc>
+  </descriptor>
+
+  <descriptor id="validThrough" type="semantic" rt="http://alps.io/schema.org/DateTime">
+   <doc format="html">
+    The end of the validity of offer, price specification, or opening hours data.
    </doc>
   </descriptor>
 

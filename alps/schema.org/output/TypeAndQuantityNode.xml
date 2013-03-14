@@ -3,11 +3,8 @@
   <doc format="html">
    A structured value indicating the quantity, unit of measurement, and business function of goods included in a bundle offer.
   </doc>
-    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
-   </doc>
-  </descriptor>
+
+  <descriptor href="http://alps.io/schema.org/Thing#additionalType"/>
 
   <descriptor id="amountOfThisGood" type="semantic" rt="http://alps.io/schema.org/Number">
    <doc format="html">
@@ -15,29 +12,31 @@
    </doc>
   </descriptor>
 
-  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
+  <descriptor id="businessFunction" type="semantic" rt="http://alps.io/schema.org/BusinessFunction">
    <doc format="html">
-    A short description of the item.
+    The business function (e.g. sell, lease, repair, dispose) of the offer or component of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.
    </doc>
   </descriptor>
 
-  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
+  <descriptor href="http://alps.io/schema.org/Thing#description"/>
+
+  <descriptor href="http://alps.io/schema.org/Thing#image"/>
+
+  <descriptor href="http://alps.io/schema.org/Thing#name"/>
+
+  <descriptor id="typeOfGood" type="semantic" rt="http://alps.io/schema.org/Product">
    <doc format="html">
-    URL of an image of the item.
+    The product that this structured value is referring to.
    </doc>
   </descriptor>
 
-  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
+  <descriptor id="unitCode" type="semantic" rt="http://alps.io/schema.org/Text">
    <doc format="html">
-    The name of the item.
+    The unit of measurement given using the UN/CEFACT Common Code (3 characters).
    </doc>
   </descriptor>
 
-  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    URL of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#url"/>
 
  </descriptor>
 </alps>

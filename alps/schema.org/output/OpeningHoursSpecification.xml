@@ -3,11 +3,8 @@
   <doc format="html">
    A structured value providing information about the opening hours of a place or a certain service inside a place.
   </doc>
-    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
-   </doc>
-  </descriptor>
+
+  <descriptor href="http://alps.io/schema.org/Thing#additionalType"/>
 
   <descriptor id="closes" type="semantic" rt="http://alps.io/schema.org/Time">
    <doc format="html">
@@ -21,23 +18,11 @@
    </doc>
   </descriptor>
 
-  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
-   <doc format="html">
-    A short description of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#description"/>
 
-  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    URL of an image of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#image"/>
 
-  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
-   <doc format="html">
-    The name of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#name"/>
 
   <descriptor id="opens" type="semantic" rt="http://alps.io/schema.org/Time">
    <doc format="html">
@@ -45,9 +30,17 @@
    </doc>
   </descriptor>
 
-  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
+  <descriptor href="http://alps.io/schema.org/Thing#url"/>
+
+  <descriptor id="validFrom" type="semantic" rt="http://alps.io/schema.org/DateTime">
    <doc format="html">
-    URL of the item.
+    The beginning of the validity of offer, price specification, or opening hours data.
+   </doc>
+  </descriptor>
+
+  <descriptor id="validThrough" type="semantic" rt="http://alps.io/schema.org/DateTime">
+   <doc format="html">
+    The end of the validity of offer, price specification, or opening hours data.
    </doc>
   </descriptor>
 

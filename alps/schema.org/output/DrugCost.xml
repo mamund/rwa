@@ -3,17 +3,10 @@
   <doc format="html">
    The cost per unit of a medical drug. Note that this type is not meant to represent the price in an offer of a drug for sale; see the Offer type for that. This type will typically be used to tag wholesale or average retail cost of a drug, or maximum reimbursable cost. Costs of medical drugs vary widely depending on how and where they are paid for, so while this type captures some of the variables, costs should be used with caution by consumers of this schema's markup.
   </doc>
-    <descriptor id="additionalType" type="semantic" href="http://alps.io/schema.org/Thing#additionalType" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the 'typeof' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.
-   </doc>
-  </descriptor>
 
-  <descriptor id="alternateName" type="semantic" href="http://alps.io/schema.org/MedicalEntity#alternateName" rt="http://alps.io/schema.org/Text">
-   <doc format="html">
-    Any alternate name for this medical entity.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#additionalType"/>
+
+  <descriptor href="http://alps.io/schema.org/MedicalEntity#alternateName"/>
 
   <descriptor id="applicableLocation" type="semantic" rt="http://alps.io/schema.org/AdministrativeArea">
    <doc format="html">
@@ -21,11 +14,7 @@
    </doc>
   </descriptor>
 
-  <descriptor id="code" type="semantic" href="http://alps.io/schema.org/MedicalEntity#code" rt="http://alps.io/schema.org/MedicalCode">
-   <doc format="html">
-    A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/MedicalEntity#code"/>
 
   <descriptor id="costCategory" type="semantic" rt="http://alps.io/schema.org/DrugCostCategory">
    <doc format="html">
@@ -51,11 +40,7 @@
    </doc>
   </descriptor>
 
-  <descriptor id="description" type="semantic" href="http://alps.io/schema.org/Thing#description" rt="http://alps.io/schema.org/Text">
-   <doc format="html">
-    A short description of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#description"/>
 
   <descriptor id="drugUnit" type="semantic" rt="http://alps.io/schema.org/Text">
    <doc format="html">
@@ -63,53 +48,21 @@
    </doc>
   </descriptor>
 
-  <descriptor id="guideline" type="semantic" href="http://alps.io/schema.org/MedicalEntity#guideline" rt="http://alps.io/schema.org/MedicalGuideline">
-   <doc format="html">
-    A medical guideline related to this entity.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/MedicalEntity#guideline"/>
 
-  <descriptor id="image" type="semantic" href="http://alps.io/schema.org/Thing#image" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    URL of an image of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#image"/>
 
-  <descriptor id="medicineSystem" type="semantic" href="http://alps.io/schema.org/MedicalEntity#medicineSystem" rt="http://alps.io/schema.org/MedicineSystem">
-   <doc format="html">
-    The system of medicine that includes this MedicalEntity, for example 'evidence-based', 'homeopathic', 'chiropractic', etc.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/MedicalEntity#medicineSystem"/>
 
-  <descriptor id="name" type="semantic" href="http://alps.io/schema.org/Thing#name" rt="http://alps.io/schema.org/Text">
-   <doc format="html">
-    The name of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#name"/>
 
-  <descriptor id="recognizingAuthority" type="semantic" href="http://alps.io/schema.org/MedicalEntity#recognizingAuthority" rt="http://alps.io/schema.org/Organization">
-   <doc format="html">
-    If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/MedicalEntity#recognizingAuthority"/>
 
-  <descriptor id="relevantSpecialty" type="semantic" href="http://alps.io/schema.org/MedicalEntity#relevantSpecialty" rt="http://alps.io/schema.org/MedicalSpecialty">
-   <doc format="html">
-    If applicable, a medical specialty in which this entity is relevant.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/MedicalEntity#relevantSpecialty"/>
 
-  <descriptor id="study" type="semantic" href="http://alps.io/schema.org/MedicalEntity#study" rt="http://alps.io/schema.org/MedicalStudy">
-   <doc format="html">
-    A medical study or trial related to this entity.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/MedicalEntity#study"/>
 
-  <descriptor id="url" type="semantic" href="http://alps.io/schema.org/Thing#url" rt="http://alps.io/schema.org/URL">
-   <doc format="html">
-    URL of the item.
-   </doc>
-  </descriptor>
+  <descriptor href="http://alps.io/schema.org/Thing#url"/>
 
  </descriptor>
 </alps>
