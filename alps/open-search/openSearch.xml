@@ -1,5 +1,5 @@
 <alps>
-    <link rel="self" href="http://alps.io/opensearch/opensearch/" />
+    <link rel="self" href="http://alps.io/opensearch/opensearch" />
     <link rel="help"
         href="http://www.opensearch.org/Specifications/OpenSearch/1.1" />
 
@@ -46,11 +46,11 @@
                 suggestions, or additional description documents.
             </p>
         </doc>
-        <property href="#template" />
-        <property href="#type" />
-        <property href="#rel" />
-        <property href="#indexOffset" />
-        <property href="#pageOffset" />
+        <descriptor href="#template" />
+        <descripto href="#type" />
+        <descriptor href="#rel" />
+        <descriptor href="#indexOffset" />
+        <descriptor href="#pageOffset" />
     </descriptor>
 
     <descriptor id="template" type="semantic">
@@ -61,13 +61,13 @@
                 queried.
             </p>
         </doc>
-        <property href="#searchTerms" />
-        <property href="#count" />
-        <property id="startIndex" href="#indexOffset" />
-        <property id="startPage" href="#pageOffset" />
-        <property id="language" href="#Language" />
-        <property id="TemplateInputEncoding" name="inputEncoding" href="#InputEncoding" />
-        <property id="TemplateOutputEncoding" name="outputEncoding" href="OutputEncoding" />
+        <descriptor href="#searchTerms" />
+        <descriptor href="#count" />
+        <descriptor id="startIndex" href="#indexOffset" />
+        <descriptor id="startPage" href="#pageOffset" />
+        <descriptor id="language" href="#Language" />
+        <descriptor id="TemplateInputEncoding" name="inputEncoding" href="#InputEncoding" />
+        <descriptor id="TemplateOutputEncoding" name="outputEncoding" href="OutputEncoding" />
     </descriptor>
 
     <descriptor id="searchTerms" type="semantic">
@@ -159,9 +159,9 @@
                 can be used in association with this search content.
             </p>
         </doc>
-        <property href="#height" />
-        <property href="#width" />
-        <property href="#type" />
+        <descriptor href="#height" />
+        <descriptor href="#width" />
+        <descriptor href="#type" />
     </descriptor>
 
     <descriptor id="height" type="semantic">
@@ -188,16 +188,16 @@
                 information.
             </p>
         </doc>
-        <property href="#role" />
-        <property href="#title" />
-        <property href="#totalResults" />
-        <property href="#searchTerms" />
-        <property href="#count" />
-        <property id="startIndex" href="#indexOffset" />
-        <property id="startPage" href="#pageOffset" />
-        <property id="language" href="#Language" />
-        <property id="QueryInputEncoding" name="inputEncoding" href="#InputEncoding" />
-        <property id="QueryOutputEncoding" name="outputEndcoding" href="OutputEncoding" />
+        <descriptor href="#role" />
+        <descriptor href="#title" />
+        <descriptor href="#totalResults" />
+        <descriptor href="#searchTerms" />
+        <descriptor href="#count" />
+        <descriptor id="startIndex" href="#indexOffset" />
+        <descriptor id="startPage" href="#pageOffset" />
+        <descriptor id="language" href="#Language" />
+        <descriptor id="QueryInputEncoding" name="inputEncoding" href="#InputEncoding" />
+        <descriptor id="QueryOutputEncoding" name="outputEndcoding" href="OutputEncoding" />
     </descriptor>
 
     <descriptor id="role" type="semantic">

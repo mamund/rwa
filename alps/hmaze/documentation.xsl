@@ -60,6 +60,9 @@
       <xsl:if test="count(property)&gt;0">
           <li>Properties: <xsl:apply-templates select="*" /></li>
       </xsl:if>
+      <xsl:if test="count(descriptor)&gt;0">
+          <li>Contains: <xsl:apply-templates select="*" /></li>
+      </xsl:if>
     </ul>
   </div>
 </xsl:template>
