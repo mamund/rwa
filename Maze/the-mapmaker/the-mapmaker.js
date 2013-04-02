@@ -57,9 +57,23 @@ function makeRequest(method, path) {
         });
 
         res.on('end', function() {
-            var doc, nodes, i, x, links, href, flag, choices;
+            var doc, nodes, i, x, links, href, flag, choices, room, maze, cell;
 
             m.nest--
+
+            // parse incoming response
+            doc = new DOMParser().parseFromString(body, 'text/xml');
+
+            // get title of cell/maze
+            title = '';
+            maze = doc.getElementsByTagName('item')[0];
+            if(maze) {
+                title = maze.getAttribute('title');
+            }
+            cell = doc.getElementsByTagName('cell')[0];
+            if(cell) {
+                title = cell.getAttribute('title');
+            }
 
             // collect hyperlinks from the response
             links = [];
@@ -75,8 +89,8 @@ function makeRequest(method, path) {
                 if(href) {
                     m.start = true;
                     addRooms(links);
-                    addVisited(path, links);
-                    console.log(m.moves++ + '[s]:' + href)
+                    addVisited(path, links, title, 'maze');
+                    console.log(m.moves++ + '[Starting in the '+ title + '] First move is:' + href)
                 }
                 // ok, see if we can find a maze link
                 if(href===undefined) {
@@ -99,9 +113,9 @@ function makeRequest(method, path) {
                 addRooms(links);
                 while(m.rooms.length!==0) {
                     href = m.rooms[m.rooms.length-1];
-                    addVisited(path, links);
+                    addVisited(path, links, title, 'cell');
                     m.rooms.pop();
-                    console.log(m.moves++ + '[m]:' + href);
+                    console.log(m.moves++ + '[In the ' + title +'] Next move is:' + href);
                     makeRequest('GET', href, m.nest++);
                 }
             }
@@ -147,18 +161,18 @@ function addRooms(links) {
     }
 }
 
-function addVisited(href, links) {
+function addVisited(href, links, title, type) {
     var i, x;
 
     if(m.visited.length==0) {
         m.visited.push(href);
-        m.map.push({'href':href, 'links':links});
+        m.map.push({'type':type, 'href':href, 'title':title, 'links':links});
     }
     else {
         for(i=0, x=m.visited.length;i<x;i++) {
             if(m.visited.contains(href)===false) {
                 m.visited.push(href);
-                m.map.push({'href':href, 'links':scrub(links)});
+                m.map.push({'type':type, 'href':href, 'title':title, 'links':scrub(links)});
             }
         }
     }
