@@ -6,6 +6,9 @@
 var thisPage = function() {
 
     var g = {};
+    g.title = '';
+    g.collection = 0;
+    g.mode = 'server'; // server, collection, maze
     g.moves = 0;
     g.links = [];
     g.mediaType = "application/vnd.amundsen.maze+xml";
@@ -38,29 +41,49 @@ var thisPage = function() {
     }
 
     function toggleDisplay() {
-        var elm, srv;
+        var elm, srv, sblock,cblock,mblock;
     
+        sblock = false;
+        cblock = false;
+        mblock = false;
+
+        switch(g.mode) {
+            case 'server':
+                sblock = true;
+                break;
+            case 'collection':
+                cblock = true;
+                break;
+            case 'maze':
+                mblock = true;
+                break;
+            default:
+                break;
+        }
         elm = document.getElementsByName('server')[0];
         if(elm) {
             srv = elm.value;
         }
-        elm = document.getElementById('show-server');
+  
+        elm = document.getElementById('history');
         if(elm) {
-            elm.innerHTML = srv;
-            elm.style.display = 'block';
+            elm.style.display = (mblock?'block':'none');
         }
-    
         elm = document.getElementById('display');
         if(elm) {
-            elm.style.display = 'block';
+            elm.style.display = (mblock?'block':'none');
         }
         elm = document.getElementById('interface');
         if(elm) {
-            elm.style.display = 'block';
+            elm.style.display = (mblock?'block':'none');
         }
         elm = document.getElementById('select-server');
         if(elm) {
-            elm.style.display = 'none';
+            elm.style.display = (sblock?'block':'none');
+        }
+        elm = document.getElementById('show-mazes');
+        if(elm) {
+            elm.style.display = (cblock?'block':'none');
         }
     }
 
@@ -70,15 +93,38 @@ var thisPage = function() {
         elm = document.getElementsByName('server')[0];
         if(elm) {
             g.startLink = elm.value;
+            clearList();
+            clearMaze();
             if(g.startLink!=='') {
                 getDocument(g.startLink);
-                toggleDisplay();
-                setFocus();
             }
         }
         return false;
     }
 
+    function clearList() {
+        var elm;
+
+        elm = document.getElementById('maze-list');
+        if(elm) {
+            elm.innerHTML = '';
+        }
+    }
+
+    function clearMaze() {
+        var elm;
+
+        elm = document.getElementsByClassName('options')[0];
+        if(elm) {
+            elm.innerHTML = '';
+        }
+
+        elm = document.getElementsByClassName('room')[0];
+        if(elm) {
+            elm.innerHTML = '';
+        }
+    }
+    
     function move() {
         var elm, mv, href;
     
@@ -139,17 +185,20 @@ var thisPage = function() {
     function processLinks(ajax) {
         var xml, link, i, x, y, j, rels, href;
     
+        // handle links
         g.links = [];
         xml = ajax.responseXML.selectNodes('//link');
         for(i = 0, x = xml.length; i < x; i++) {
             href = xml[i].getAttribute('href');
             rels = xml[i].getAttribute('rel').split(' ');
+            title = xml[i].getAttribute('title');
             for(j = 0, y = rels.length; j < y; j++) {
-                link = {'rel' : rels[j], 'href' : href};
+                link = {'rel' : rels[j], 'href' : href, 'title' : title};
                 g.links[g.links.length] = link;
             }
         }     
 
+        // handle titles
         g.title = '';
         xml = ajax.responseXML.selectNodes('//item');
         for(i = 0, x = xml.length; i < x; i++) {
@@ -160,14 +209,61 @@ var thisPage = function() {
         for(i = 0, x = xml.length; i < x; i++) {
             g.title = xml[i].getAttribute('title');
         }
-        showLocation();
-        showOptions();
+
+        // handle display settings
+        g.collection = 0;
+        xml = ajax.responseXML.selectNodes('//collection');
+        for(i = 0, x = xml.length; i < x; i++) {
+            g.collection++;
+        }
+
+        if(g.collection>0) {
+            g.mode = 'collection';
+            showList();
+            g.collection = 0;
+        }
+        else {
+            g.mode = 'maze';
+            showLocation();
+            showOptions();
+        }
+
+        toggleDisplay();
+        setFocus();
+    }
+
+    function showList() {
+        var elm, li, a, i, x;
+
+        elm = document.getElementById('maze-list');
+        if(elm) {
+            for(i = 0, x = g.links.length; i < x; i++) {
+                li = document.createElement('li');
+                a = document.createElement('a');
+                a.href = g.links[i].href;
+                a.rel = g.links[i].rel;
+                a.title = g.links[i].title;
+                a.onclick = function(){return getMaze();};
+                a.appendChild(document.createTextNode(a.title));
+                li.appendChild(a);
+                elm.appendChild(li);
+            }
+        }
+    }
+    
+    function getMaze(e) {
+        var elm;
+
+        e = e || event; 
+        elm = e.target || e.srcElement;
+        getDocument(elm.href);
+
+        return false;
     }
 
     function showLocation() {
-        var elm, i, x, txt;
+        var elm;
 
-        txt = '';
         elm = document.getElementsByClassName('room')[0];
         if(elm) {
             elm.innerHTML = g.title;
@@ -211,6 +307,8 @@ var thisPage = function() {
             ajax.setRequestHeader('accept', g.mediaType);
             ajax.send(null);
         }
+
+        return false;
     }
 
     // publish methods  
