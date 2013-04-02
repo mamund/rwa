@@ -14,7 +14,7 @@ m.start = false;
 m.facing = 'north';
 m.moves = 1;
 m.help = '***Usage:\nnode the-bot [starting-url]';
-m.winner = '*** DONE and it only took {m} moves! ***';
+m.winner = '*** I made it out - and it only took {m} moves! ***';
 m.quitter = '*** Sorry, I can\'t find any mazes here. ***';
 m.rules = {
     'east' : ['south','east','north','west'],
@@ -39,8 +39,8 @@ function makeRequest(method, path) {
     pUrl = url.parse(path);
     
     hdrs = {
-        'host' : pUrl.host,
-        'content-type' : 'application/vnd.amundsen.maze+xml'
+        'Host' : pUrl.host,
+        'Accept' : 'application/vnd.amundsen.maze+xml'
     };
 
     options = {
@@ -59,11 +59,27 @@ function makeRequest(method, path) {
         });
 
         res.on('end', function() {
-            var doc, nodes, i, x, links, href, flag, choices;
+            var doc, nodes, i, x, links, href, flag, choices, cell, room;
 
+            //parse incoming response
+            doc = new DOMParser().parseFromString(body, 'text/xml');
+            
+            // get the name of this room (or maze)
+            room = '';
+            cell = doc.getElementsByTagName('cell')[0];
+            if(cell) {
+                room = cell.getAttribute('title');
+            }
+            maze = doc.getElementsByTagName('item')[0];
+            if(maze) {
+                room = maze.getAttribute('title');
+            }
+            if(room==='') {
+                room = 'No-name Place';
+            }
+            
             // collect hyperlinks from the response
             links = [];
-            doc = new DOMParser().parseFromString(body, 'text/xml');
             nodes = doc.getElementsByTagName('link');
             for(i=0, x=nodes.length; i<x; i++) {
                 links.push({'rel':nodes[i].getAttribute('rel'), 'href':nodes[i].getAttribute('href')});
@@ -84,7 +100,7 @@ function makeRequest(method, path) {
                     flag = true;
                     m.start = true;
                     m.facing = 'north';
-                    console.log(m.moves++ + ':' + href)
+                    console.log(m.moves++ + ': I\'m starting the ' + room + '. My first move is:' + href)
                 }
                 // ok, see if we can find a maze link
                 if(href===undefined) {
@@ -109,7 +125,7 @@ function makeRequest(method, path) {
                     if(href) {
                         flag = true;
                         m.facing = choices[i];
-                        console.log(m.moves++ + ':' + href);
+                        console.log(m.moves++ + ': I\'m in the ' + room + '. My next move is:' + href);
                         break;
                     }
                 }
