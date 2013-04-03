@@ -27,7 +27,8 @@ if(arg===undefined) {
     console.log(m.help);
 }
 else {
-    makeRequest('GET', arg, m.nest++);
+    m.nest++;
+    makeRequest('GET', arg);
 }
 
 // send requests to server
@@ -57,7 +58,7 @@ function makeRequest(method, path) {
         });
 
         res.on('end', function() {
-            var doc, nodes, i, x, links, href, flag, choices, room, maze, cell;
+            var doc, nodes, i, x, links, href, h, flag, choices, room, maze, cell;
 
             m.nest--
 
@@ -82,15 +83,19 @@ function makeRequest(method, path) {
             for(i=0, x=nodes.length; i<x; i++) {
                 links.push({'rel':nodes[i].getAttribute('rel'), 'href':nodes[i].getAttribute('href')});
             }
+            if(cell) {
+                links.push({'rel':'current', 'href':cell.getAttribute('href')});
+            }
 
             // check for entrance link
             if(m.start===false) {
                 href = findLink(links, 'start');
                 if(href) {
                     m.start = true;
+                    addRooms([{'rel':'start','href':href}]);
                     addRooms(links);
                     addVisited(path, links, title, 'maze');
-                    console.log(m.moves++ + '[Starting in the '+ title + '] First move is:' + href)
+                    console.log('Exploring the '+ title + '...');
                 }
                 // ok, see if we can find a maze link
                 if(href===undefined) {
@@ -105,24 +110,25 @@ function makeRequest(method, path) {
                     console.log(m.quitter);
                     return;
                 }
-                makeRequest('GET', href, m.nest++);
+                m.nest++;
+                makeRequest('GET', href);
             }
             
             // ok, check to see if we have some rooms
             if(href===undefined) {
                 addRooms(links);
                 while(m.rooms.length!==0) {
-                    href = m.rooms[m.rooms.length-1];
+                    href  = m.rooms.pop();
                     addVisited(path, links, title, 'cell');
-                    m.rooms.pop();
-                    console.log(m.moves++ + '[In the ' + title +'] Next move is:' + href);
-                    makeRequest('GET', href, m.nest++);
+                    //console.log(m.moves++ + '[In the ' + title +'] I can see:' + href);
+                    m.nest++;
+                    makeRequest('GET', href);
                 }
             }
             
             // did we finally run out of rooms?
             if(m.nest===0 && m.rooms.length===0) {
-                console.log(JSON.stringify(m.map, null, 2));
+                showMap();
             }
         });
    });
@@ -134,6 +140,32 @@ function makeRequest(method, path) {
     req.end();
 }
  
+function showMap() {
+    var t = (m.map.length)-2;
+    var sq = Math.sqrt(t);
+
+    console.log(t + ' : ' + sq);;
+    //console.log(JSON.stringify(m.map, null, 2));
+
+    //messing around for now
+    //var coll, i, x, href;
+    //for(i=0, x=25; i<x; i++) {
+    //    href = 'http://localhost:1337/simple/'+i;
+    //   console.log(getMapElement(href));
+    //}
+}
+
+function getMapElement(href) {
+    var i, x, rtn;
+    rtn = '';
+    for(i=0, x=m.map.length; i<x; i++) {
+        if(m.map[i].href===href) {
+            rtn = m.map[i].href;
+            break;
+        }
+    }
+    return rtn;
+}
 
 function findLink(links,rel) {
     var i, x, rtn;
@@ -153,9 +185,10 @@ function addRooms(links) {
     coll = scrub(links);
 
     for(i=0,x=coll.length;i<x;i++) {
-        if(m.visited.contains(coll[i].href)===false 
+        if(isInArray(m.visited, coll[i].href)===false 
             && 
-            m.rooms.contains(coll[i].href)===false) {
+            isInArray(m.rooms, coll[i].href)===false
+            ) {
             m.rooms.push(coll[i].href);
         }
     }
@@ -170,12 +203,25 @@ function addVisited(href, links, title, type) {
     }
     else {
         for(i=0, x=m.visited.length;i<x;i++) {
-            if(m.visited.contains(href)===false) {
+            if(isInArray(m.visited, href)===false) {
                 m.visited.push(href);
-                m.map.push({'type':type, 'href':href, 'title':title, 'links':scrub(links)});
+                m.map.push({'type':type, 'href':href, 'title':title, 'links':links});
             }
         }
     }
+}
+
+function isInArray(coll,value) {
+    var i, x, rtn;
+
+    rtn = false;
+    for(i=0, x=coll.length; i<x; i++) {
+        if(coll[i]===value) {
+            rtn = true;
+            break;
+        }
+    }
+    return rtn;
 }
 
 function scrub(links) {
