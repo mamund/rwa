@@ -1,6 +1,6 @@
 {
   "_id" : "ten-by-ten",
-  "title" : "Advanced Maze (10x10)",
+  "title" : "For Experts Only",
   "cells" : {
     "cell0":{"title":"Entry", "doors":[1,1,1,0]},
     "cell1":{"title":"Living Room", "doors":[1,1,0,0]},

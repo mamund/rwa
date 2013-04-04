@@ -12,7 +12,7 @@ var thisPage = function() {
     g.moves = 0;
     g.links = [];
     g.mediaType = "application/vnd.amundsen.maze+xml";
-    g.startLink = ""; //"http://localhost:1337/simple/";
+    g.startLink = "http://localhost:1337/";
     g.sorryMsg = 'Sorry, I don\'t understand what you want to do.';
     g.successMsg = 'Congratulations! you\'ve made it out of the maze!';
       
@@ -28,6 +28,55 @@ var thisPage = function() {
         if(elm) {
             elm.onsubmit = function(){return load();};
         }
+
+        elm = document.getElementById('select-maze');
+        if(elm) {
+            elm.onsubmit = function(){return getSelectedMaze();};
+        }
+        if(g.startLink!=='') {
+            loadFromDefaultServer();
+        }
+        else {
+            toggleDisplay();
+        }
+    }
+
+    function loadFromDefaultServer() {
+        var elm;
+
+        elm = document.getElementsByName('server')[0];
+        if(elm) {
+            elm.value = g.startLink;
+            load();
+        }
+    }
+
+    function getSelectedMaze() {
+        var elm, val, href;
+
+        val = '';
+        elm = document.getElementsByName('maze-number')[0];
+        if(elm) {
+            val = elm.value.replace(/^\s+|\s+$/g, "");
+        }
+
+        if(val!=='') {
+            elm = document.getElementById('maze-'+val);
+            if(elm) {
+                href = elm.getAttribute('data-href');
+                if(href && href!=='') {
+                    getDocument(href);
+                }
+                else {
+                    alert('No address for that maze!');
+                }
+            }
+            else {
+                alert('Unable to load that maze!');
+            }
+        }
+
+        return false;
     }
 
     function setFocus() {
@@ -239,6 +288,10 @@ var thisPage = function() {
         if(elm) {
             for(i = 0, x = g.links.length; i < x; i++) {
                 li = document.createElement('li');
+                li.id = 'maze-'+(parseInt(i)+1).toString();
+                li.setAttribute('data-href',g.links[i].href);
+                li.appendChild(document.createTextNode(g.links[i].title));
+                /*
                 a = document.createElement('a');
                 a.href = g.links[i].href;
                 a.rel = g.links[i].rel;
@@ -246,6 +299,7 @@ var thisPage = function() {
                 a.onclick = function(){return getMaze();};
                 a.appendChild(document.createTextNode(a.title));
                 li.appendChild(a);
+                */
                 elm.appendChild(li);
             }
         }

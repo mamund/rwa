@@ -15,7 +15,7 @@
     <body>
         <h1>The Game</h1>
         <div id="play-space">
-            <form id="select-server" action="#" method="get">
+            <form id="select-server" action="#" method="get" style="display:none;">
                 <fieldset>
                     <legend>Which maze server?</legend>
                     <input type="text" name="server" value="http://localhost:1337" />
@@ -24,7 +24,11 @@
             </form>
             <div id="show-mazes" style="display:none;">
                 <h3>Select a maze:</h3>
-                <ul id="maze-list"></ul>
+                <ol id="maze-list"></ol>
+                <form id="select-maze" action="#" method="get">
+                    <input type="text" name="maze-number" value="" />
+                    <input type="submit" value="Go" />
+                </form>
             </div>
             <div id="show-server" style="display:none;"></div>
             <div id="history" style="display:none;"></div>

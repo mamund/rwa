@@ -1,6 +1,6 @@
 {
   "_id" : "five-by-five",
-  "title" : "Beginner's Maze",
+  "title" : "A Beginner's Maze",
   "cells" : {
       "cell0":{"title":"Entrance", "doors":[1,1,1,0]},
       "cell1":{"title":"Hall of Knives", "doors":[1,1,1,0]},
