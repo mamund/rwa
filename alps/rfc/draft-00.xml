@@ -211,15 +211,12 @@
     <!-- a hypermedia control for returning contacts -->
     <descriptor id="collection"
         type="safe"
-        appears="MUST"
         rt="contact">
         <doc>
             simple link/form for getting a list of contacts
         </doc>
         <descriptor id="nameSearch"
             type="semantic"
-            appears="SHOULD" 
-            cardinality="single">
             <doc>
                 input for search form
             </doc>
@@ -228,8 +225,7 @@
 
     <!--  a contact: one or more of these may be returned -->
     <descriptor id="contact" 
-        type="semantic"
-        cardinality="many">
+        type="semantic">
         <descriptor id="item"
             type="safe"
             appears="MUST">
@@ -238,14 +234,11 @@
             </doc>
         </descriptor>
         <descriptor id="fullName" 
-            type="semantic" 
-            appears="MUST" />
+            type="semantic"" />
         <descriptor id="email"
-            type="semantic"
-            appears="SHOULD" />
+            type="semantic" />
         <descriptor id="phone"
-            type="semantic"
-            appears="MAY" />
+            type="semantic"/>
     </descriptor>
 
 </alps>
@@ -402,7 +395,7 @@
                 "data" : [
                     {"name" : "fullName", "value" : "Ann Arbuckle" },
                     {"name" : "email", "value" : "aa@example.org" },
-                    {"name" : "email", "value" : "123.456.7890" }
+                    {"name" : "phone", "value" : "123.456.7890" }
                 ],
                 "links" : [
                     {
@@ -418,7 +411,7 @@
                 "data" : [
                     {"name" : "fullName", "value" : "Zelda Zackney" },
                     {"name" : "email", "value" : "zz@example.org" },
-                    {"name" : "email", "value" : "987.654.3210" }
+                    {"name" : "phone", "value" : "987.654.3210" }
                 ],
                  "links" : [
                     {
@@ -521,104 +514,6 @@
                 </t>
               </section>
 
-              <section anchor="prop-appears" title="'appears'">
-                <t>
-                  Indicates the appearance rules for the related <xref
-                  target="prop-descriptor">'descriptor'</xref> in a a
-                  representation. All valid values for this property
-                  are terms defined in <xref target="RFC2119" />, and
-                  have the meaning given in that standard.
-                </t>
-                
-                <section title="Applied to a top-level 'descriptor'">
-                  <t>
-                    The 'appears' property MAY appear as a property
-                    of a "top level" 'descriptor'. This controls
-                    whether the the 'descriptor' may appear at the "top
-                    level"; that is, not enclosed in any other
-                    element defined by this ALPS document. The
-                    formal meanings of "top level" and "enclosed in"
-                    vary by the media type of the representation
-                    document; see <xref target="instructions"/> for
-                    definitions.
-                  </t>
-                  <t>
-                    Examples:
-                    <list style="hanging">
-                      <t hangText="XML:">
-                        &lt;element ... appears="MUST NOT"&gt;
-                      </t>
-                      <t hangText="JSON:">
-                        {"element" : "{..., "appears" : "MUST NOT"}}
-                      </t>
-                    </list>
-                  </t>
-                  <t>
-                    Valid values for 'appears' in a top-level
-                    'descriptor' are: "MUST", "SHOULD", "MAY", and
-                    "MUST NOT". If this property does not appear, the
-                    value SHOULD be treated as "MUST NOT". [TK that
-                    comes from microformats. But for schema.org a
-                    better default value is "MAY". I don't know which
-                    is better. -LR :: I think MA is fine and that
-                    means no diff for top-level or enclosed
-                    descriptors! -mca :: OK, let's change
-                    it. -leonardr]
-                  </t>
-                </section>
-                <section title="Applied to an enclosing 'descriptor'">
-                  <t>
-                    The 'appears' property MAY appear as a property of
-                    an enclosing 'descriptor'. This controls
-                    the rules by which the referenced element may
-                    appear as a child of the enclosing 'descriptor'. The
-                    formal meaning of "enclosing 'descriptor'" varies by
-                    the media type of the representation document; see
-                    <xref target="instructions" /> for definitions.
-                  </t>
-                  <t>
-                    Examples:
-                    <list style="hanging">
-                      <t hangText="XML:">
-                        &lt;element ... appears="MAY"&gt;
-                      </t>
-                      <t hangText="JSON:">
-                        {"element" : "{..., "appears" : "MAY"}}
-                      </t>
-                    </list>
-                  </t>
-                  <t>
-                    Valid values for 'appears' in an enclosing
-                    'descriptor' are: "MUST", "SHOULD", and "MAY". If
-                    this property does not appear, the value SHOULD be
-                    treated as "MAY".
-                  </t>
-                </section>
-              </section>
-              
-              <section anchor="prop-cardinality" title="'cardinality'">
-                <t>
-                  Indicates the number of times the related <xref
-                  target="prop-descriptor">'descriptor'</xref> can
-                  appear. [TK within the document for top-level,
-                  within the enclosing for enclosed. -leonardr] Valid
-                  values are "single" and "many".  If this property
-                  does not appear, the value SHOULD be treated as
-                  "many".
-                </t>
-                <t>
-                  Examples:
-                  <list style="hanging">
-                    <t hangText="XML:">
-                      &lt;element ... candinality="many"&gt;
-                    </t>
-                    <t hangText="JSON:">
-                      {"element" : "{..., "cardinaltiy" : "many"}}
-                    </t>
-                  </list>
-                </t>
-              </section>
-
               <section anchor="prop-doc" title="'doc'">
                 <t>
                   A text field that contains free-form, usually
@@ -633,10 +528,13 @@
                   <list style="numbers">
                     <t>"text"</t>
                     <t>"html"</t>
+                    <t>ascidoc</t>
                   </list>
-                  If the 'format' property is set to "html" the
-                  content within the 'description' block MUST be
-                  treated as HTML markup.  If no 'format' property is
+                  Any program processing "doc" elements SHOULD honor the
+                  "format" directive and parse/render the content
+                  appropriately. If the value in the "format" property is
+                  not recognized and/or supported, the processing program
+                  MUST treat the content as plain text. If no 'format' property is
                   present, the content SHOULD be treated as plain
                   text.
                   <list style="hanging">
@@ -695,13 +593,7 @@
            
            <section anchor="prop-descriptor" title="'descriptor'">
                 <t>
-                  Identifies a semantic descriptor. [TK is this the
-                  right term to use here? Is a link relation a
-                  semantic descriptor? -leonardr :: I think we're OK
-                  here. A link rel is a semantic identifier? -mca ::
-                  In that case we need to change the book, because a
-                  link relation is not a semantic descriptor in the
-                  book. -leonardr] One or more 'descriptor' elements
+                  Identifies a semantic descriptor. One or more 'descriptor' elements
                   SHOULD appear as children of <xref
                   target="prop-alps">'alps'</xref>. It may also appear
                   as a child of itself; that is, the 'descriptor'
@@ -709,14 +601,12 @@
                 </t>
 
                 <t>
-                  The 'descriptor' property MUST have either an <xref
+                  The 'descriptor' property MAY have either an <xref
                   target="prop-id">'id'</xref> or <xref
                   target="prop-href">'href'</xref> attribute. It MAY
                   have both. Additionally, the 'descriptor' MAY have any
                   of the following attributes:
                   <list style="numbers">
-                    <t><xref target="prop-appears">'appears'</xref></t>
-                    <t><xref target="prop-cardinality">'cardinality'</xref></t>
                     <t><xref target="prop-doc">'doc'</xref></t>
                     <t><xref target="prop-ext">'ext'</xref></t>
                     <t><xref target="prop-name">'name'</xref></t>
@@ -725,13 +615,9 @@
                 </t>
                 <t>
                   If present, the 'href' property MUST be a
-                  dereferenceable URL, with fragment identifier, that
+                  dereferenceable URL, that
                   points to another 'descriptor' either within the
                   current ALPS document or in another ALPS document.
-                  [TK we were considering getting rid of href and
-                  seeing what happened. -LR :: I;m torn on this
-                  one. We could insist only frag-ids are allowed, but
-                  i don't think that helps much. -mca]
                 </t>
 
                 <t>
@@ -810,11 +696,15 @@
 
             <section anchor="prop-format" title="'format'">
                 <t>
-                  Indicates whether textual content associated with
-                  the element should be treated as plain text ('text')
-                  or HTML ('html'). Other values for this attribute
-                  are undefined. This
-                  attribute MAY appear as an attribute of the <xref
+                    Indicates how the text content should be parsed and/or
+                    rendered. This version of the spec identifies three
+                    possible values for "format": "text", "html", and
+                    "asciidoc." Any other calues for this attribute are 
+                    undefined and SHOULD be treated as plain text. If the
+                    program does not recognize the value of the "format"
+                    property and/or the "format" property is missing, the
+                    content SHOULD be treated as plain text.
+                    Thisc property MAY appear as an attribute of the <xref
                   target="prop-doc">'doc'</xref>
                   element.
                 </t>
@@ -956,8 +846,7 @@
                   The use of the 'name' property usually indicates an
                   ambiguity in the application semantics. Thus, it
                   SHOULD only be used when creating an ALPS profile
-                  that describes an existing design. [TK how does that
-                  look?  -leonardr]
+                  that describes an existing design.
                 </t>
             </section>
 
@@ -986,7 +875,10 @@
                 [TK I noticed you added rt to the example but it
                 wasn't defined here. I'm also not convinced we need to
                 add rt to ALPS itself, as opposed to saying it's OK to
-                use ALPS URIs as rt in other formats. -leonardr]
+                use ALPS URIs as rt in other formats. -leonardr] :: [ok, let's
+                talk about this one. i figured using this to "point to"
+                existing semantic descriptors with the current ALPS doc (or
+                some other doc (e.g. schem.org) would be helpful. no? -mca]
               </t>
             </section>
 
@@ -1110,26 +1002,20 @@
     <doc href="http://example.org/samples/full/doc.html" />
 
     <descriptor id="search" 
-        type="safe" 
-        cardinality="single" 
-        appears="MUST NOT">
+        type="safe">
         <doc format="text">
             A search form with two inputs.
         </doc>
         <descriptor href="#resultType" />
         <descriptor id="value"
             name="search" 
-            type="semantic" 
-            cardinality="single"
-            appears="MAY">
-            <ddoc>input for search</doc>
+            type="semantic">
+            <doc>input for search</doc>
         </descriptor>
     </descriptor>
 
     <descriptor id="resultType"
-        type="semantic"
-        cardinality="single"
-        appears="MAY"
+        type="semantic">
         <doc>results format</doc>
         <ext 
             href="http://alps.io/ext/range" 
@@ -1215,8 +1101,6 @@
             {
                 "id" : "search", 
                 "type" : "safe",
-                "cardinality" : "single",
-                "appears" : "MUST NOT",
                 "doc" : {"value" : 
                     "A search form with a two inputs"
                 },
@@ -1225,8 +1109,6 @@
                         "id" : "value",
                         "name" : "search",
                         "type" : "descriptor",
-                        "cardinality" : "single",
-                        "appears" : "MAY",
                         "doc" : {"value" : "input for search"}
                     },
                     {"href" : "#resultType"}
@@ -1235,8 +1117,6 @@
            {
                 "id" : "resultType",
                 "type" : "descriptor",
-                "cardinality" : "single",
-                "appears" : "MAY",
                 "description" : {"value" : "results format"},
                 "ext" : [
                     {
@@ -1314,12 +1194,16 @@
       <t>
         Not all media types can faithfully represent all ALPS
         descriptors. For instance, the 'application/json' media type
-        has no standard way of representing hyperlinks. The of how to
+        has no standard way of representing hyperlinks. The [details?] of how to
         apply ALPS to such a media type will necesarily be incomplete,
         and it will not be possible to represent some aspects of an
-        ALPS profile in documents sing that media type. [TK could we
+        ALPS profile in documents in that media type. [TK could we
         say that such a media type is not in complete compliance with
-        the ALPS document?  -leonardr]
+        the ALPS document?  -leonardr] :: [we might want to add a compliance
+        section in this spec. IOW, what parts of ALPS a media type 
+        MUST/SHOULD/MAY support in order to be "fully compliant" (all MUSTs
+        and SHOULDs, "conditionally compliant" (all MUSTs), and "non-compliant"
+        (not all MUSTs) -mca] 
       </t>
 
       <section anchor="linking-to-alps-documents" title="Linking to ALPS Documents">
