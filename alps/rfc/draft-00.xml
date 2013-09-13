@@ -1169,20 +1169,20 @@
             element may be used as a tag name.
           </t>
         </list>
+      </t>
 
-        <t>
-          How to mark up a hypermedia control in the representation
-          with the name of an ALPS element that sets type="descriptor"
-          or type="safe". Informative examples:
-        </t>
+      <t>
+        How to mark up a hypermedia control in the representation with
+        the name of an ALPS element that sets type="descriptor" or
+        type="safe". Informative examples:
 
         <list>
 
           <t>
-            In an HTML representation, any HTML tag that supports the
-            "rel" attribute" ("a", "link", etc.) may use the name or
-            URI of any such ALPS element as the value for the "rel"
-            attribute.
+            In an HTML representation, any HTML tag that supports
+            the "rel" attribute" ("a", "link", etc.) may use the
+            name or URI of any such ALPS element as the value for
+            the "rel" attribute.
           </t>
 
           <t>
@@ -1194,52 +1194,55 @@
 
           <t>
             In a HAL representation, any "link" tag may use use the
-            name or URI of any such ALPS element as one value for its
-            "rel" attribute.
+            name or URI of any such ALPS element as one value for
+            its "rel" attribute.
           </t>
         </list>
+      </t>
 
-        <t>
-          How to mark up a hypermedia control with the name of an ALPS
-          element that sets type="idempotent". Informative example:
-        </t>
-
+      <t>
+        How to mark up a hypermedia control with the name of an ALPS
+        element that sets type="idempotent". Informative example:
+        
         <list>
           <t>
             In an HTML representation, a "form" tag that sets
             method="POST" may use the name or URI of any such ALPS
-            element as one value for the "class" attribute of any of its
-            "submit" tags.
+            element as one value for the "class" attribute of any of
+            its "submit" tags.
           </t>
         </list>
+      </t>
 
-        <t>
-          How to mark up a hypermedia control with the name of an ALPS
-          element that sets type="unsafe". Informative example:
-        </t>
-
+      <t>
+        How to mark up a hypermedia control with the name of an
+        ALPS element that sets type="unsafe". Informative example:
+        
         <list>
           <t>
             In an HTML representation, a "form" tag that sets
             method="POST" may use the name or URI of any such ALPS
-            element as one value for the "class" attribute of any of its
-            "submit" tags.
+            element as one value for the "class" attribute of any
+            of its "submit" tags.
           </t>
         </list>
+      </t>
 
-        <t>
-          How to represent the relationship between an enclosing ALPS
-          descriptor and the descriptor it encloses. Informative
-          examples:
-        </t>
+      <t>
+        How to represent the relationship between an enclosing ALPS
+        descriptor and the descriptor it encloses. Informative
+        examples:
 
         <list>
           <t>
-            In an HTML or XML representation, a tag marked up as an
-            ALPS descriptor may contain a child tag marked up as one
-            of the children of that ALPS descriptor.
+            In an HTML or XML representation, a tag marked up as
+            an ALPS descriptor may contain a child tag marked up
+            as one of the children of that ALPS descriptor.
           </t>
         </list>
+      </t>
+    </list>
+
 
       <t>
         Not all media types can faithfully represent all ALPS
