@@ -130,6 +130,7 @@ function makeRequest(method, path) {
                     }
                 }
             }
+            //setTimeout(function(){makeRequest('GET',href)}, 1000);
             makeRequest('GET',href);
         });
     });

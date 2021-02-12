@@ -35,7 +35,7 @@ function handler(req, res) {
 
     // set global var
     root = 'http://'+req.headers.host;
-
+    
     // simple routing
     parts = [];
     segments = req.url.split('/');
@@ -201,3 +201,5 @@ function showResponse(req, res, body, code) {
 
 // wait for someone to call
 http.createServer(handler).listen(port);
+console.log('listening on port '+port);
+
